@@ -31,7 +31,7 @@ namespace BorwinAnalyse.Forms
         {
             InitButton("解析".tr());
             InitButton("规则".tr());
-            InitButton("查询".tr());
+            InitButton("查询".tr())  ;
         }
 
         private void InitButton(string text)
