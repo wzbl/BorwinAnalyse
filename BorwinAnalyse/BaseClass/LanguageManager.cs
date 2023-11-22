@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.DataBase.Comm;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,17 +32,17 @@ namespace BorwinAnalyse.BaseClass
                 return str;
             }
             string comms = string.Format("select * from Language where context = '{0}' ", str);
-            var res =  SqlLiteManager.Instance.DB.Search(comms, "Language");
-            if (res == null|| res.Rows.Count==0)
+            DataTable res = SqlLiteManager.Instance.DB.Search(comms, "Language");
+            if (res == null || res.Rows.Count == 0)
             {
-                string comm = string.Format("insert into Language values('{0}','{1}','','','','','','','{2}')",str,str,DateTime.Now.ToString("yyyy-MM-dd H:m:s"));
+                string comm = string.Format("insert into Language values('{0}','{1}','','','','','','','{2}')", str, str, DateTime.Now.ToString("yyyy-MM-dd H:m:s"));
                 SqlLiteManager.Instance.DB.Insert(comm);
             }
             else
             {
-
+                return res.Rows[0].ItemArray[1].ToString() != "" ? res.Rows[0].ItemArray[1].ToString() : str;
             }
-           return str;
+            return str;
         }
     }
 }
