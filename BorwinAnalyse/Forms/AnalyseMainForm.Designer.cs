@@ -32,23 +32,11 @@
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.comLanguage = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonButton4 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.labelHorizontal = new System.Windows.Forms.Label();
-            this.comboBoxH = new System.Windows.Forms.ComboBox();
-            this.labelVertical = new System.Windows.Forms.Label();
-            this.comboBoxV = new System.Windows.Forms.ComboBox();
-            this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonContextMenu1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu(this.components);
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
@@ -83,10 +71,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).BeginInit();
             this.kryptonSplitContainer2.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).BeginInit();
-            this.kryptonSplitContainer2.Panel2.SuspendLayout();
             this.kryptonSplitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comLanguage)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonManager1
@@ -121,45 +107,23 @@
             // 
             // kryptonSplitContainer2.Panel1
             // 
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonComboBox1);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonWrapLabel1);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.comLanguage);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonButton4);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonButton3);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonButton2);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonButton1);
-            // 
-            // kryptonSplitContainer2.Panel2
-            // 
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.labelHorizontal);
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.comboBoxH);
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.labelVertical);
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.comboBoxV);
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonDataGridView1);
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1410, 583);
             this.kryptonSplitContainer2.SplitterDistance = 184;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
-            // kryptonComboBox1
+            // comLanguage
             // 
-            this.kryptonComboBox1.DropDownWidth = 121;
-            this.kryptonComboBox1.Items.AddRange(new object[] {
-            "BOM",
-            "上料表",
-            "设置",
-            "查询"});
-            this.kryptonComboBox1.Location = new System.Drawing.Point(42, 284);
-            this.kryptonComboBox1.Name = "kryptonComboBox1";
-            this.kryptonComboBox1.Size = new System.Drawing.Size(121, 21);
-            this.kryptonComboBox1.TabIndex = 0;
-            // 
-            // kryptonWrapLabel1
-            // 
-            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(42, 239);
-            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
-            this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel1.Text = "设置";
+            this.comLanguage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.comLanguage.DropDownWidth = 121;
+            this.comLanguage.Location = new System.Drawing.Point(0, 562);
+            this.comLanguage.Name = "comLanguage";
+            this.comLanguage.Size = new System.Drawing.Size(184, 21);
+            this.comLanguage.TabIndex = 0;
             // 
             // kryptonButton4
             // 
@@ -202,98 +166,6 @@
             this.kryptonButton1.TabIndex = 0;
             this.kryptonButton1.Tag = "BOM";
             this.kryptonButton1.Values.Text = "BOM";
-            // 
-            // labelHorizontal
-            // 
-            this.labelHorizontal.AutoSize = true;
-            this.labelHorizontal.Location = new System.Drawing.Point(173, 171);
-            this.labelHorizontal.Name = "labelHorizontal";
-            this.labelHorizontal.Size = new System.Drawing.Size(65, 12);
-            this.labelHorizontal.TabIndex = 7;
-            this.labelHorizontal.Text = "Horizontal";
-            // 
-            // comboBoxH
-            // 
-            this.comboBoxH.FormattingEnabled = true;
-            this.comboBoxH.Items.AddRange(new object[] {
-            "Before",
-            "After",
-            "Left",
-            "Right"});
-            this.comboBoxH.Location = new System.Drawing.Point(234, 168);
-            this.comboBoxH.Name = "comboBoxH";
-            this.comboBoxH.Size = new System.Drawing.Size(121, 20);
-            this.comboBoxH.TabIndex = 6;
-            // 
-            // labelVertical
-            // 
-            this.labelVertical.AutoSize = true;
-            this.labelVertical.Location = new System.Drawing.Point(186, 198);
-            this.labelVertical.Name = "labelVertical";
-            this.labelVertical.Size = new System.Drawing.Size(53, 12);
-            this.labelVertical.TabIndex = 5;
-            this.labelVertical.Text = "Vertical";
-            // 
-            // comboBoxV
-            // 
-            this.comboBoxV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxV.FormattingEnabled = true;
-            this.comboBoxV.Items.AddRange(new object[] {
-            "Above",
-            "Below",
-            "Top",
-            "Bottom"});
-            this.comboBoxV.Location = new System.Drawing.Point(234, 195);
-            this.comboBoxV.Name = "comboBoxV";
-            this.comboBoxV.Size = new System.Drawing.Size(121, 20);
-            this.comboBoxV.TabIndex = 4;
-            // 
-            // kryptonDataGridView1
-            // 
-            this.kryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kryptonDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.kryptonDataGridView1.Location = new System.Drawing.Point(635, 143);
-            this.kryptonDataGridView1.Name = "kryptonDataGridView1";
-            this.kryptonDataGridView1.RowTemplate.Height = 23;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.kryptonDataGridView1.TabIndex = 0;
-            this.kryptonDataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonDataGridView1_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Column5";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Column6";
-            this.Column6.Name = "Column6";
             // 
             // kryptonRichTextBox1
             // 
@@ -379,6 +251,7 @@
             this.Name = "AnalyseMainForm";
             this.Text = "AnalyseMainForm";
             this.Load += new System.EventHandler(this.AnalyseMainForm_Load);
+            this.Shown += new System.EventHandler(this.AnalyseMainForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
@@ -387,14 +260,10 @@
             this.kryptonSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
             this.kryptonSplitContainer2.Panel1.ResumeLayout(false);
-            this.kryptonSplitContainer2.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).EndInit();
-            this.kryptonSplitContainer2.Panel2.ResumeLayout(false);
-            this.kryptonSplitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
             this.kryptonSplitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comLanguage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -409,19 +278,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox kryptonComboBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.Label labelHorizontal;
-        private System.Windows.Forms.ComboBox comboBoxH;
-        private System.Windows.Forms.Label labelVertical;
-        private System.Windows.Forms.ComboBox comboBoxV;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox comLanguage;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenu kryptonContextMenu1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems2;

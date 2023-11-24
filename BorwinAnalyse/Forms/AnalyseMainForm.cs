@@ -19,23 +19,38 @@ namespace BorwinAnalyse.Forms
         public AnalyseMainForm()
         {
             InitializeComponent();
+            
         }
+
+        //UCBOM uCBOM = new UCBOM();
+        UCSearch uCSearch;
+        //UCAnalyseSet uCAnalyseSet = new UCAnalyseSet();
 
         private void AnalyseMainForm_Load(object sender, EventArgs e)
         {
             SqlLiteManager.Instance.Init();
-
+            InitUI();
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
-            
+
         }
 
         private void InitUI()
         {
-            InitButton("查询");
-            InitButton("设置");
-            InitButton("上料表");
-            InitButton("BOM");
-
+            //kryptonSplitContainer2.Panel2.Controls.Add(uCBOM);
+            //kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
+            //kryptonSplitContainer2.Panel2.Controls.Add(uCAnalyseSet);
+            DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
+            if (dataTable == null) { return; }
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                comLanguage.Items.Add(dataTable.Rows[i].ItemArray[0]);
+            }
+            if (dataTable.Rows.Count > 0)
+            {
+                int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
+                comLanguage.SelectedIndex = lang - 1;
+                LanguageManager.Instance.CurrenIndex = lang;
+            }
         }
 
         private void InitButton(string text)
@@ -54,21 +69,20 @@ namespace BorwinAnalyse.Forms
             switch (((KryptonButton)sender).Tag)
             {
                 case "BOM":
-                    kryptonSplitContainer2.Panel2.Controls.Clear();
-                    UCBOM uCBOM = new UCBOM();
-                    uCBOM.Show();
-                    kryptonSplitContainer2.Panel2.Controls.Add(uCBOM);
+                    //uCBOM.BringToFront();
                     break;
                 case "上料表":
                     break;
                 case "查询":
-
+                    if (uCSearch==null)
+                    {
+                        uCSearch = new UCSearch();
+                        kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
+                    }
+                    uCSearch.BringToFront();
                     break;
                 case "设置":
-                    kryptonSplitContainer2.Panel2.Controls.Clear();
-                    UCAnalyseSet uCAnalyseSet= new UCAnalyseSet();
-                    uCAnalyseSet.Show();
-                    kryptonSplitContainer2.Panel2.Controls.Add(uCAnalyseSet);
+                    //uCAnalyseSet.BringToFront();
                     break;
                 default:
                     break;
@@ -82,14 +96,24 @@ namespace BorwinAnalyse.Forms
 
         private void kryptonDataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            ShowMenu(kryptonDataGridView1, kryptonContextMenu1);
+            //ShowMenu(kryptonDataGridView1, kryptonContextMenu1);
         }
 
         private void ShowMenu(Control c, KryptonContextMenu kcm)
         {
-            kcm.Show(c.RectangleToScreen(c.ClientRectangle),
-                     (KryptonContextMenuPositionH)Enum.Parse(typeof(KryptonContextMenuPositionH), (string)comboBoxH.SelectedItem),
-                     (KryptonContextMenuPositionV)Enum.Parse(typeof(KryptonContextMenuPositionV), (string)comboBoxV.SelectedItem));
+            //kcm.Show(c.RectangleToScreen(c.ClientRectangle),
+            //         (KryptonContextMenuPositionH)Enum.Parse(typeof(KryptonContextMenuPositionH), (string)comboBoxH.SelectedItem),
+            //         (KryptonContextMenuPositionV)Enum.Parse(typeof(KryptonContextMenuPositionV), (string)comboBoxV.SelectedItem));
+        }
+
+        private void comLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LanguageManager.Instance.UpdateCurrentLanguage(comLanguage.SelectedIndex);
+        }
+
+        private void AnalyseMainForm_Shown(object sender, EventArgs e)
+        {
+            comLanguage.SelectedValueChanged += comLanguage_SelectedIndexChanged;
         }
     }
 }

@@ -24,6 +24,7 @@ namespace BorwinAnalyse.UCControls
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            this.components = new System.ComponentModel.Container();
             tokenSource = new CancellationTokenSource();
             this.Load += UCBOM_Load;
         }
@@ -31,6 +32,7 @@ namespace BorwinAnalyse.UCControls
         private void UCBOM_Load(object sender, EventArgs e)
         {
             InitUI();
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         private void InitUI()

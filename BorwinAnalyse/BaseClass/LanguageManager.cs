@@ -1,13 +1,11 @@
 ﻿using BorwinAnalyse.DataBase.Comm;
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace BorwinAnalyse.BaseClass
@@ -27,8 +25,36 @@ namespace BorwinAnalyse.BaseClass
             }
         }
 
+        public int CurrenIndex = 0;
+
+        private Dictionary<Control, ComponentCollection> Controls = new Dictionary<Control, ComponentCollection>();
+
+        public DataTable SearchALLLanguageType()
+        {
+            string comms = "select name ,currentLanguage  from LanguageType";
+            DataTable res = SqlLiteManager.Instance.DB.Search(comms, "LanguageType");
+            return res;
+        }
+
+        public void UpdateCurrentLanguage(int index)
+        {
+            CurrenIndex = index + 1;
+            string cmd = string.Format("update LanguageType set currentLanguage = '{0}'",(index + 1).ToString());
+            SqlLiteManager.Instance.DB.Insert(cmd);
+
+            foreach (var item in Controls)
+            {
+                UpdateLanguage(item.Key, item.Value);
+                Thread.Sleep(500);
+            }
+        }
+
         public void UpdateLanguage(Control control, ComponentCollection componentCollection)
         {
+            if (!Controls.ContainsKey(control))
+            {
+                Controls.Add(control, componentCollection);
+            }
             LoopControl(control);
             LoopWinform(componentCollection);
 
@@ -43,13 +69,13 @@ namespace BorwinAnalyse.BaseClass
             {
                 if (item is KryptonContextMenu)
                 {
-                    
+
                     if (((KryptonContextMenu)item).Items[2] is KryptonContextMenuHeading)
                     {
                         string s = ((KryptonContextMenuHeading)((KryptonContextMenu)item).Items[2]).Text;
                     }
                 }
-               
+
             }
 
         }
@@ -59,19 +85,36 @@ namespace BorwinAnalyse.BaseClass
             Control.ControlCollection sonControls = fatherControl.Controls;
             foreach (Control control in sonControls)
             {
-                if (control is Label || control is Button)
+               
+                if (control is Label || control is Button|| control is KryptonButton)
                 {
-                    control.Text = ((Label)control).Text.tr();
+                    control.Text = control.Text.tr();
                 }
                 else if (control is ComboBox)
                 {
-                    if (((ComboBox)control).Items.Count > 0)
+                    ComboBox comboBox = (ComboBox)control;
+                    for (int i = 0; i < comboBox.Items.Count; i++)
                     {
-
+                        string text = comboBox.Items[i].ToString().tr();
+                        comboBox.Items[i] = text;
                     }
-
                 }
-                string text = control.Text;
+                else if (control is KryptonNavigator)
+                {
+                    KryptonNavigator kryptonNavigator = (KryptonNavigator)control;
+                    for (int i = 0; i < kryptonNavigator.Pages.Count; i++)
+                    {
+                        kryptonNavigator.Pages[i].Text = kryptonNavigator.Pages[i].Text.tr();
+                    }
+                }
+                else if (control is KryptonDataGridView)
+                {
+                    KryptonDataGridView kryptonDataGridView = (KryptonDataGridView)control;
+                    for (int i = 0; i < kryptonDataGridView.Columns.Count; i++)
+                    {
+                        kryptonDataGridView.Columns[i].HeaderText = kryptonDataGridView.Columns[i].HeaderText.tr();
+                    }
+                }
                 if (control.Controls != null)
                 {
                     LoopControl(control);
@@ -87,16 +130,16 @@ namespace BorwinAnalyse.BaseClass
             {
                 return str;
             }
-            string comms = string.Format("select * from Language where context = '{0}' ", str);
+            string comms = string.Format("select * from Language where context = '{0}' or chinese = '{1}' or english = '{2}' ", str,str,str);
             DataTable res = SqlLiteManager.Instance.DB.Search(comms, "Language");
             if (res == null || res.Rows.Count == 0)
             {
-                string comm = string.Format("insert into Language values('{0}','{1}','','','','','','','{2}')", str, str, DateTime.Now.ToString("yyyy-MM-dd H:m:s"));
+                string comm = string.Format("insert into Language values('{0}','{1}','','','','','','')", str, str);
                 SqlLiteManager.Instance.DB.Insert(comm);
             }
             else
             {
-                return res.Rows[0].ItemArray[1].ToString() != "" ? res.Rows[0].ItemArray[1].ToString() : str;
+                return res.Rows[0].ItemArray[LanguageManager.Instance.CurrenIndex].ToString() != "" ? res.Rows[0].ItemArray[LanguageManager.Instance.CurrenIndex].ToString() : str;
             }
             return str;
         }

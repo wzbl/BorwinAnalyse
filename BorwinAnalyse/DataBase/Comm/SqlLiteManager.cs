@@ -53,17 +53,19 @@ namespace BorwinAnalyse.DataBase.Comm
             {
                 DB = new SQLConnect(DicPath + "\\AnalyseData.db");
             }
+
+            DB.OpenDB();
         }
 
         private void InitTable()
         {
             string tableName = "BOM";
-            string commandText = "CREATE TABLE IF NOT EXISTS " + tableName + "(id varchar PRIMARY KEY,barCode varchar, description varchar,status int,type varchar,size varchar,value varchar,unit varchar,grade varchar,exp1 varchar,exp2 varchar,exp3 varchar,exp4 varchar,exp5 varchar,createTime datetime)";
+            string commandText = "CREATE TABLE IF NOT EXISTS " + tableName + "(id varchar PRIMARY KEY,barCode varchar, description varchar,status int,type varchar,size varchar,value varchar,unit varchar,grade varchar,exp1 varchar,exp2 varchar,exp3 varchar,exp4 varchar,exp5 varchar)";
             DB.NewTable(commandText);
 
 
             string tableName2 = "Language";
-            string commandText2 = "CREATE TABLE IF NOT EXISTS " + tableName2 + "(context varchar PRIMARY KEY,chinese varchar, english varchar,exp1 varchar,exp2 varchar,exp3 varchar,exp4 varchar,exp5 varchar,createTime datetime)";
+            string commandText2 = "CREATE TABLE IF NOT EXISTS " + tableName2 + "(context varchar PRIMARY KEY,chinese varchar, english varchar,exp1 varchar,exp2 varchar,exp3 varchar,exp4 varchar,exp5 varchar)";
             DB.NewTable(commandText2);
 
 

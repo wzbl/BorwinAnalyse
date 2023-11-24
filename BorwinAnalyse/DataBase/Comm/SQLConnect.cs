@@ -24,6 +24,12 @@ namespace BorwinAnalyse.DataBase.Comm
         public SQLConnect(string dbPath)
         {
             this._SQLiteConnString = "Data Source=" + dbPath;
+            _SQLiteConn = new SQLiteConnection(this._SQLiteConnString);
+        }
+
+        public void OpenDB()
+        {
+            _SQLiteConn.Open();
         }
 
         /// <summary>
@@ -52,33 +58,30 @@ namespace BorwinAnalyse.DataBase.Comm
         /// <param name="tableName">表名称</param>
         public void NewTable(string CommandText)
         {
-
-            SQLiteConnection sqliteConn = new SQLiteConnection(this._SQLiteConnString);
-            if (sqliteConn.State != System.Data.ConnectionState.Open)
+            if (_SQLiteConn.State == System.Data.ConnectionState.Open)
             {
-                sqliteConn.Open();
                 SQLiteCommand cmd = new SQLiteCommand();
-                cmd.Connection = sqliteConn;
+                cmd.Connection = _SQLiteConn;
                 cmd.CommandText = CommandText;
                 cmd.ExecuteNonQuery();
             }
-            sqliteConn.Close();
+            else
+            {
+                OpenDB();
+            }
         }
 
         public bool Insert(string CommandText)
         {
             try
             {
-                SQLiteConnection sqliteConn = new SQLiteConnection(this._SQLiteConnString);
-                if (sqliteConn.State != System.Data.ConnectionState.Open)
+                if (_SQLiteConn.State != System.Data.ConnectionState.Open)
                 {
-                    sqliteConn.Open();
                     SQLiteCommand cmd = new SQLiteCommand();
-                    cmd.Connection = sqliteConn;
+                    cmd.Connection = _SQLiteConn;
                     cmd.CommandText = CommandText;
                     cmd.ExecuteNonQuery();
                 }
-                sqliteConn.Close();
                 return true;
             }
             catch (Exception ex)
@@ -92,17 +95,14 @@ namespace BorwinAnalyse.DataBase.Comm
             try
             {
                 DataTable dt = new DataTable();
-                SQLiteConnection sqliteConn = new SQLiteConnection(this._SQLiteConnString);
-                if (sqliteConn.State != System.Data.ConnectionState.Open)
+                if (_SQLiteConn.State == System.Data.ConnectionState.Open)
                 {
-                    sqliteConn.Open();
-                    SQLiteCommand cmd = new SQLiteCommand( CommandText, sqliteConn);
+                    SQLiteCommand cmd = new SQLiteCommand( CommandText, _SQLiteConn);
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     adapter.Fill(ds, table);
                     return ds.Tables[0];
                 }
-                sqliteConn.Close();
                 return dt;
             }
             catch (Exception ex)

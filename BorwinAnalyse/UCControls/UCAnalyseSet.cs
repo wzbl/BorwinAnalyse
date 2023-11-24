@@ -15,7 +15,8 @@ namespace BorwinAnalyse.UCControls
         public UCAnalyseSet()
         {
             InitializeComponent();
-            Dock=DockStyle.Fill;
+            this.components = new System.ComponentModel.Container();
+            Dock =DockStyle.Fill;
         }
     }
 }
