@@ -29,21 +29,16 @@
         private void InitializeComponent()
         {
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager();
             this.SuspendLayout();
             // 
             // kryptonButton1
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(449, 194);
+            this.kryptonButton1.Location = new System.Drawing.Point(299, 219);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
             this.kryptonButton1.TabIndex = 0;
             this.kryptonButton1.Values.Text = "kryptonButton1";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
-            // kryptonManager1
-            // 
-            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2010Black;
             // 
             // Form1
             // 
@@ -53,6 +48,7 @@
             this.Controls.Add(this.kryptonButton1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -60,7 +56,6 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
     }
 }
 

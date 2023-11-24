@@ -65,6 +65,11 @@ namespace BorwinAnalyse.DataBase.Comm
             string tableName2 = "Language";
             string commandText2 = "CREATE TABLE IF NOT EXISTS " + tableName2 + "(context varchar PRIMARY KEY,chinese varchar, english varchar,exp1 varchar,exp2 varchar,exp3 varchar,exp4 varchar,exp5 varchar,createTime datetime)";
             DB.NewTable(commandText2);
+
+
+            string tableName3 = "LanguageType";
+            string commandText3 = "CREATE TABLE IF NOT EXISTS " + tableName3 + "(languageIndex varchar PRIMARY KEY,name varchar,currentLanguage varchar )";
+            DB.NewTable(commandText3);
         }
     }
 }

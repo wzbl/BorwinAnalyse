@@ -1,10 +1,14 @@
 ﻿using BorwinAnalyse.DataBase.Comm;
+using ComponentFactory.Krypton.Toolkit;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BorwinAnalyse.BaseClass
 {
@@ -20,6 +24,58 @@ namespace BorwinAnalyse.BaseClass
                     instance = new LanguageManager();
                 }
                 return instance;
+            }
+        }
+
+        public void UpdateLanguage(Control control, ComponentCollection componentCollection)
+        {
+            LoopControl(control);
+            LoopWinform(componentCollection);
+
+        }
+
+        /// <summary>
+        /// 遍历窗体控件
+        /// </summary>
+        private void LoopWinform(ComponentCollection fatherComponent)
+        {
+            foreach (Component item in fatherComponent)
+            {
+                if (item is KryptonContextMenu)
+                {
+                    
+                    if (((KryptonContextMenu)item).Items[2] is KryptonContextMenuHeading)
+                    {
+                        string s = ((KryptonContextMenuHeading)((KryptonContextMenu)item).Items[2]).Text;
+                    }
+                }
+               
+            }
+
+        }
+
+        private void LoopControl(Control fatherControl)
+        {
+            Control.ControlCollection sonControls = fatherControl.Controls;
+            foreach (Control control in sonControls)
+            {
+                if (control is Label || control is Button)
+                {
+                    control.Text = ((Label)control).Text.tr();
+                }
+                else if (control is ComboBox)
+                {
+                    if (((ComboBox)control).Items.Count > 0)
+                    {
+
+                    }
+
+                }
+                string text = control.Text;
+                if (control.Controls != null)
+                {
+                    LoopControl(control);
+                }
             }
         }
     }
