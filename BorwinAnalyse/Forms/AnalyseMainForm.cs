@@ -80,13 +80,16 @@ namespace BorwinAnalyse.Forms
 
         }
 
-      
+        private void kryptonDataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ShowMenu(kryptonDataGridView1, kryptonContextMenu1);
+        }
 
         private void ShowMenu(Control c, KryptonContextMenu kcm)
         {
-            //kcm.Show(c.RectangleToScreen(c.ClientRectangle),
-            //         (KryptonContextMenuPositionH)Enum.Parse(typeof(KryptonContextMenuPositionH), (string)comboBoxH.SelectedItem),
-            //         (KryptonContextMenuPositionV)Enum.Parse(typeof(KryptonContextMenuPositionV), (string)comboBoxV.SelectedItem));
+            kcm.Show(c.RectangleToScreen(c.ClientRectangle),
+                     (KryptonContextMenuPositionH)Enum.Parse(typeof(KryptonContextMenuPositionH), (string)comboBoxH.SelectedItem),
+                     (KryptonContextMenuPositionV)Enum.Parse(typeof(KryptonContextMenuPositionV), (string)comboBoxV.SelectedItem));
         }
     }
 }

@@ -31,6 +31,7 @@ namespace BorwinAnalyse.BaseClass
         {
             LoopControl(control);
             LoopWinform(componentCollection);
+
         }
 
         /// <summary>
@@ -42,31 +43,13 @@ namespace BorwinAnalyse.BaseClass
             {
                 if (item is KryptonContextMenu)
                 {
-                    foreach (KryptonContextMenuItemBase MenuItemBas in ((KryptonContextMenu)item).Items)
+                    
+                    if (((KryptonContextMenu)item).Items[2] is KryptonContextMenuHeading)
                     {
-                        if (MenuItemBas is KryptonContextMenuHeading)
-                        {
-                            ((KryptonContextMenuHeading)(MenuItemBas)).Text = ((KryptonContextMenuHeading)(MenuItemBas)).Text.tr();
-                        }
-                        else if (MenuItemBas is KryptonContextMenuCheckBox)
-                        {
-                            ((KryptonContextMenuCheckBox)(MenuItemBas)).Text = ((KryptonContextMenuCheckBox)(MenuItemBas)).Text.tr();
-                        }
-                        else if (MenuItemBas is KryptonContextMenuCheckButton)
-                        {
-                            ((KryptonContextMenuCheckButton)(MenuItemBas)).Text = ((KryptonContextMenuCheckButton)(MenuItemBas)).Text.tr();
-                        }
-                        else if (MenuItemBas is KryptonContextMenuRadioButton)
-                        {
-                            ((KryptonContextMenuRadioButton)(MenuItemBas)).Text = ((KryptonContextMenuRadioButton)(MenuItemBas)).Text.tr();
-                        }
-                        else if (MenuItemBas is KryptonContextMenuLinkLabel)
-                        {
-                            ((KryptonContextMenuLinkLabel)(MenuItemBas)).Text = ((KryptonContextMenuLinkLabel)(MenuItemBas)).Text.tr();
-                        }
+                        string s = ((KryptonContextMenuHeading)((KryptonContextMenu)item).Items[2]).Text;
                     }
                 }
-
+               
             }
 
         }
@@ -78,23 +61,17 @@ namespace BorwinAnalyse.BaseClass
             {
                 if (control is Label || control is Button)
                 {
-                    control.Text = control.Text.tr();
+                    control.Text = ((Label)control).Text.tr();
                 }
                 else if (control is ComboBox)
                 {
-                    ComboBox comboBox = (ComboBox)control;
-                    for (int i = 0; i < comboBox.Items.Count; i++)
+                    if (((ComboBox)control).Items.Count > 0)
                     {
-                        comboBox.Items[i]= comboBox.Items[i].ToString().tr();
+
                     }
-                }else if (control is KryptonDataGridView)
-                {
-                    KryptonDataGridView kryptonDataGridView = (KryptonDataGridView)control;
-                    for (int i = 0; i < kryptonDataGridView.Columns.Count; i++)
-                    {
-                        kryptonDataGridView.Columns[i].HeaderText = kryptonDataGridView.Columns[i].HeaderText.tr();
-                    }
+
                 }
+                string text = control.Text;
                 if (control.Controls != null)
                 {
                     LoopControl(control);
@@ -106,11 +83,11 @@ namespace BorwinAnalyse.BaseClass
     {
         public static string tr(this string str)
         {
-            if (str == null || str == "")
+            if (str == null)
             {
                 return str;
             }
-            string comms = string.Format("select * from Language where context = '{0}' or english = '{1}'", str, str);
+            string comms = string.Format("select * from Language where context = '{0}' ", str);
             DataTable res = SqlLiteManager.Instance.DB.Search(comms, "Language");
             if (res == null || res.Rows.Count == 0)
             {
