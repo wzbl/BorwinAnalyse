@@ -62,6 +62,7 @@ namespace BorwinAnalyse.Forms
                 case "上料表":
                     break;
                 case "查询":
+
                     break;
                 case "设置":
                     kryptonSplitContainer2.Panel2.Controls.Clear();

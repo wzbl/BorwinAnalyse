@@ -31,14 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton4 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonButton4 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.labelHorizontal = new System.Windows.Forms.Label();
+            this.comboBoxH = new System.Windows.Forms.ComboBox();
+            this.labelVertical = new System.Windows.Forms.Label();
+            this.comboBoxV = new System.Windows.Forms.ComboBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,12 +49,15 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelHorizontal = new System.Windows.Forms.Label();
-            this.comboBoxH = new System.Windows.Forms.ComboBox();
-            this.labelVertical = new System.Windows.Forms.Label();
-            this.comboBoxV = new System.Windows.Forms.ComboBox();
+            this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.kryptonContextMenu1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu(this.components);
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
+            this.kryptonContextMenuColorColumns3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
+            this.kryptonContextMenuImageSelect1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect();
+            this.kryptonContextMenuMonthCalendar1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
+            this.kryptonContextMenuImageSelect2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect();
+            this.kryptonContextMenuMonthCalendar2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
+            this.kryptonContextMenuMonthCalendar3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
             this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
             this.kryptonContextMenuHeading2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
@@ -67,12 +73,6 @@
             this.kryptonContextMenuLinkLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuLinkLabel();
             this.kryptonContextMenuColorColumns1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
             this.kryptonContextMenuColorColumns2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
-            this.kryptonContextMenuColorColumns3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
-            this.kryptonContextMenuImageSelect1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect();
-            this.kryptonContextMenuMonthCalendar1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
-            this.kryptonContextMenuImageSelect2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect();
-            this.kryptonContextMenuMonthCalendar2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
-            this.kryptonContextMenuMonthCalendar3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -112,15 +112,6 @@
             this.kryptonSplitContainer1.SplitterDistance = 583;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
-            // kryptonRichTextBox1
-            // 
-            this.kryptonRichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonRichTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
-            this.kryptonRichTextBox1.Size = new System.Drawing.Size(1410, 112);
-            this.kryptonRichTextBox1.TabIndex = 0;
-            this.kryptonRichTextBox1.Text = "kryptonRichTextBox1";
-            // 
             // kryptonSplitContainer2
             // 
             this.kryptonSplitContainer2.Cursor = System.Windows.Forms.Cursors.Default;
@@ -148,55 +139,6 @@
             this.kryptonSplitContainer2.SplitterDistance = 184;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonButton1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(184, 53);
-            this.kryptonButton1.TabIndex = 0;
-            this.kryptonButton1.Tag = "BOM";
-            this.kryptonButton1.Values.Text = "BOM";
-            // 
-            // kryptonButton2
-            // 
-            this.kryptonButton2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonButton2.Location = new System.Drawing.Point(0, 53);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.Size = new System.Drawing.Size(184, 53);
-            this.kryptonButton2.TabIndex = 1;
-            this.kryptonButton2.Tag = "上料表";
-            this.kryptonButton2.Values.Text = "上料表";
-            // 
-            // kryptonButton3
-            // 
-            this.kryptonButton3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonButton3.Location = new System.Drawing.Point(0, 106);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.Size = new System.Drawing.Size(184, 53);
-            this.kryptonButton3.TabIndex = 2;
-            this.kryptonButton3.Tag = "设置";
-            this.kryptonButton3.Values.Text = "设置";
-            // 
-            // kryptonButton4
-            // 
-            this.kryptonButton4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonButton4.Location = new System.Drawing.Point(0, 159);
-            this.kryptonButton4.Name = "kryptonButton4";
-            this.kryptonButton4.Size = new System.Drawing.Size(184, 53);
-            this.kryptonButton4.TabIndex = 3;
-            this.kryptonButton4.Tag = "查询";
-            this.kryptonButton4.Values.Text = "查询";
-            // 
-            // kryptonWrapLabel1
-            // 
-            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(42, 239);
-            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
-            this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel1.Text = "设置";
-            // 
             // kryptonComboBox1
             // 
             this.kryptonComboBox1.DropDownWidth = 121;
@@ -209,6 +151,102 @@
             this.kryptonComboBox1.Name = "kryptonComboBox1";
             this.kryptonComboBox1.Size = new System.Drawing.Size(121, 21);
             this.kryptonComboBox1.TabIndex = 0;
+            // 
+            // kryptonWrapLabel1
+            // 
+            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(42, 239);
+            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
+            this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel1.Text = "设置";
+            // 
+            // kryptonButton4
+            // 
+            this.kryptonButton4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonButton4.Location = new System.Drawing.Point(0, 159);
+            this.kryptonButton4.Name = "kryptonButton4";
+            this.kryptonButton4.Size = new System.Drawing.Size(184, 53);
+            this.kryptonButton4.TabIndex = 3;
+            this.kryptonButton4.Tag = "查询";
+            this.kryptonButton4.Values.Text = "查询";
+            this.kryptonButton4.Click += new System.EventHandler(this.KryptonButton_Click);
+            // 
+            // kryptonButton3
+            // 
+            this.kryptonButton3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonButton3.Location = new System.Drawing.Point(0, 106);
+            this.kryptonButton3.Name = "kryptonButton3";
+            this.kryptonButton3.Size = new System.Drawing.Size(184, 53);
+            this.kryptonButton3.TabIndex = 2;
+            this.kryptonButton3.Tag = "设置";
+            this.kryptonButton3.Values.Text = "设置";
+            this.kryptonButton3.Click += new System.EventHandler(this.KryptonButton_Click);
+            // 
+            // kryptonButton2
+            // 
+            this.kryptonButton2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonButton2.Location = new System.Drawing.Point(0, 53);
+            this.kryptonButton2.Name = "kryptonButton2";
+            this.kryptonButton2.Size = new System.Drawing.Size(184, 53);
+            this.kryptonButton2.TabIndex = 1;
+            this.kryptonButton2.Tag = "上料表";
+            this.kryptonButton2.Values.Text = "上料表";
+            // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonButton1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(184, 53);
+            this.kryptonButton1.TabIndex = 0;
+            this.kryptonButton1.Tag = "BOM";
+            this.kryptonButton1.Values.Text = "BOM";
+            // 
+            // labelHorizontal
+            // 
+            this.labelHorizontal.AutoSize = true;
+            this.labelHorizontal.Location = new System.Drawing.Point(173, 171);
+            this.labelHorizontal.Name = "labelHorizontal";
+            this.labelHorizontal.Size = new System.Drawing.Size(65, 12);
+            this.labelHorizontal.TabIndex = 7;
+            this.labelHorizontal.Text = "Horizontal";
+            // 
+            // comboBoxH
+            // 
+            this.comboBoxH.FormattingEnabled = true;
+            this.comboBoxH.Items.AddRange(new object[] {
+            "Before",
+            "After",
+            "Left",
+            "Right"});
+            this.comboBoxH.Location = new System.Drawing.Point(234, 168);
+            this.comboBoxH.Name = "comboBoxH";
+            this.comboBoxH.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxH.TabIndex = 6;
+            // 
+            // labelVertical
+            // 
+            this.labelVertical.AutoSize = true;
+            this.labelVertical.Location = new System.Drawing.Point(186, 198);
+            this.labelVertical.Name = "labelVertical";
+            this.labelVertical.Size = new System.Drawing.Size(53, 12);
+            this.labelVertical.TabIndex = 5;
+            this.labelVertical.Text = "Vertical";
+            // 
+            // comboBoxV
+            // 
+            this.comboBoxV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxV.FormattingEnabled = true;
+            this.comboBoxV.Items.AddRange(new object[] {
+            "Above",
+            "Below",
+            "Top",
+            "Bottom"});
+            this.comboBoxV.Location = new System.Drawing.Point(234, 195);
+            this.comboBoxV.Name = "comboBoxV";
+            this.comboBoxV.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxV.TabIndex = 4;
             // 
             // kryptonDataGridView1
             // 
@@ -257,50 +295,14 @@
             this.Column6.HeaderText = "Column6";
             this.Column6.Name = "Column6";
             // 
-            // labelHorizontal
+            // kryptonRichTextBox1
             // 
-            this.labelHorizontal.AutoSize = true;
-            this.labelHorizontal.Location = new System.Drawing.Point(173, 171);
-            this.labelHorizontal.Name = "labelHorizontal";
-            this.labelHorizontal.Size = new System.Drawing.Size(65, 12);
-            this.labelHorizontal.TabIndex = 7;
-            this.labelHorizontal.Text = "Horizontal";
-            // 
-            // comboBoxH
-            // 
-            this.comboBoxH.FormattingEnabled = true;
-            this.comboBoxH.Items.AddRange(new object[] {
-            "Before",
-            "After",
-            "Left",
-            "Right"});
-            this.comboBoxH.Location = new System.Drawing.Point(234, 168);
-            this.comboBoxH.Name = "comboBoxH";
-            this.comboBoxH.Size = new System.Drawing.Size(121, 20);
-            this.comboBoxH.TabIndex = 6;
-            // 
-            // labelVertical
-            // 
-            this.labelVertical.AutoSize = true;
-            this.labelVertical.Location = new System.Drawing.Point(186, 198);
-            this.labelVertical.Name = "labelVertical";
-            this.labelVertical.Size = new System.Drawing.Size(53, 12);
-            this.labelVertical.TabIndex = 5;
-            this.labelVertical.Text = "Vertical";
-            // 
-            // comboBoxV
-            // 
-            this.comboBoxV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxV.FormattingEnabled = true;
-            this.comboBoxV.Items.AddRange(new object[] {
-            "Above",
-            "Below",
-            "Top",
-            "Bottom"});
-            this.comboBoxV.Location = new System.Drawing.Point(234, 195);
-            this.comboBoxV.Name = "comboBoxV";
-            this.comboBoxV.Size = new System.Drawing.Size(121, 20);
-            this.comboBoxV.TabIndex = 4;
+            this.kryptonRichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonRichTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonRichTextBox1.Name = "kryptonRichTextBox1";
+            this.kryptonRichTextBox1.Size = new System.Drawing.Size(1410, 112);
+            this.kryptonRichTextBox1.TabIndex = 0;
+            this.kryptonRichTextBox1.Text = "kryptonRichTextBox1";
             // 
             // kryptonContextMenu1
             // 
@@ -339,70 +341,34 @@
             // kryptonContextMenuCheckBox1
             // 
             this.kryptonContextMenuCheckBox1.ExtraText = "";
-            this.kryptonContextMenuCheckBox1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
             // 
             // kryptonContextMenuCheckBox2
             // 
             this.kryptonContextMenuCheckBox2.ExtraText = "";
-            this.kryptonContextMenuCheckBox2.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
             // 
             // kryptonContextMenuCheckButton1
             // 
-            this.kryptonContextMenuCheckButton1.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonContextMenuCheckButton1.Text = "CheckButton";
             // 
             // kryptonContextMenuCheckButton2
             // 
-            this.kryptonContextMenuCheckButton2.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Standalone;
             this.kryptonContextMenuCheckButton2.Text = "CheckButton";
             // 
             // kryptonContextMenuRadioButton1
             // 
             this.kryptonContextMenuRadioButton1.ExtraText = "";
-            this.kryptonContextMenuRadioButton1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
             // 
             // kryptonContextMenuRadioButton2
             // 
             this.kryptonContextMenuRadioButton2.ExtraText = "";
-            this.kryptonContextMenuRadioButton2.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
             // 
             // kryptonContextMenuLinkLabel1
             // 
             this.kryptonContextMenuLinkLabel1.ExtraText = "";
-            this.kryptonContextMenuLinkLabel1.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.kryptonContextMenuLinkLabel1.LinkBehavior = ComponentFactory.Krypton.Toolkit.KryptonLinkBehavior.AlwaysUnderline;
             // 
             // kryptonContextMenuLinkLabel2
             // 
             this.kryptonContextMenuLinkLabel2.ExtraText = "";
-            this.kryptonContextMenuLinkLabel2.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.NormalControl;
-            this.kryptonContextMenuLinkLabel2.LinkBehavior = ComponentFactory.Krypton.Toolkit.KryptonLinkBehavior.AlwaysUnderline;
-            // 
-            // kryptonContextMenuImageSelect1
-            // 
-            this.kryptonContextMenuImageSelect1.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            // 
-            // kryptonContextMenuMonthCalendar1
-            // 
-            this.kryptonContextMenuMonthCalendar1.DayOfWeekStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar1.DayStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar1.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Calendar;
-            // 
-            // kryptonContextMenuImageSelect2
-            // 
-            this.kryptonContextMenuImageSelect2.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.LowProfile;
-            // 
-            // kryptonContextMenuMonthCalendar2
-            // 
-            this.kryptonContextMenuMonthCalendar2.DayOfWeekStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar2.DayStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar2.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Calendar;
-            // 
-            // kryptonContextMenuMonthCalendar3
-            // 
-            this.kryptonContextMenuMonthCalendar3.DayOfWeekStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar3.DayStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.CalendarDay;
-            this.kryptonContextMenuMonthCalendar3.HeaderStyle = ComponentFactory.Krypton.Toolkit.HeaderStyle.Calendar;
             // 
             // AnalyseMainForm
             // 
