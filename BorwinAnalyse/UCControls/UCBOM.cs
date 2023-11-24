@@ -94,7 +94,7 @@ namespace BorwinAnalyse.UCControls
                 Name = "Column6",
                 ReadOnly = true,
             },
-                  new DataGridViewTextBoxColumn()
+            new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
                 HeaderText = "单位".tr(),
@@ -159,9 +159,9 @@ namespace BorwinAnalyse.UCControls
             openFileDialog.Multiselect = false;
             openFileDialog.Filter = "xlsx|*.xlsx|xls表格|*.xls|XLS|*.XLS";
             openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog()==DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-               txtImportPath.Text = openFileDialog.FileName;
+                txtImportPath.Text = openFileDialog.FileName;
                 if (string.IsNullOrEmpty(txtImportPath.Text)) return;
             }
             else return;
@@ -189,11 +189,11 @@ namespace BorwinAnalyse.UCControls
             isStart = true;
             Task.Factory.StartNew(() =>
             {
-                while (true) 
+                while (true)
                 {
-                     if (tokenSource.IsCancellationRequested) break;
+                    if (tokenSource.IsCancellationRequested) break;
 
-                     Thread.Sleep(10);    
+                    Thread.Sleep(10);
                 }
 
             }).Start();
