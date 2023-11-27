@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BorwinAnalyse.BaseClass;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace BorwinAnalyse.DataBase.Comm
         {
             InitData();
             InitTable();
+            LanguageManager.Instance.SearchALLLanguage();
         }
 
         /// <summary>

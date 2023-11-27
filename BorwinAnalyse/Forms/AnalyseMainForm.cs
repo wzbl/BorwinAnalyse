@@ -22,9 +22,9 @@ namespace BorwinAnalyse.Forms
             
         }
 
-        //UCBOM uCBOM = new UCBOM();
+        UCBOM uCBOM;
         UCSearch uCSearch;
-        //UCAnalyseSet uCAnalyseSet = new UCAnalyseSet();
+        UCAnalyseSet uCAnalyseSet ;
 
         private void AnalyseMainForm_Load(object sender, EventArgs e)
         {
@@ -36,9 +36,6 @@ namespace BorwinAnalyse.Forms
 
         private void InitUI()
         {
-            //kryptonSplitContainer2.Panel2.Controls.Add(uCBOM);
-            //kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
-            //kryptonSplitContainer2.Panel2.Controls.Add(uCAnalyseSet);
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             if (dataTable == null) { return; }
             for (int i = 0; i < dataTable.Rows.Count; i++)
@@ -69,7 +66,12 @@ namespace BorwinAnalyse.Forms
             switch (((KryptonButton)sender).Tag)
             {
                 case "BOM":
-                    //uCBOM.BringToFront();
+                    if (uCBOM == null)
+                    {
+                        uCBOM = new UCBOM();
+                        kryptonSplitContainer2.Panel2.Controls.Add(uCBOM);
+                    }
+                    uCBOM.BringToFront();
                     break;
                 case "上料表":
                     break;
@@ -82,7 +84,12 @@ namespace BorwinAnalyse.Forms
                     uCSearch.BringToFront();
                     break;
                 case "设置":
-                    //uCAnalyseSet.BringToFront();
+                    if (uCAnalyseSet == null)
+                    {
+                        uCAnalyseSet = new UCAnalyseSet();
+                        kryptonSplitContainer2.Panel2.Controls.Add(uCAnalyseSet);
+                    }
+                    uCAnalyseSet.BringToFront();
                     break;
                 default:
                     break;
@@ -113,7 +120,7 @@ namespace BorwinAnalyse.Forms
 
         private void AnalyseMainForm_Shown(object sender, EventArgs e)
         {
-            comLanguage.SelectedValueChanged += comLanguage_SelectedIndexChanged;
+            comLanguage.SelectedIndexChanged += comLanguage_SelectedIndexChanged;
         }
     }
 }

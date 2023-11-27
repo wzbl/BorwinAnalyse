@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.Forms;
+using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,6 @@ namespace BorwinAnalyse.UCControls
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             this.components = new System.ComponentModel.Container();
-            tokenSource = new CancellationTokenSource();
             this.Load += UCBOM_Load;
         }
 
@@ -37,7 +37,7 @@ namespace BorwinAnalyse.UCControls
 
         private void InitUI()
         {
-            InitDataGrid();
+            //InitDataGrid();
         }
 
         /// <summary>
@@ -155,22 +155,23 @@ namespace BorwinAnalyse.UCControls
 
         }
 
+        DataTable dt;
         private void btnImport_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
             openFileDialog.Filter = "xlsx|*.xlsx|xls表格|*.xls|XLS|*.XLS";
             openFileDialog.RestoreDirectory = true;
-            if (openFileDialog.ShowDialog()==DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-               txtImportPath.Text = openFileDialog.FileName;
+                txtImportPath.Text = openFileDialog.FileName;
                 if (string.IsNullOrEmpty(txtImportPath.Text)) return;
             }
             else return;
 
             if (!File.Exists(txtImportPath.Text)) { return; }
-
-            DataGridView_BOM.DataSource = NOPIHelper.ExcelToDataTable(txtImportPath.Text, true);
+            dt = NOPIHelper.ExcelToDataTable(txtImportPath.Text, true);
+            DataGridView_BOM.DataSource = dt;
             DataGridView_BOM.Refresh();
         }
 
@@ -178,10 +179,14 @@ namespace BorwinAnalyse.UCControls
         {
             if (isStart)
             {
+                btnStart.Text = "开始".tr();
                 StopAnalyse();
             }
             else
             {
+                tokenSource = new CancellationTokenSource();
+                kryptonDockableNavigator1.SelectedIndex = 1;
+                btnStart.Text = "停止".tr();
                 StartAnalyse();
             }
         }
@@ -191,14 +196,17 @@ namespace BorwinAnalyse.UCControls
             isStart = true;
             Task.Factory.StartNew(() =>
             {
-                while (true) 
+                while (true)
                 {
-                     if (tokenSource.IsCancellationRequested) break;
+                    if (tokenSource.IsCancellationRequested) break;
+                    for (int i = 0; i < DataGridView_BOM.RowCount; i++)
+                    {
 
-                     Thread.Sleep(10);    
+                    }
+                    Thread.Sleep(10);
                 }
 
-            }).Start();
+            });
         }
 
         public void StopAnalyse()
@@ -207,15 +215,65 @@ namespace BorwinAnalyse.UCControls
             tokenSource?.Cancel();
         }
 
+        /// <summary>
+        /// 保存BOM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtName.Text))
+            {
+                return;
+            }
 
-        private void DataGridView_BOM_DragDrop(object sender, DragEventArgs e)
+            Save();
+        }
+
+        private void Save()
         {
 
         }
 
-        private void DataGridView_BOM_DragEnter(object sender, DragEventArgs e)
+        /// <summary>
+        /// 合并按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnMerge_Click(object sender, EventArgs e)
         {
-
+            Merge();
         }
+        /// <summary>
+        /// 合并
+        /// </summary>
+        private void Merge()
+        {
+            if (dt == null)
+            {
+                return;
+            }
+            if (!dt.Columns.Contains(txtColumn1.Text.Trim())|| !dt.Columns.Contains(txtColumn2.Text.Trim()))
+            {
+                return;
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                DataRow row = dt.Rows[i];//DataTable的第i行
+
+
+                row.BeginEdit();//开始编辑行
+
+
+                row[txtColumn1.Text.Trim()] = row[txtColumn1.Text.Trim()].ToString()+ " " + row[txtColumn2.Text.Trim()].ToString();//给行的列"columnname"赋值
+                row.EndEdit();//结束编辑
+
+
+                dt.AcceptChanges();//保存修改的结果。     
+            }
+            dt.Columns.Remove(dt.Columns[txtColumn2.Text.Trim()]);
+        }
+
     }
 }

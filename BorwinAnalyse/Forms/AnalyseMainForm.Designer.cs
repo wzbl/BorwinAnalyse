@@ -38,29 +38,6 @@
             this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonRichTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.kryptonContextMenu1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu(this.components);
-            this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.kryptonContextMenuColorColumns3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
-            this.kryptonContextMenuImageSelect1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect();
-            this.kryptonContextMenuMonthCalendar1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
-            this.kryptonContextMenuImageSelect2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect();
-            this.kryptonContextMenuMonthCalendar2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
-            this.kryptonContextMenuMonthCalendar3 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar();
-            this.kryptonContextMenuItems2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
-            this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
-            this.kryptonContextMenuHeading2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
-            this.kryptonContextMenuSeparator1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
-            this.kryptonContextMenuSeparator2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator();
-            this.kryptonContextMenuCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckBox();
-            this.kryptonContextMenuCheckBox2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckBox();
-            this.kryptonContextMenuCheckButton1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckButton();
-            this.kryptonContextMenuCheckButton2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckButton();
-            this.kryptonContextMenuRadioButton1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuRadioButton();
-            this.kryptonContextMenuRadioButton2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuRadioButton();
-            this.kryptonContextMenuLinkLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuLinkLabel();
-            this.kryptonContextMenuLinkLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuLinkLabel();
-            this.kryptonContextMenuColorColumns1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
-            this.kryptonContextMenuColorColumns2 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -156,6 +133,7 @@
             this.kryptonButton2.TabIndex = 1;
             this.kryptonButton2.Tag = "上料表";
             this.kryptonButton2.Values.Text = "上料表";
+            this.kryptonButton2.Click += new System.EventHandler(this.KryptonButton_Click);
             // 
             // kryptonButton1
             // 
@@ -166,6 +144,7 @@
             this.kryptonButton1.TabIndex = 0;
             this.kryptonButton1.Tag = "BOM";
             this.kryptonButton1.Values.Text = "BOM";
+            this.kryptonButton1.Click += new System.EventHandler(this.KryptonButton_Click);
             // 
             // kryptonRichTextBox1
             // 
@@ -176,72 +155,6 @@
             this.kryptonRichTextBox1.TabIndex = 0;
             this.kryptonRichTextBox1.Text = "kryptonRichTextBox1";
             // 
-            // kryptonContextMenu1
-            // 
-            this.kryptonContextMenu1.Items.AddRange(new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItemBase[] {
-            this.kryptonContextMenuItems1,
-            this.kryptonContextMenuColorColumns3,
-            this.kryptonContextMenuImageSelect1,
-            this.kryptonContextMenuMonthCalendar1,
-            this.kryptonContextMenuImageSelect2,
-            this.kryptonContextMenuMonthCalendar2,
-            this.kryptonContextMenuMonthCalendar3,
-            this.kryptonContextMenuItems2,
-            this.kryptonContextMenuHeading1,
-            this.kryptonContextMenuHeading2,
-            this.kryptonContextMenuSeparator1,
-            this.kryptonContextMenuSeparator2,
-            this.kryptonContextMenuCheckBox1,
-            this.kryptonContextMenuCheckBox2,
-            this.kryptonContextMenuCheckButton1,
-            this.kryptonContextMenuCheckButton2,
-            this.kryptonContextMenuRadioButton1,
-            this.kryptonContextMenuRadioButton2,
-            this.kryptonContextMenuLinkLabel1,
-            this.kryptonContextMenuLinkLabel2,
-            this.kryptonContextMenuColorColumns1,
-            this.kryptonContextMenuColorColumns2});
-            // 
-            // kryptonContextMenuHeading1
-            // 
-            this.kryptonContextMenuHeading1.ExtraText = "";
-            // 
-            // kryptonContextMenuHeading2
-            // 
-            this.kryptonContextMenuHeading2.ExtraText = "";
-            // 
-            // kryptonContextMenuCheckBox1
-            // 
-            this.kryptonContextMenuCheckBox1.ExtraText = "";
-            // 
-            // kryptonContextMenuCheckBox2
-            // 
-            this.kryptonContextMenuCheckBox2.ExtraText = "";
-            // 
-            // kryptonContextMenuCheckButton1
-            // 
-            this.kryptonContextMenuCheckButton1.Text = "CheckButton";
-            // 
-            // kryptonContextMenuCheckButton2
-            // 
-            this.kryptonContextMenuCheckButton2.Text = "CheckButton";
-            // 
-            // kryptonContextMenuRadioButton1
-            // 
-            this.kryptonContextMenuRadioButton1.ExtraText = "";
-            // 
-            // kryptonContextMenuRadioButton2
-            // 
-            this.kryptonContextMenuRadioButton2.ExtraText = "";
-            // 
-            // kryptonContextMenuLinkLabel1
-            // 
-            this.kryptonContextMenuLinkLabel1.ExtraText = "";
-            // 
-            // kryptonContextMenuLinkLabel2
-            // 
-            this.kryptonContextMenuLinkLabel2.ExtraText = "";
-            // 
             // AnalyseMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -249,7 +162,9 @@
             this.ClientSize = new System.Drawing.Size(1410, 700);
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Name = "AnalyseMainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AnalyseMainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AnalyseMainForm_Load);
             this.Shown += new System.EventHandler(this.AnalyseMainForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
@@ -279,28 +194,5 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comLanguage;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenu kryptonContextMenu1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems kryptonContextMenuItems2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading kryptonContextMenuHeading2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuSeparator kryptonContextMenuSeparator2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckBox kryptonContextMenuCheckBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckBox kryptonContextMenuCheckBox2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckButton kryptonContextMenuCheckButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuCheckButton kryptonContextMenuCheckButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuRadioButton kryptonContextMenuRadioButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuRadioButton kryptonContextMenuRadioButton2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuLinkLabel kryptonContextMenuLinkLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuLinkLabel kryptonContextMenuLinkLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns kryptonContextMenuColorColumns1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns kryptonContextMenuColorColumns2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuColorColumns kryptonContextMenuColorColumns3;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect kryptonContextMenuImageSelect1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar kryptonContextMenuMonthCalendar1;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuImageSelect kryptonContextMenuImageSelect2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar kryptonContextMenuMonthCalendar2;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuMonthCalendar kryptonContextMenuMonthCalendar3;
     }
 }

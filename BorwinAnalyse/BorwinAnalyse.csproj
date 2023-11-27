@@ -134,11 +134,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass\CommonAnalyse.cs" />
     <Compile Include="BaseClass\LanguageManager.cs" />
     <Compile Include="BaseClass\NOPIHelper.cs" />
     <Compile Include="DataBase\Comm\SQLConnect.cs" />
     <Compile Include="DataBase\Comm\SqlLiteManager.cs" />
     <Compile Include="DataBase\Model\BaseModel.cs" />
+    <Compile Include="DataBase\Model\Language.cs" />
     <Compile Include="Forms\AnalyseMainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,7 +29,8 @@ namespace BorwinAnalyse.DataBase.Comm
 
         public void OpenDB()
         {
-            _SQLiteConn.Open();
+            if (_SQLiteConn.State != System.Data.ConnectionState.Open)
+                _SQLiteConn.Open();
         }
 
         /// <summary>
@@ -75,13 +76,10 @@ namespace BorwinAnalyse.DataBase.Comm
         {
             try
             {
-                if (_SQLiteConn.State != System.Data.ConnectionState.Open)
-                {
-                    SQLiteCommand cmd = new SQLiteCommand();
-                    cmd.Connection = _SQLiteConn;
-                    cmd.CommandText = CommandText;
-                    cmd.ExecuteNonQuery();
-                }
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd.Connection = _SQLiteConn;
+                cmd.CommandText = CommandText;
+                cmd.ExecuteNonQuery();
                 return true;
             }
             catch (Exception ex)
@@ -95,15 +93,11 @@ namespace BorwinAnalyse.DataBase.Comm
             try
             {
                 DataTable dt = new DataTable();
-                if (_SQLiteConn.State == System.Data.ConnectionState.Open)
-                {
-                    SQLiteCommand cmd = new SQLiteCommand( CommandText, _SQLiteConn);
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    adapter.Fill(ds, table);
-                    return ds.Tables[0];
-                }
-                return dt;
+                SQLiteCommand cmd = new SQLiteCommand(CommandText, _SQLiteConn);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, table);
+                return ds.Tables[0];
             }
             catch (Exception ex)
             {
