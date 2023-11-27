@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace BorwinAnalyse.BaseClass
 {
@@ -28,8 +29,9 @@ namespace BorwinAnalyse.BaseClass
                 return instance;
             }
         }
-       
-        public CommonAnalyse() {
+
+        public CommonAnalyse()
+        {
 
 
         }
@@ -40,21 +42,26 @@ namespace BorwinAnalyse.BaseClass
 
         public void Load()
         {
-            string savePath = @"BOM/CommonAnalyse.xml";
-            if (File.Exists(savePath))
+            string savePath = @"SqlLiteData/CommonAnalyse.json";
+            if (!File.Exists(savePath))
             {
-                instance = SerializeHelper.DeserializeXml<CommonAnalyse>(savePath);
-                if (instance == null)
-                {
-                    instance = new CommonAnalyse();
-                }
+                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
+                fs1.Close();
             }
-
+            else
+            {
+                instance = JsonConvert.DeserializeObject<CommonAnalyse>(File.ReadAllText(savePath));
+            }
         }
         public void Save()
         {
-            string savePath = @"BOM/CommonAnalyse.xml";
-            SerializeHelper.SerializeXml(savePath, instance);
+            string savePath = @"SqlLiteData/CommonAnalyse.json";
+            if (!File.Exists(savePath))
+            {
+                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
+                fs1.Close();
+            }
+            File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
         }
 
         /// <summary>
@@ -77,17 +84,17 @@ namespace BorwinAnalyse.BaseClass
         /// <summary>
         /// 是否可用
         /// </summary>
-        public bool Enable;
+        public bool Enable = false;
 
         /// <summary>
         /// Asc码
         /// </summary>
-        public string Acsii;
+        public string Acsii = "";
 
         /// <summary>
         /// 说明
         /// </summary>
-        public string Illustrate;
+        public string Illustrate = "";
     }
 
     /// <summary>
@@ -99,27 +106,32 @@ namespace BorwinAnalyse.BaseClass
         /// <summary>
         /// 是否可用
         /// </summary>
-        public bool Enable;
+        public bool Enable = false;
 
         /// <summary>
         /// 查找内容
         /// </summary>
-        public string FindContent;
+        public string FindContent = "";
 
         /// <summary>
         /// 替换
         /// </summary>
-        public string Replace;
+        public string Replace = "";
 
         /// <summary>
         /// 是否区分大小写
         /// </summary>
-        public bool Is_Case_sensitive;
+        public bool Is_Case_sensitive = false;
 
         /// <summary>
         /// 是否区分全半角
         /// </summary>
-        public bool Is_Full_half_width;
+        public bool Is_Full_half_width = false;
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark = "";
     }
 
     public class SerializeHelper
