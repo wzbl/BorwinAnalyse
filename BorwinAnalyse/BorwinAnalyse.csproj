@@ -137,12 +137,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass\BomManager.cs" />
     <Compile Include="BaseClass\CommonAnalyse.cs" />
     <Compile Include="BaseClass\LanguageManager.cs" />
     <Compile Include="BaseClass\NOPIHelper.cs" />
     <Compile Include="DataBase\Comm\SQLConnect.cs" />
     <Compile Include="DataBase\Comm\SqlLiteManager.cs" />
     <Compile Include="DataBase\Model\BaseModel.cs" />
+    <Compile Include="DataBase\Model\BomDataModel.cs" />
     <Compile Include="DataBase\Model\Language.cs" />
     <Compile Include="Forms\AnalyseMainForm.cs">
       <SubType>Form</SubType>
@@ -174,6 +176,18 @@
     <Compile Include="UCControls\UCSearch.Designer.cs">
       <DependentUpon>UCSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCControls\UCSearchBom.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCSearchBom.Designer.cs">
+      <DependentUpon>UCSearchBom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCControls\UCSearchLanguage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCSearchLanguage.Designer.cs">
+      <DependentUpon>UCSearchLanguage.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -195,6 +209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCSearch.resx">
       <DependentUpon>UCSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\UCSearchBom.resx">
+      <DependentUpon>UCSearchBom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\UCSearchLanguage.resx">
+      <DependentUpon>UCSearchLanguage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

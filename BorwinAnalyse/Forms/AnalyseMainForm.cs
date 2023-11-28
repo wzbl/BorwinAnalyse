@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Comm;
 using BorwinAnalyse.UCControls;
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -19,17 +20,33 @@ namespace BorwinAnalyse.Forms
         public AnalyseMainForm()
         {
             InitializeComponent();
-            
+            f = this;
         }
 
         UCBOM uCBOM;
         UCSearch uCSearch;
         UCAnalyseSet uCAnalyseSet ;
 
+        public static AnalyseMainForm f;
+
+        public void ShowModelData()
+        {
+            if (uCSearch == null)
+            {
+                uCSearch = new UCSearch();
+                kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
+            }
+            uCSearch.kryptonNavigator1.SelectedIndex = 1;
+            uCSearch.ucSearchBom1.ComModelUpdata();
+            uCSearch.ucSearchBom1.Search();
+            uCSearch.BringToFront();
+        }
+
         private void AnalyseMainForm_Load(object sender, EventArgs e)
         {
             SqlLiteManager.Instance.Init();
             CommonAnalyse.Instance.Load();
+            BomManager.Instance.Init();
             InitUI();
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
 
@@ -82,6 +99,7 @@ namespace BorwinAnalyse.Forms
                         uCSearch = new UCSearch();
                         kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
                     }
+                    uCSearch.ucSearchBom1.ComModelUpdata();
                     uCSearch.BringToFront();
                     break;
                 case "设置":

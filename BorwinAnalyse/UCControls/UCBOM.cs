@@ -37,7 +37,8 @@ namespace BorwinAnalyse.UCControls
 
         private void InitUI()
         {
-            //InitDataGrid();
+            kryptonDockableNavigator1.SelectedIndex = 0;
+            txtName.Text = BomManager.Instance.CurrentBomName;
         }
 
         /// <summary>
@@ -186,6 +187,7 @@ namespace BorwinAnalyse.UCControls
             {
                 tokenSource = new CancellationTokenSource();
                 kryptonDockableNavigator1.SelectedIndex = 1;
+                DataGridView_Result.Rows.Clear();
                 btnStart.Text = "停止".tr();
                 StartAnalyse();
             }
@@ -194,25 +196,62 @@ namespace BorwinAnalyse.UCControls
         public void StartAnalyse()
         {
             isStart = true;
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
-                while (true)
+                for (int i = 0; i < DataGridView_BOM.RowCount; i++)
                 {
                     if (tokenSource.IsCancellationRequested) break;
-                    for (int i = 0; i < DataGridView_BOM.RowCount; i++)
+                    if (DataGridView_BOM.Rows[i].IsNewRow)
                     {
-
+                        continue;
                     }
-                    Thread.Sleep(10);
+                    if (DataGridView_BOM.Rows[i].Cells[1].Value == null)
+                    {
+                        UpdataAnalyseData(DataGridView_BOM.Rows[i].Cells[0].Value.ToString(), "", new AnalyseResult());
+                        continue;
+                    }
+                    AnalyseResult analyseResult = CommonAnalyse.Instance.AnalyseMethod(DataGridView_BOM.Rows[i].Cells[1].Value.ToString());
+                    UpdataAnalyseData(DataGridView_BOM.Rows[i].Cells[0].Value.ToString(), DataGridView_BOM.Rows[i].Cells[1].Value.ToString(), analyseResult);
                 }
+                Thread.Sleep(10);
 
-            });
+                this.Invoke(new Action(() =>
+                {
+                    btnStart.Text = "开始".tr();
+                }));
+                isStart = false;
+                tokenSource?.Cancel();
+
+            },tokenSource.Token);
         }
 
         public void StopAnalyse()
         {
             isStart = false;
             tokenSource?.Cancel();
+        }
+
+        /// <summary>
+        /// 更新解析数据
+        /// </summary>
+        /// <param name="analyseResult"></param>
+        private void UpdataAnalyseData(string barCode,string description, AnalyseResult analyseResult)
+        {
+            this.Invoke(new Action(() =>
+            {
+                DataGridView_Result.Rows.Add
+              (
+              barCode,
+              description,
+              analyseResult.Result,
+              analyseResult.LcrItem.Type,
+              analyseResult.LcrItem.Size,
+              analyseResult.LcrItem.Value,
+              analyseResult.LcrItem.Unit,
+              analyseResult.LcrItem.Grade,
+              analyseResult.LcrItem.DefaultFormat()
+              );
+            }));
         }
 
         /// <summary>
@@ -224,6 +263,13 @@ namespace BorwinAnalyse.UCControls
         {
             if (string.IsNullOrEmpty(txtName.Text))
             {
+                MessageBox.Show("模板名称不能为空".tr());
+                return;
+            }
+
+            if (BomManager.Instance.BomNames.Contains(txtName.Text))
+            {
+                MessageBox.Show("模板名称已经存在".tr());
                 return;
             }
 
@@ -232,7 +278,13 @@ namespace BorwinAnalyse.UCControls
 
         private void Save()
         {
-
+            BomManager.Instance.SaveInAllBomData(txtName.Text,DataGridView_Result);
+            if (MessageBox.Show("保存成功，是否作为当前BOM？".tr(), "提示".tr(), MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                BomManager.Instance.SaveInCurrentBomData(txtName.Text, DataGridView_Result);
+                MessageBox.Show("已经设置为当前BOM".tr(), "提示".tr(), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            }
+            
         }
 
         /// <summary>
@@ -275,5 +327,14 @@ namespace BorwinAnalyse.UCControls
             dt.Columns.Remove(dt.Columns[txtColumn2.Text.Trim()]);
         }
 
+        private void btnShowModelData_Click(object sender, EventArgs e)
+        {
+            ShowModelData();
+        }
+
+        private void ShowModelData()
+        {
+            AnalyseMainForm.f.ShowModelData();
+        }
     }
 }
