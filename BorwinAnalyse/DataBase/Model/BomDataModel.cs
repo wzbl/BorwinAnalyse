@@ -17,7 +17,7 @@ namespace BorwinAnalyse.DataBase.Model
         public string barCode;
         public string replaceCode;
         public string description;
-        public bool result;
+        public string result;
         public string type;
         public string size;
         public string value;

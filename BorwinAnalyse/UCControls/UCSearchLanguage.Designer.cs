@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCSearchLanguage));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
@@ -76,7 +77,7 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.DGV_Language);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1387, 614);
-            this.kryptonSplitContainer1.SplitterDistance = 114;
+            this.kryptonSplitContainer1.SplitterDistance = 86;
             this.kryptonSplitContainer1.TabIndex = 1;
             // 
             // txtName
@@ -98,7 +99,7 @@
             // btnSearch
             // 
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSearch.Location = new System.Drawing.Point(897, 0);
+            this.btnSearch.Location = new System.Drawing.Point(957, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnSearch.OverrideDefault.Back.Color2 = System.Drawing.Color.Cyan;
@@ -109,49 +110,54 @@
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnSearch.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnSearch.OverrideFocus.Back.Color2 = System.Drawing.Color.Lime;
-            this.btnSearch.Size = new System.Drawing.Size(98, 114);
+            this.btnSearch.Size = new System.Drawing.Size(86, 86);
             this.btnSearch.TabIndex = 5;
-            this.btnSearch.Values.Text = "查询";
+            this.btnSearch.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Values.Image")));
+            this.btnSearch.Values.Text = "";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnUpdate
             // 
             this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnUpdate.Location = new System.Drawing.Point(995, 0);
+            this.btnUpdate.Location = new System.Drawing.Point(1043, 0);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(98, 114);
+            this.btnUpdate.Size = new System.Drawing.Size(86, 86);
             this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Values.Text = "更新";
+            this.btnUpdate.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Values.Image")));
+            this.btnUpdate.Values.Text = "";
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDelete.Location = new System.Drawing.Point(1093, 0);
+            this.btnDelete.Location = new System.Drawing.Point(1129, 0);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(98, 114);
+            this.btnDelete.Size = new System.Drawing.Size(86, 86);
             this.btnDelete.TabIndex = 2;
-            this.btnDelete.Values.Text = "删除";
+            this.btnDelete.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Values.Image")));
+            this.btnDelete.Values.Text = "";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnImPort
             // 
             this.btnImPort.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnImPort.Location = new System.Drawing.Point(1191, 0);
+            this.btnImPort.Location = new System.Drawing.Point(1215, 0);
             this.btnImPort.Name = "btnImPort";
-            this.btnImPort.Size = new System.Drawing.Size(98, 114);
+            this.btnImPort.Size = new System.Drawing.Size(86, 86);
             this.btnImPort.TabIndex = 1;
-            this.btnImPort.Values.Text = "导入";
+            this.btnImPort.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnImPort.Values.Image")));
+            this.btnImPort.Values.Text = "";
             this.btnImPort.Click += new System.EventHandler(this.btnImPort_Click);
             // 
             // btnExport
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExport.Location = new System.Drawing.Point(1289, 0);
+            this.btnExport.Location = new System.Drawing.Point(1301, 0);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(98, 114);
+            this.btnExport.Size = new System.Drawing.Size(86, 86);
             this.btnExport.TabIndex = 0;
-            this.btnExport.Values.Text = "导出";
+            this.btnExport.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Values.Image")));
+            this.btnExport.Values.Text = "";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // DGV_Language
@@ -171,13 +177,14 @@
             this.DGV_Language.Location = new System.Drawing.Point(0, 0);
             this.DGV_Language.Name = "DGV_Language";
             this.DGV_Language.RowTemplate.Height = 23;
-            this.DGV_Language.Size = new System.Drawing.Size(1387, 495);
+            this.DGV_Language.Size = new System.Drawing.Size(1387, 523);
             this.DGV_Language.TabIndex = 0;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "默认文本";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column1.Width = 168;
             // 
@@ -185,13 +192,13 @@
             // 
             this.Column2.HeaderText = "中文";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 168;
+            this.Column2.Width = 169;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "英文";
             this.Column3.Name = "Column3";
-            this.Column3.Width = 169;
+            this.Column3.Width = 168;
             // 
             // Column4
             // 
@@ -209,13 +216,13 @@
             // 
             this.Column6.HeaderText = "exp3";
             this.Column6.Name = "Column6";
-            this.Column6.Width = 168;
+            this.Column6.Width = 169;
             // 
             // Column7
             // 
             this.Column7.HeaderText = "exp4";
             this.Column7.Name = "Column7";
-            this.Column7.Width = 169;
+            this.Column7.Width = 168;
             // 
             // Column8
             // 

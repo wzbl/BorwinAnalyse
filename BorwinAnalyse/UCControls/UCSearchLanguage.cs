@@ -180,6 +180,7 @@ namespace BorwinAnalyse.UCControls
             string cmd = string.Format("UPDATE Language SET  chinese = '{0}',english = '{1}',exp1 = '{2}',exp2 = '{3}',exp3 = '{4}',exp4 = '{5}',exp5 = '{6}'  WHERE context = '{7}'", language1.context, language1.english, language1.exp1, language1.exp2, language1.exp3, language1.exp4, language1.exp5, language1.context);
             SqlLiteManager.Instance.DB.Search(cmd, "Language");
             LanguageManager.Instance.languages.Add(language1);
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -221,6 +222,7 @@ namespace BorwinAnalyse.UCControls
         private void btnImPort_Click(object sender, EventArgs e)
         {
             DataTable dt = NOPIHelper.ImportExcel();
+            if (dt==null) { return; }
             DGV_Language.Rows.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
             {

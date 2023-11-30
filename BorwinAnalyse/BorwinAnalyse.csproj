@@ -220,5 +220,14 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-xls导入-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-开始-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-暂停-80.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

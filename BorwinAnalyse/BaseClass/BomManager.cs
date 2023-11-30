@@ -56,7 +56,7 @@ namespace BorwinAnalyse.BaseClass
                 bomDataModel.barCode = dataTable.Rows[i].ItemArray[2].ToString();
                 bomDataModel.replaceCode = dataTable.Rows[i].ItemArray[3].ToString();
                 bomDataModel.description = dataTable.Rows[i].ItemArray[4].ToString();
-                bomDataModel.result = bool.Parse( dataTable.Rows[i].ItemArray[5].ToString());
+                bomDataModel.result = dataTable.Rows[i].ItemArray[5].ToString();
                 bomDataModel.type = dataTable.Rows[i].ItemArray[6].ToString();
                 bomDataModel.size = dataTable.Rows[i].ItemArray[7].ToString();
                 bomDataModel.value = dataTable.Rows[i].ItemArray[8].ToString();
@@ -93,7 +93,7 @@ namespace BorwinAnalyse.BaseClass
                 bomDataModel.barCode = dataTable.Rows[i].ItemArray[2].ToString();
                 bomDataModel.replaceCode = dataTable.Rows[i].ItemArray[3].ToString();
                 bomDataModel.description = dataTable.Rows[i].ItemArray[4].ToString();
-                bomDataModel.result = bool.Parse(dataTable.Rows[i].ItemArray[5].ToString());
+                bomDataModel.result = dataTable.Rows[i].ItemArray[5].ToString();
                 bomDataModel.type = dataTable.Rows[i].ItemArray[6].ToString();
                 bomDataModel.size = dataTable.Rows[i].ItemArray[7].ToString();
                 bomDataModel.value = dataTable.Rows[i].ItemArray[8].ToString();
@@ -117,7 +117,7 @@ namespace BorwinAnalyse.BaseClass
         {
             for (int i = 0; i < dataGrid.RowCount; i++)
             {
-                if (dataGrid.Rows[i].IsNewRow)
+                if (dataGrid.Rows[i].IsNewRow||string.IsNullOrEmpty(dataGrid.Rows[i].Cells[0].FormattedValue.ToString()))
                 {
                     continue;
                 }
@@ -128,7 +128,7 @@ namespace BorwinAnalyse.BaseClass
                 bomDataModel.barCode = dataGrid.Rows[i].Cells[0].FormattedValue.ToString();
                 bomDataModel.replaceCode = "";
                 bomDataModel.description = dataGrid.Rows[i].Cells[1].FormattedValue.ToString();
-                bomDataModel.result = bool.Parse(dataGrid.Rows[i].Cells[2].FormattedValue.ToString());
+                bomDataModel.result = dataGrid.Rows[i].Cells[2].FormattedValue.ToString();
                 bomDataModel.type = dataGrid.Rows[i].Cells[3].FormattedValue.ToString();
                 bomDataModel.size = dataGrid.Rows[i].Cells[4].FormattedValue.ToString();
                 bomDataModel.value = dataGrid.Rows[i].Cells[5].FormattedValue.ToString();
@@ -140,7 +140,7 @@ namespace BorwinAnalyse.BaseClass
                 bomDataModel.exp4 = dataGrid.Rows[i].Cells[11].FormattedValue.ToString();
                 bomDataModel.exp5 = dataGrid.Rows[i].Cells[12].FormattedValue.ToString();
 
-                string cmd = string.Format("insert into ALLBOM values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}')", bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode, bomDataModel.replaceCode, bomDataModel.description, bomDataModel.result.ToString(), bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade, bomDataModel.exp1, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5);
+                string cmd = string.Format("insert into ALLBOM values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}')", bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode, bomDataModel.replaceCode, bomDataModel.description, bomDataModel.result, bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade, bomDataModel.exp1, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5);
                 SqlLiteManager.Instance.DB.Insert(cmd);
             }
             GetAllBomData();
@@ -156,7 +156,7 @@ namespace BorwinAnalyse.BaseClass
             SqlLiteManager.Instance.DB.Insert(comms);
             for (int i = 0; i < dataGrid.RowCount; i++)
             {
-                if (dataGrid.Rows[i].IsNewRow)
+                if (dataGrid.Rows[i].IsNewRow || string.IsNullOrEmpty(dataGrid.Rows[i].Cells[0].FormattedValue.ToString()))
                 {
                     continue;
                 }
@@ -167,7 +167,7 @@ namespace BorwinAnalyse.BaseClass
                 bomDataModel.barCode = dataGrid.Rows[i].Cells[0].FormattedValue.ToString();
                 bomDataModel.replaceCode = "";
                 bomDataModel.description = dataGrid.Rows[i].Cells[1].FormattedValue.ToString();
-                bomDataModel.result = bool.Parse(dataGrid.Rows[i].Cells[2].FormattedValue.ToString());
+                bomDataModel.result = dataGrid.Rows[i].Cells[2].FormattedValue.ToString();
                 bomDataModel.type = dataGrid.Rows[i].Cells[3].FormattedValue.ToString();
                 bomDataModel.size = dataGrid.Rows[i].Cells[4].FormattedValue.ToString();
                 bomDataModel.value = dataGrid.Rows[i].Cells[5].FormattedValue.ToString();
@@ -179,7 +179,7 @@ namespace BorwinAnalyse.BaseClass
                 bomDataModel.exp4 = dataGrid.Rows[i].Cells[11].FormattedValue.ToString();
                 bomDataModel.exp5 = dataGrid.Rows[i].Cells[12].FormattedValue.ToString();
 
-                string cmd = string.Format("insert into CurrentBOM values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}')", bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode, bomDataModel.replaceCode, bomDataModel.description, bomDataModel.result.ToString(), bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade, bomDataModel.exp1, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5);
+                string cmd = string.Format("insert into CurrentBOM values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}')", bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode, bomDataModel.replaceCode, bomDataModel.description, bomDataModel.result, bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade, bomDataModel.exp1, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5);
                 SqlLiteManager.Instance.DB.Insert(cmd);
             }
             GetCurrentBomData();
@@ -205,6 +205,28 @@ namespace BorwinAnalyse.BaseClass
             CurrentBomName = modelName;
         }
 
+        public void UpdataBomData(BomDataModel bomDataModel)
+        {
+            string cmd = string.Format("UPDATE ALLBOM SET  replaceCode = '{0}' ,exp2 ='{1}',exp3='{2}',exp4='{3}',exp5='{4}' where id = '{5}' and modelName = '{6}' and barCode = '{7}'", bomDataModel.replaceCode, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5, bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode);
+            SqlLiteManager.Instance.DB.Insert(cmd);
+            if (CurrentBomName== bomDataModel.modelName)
+            {
+                SetCurrentModel(CurrentBomName);
+            }
+        }
+
+        public void InserIntoBomData(BomDataModel bomDataModel)
+        {
+            string cmd = string.Format("insert into ALLBOM values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}')", bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode, bomDataModel.replaceCode, bomDataModel.description, bomDataModel.result, bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade, bomDataModel.exp1, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5);
+            SqlLiteManager.Instance.DB.Insert(cmd);
+            GetAllBomData();
+            if (CurrentBomName == bomDataModel.modelName)
+            {
+                SetCurrentModel(CurrentBomName);
+                GetCurrentBomData();
+            }
+        }
+
         /// <summary>
         /// 所有Bom数据
         /// </summary>
@@ -214,5 +236,35 @@ namespace BorwinAnalyse.BaseClass
         /// 当前的BomData
         /// </summary>
         public List<BomDataModel> CurrentBomData =new List<BomDataModel>();
+
+        /// <summary>
+        /// 在Bom中查询条码信息
+        /// </summary>
+        /// <param name="barCode">条码</param>
+        /// <param name="modelName">模板名称</param>
+        /// <returns></returns>
+        public BomDataModel SearchByBarCode(string barCode)
+        {
+           return CurrentBomData.Where(x=>x.barCode==barCode).ToList()[0];
+        }
+
+        /// <summary>
+        /// 在Bom中查询条码信息
+        /// </summary>
+        /// <param name="barCode">条码</param>
+        /// <param name="modelName">模板名称</param>
+        /// <returns></returns>
+        public List<BomDataModel> SearchByBarCode(string barCode,string modelName)
+        {
+            if (modelName==CurrentBomName)
+            {
+                return CurrentBomData.Where(x => x.barCode == barCode && x.modelName == modelName).ToList();
+            }
+            else
+            {
+                return AllBomData.Where(x => x.barCode == barCode && x.modelName == modelName).ToList();
+            }
+           
+        }
     }
 }

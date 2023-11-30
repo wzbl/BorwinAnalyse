@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCBOM));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.btnShowModelData = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -39,6 +41,9 @@
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.DataGridView_BOM = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btnDeleteSelectColumn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnDeleteSelectRow = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.chkAnalyseSelectRow = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnMerge = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtColumn2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -60,7 +65,6 @@
             this.Column11 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column12 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column13 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.btnShowModelData = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -68,7 +72,6 @@
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableNavigator1)).BeginInit();
-            this.kryptonDockableNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).BeginInit();
@@ -109,8 +112,17 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonDockableNavigator1);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1230, 749);
-            this.kryptonSplitContainer1.SplitterDistance = 125;
+            this.kryptonSplitContainer1.SplitterDistance = 86;
             this.kryptonSplitContainer1.TabIndex = 0;
+            // 
+            // btnShowModelData
+            // 
+            this.btnShowModelData.Location = new System.Drawing.Point(277, 3);
+            this.btnShowModelData.Name = "btnShowModelData";
+            this.btnShowModelData.Size = new System.Drawing.Size(98, 31);
+            this.btnShowModelData.TabIndex = 5;
+            this.btnShowModelData.Values.Text = "显示模板数据";
+            this.btnShowModelData.Click += new System.EventHandler(this.btnShowModelData_Click);
             // 
             // kryptonWrapLabel1
             // 
@@ -132,35 +144,38 @@
             // btnStart
             // 
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStart.Location = new System.Drawing.Point(1084, 0);
+            this.btnStart.Location = new System.Drawing.Point(1058, 0);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(74, 125);
+            this.btnStart.Size = new System.Drawing.Size(86, 86);
             this.btnStart.TabIndex = 3;
-            this.btnStart.Values.Text = "开始";
+            this.btnStart.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Values.Image")));
+            this.btnStart.Values.Text = "";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnSave
             // 
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(1158, 0);
+            this.btnSave.Location = new System.Drawing.Point(1144, 0);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(72, 125);
+            this.btnSave.Size = new System.Drawing.Size(86, 86);
             this.btnSave.TabIndex = 2;
-            this.btnSave.Values.Text = "保存";
+            this.btnSave.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Values.Image")));
+            this.btnSave.Values.Text = "";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(461, 35);
+            this.btnImport.Location = new System.Drawing.Point(462, 17);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(55, 33);
+            this.btnImport.Size = new System.Drawing.Size(59, 59);
             this.btnImport.TabIndex = 0;
-            this.btnImport.Values.Text = "。。。";
+            this.btnImport.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.Values.Image")));
+            this.btnImport.Values.Text = "";
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // txtImportPath
             // 
-            this.txtImportPath.Location = new System.Drawing.Point(17, 45);
+            this.txtImportPath.Location = new System.Drawing.Point(17, 40);
             this.txtImportPath.Name = "txtImportPath";
             this.txtImportPath.Size = new System.Drawing.Size(438, 23);
             this.txtImportPath.TabIndex = 0;
@@ -170,11 +185,13 @@
             this.kryptonDockableNavigator1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonDockableNavigator1.Location = new System.Drawing.Point(0, 0);
             this.kryptonDockableNavigator1.Name = "kryptonDockableNavigator1";
+            this.kryptonDockableNavigator1.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.StackCheckButtonGroup;
+            this.kryptonDockableNavigator1.PageBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ButtonStandalone;
             this.kryptonDockableNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2});
             this.kryptonDockableNavigator1.SelectedIndex = 1;
-            this.kryptonDockableNavigator1.Size = new System.Drawing.Size(1230, 619);
+            this.kryptonDockableNavigator1.Size = new System.Drawing.Size(1230, 658);
             this.kryptonDockableNavigator1.TabIndex = 2;
             this.kryptonDockableNavigator1.Text = "kryptonDockableNavigator1";
             // 
@@ -186,7 +203,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1228, 592);
+            this.kryptonPage1.Size = new System.Drawing.Size(1228, 631);
             this.kryptonPage1.Text = "导入数据";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "6006BBC66D19453C33B0E88AADC7CB54";
@@ -204,9 +221,12 @@
             // 
             // kryptonSplitContainer2.Panel2
             // 
+            this.kryptonSplitContainer2.Panel2.Controls.Add(this.btnDeleteSelectColumn);
+            this.kryptonSplitContainer2.Panel2.Controls.Add(this.btnDeleteSelectRow);
+            this.kryptonSplitContainer2.Panel2.Controls.Add(this.chkAnalyseSelectRow);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonGroupBox1);
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1228, 592);
-            this.kryptonSplitContainer2.SplitterDistance = 868;
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1228, 631);
+            this.kryptonSplitContainer2.SplitterDistance = 867;
             this.kryptonSplitContainer2.TabIndex = 3;
             // 
             // DataGridView_BOM
@@ -219,8 +239,34 @@
             this.DataGridView_BOM.Location = new System.Drawing.Point(0, 0);
             this.DataGridView_BOM.Name = "DataGridView_BOM";
             this.DataGridView_BOM.RowTemplate.Height = 23;
-            this.DataGridView_BOM.Size = new System.Drawing.Size(868, 592);
+            this.DataGridView_BOM.Size = new System.Drawing.Size(867, 631);
             this.DataGridView_BOM.TabIndex = 2;
+            // 
+            // btnDeleteSelectColumn
+            // 
+            this.btnDeleteSelectColumn.Location = new System.Drawing.Point(156, 130);
+            this.btnDeleteSelectColumn.Name = "btnDeleteSelectColumn";
+            this.btnDeleteSelectColumn.Size = new System.Drawing.Size(98, 36);
+            this.btnDeleteSelectColumn.TabIndex = 9;
+            this.btnDeleteSelectColumn.Values.Text = "删除选中列";
+            this.btnDeleteSelectColumn.Click += new System.EventHandler(this.btnDeleteSelectColumn_Click);
+            // 
+            // btnDeleteSelectRow
+            // 
+            this.btnDeleteSelectRow.Location = new System.Drawing.Point(3, 130);
+            this.btnDeleteSelectRow.Name = "btnDeleteSelectRow";
+            this.btnDeleteSelectRow.Size = new System.Drawing.Size(98, 36);
+            this.btnDeleteSelectRow.TabIndex = 8;
+            this.btnDeleteSelectRow.Values.Text = "删除选中行";
+            this.btnDeleteSelectRow.Click += new System.EventHandler(this.btnDeleteSelectRow_Click);
+            // 
+            // chkAnalyseSelectRow
+            // 
+            this.chkAnalyseSelectRow.Location = new System.Drawing.Point(3, 104);
+            this.chkAnalyseSelectRow.Name = "chkAnalyseSelectRow";
+            this.chkAnalyseSelectRow.Size = new System.Drawing.Size(88, 20);
+            this.chkAnalyseSelectRow.TabIndex = 7;
+            this.chkAnalyseSelectRow.Values.Text = "分析选中行";
             // 
             // kryptonGroupBox1
             // 
@@ -235,14 +281,14 @@
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonWrapLabel3);
             this.kryptonGroupBox1.Panel.Controls.Add(this.txtColumn1);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonWrapLabel2);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(355, 98);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(356, 98);
             this.kryptonGroupBox1.TabIndex = 0;
             this.kryptonGroupBox1.Values.Heading = "合并";
             // 
             // btnMerge
             // 
             this.btnMerge.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMerge.Location = new System.Drawing.Point(231, 0);
+            this.btnMerge.Location = new System.Drawing.Point(232, 0);
             this.btnMerge.Name = "btnMerge";
             this.btnMerge.Size = new System.Drawing.Size(120, 74);
             this.btnMerge.TabIndex = 5;
@@ -291,7 +337,7 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(1228, 592);
+            this.kryptonPage2.Size = new System.Drawing.Size(1228, 606);
             this.kryptonPage2.Text = "解析结果";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "98C0C56E816840DFA2AF84A99BCB948E";
@@ -318,7 +364,7 @@
             this.DataGridView_Result.Location = new System.Drawing.Point(0, 0);
             this.DataGridView_Result.Name = "DataGridView_Result";
             this.DataGridView_Result.RowTemplate.Height = 23;
-            this.DataGridView_Result.Size = new System.Drawing.Size(1228, 592);
+            this.DataGridView_Result.Size = new System.Drawing.Size(1228, 606);
             this.DataGridView_Result.TabIndex = 1;
             // 
             // Column1
@@ -401,15 +447,6 @@
             this.Column13.Name = "Column13";
             this.Column13.Width = 91;
             // 
-            // btnShowModelData
-            // 
-            this.btnShowModelData.Location = new System.Drawing.Point(277, 3);
-            this.btnShowModelData.Name = "btnShowModelData";
-            this.btnShowModelData.Size = new System.Drawing.Size(98, 36);
-            this.btnShowModelData.TabIndex = 5;
-            this.btnShowModelData.Values.Text = "显示模板数据";
-            this.btnShowModelData.Click += new System.EventHandler(this.btnShowModelData_Click);
-            // 
             // UCBOM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -425,13 +462,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableNavigator1)).EndInit();
-            this.kryptonDockableNavigator1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
             this.kryptonSplitContainer2.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).EndInit();
             this.kryptonSplitContainer2.Panel2.ResumeLayout(false);
+            this.kryptonSplitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
             this.kryptonSplitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView_BOM)).EndInit();
@@ -482,5 +519,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column12;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column13;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnShowModelData;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkAnalyseSelectRow;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDeleteSelectRow;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDeleteSelectColumn;
     }
 }
