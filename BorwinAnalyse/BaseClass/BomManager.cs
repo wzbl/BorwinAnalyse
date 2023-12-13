@@ -125,20 +125,20 @@ namespace BorwinAnalyse.BaseClass
                 BomDataModel bomDataModel = new BomDataModel();
                 bomDataModel.id = id;
                 bomDataModel.modelName = modelName;
-                bomDataModel.barCode = dataGrid.Rows[i].Cells[0].FormattedValue.ToString();
+                bomDataModel.barCode = dataGrid.Rows[i].Cells["barCode"].FormattedValue.ToString();
                 bomDataModel.replaceCode = "";
-                bomDataModel.description = dataGrid.Rows[i].Cells[1].FormattedValue.ToString();
-                bomDataModel.result = dataGrid.Rows[i].Cells[2].FormattedValue.ToString();
-                bomDataModel.type = dataGrid.Rows[i].Cells[3].FormattedValue.ToString();
-                bomDataModel.size = dataGrid.Rows[i].Cells[4].FormattedValue.ToString();
-                bomDataModel.value = dataGrid.Rows[i].Cells[5].FormattedValue.ToString();
-                bomDataModel.unit = dataGrid.Rows[i].Cells[6].FormattedValue.ToString();
-                bomDataModel.grade = dataGrid.Rows[i].Cells[7].FormattedValue.ToString();
-                bomDataModel.exp1 = dataGrid.Rows[i].Cells[8].FormattedValue.ToString();
-                bomDataModel.exp2 = dataGrid.Rows[i].Cells[9].FormattedValue.ToString();
-                bomDataModel.exp3 = dataGrid.Rows[i].Cells[10].FormattedValue.ToString();
-                bomDataModel.exp4 = dataGrid.Rows[i].Cells[11].FormattedValue.ToString();
-                bomDataModel.exp5 = dataGrid.Rows[i].Cells[12].FormattedValue.ToString();
+                bomDataModel.description = dataGrid.Rows[i].Cells["description"].FormattedValue.ToString();
+                bomDataModel.result = dataGrid.Rows[i].Cells["result"].FormattedValue.ToString();
+                bomDataModel.type = dataGrid.Rows[i].Cells["type"].FormattedValue.ToString();
+                bomDataModel.size = dataGrid.Rows[i].Cells["size"].FormattedValue.ToString();
+                bomDataModel.value = dataGrid.Rows[i].Cells["value"].FormattedValue.ToString();
+                bomDataModel.unit = dataGrid.Rows[i].Cells["unit"].FormattedValue.ToString();
+                bomDataModel.grade = dataGrid.Rows[i].Cells["grade"].FormattedValue.ToString();
+                bomDataModel.exp1 = dataGrid.Rows[i].Cells["exp1"].FormattedValue.ToString();
+                bomDataModel.exp2 = dataGrid.Rows[i].Cells["exp2"].FormattedValue.ToString();
+                bomDataModel.exp3 = dataGrid.Rows[i].Cells["exp3"].FormattedValue.ToString();
+                bomDataModel.exp4 = dataGrid.Rows[i].Cells["exp4"].FormattedValue.ToString();
+                bomDataModel.exp5 = dataGrid.Rows[i].Cells["exp5"].FormattedValue.ToString();
 
                 string cmd = string.Format("insert into ALLBOM values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}')", bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode, bomDataModel.replaceCode, bomDataModel.description, bomDataModel.result, bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade, bomDataModel.exp1, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5);
                 SqlLiteManager.Instance.DB.Insert(cmd);
@@ -207,7 +207,7 @@ namespace BorwinAnalyse.BaseClass
 
         public void UpdataBomData(BomDataModel bomDataModel)
         {
-            string cmd = string.Format("UPDATE ALLBOM SET  replaceCode = '{0}' ,exp2 ='{1}',exp3='{2}',exp4='{3}',exp5='{4}' where id = '{5}' and modelName = '{6}' and barCode = '{7}'", bomDataModel.replaceCode, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5, bomDataModel.id, bomDataModel.modelName, bomDataModel.barCode);
+            string cmd = string.Format("UPDATE ALLBOM SET  replaceCode = '{0}' ,exp2 ='{1}',exp3='{2}',exp4='{3}',exp5='{4}' where  modelName = '{5}' and barCode = '{6}'", bomDataModel.replaceCode, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5, bomDataModel.modelName, bomDataModel.barCode);
             SqlLiteManager.Instance.DB.Insert(cmd);
             if (CurrentBomName== bomDataModel.modelName)
             {

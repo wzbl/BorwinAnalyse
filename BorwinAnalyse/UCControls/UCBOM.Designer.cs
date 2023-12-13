@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCBOM));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.lbResult = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnShowModelData = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -52,19 +53,6 @@
             this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.DataGridView_Result = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.Column1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column4 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column5 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column6 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column7 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column8 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column9 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column10 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column11 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column12 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.Column13 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -100,6 +88,7 @@
             // 
             // kryptonSplitContainer1.Panel1
             // 
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.lbResult);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnShowModelData);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel1);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtName);
@@ -114,6 +103,14 @@
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1230, 749);
             this.kryptonSplitContainer1.SplitterDistance = 86;
             this.kryptonSplitContainer1.TabIndex = 0;
+            // 
+            // lbResult
+            // 
+            this.lbResult.Font = new System.Drawing.Font("Segoe UI", 25F);
+            this.lbResult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbResult.Location = new System.Drawing.Point(548, 40);
+            this.lbResult.Name = "lbResult";
+            this.lbResult.Size = new System.Drawing.Size(0, 46);
             // 
             // btnShowModelData
             // 
@@ -203,7 +200,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1228, 631);
+            this.kryptonPage1.Size = new System.Drawing.Size(1228, 606);
             this.kryptonPage1.Text = "导入数据";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "6006BBC66D19453C33B0E88AADC7CB54";
@@ -225,7 +222,7 @@
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.btnDeleteSelectRow);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.chkAnalyseSelectRow);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonGroupBox1);
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1228, 631);
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1228, 606);
             this.kryptonSplitContainer2.SplitterDistance = 867;
             this.kryptonSplitContainer2.TabIndex = 3;
             // 
@@ -239,7 +236,7 @@
             this.DataGridView_BOM.Location = new System.Drawing.Point(0, 0);
             this.DataGridView_BOM.Name = "DataGridView_BOM";
             this.DataGridView_BOM.RowTemplate.Height = 23;
-            this.DataGridView_BOM.Size = new System.Drawing.Size(867, 631);
+            this.DataGridView_BOM.Size = new System.Drawing.Size(867, 606);
             this.DataGridView_BOM.TabIndex = 2;
             // 
             // btnDeleteSelectColumn
@@ -344,108 +341,13 @@
             // 
             // DataGridView_Result
             // 
-            this.DataGridView_Result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridView_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView_Result.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8,
-            this.Column9,
-            this.Column10,
-            this.Column11,
-            this.Column12,
-            this.Column13});
             this.DataGridView_Result.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridView_Result.Location = new System.Drawing.Point(0, 0);
             this.DataGridView_Result.Name = "DataGridView_Result";
             this.DataGridView_Result.RowTemplate.Height = 23;
             this.DataGridView_Result.Size = new System.Drawing.Size(1228, 606);
             this.DataGridView_Result.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "条码";
-            this.Column1.Name = "Column1";
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.Width = 91;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "物料描述";
-            this.Column2.Name = "Column2";
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.Width = 92;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "结果";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 91;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "类型";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 91;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "尺寸";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 92;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "值";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 91;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "单位";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 91;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "等级";
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 91;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "exp1";
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 92;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "exp2";
-            this.Column10.Name = "Column10";
-            this.Column10.Width = 91;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "exp3";
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 91;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "exp4";
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 92;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "exp5";
-            this.Column13.Name = "Column13";
-            this.Column13.Width = 91;
             // 
             // UCBOM
             // 
@@ -505,22 +407,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtColumn2;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnMerge;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column2;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column3;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column4;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column5;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column6;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column7;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column8;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column9;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column10;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column11;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column12;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column13;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnShowModelData;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkAnalyseSelectRow;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDeleteSelectRow;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDeleteSelectColumn;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbResult;
     }
 }

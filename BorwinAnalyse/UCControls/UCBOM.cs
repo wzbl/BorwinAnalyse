@@ -1,4 +1,5 @@
 ﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
 using BorwinAnalyse.Forms;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Toolkit;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -34,11 +36,27 @@ namespace BorwinAnalyse.UCControls
             InitUI();
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-
+        DataTable AnalyseDt;
+        List<string> codes = new List<string>();
         private void InitUI()
         {
             kryptonDockableNavigator1.SelectedIndex = 0;
             txtName.Text = BomManager.Instance.CurrentBomName;
+            AnalyseDt = new DataTable();
+            AnalyseDt.Columns.Add("序号");
+            AnalyseDt.Columns.Add("barCode");
+            AnalyseDt.Columns.Add("description");
+            AnalyseDt.Columns.Add("result");
+            AnalyseDt.Columns.Add("type");
+            AnalyseDt.Columns.Add("size");
+            AnalyseDt.Columns.Add("value");
+            AnalyseDt.Columns.Add("unit");
+            AnalyseDt.Columns.Add("grade");
+            AnalyseDt.Columns.Add("exp1");
+            AnalyseDt.Columns.Add("exp2");
+            AnalyseDt.Columns.Add("exp3");
+            AnalyseDt.Columns.Add("exp4");
+            AnalyseDt.Columns.Add("exp5");
         }
 
         /// <summary>
@@ -153,7 +171,6 @@ namespace BorwinAnalyse.UCControls
                 ReadOnly = true,
             }
             });
-
         }
 
         DataTable dt;
@@ -171,9 +188,13 @@ namespace BorwinAnalyse.UCControls
             else return;
 
             if (!File.Exists(txtImportPath.Text)) { return; }
+            dt = new DataTable();
+            DataGridView_BOM.DataSource = dt;
+            DataGridView_BOM.Refresh();
             dt = NOPIHelper.ExcelToDataTable(txtImportPath.Text, true);
             DataGridView_BOM.DataSource = dt;
             DataGridView_BOM.Refresh();
+            lbResult.Text = "总数".tr() + ":" + DataGridView_BOM.RowCount;
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -182,60 +203,44 @@ namespace BorwinAnalyse.UCControls
             {
                 btnStart.Values.Image = Properties.Resources.icons8_开始_80;
                 StopAnalyse();
-
             }
             else
             {
                 tokenSource = new CancellationTokenSource();
                 kryptonDockableNavigator1.SelectedIndex = 1;
-                DataGridView_Result.Rows.Clear();
                 btnStart.Values.Image = Properties.Resources.icons8_暂停_80;
                 StartAnalyse();
             }
         }
 
-        public void StartAnalyse()
+        public async void StartAnalyse()
         {
             isStart = true;
             AllCount = 0;
             OKCount = 0;
             NGCount = 0;
-            Task.Run(() =>
+            analyseResults.Clear();
+            AnalyseDt.Rows.Clear();
+            codes.Clear();
+            if (chkAnalyseSelectRow.Checked)
             {
-                if (chkAnalyseSelectRow.Checked)
-                {
-                    AnalyseSelect();
-                }
-                else
-                {
-                    AnalyseAll();
-                }
-
-                Thread.Sleep(10);
-
-                this.Invoke(new Action(() =>
-                {
-                    btnStart.Values.Image = Properties.Resources.icons8_开始_80;
-
-                    DataGridView_Result.Rows.Add
-                   (
-                          "",
-                         "",
-                          "",
-                      "总数".tr(),
-                         AllCount,
-                       "成功".tr(),
-                       OKCount,
-                         "失败",
-                         NGCount
-
-                    );
-                    DataGridView_Result.FirstDisplayedScrollingRowIndex = DataGridView_Result.RowCount - 1;
-                }));
-                isStart = false;
-                tokenSource?.Cancel();
-
-            }, tokenSource.Token);
+                AnalyseSelect();
+            }
+            else
+            {
+                //Stopwatch stopwatch = new Stopwatch();
+                //stopwatch.Start();
+                await AnalyseAll();
+                //stopwatch.Stop();
+                //MessageBox.Show("解析完成用时"+stopwatch.ElapsedMilliseconds);
+            }
+            Thread.Sleep(10);
+            DataGridView_Result.DataSource = null;
+            DataGridView_Result.DataSource = AnalyseDt;
+            DataGridView_Result.Refresh();
+            btnStart.Values.Image = Properties.Resources.icons8_开始_80;
+            isStart = false;
+            tokenSource?.Cancel();
         }
 
         /// <summary>
@@ -257,39 +262,81 @@ namespace BorwinAnalyse.UCControls
 
                 if (DataGridView_BOM.SelectedRows[i].Cells[1].Value == null)
                 {
-                    UpdataAnalyseData(DataGridView_BOM.SelectedRows[i].Cells[0].Value.ToString(), "", new AnalyseResult());
+                    UpdataAnalyseData(new AnalyseResult { BarCode = DataGridView_BOM.SelectedRows[i].Cells[0].Value.ToString() });
                     continue;
                 }
-                AnalyseResult analyseResult = CommonAnalyse.Instance.AnalyseMethod(DataGridView_BOM.SelectedRows[i].Cells[1].Value.ToString());
-                UpdataAnalyseData(DataGridView_BOM.SelectedRows[i].Cells[0].Value.ToString(), DataGridView_BOM.SelectedRows[i].Cells[1].Value.ToString(), analyseResult);
+                AnalyseResult analyseResult = CommonAnalyse.Instance.AnalyseMethod_copy(DataGridView_BOM.SelectedRows[i].Cells[1].Value.ToString());
+                analyseResult.BarCode = DataGridView_BOM.SelectedRows[i].Cells[0].Value.ToString();
+                analyseResult.Description = DataGridView_BOM.SelectedRows[i].Cells[1].Value.ToString();
+                UpdataAnalyseData(analyseResult);
             }
         }
 
         /// <summary>
         /// 分析所有行
         /// </summary>
-        public void AnalyseAll()
+        public async Task AnalyseAll()
         {
-            for (int i = 0; i < DataGridView_BOM.RowCount; i++)
+            await Task.Run(() =>
             {
-                if (tokenSource.IsCancellationRequested) break;
-                if (DataGridView_BOM.Rows[i].IsNewRow || DataGridView_BOM.Rows[i].Cells[0].Value == null)
+                for (int i = 0; i < DataGridView_BOM.RowCount; i++)
                 {
-                    continue;
+                    if (tokenSource.IsCancellationRequested) break;
+                    if (IsOKRow(i))
+                    {
+                        string barCode = DataGridView_BOM.Rows[i].Cells[0].Value.ToString();
+                        string description = DataGridView_BOM.Rows[i].Cells[1].Value.ToString();
+                        description = description.Replace("'", "");
+                        string spec = DataGridView_BOM.Rows[i].Cells[2].Value.ToString();
+                        AnalyseMethod(barCode, description, spec);
+                    }
                 }
-                if (string.IsNullOrEmpty(DataGridView_BOM.Rows[i].Cells[0].Value.ToString()))
-                {
-                    continue;
-                }
-                if (DataGridView_BOM.Rows[i].Cells[1].Value == null)
-                {
-                    UpdataAnalyseData(DataGridView_BOM.Rows[i].Cells[0].Value.ToString(), "", new AnalyseResult());
-                    continue;
-                }
-                AnalyseResult analyseResult = CommonAnalyse.Instance.AnalyseMethod(DataGridView_BOM.Rows[i].Cells[1].Value.ToString());
-                CommonAnalyse.Instance.AnalyWidth(DataGridView_BOM.Rows[i].Cells[2].Value.ToString(),ref analyseResult);
-                UpdataAnalyseData(DataGridView_BOM.Rows[i].Cells[0].Value.ToString(), DataGridView_BOM.Rows[i].Cells[1].Value.ToString(), analyseResult);
+            }, tokenSource.Token);
+        }
+
+        /// <summary>
+        /// 判断解析行是否可以解析
+        /// </summary>
+        /// <returns></returns>
+        private bool IsOKRow(int i)
+        {
+            if (DataGridView_BOM.Rows[i].IsNewRow || DataGridView_BOM.Rows[i].Cells[0].Value == null)
+            {
+                return false;
             }
+            if (string.IsNullOrEmpty(DataGridView_BOM.Rows[i].Cells[0].Value.ToString()))
+            {
+                return false;
+            }
+            if (DataGridView_BOM.Rows[i].Cells[1].Value == null)
+            {
+                UpdataAnalyseData(new AnalyseResult { BarCode = DataGridView_BOM.Rows[i].Cells[0].Value.ToString() });
+                return false;
+            }
+
+            string barCode = DataGridView_BOM.Rows[i].Cells[0].Value.ToString();
+            if (BomManager.Instance.AllBomData.Where(x => x.barCode == barCode).ToList().Count > 0)
+            {
+                //如果bom中有这个条码就不解析了
+                return false;
+            }
+
+            if (codes.Contains(barCode))
+            {
+                //如果条码已经解析了，不再解析
+                return false;
+            }
+
+            return true;
+        }
+
+        public void AnalyseMethod(string barcode, string description, string spec)
+        {
+            AnalyseResult analyseResult = CommonAnalyse.Instance.AnalyseMethod_copy(description);
+            analyseResult.BarCode = barcode;
+            analyseResult.Description = description;
+            CommonAnalyse.Instance.AnalyWidth(spec, ref analyseResult);
+            UpdataAnalyseData(analyseResult);
         }
 
         public void StopAnalyse()
@@ -301,42 +348,54 @@ namespace BorwinAnalyse.UCControls
         int AllCount = 0;
         int OKCount = 0;
         int NGCount = 0;
+        Queue<AnalyseResult> analyseResults = new Queue<AnalyseResult>();
 
         /// <summary>
         /// 更新解析数据
         /// </summary>
         /// <param name="analyseResult"></param>
-        private void UpdataAnalyseData(string barCode, string description, AnalyseResult analyseResult)
+        private void UpdataAnalyseData(AnalyseResult analyseResult)
+        {
+            AnalyseDt.Rows.Add
+                (
+                           AnalyseDt.Rows.Count,
+                           analyseResult.BarCode,
+                           analyseResult.Description,
+                           analyseResult.Result,
+                           analyseResult.Type,
+                           analyseResult.Size,
+                           analyseResult.Value,
+                           analyseResult.Unit,
+                           analyseResult.Grade,
+                           analyseResult.DefaultFormat(),
+                           analyseResult.Width,
+                           analyseResult.Space
+                );
+            if (analyseResult.Result)
+            {
+                OKCount++;
+            }
+            else
+            {
+                NGCount++;
+            }
+            AllCount++;
+            codes.Add(analyseResult.BarCode);
+            UpdataResult();
+        }
+
+        private void UpdataResult()
         {
             this.Invoke(new Action(() =>
             {
-                DataGridView_Result.Rows.Add
-              (
-                 barCode,
-                 description,
-                 analyseResult.Result,
-                 analyseResult.LcrItem.Type,
-                 analyseResult.LcrItem.Size,
-                 analyseResult.LcrItem.Value,
-                 analyseResult.LcrItem.Unit,
-                 analyseResult.LcrItem.Grade,
-                 analyseResult.LcrItem.DefaultFormat(),
-                 analyseResult.Width,
-                 analyseResult.Space
-              );
-                if (analyseResult.Result)
+                lbResult.Text = "总数".tr() + ":" + AllCount + "成功".tr() + ":" + OKCount + "失败".tr() + ":" + NGCount;
+                if (AllCount % 1000 == 0)
                 {
-                    OKCount++;
-                    DataGridView_Result.Rows[AllCount].Cells[2].Style.BackColor = Color.Green;
+                    DataGridView_Result.DataSource = null;
+                    DataGridView_Result.DataSource = AnalyseDt;
+                    DataGridView_Result.Refresh();
                 }
-                else
-                {
-                    DataGridView_Result.Rows[AllCount].Cells[2].Style.BackColor = Color.Red;
-                    NGCount++;
-                }
-                AllCount++;
 
-                DataGridView_Result.FirstDisplayedScrollingRowIndex = DataGridView_Result.RowCount - 1;
             }));
         }
 
@@ -352,13 +411,6 @@ namespace BorwinAnalyse.UCControls
                 MessageBox.Show("模板名称不能为空".tr());
                 return;
             }
-
-            if (BomManager.Instance.BomNames.Contains(txtName.Text))
-            {
-                MessageBox.Show("模板名称已经存在".tr());
-                return;
-            }
-
             Save();
         }
 
@@ -382,6 +434,11 @@ namespace BorwinAnalyse.UCControls
         {
             Merge();
         }
+
+        /// <summary>
+        /// 合并符
+        /// </summary>
+        private string MergeChar = "";
         /// <summary>
         /// 合并
         /// </summary>
@@ -395,20 +452,23 @@ namespace BorwinAnalyse.UCControls
             {
                 return;
             }
+
+            if (CommonAnalyse.Instance.IsSeparator)
+            {
+                List<Separator> splitCharList = CommonAnalyse.Instance.Separators.Where(u => u.Enable == true).ToList();
+                if (splitCharList.Count > 0)
+                {
+                    MergeChar = splitCharList[0].Acsii;
+                }
+            }
+
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-
-                DataRow row = dt.Rows[i];//DataTable的第i行
-
-
-                row.BeginEdit();//开始编辑行
-
-
-                row[txtColumn1.Text.Trim()] = row[txtColumn1.Text.Trim()].ToString() + " " + row[txtColumn2.Text.Trim()].ToString();//给行的列"columnname"赋值
-                row.EndEdit();//结束编辑
-
-
-                dt.AcceptChanges();//保存修改的结果。     
+                DataRow row = dt.Rows[i];
+                row.BeginEdit();
+                row[txtColumn1.Text.Trim()] = row[txtColumn1.Text.Trim()].ToString() + MergeChar + row[txtColumn2.Text.Trim()].ToString();
+                row.EndEdit();
+                dt.AcceptChanges();
             }
             dt.Columns.Remove(dt.Columns[txtColumn2.Text.Trim()]);
         }
@@ -448,7 +508,5 @@ namespace BorwinAnalyse.UCControls
                 dt.Columns.RemoveAt(DataGridView_BOM.SelectedCells[0].ColumnIndex);
 
         }
-
-
     }
 }

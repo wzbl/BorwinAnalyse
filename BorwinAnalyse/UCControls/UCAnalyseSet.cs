@@ -71,7 +71,8 @@ namespace BorwinAnalyse.UCControls
             txtCapGrade_ON_NO_Find.Text = CommonAnalyse.Instance.CapGrade_ON_NO_Find;
 
             IsValueContainsGrade.Checked = CommonAnalyse.Instance.IsValueContainsGrade;
-            IsIdentifyingDigits.Checked = CommonAnalyse.Instance.IsIdentifyingDigits;
+            IsResDefaultUnit.Checked = CommonAnalyse.Instance.IsResDefaultUnit;
+            txtResDefaultUnit.Text = CommonAnalyse.Instance.ResDefaultUnit;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -130,7 +131,8 @@ namespace BorwinAnalyse.UCControls
             CommonAnalyse.Instance.ResGrade_ON_NO_Find = txtResGrade_ON_NO_Find.Text;
             CommonAnalyse.Instance.CapGrade_ON_NO_Find = txtCapGrade_ON_NO_Find.Text;
             CommonAnalyse.Instance.IsValueContainsGrade = IsValueContainsGrade.Checked;
-            CommonAnalyse.Instance.IsIdentifyingDigits = IsIdentifyingDigits.Checked;
+            CommonAnalyse.Instance.IsResDefaultUnit = IsResDefaultUnit.Checked;
+            CommonAnalyse.Instance.ResDefaultUnit = txtResDefaultUnit.Text.Trim();
             CommonAnalyse.Instance.Save();
 
         }

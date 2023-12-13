@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using NPOI.Util;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
+using NPOI.SS.Formula.Functions;
 
 namespace BorwinAnalyse.BaseClass
 {
@@ -116,6 +117,16 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public bool IsIdentifyingDigits = false;
 
+        /// <summary>
+        /// 启用默认电阻单位
+        /// </summary>
+        public bool IsResDefaultUnit = false;
+
+        /// <summary>
+        /// 默认电阻单位
+        /// </summary>
+        public string ResDefaultUnit = "Ω";
+
 
 
 
@@ -169,17 +180,16 @@ namespace BorwinAnalyse.BaseClass
             }
 
             GetType(description, ref analyseResult, ref LCR_Type);
-            if (analyseResult.LcrItem.Type == "Other") return analyseResult;
+            if (analyseResult.Type == "Other") return analyseResult;
 
             GetSize(description, ref analyseResult);
-            if (analyseResult.LcrItem.Size == "Error") return analyseResult;
-
+            if (analyseResult.Size == "Error") return analyseResult;
 
             var gradeResult = specList.Where("CDFGJKMN".Contains).ToList();
             if (gradeResult?.Count > 0)
-                analyseResult.LcrItem.Grade = gradeResult[0];
+                analyseResult.Grade = gradeResult[0];
 
-            if (string.IsNullOrEmpty(analyseResult.LcrItem.Grade))
+            if (string.IsNullOrEmpty(analyseResult.Grade))
             {
                 string textValue = string.Empty;
                 for (int i = 0; i < specList?.Count; i++)
@@ -189,28 +199,28 @@ namespace BorwinAnalyse.BaseClass
                     {
                         if (textValue.EndsWith("%"))
                         {
-                            analyseResult.LcrItem.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
+                            analyseResult.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
                         }
                         else
                         {
                             string tempGrade = Regex.Replace(textValue, @"[^0-9.]", "");
                             if (IsNumeric(tempGrade))
                             {
-                                analyseResult.LcrItem.Grade = tempGrade + "%";
+                                analyseResult.Grade = tempGrade + "%";
                             }
                             else
                             {
-                                analyseResult.LcrItem.Grade = tempGrade;
+                                analyseResult.Grade = tempGrade;
                             }
                         }
                         break;
                     }
                     else if (textValue.Contains("%"))
                     {
-                        analyseResult.LcrItem.Grade = TheGrade(textValue);
+                        analyseResult.Grade = TheGrade(textValue);
                         break;
                     }
-                    if (string.IsNullOrEmpty(analyseResult.LcrItem.Grade) && IsValueGrade(textValue))
+                    if (string.IsNullOrEmpty(analyseResult.Grade) && IsValueGrade(textValue))
                     {
                         if (IsValueContainsGrade)
                         {
@@ -219,7 +229,7 @@ namespace BorwinAnalyse.BaseClass
                             string grade = m.Value;
                             if (!string.IsNullOrEmpty(grade))
                             {
-                                analyseResult.LcrItem.Grade = grade;
+                                analyseResult.Grade = grade;
                                 textValue = textValue.Replace(grade, "");
                                 if (textValue.Length == 3 && IsNumeric(textValue))
                                 {
@@ -228,8 +238,8 @@ namespace BorwinAnalyse.BaseClass
                                     double val = v1 * Math.Pow(10, v2);
                                     textValue = val.ToString();
                                 }
-                                analyseResult.LcrItem.Value = textValue;
-                                analyseResult.LcrItem.Unit = "P";
+                                analyseResult.Value = textValue;
+                                //analyseResult.Unit = "P";
                                 analyseResult.Check();
                                 //如果值不为空
                                 if (analyseResult.Result)
@@ -251,7 +261,7 @@ namespace BorwinAnalyse.BaseClass
                     {
                         if (textValue.EndsWith("%"))
                         {
-                            analyseResult.LcrItem.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
+                            analyseResult.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
                         }
                         else
                         {
@@ -259,35 +269,36 @@ namespace BorwinAnalyse.BaseClass
                             //string tempGrade = textValue.TrimStart('%');
                             if (IsNumeric(tempGrade))
                             {
-                                analyseResult.LcrItem.Grade = tempGrade + "%";
+                                analyseResult.Grade = tempGrade + "%";
                             }
                             else
                             {
-                                analyseResult.LcrItem.Grade = tempGrade;
+                                analyseResult.Grade = tempGrade;
                             }
                         }
                         break;
                     }
                     else if (textValue.Contains("%"))
                     {
-                        analyseResult.LcrItem.Grade = TheGrade(textValue);
+                        analyseResult.Grade = TheGrade(textValue);
                         break;
                     }
                 }
             }
-            if (string.IsNullOrEmpty(analyseResult.LcrItem.Grade) && IsGrade_ON_NO_Find)
+
+            //未找到偏差等级是否启用自定义
+            if (string.IsNullOrEmpty(analyseResult.Grade) && IsGrade_ON_NO_Find)
             {
-                if (analyseResult.LcrItem.Type == "电阻".tr())
+                if (analyseResult.Type == "电阻".tr())
                 {
-                    analyseResult.LcrItem.Grade = ResGrade_ON_NO_Find;
+                    analyseResult.Grade = ResGrade_ON_NO_Find;
                 }
-                else if (analyseResult.LcrItem.Type == "电容".tr())
+                else if (analyseResult.Type == "电容".tr())
                 {
-                    analyseResult.LcrItem.Grade = CapGrade_ON_NO_Find;
+                    analyseResult.Grade = CapGrade_ON_NO_Find;
                 }
             }
 
-           
             //去掉物料类型
             var typeList = specList.Where(u => u.Contains(LCR_Type)).ToList();
             foreach (var item in typeList)
@@ -295,15 +306,15 @@ namespace BorwinAnalyse.BaseClass
                 specList.Remove(item);
             }
             //去掉包含规格项
-            var sizeIndexList = specList.Where(u => u.Contains(analyseResult.LcrItem.Size)).ToList();
+            var sizeIndexList = specList.Where(u => u.Contains(analyseResult.Size)).ToList();
             foreach (var item in sizeIndexList)
             {
                 specList.Remove(item);
             }
             //去掉包含偏差等级项
-            if (!string.IsNullOrEmpty(analyseResult.LcrItem.Grade))
+            if (!string.IsNullOrEmpty(analyseResult.Grade))
             {
-                specList.Remove(analyseResult.LcrItem.Grade);
+                specList.Remove(analyseResult.Grade);
             }
 
             //找到可能包含值得项
@@ -319,43 +330,43 @@ namespace BorwinAnalyse.BaseClass
 
             if (listValue.Count > 0)//找到多个待处理
             {
-                if (analyseResult.LcrItem.Type == "电阻".tr())
+                if (analyseResult.Type == "电阻".tr())
                 {
                     //通过单位分割
-                    analyseResult.LcrItem.Unit = "";
+                    analyseResult.Unit = "";
                     for (int i = 0; i < listValue.Count; i++)
                     {
                         string textValue = listValue[i];
                         var unitList = ResistanceUnit.Split(',').Where(textValue.Contains).ToList();
                         if (unitList?.Count > 0)
                         {
-                            analyseResult.LcrItem.Unit = TheLongestName(unitList.ToArray());
+                            analyseResult.Unit = TheLongestName(unitList.ToArray());
                             //提取值
-                            string[] valueArray = textValue.Split(analyseResult.LcrItem.Unit.ToCharArray()[0]);
+                            string[] valueArray = textValue.Split(analyseResult.Unit.ToCharArray()[0]);
 
                             if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
                             {
-                                analyseResult.LcrItem.Value = valueArray[0];
+                                analyseResult.Value = valueArray[0];
                             }
                             else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
                             {
                                 if (IsInt(valueArray[1]))
                                 {
-                                    analyseResult.LcrItem.Value = textValue.Replace(analyseResult.LcrItem.Unit.ToCharArray()[0], '.');
+                                    analyseResult.Value = textValue.Replace(analyseResult.Unit.ToCharArray()[0], '.');
                                 }
                                 else
                                 {
-                                    analyseResult.LcrItem.Value = valueArray[0];
+                                    analyseResult.Value = valueArray[0];
                                 }
                             }
                             break;
                         }
                     }
                 }
-                else if (analyseResult.LcrItem.Type == "电容".tr())
+                else if (analyseResult.Type == "电容".tr())
                 {
                     //通过单位分割
-                    analyseResult.LcrItem.Unit = "";
+                    analyseResult.Unit = "";
                     for (int i = 0; i < listValue.Count; i++)
                     {
                         string textValue = listValue[i];
@@ -363,22 +374,22 @@ namespace BorwinAnalyse.BaseClass
                         if (unitList?.Count > 0)
                         {
                             //找出最长
-                            analyseResult.LcrItem.Unit = TheLongestName(unitList.ToArray());
+                            analyseResult.Unit = TheLongestName(unitList.ToArray());
                             //提取值
-                            string[] valueArray = textValue.ToUpper().Split(analyseResult.LcrItem.Unit.ToCharArray()[0]);
+                            string[] valueArray = textValue.ToUpper().Split(analyseResult.Unit.ToCharArray()[0]);
                             if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
                             {
-                                analyseResult.LcrItem.Value = valueArray[0];
+                                analyseResult.Value = valueArray[0];
                             }
                             else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
                             {
                                 if (IsInt(valueArray[1]))
                                 {
-                                    analyseResult.LcrItem.Value = textValue.ToUpper().Replace(analyseResult.LcrItem.Unit.ToCharArray()[0], '.');
+                                    analyseResult.Value = textValue.ToUpper().Replace(analyseResult.Unit.ToCharArray()[0], '.');
                                 }
                                 else
                                 {
-                                    analyseResult.LcrItem.Value = valueArray[0];
+                                    analyseResult.Value = valueArray[0];
                                 }
                             }
                             break;
@@ -387,9 +398,9 @@ namespace BorwinAnalyse.BaseClass
                 }
 
                 //找出数字字符串
-                if (string.IsNullOrEmpty(analyseResult.LcrItem.Value))
+                if (string.IsNullOrEmpty(analyseResult.Value))
                 {
-                    if (analyseResult.LcrItem.Type == "电阻".tr())
+                    if (analyseResult.Type == "电阻".tr())
                     {
                         for (int i = 0; i < listValue.Count; i++)
                         {
@@ -401,11 +412,11 @@ namespace BorwinAnalyse.BaseClass
                                     if (IsIdentifyingDigits)
                                     {
                                         int factor = (int)Math.Pow(10, Convert.ToInt32(textValue.Substring(textValue.Length - 1)));
-                                        analyseResult.LcrItem.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
+                                        analyseResult.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
                                     }
                                     else
                                     {
-                                        analyseResult.LcrItem.Value = textValue;
+                                        analyseResult.Value = textValue;
                                     }
 
                                 }
@@ -417,12 +428,12 @@ namespace BorwinAnalyse.BaseClass
                                 Regex regex = new Regex(pattern);
                                 string result = regex.Replace(textValue, ".");
                                 if (IsIntermediateUnit)
-                                    analyseResult.LcrItem.Value = Regex.Replace(result, @"[^0-9.]", "");
+                                    analyseResult.Value = Regex.Replace(result, @"[^0-9.]", "");
                                 break;
                             }
                         }
                     }
-                    else if (analyseResult.LcrItem.Type == "电容".tr())
+                    else if (analyseResult.Type == "电容".tr())
                     {
                         for (int i = 0; i < listValue.Count; i++)
                         {
@@ -432,11 +443,11 @@ namespace BorwinAnalyse.BaseClass
                                 if (IsIdentifyingDigits)
                                 {
                                     int factor = (int)Math.Pow(10, Convert.ToInt32(textValue.Substring(textValue.Length - 1)));
-                                    analyseResult.LcrItem.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
+                                    analyseResult.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
                                 }
                                 else
                                 {
-                                    analyseResult.LcrItem.Value = textValue;
+                                    analyseResult.Value = textValue;
                                 }
                                 break;
                             }
@@ -447,7 +458,7 @@ namespace BorwinAnalyse.BaseClass
                                 Regex regex = new Regex(pattern);
                                 string result = regex.Replace(textValue, ".");
                                 if (IsIntermediateUnit)
-                                    analyseResult.LcrItem.Value = Regex.Replace(result, @"[^0-9.]", "");
+                                    analyseResult.Value = Regex.Replace(result, @"[^0-9.]", "");
                                 break;
                             }
                         }
@@ -479,7 +490,7 @@ namespace BorwinAnalyse.BaseClass
                     analyseResult.Space = Convert.ToDouble(Rstr.Substring(2, 2)).ToString();
                 }
             }
-            catch 
+            catch
             {
                 analyseResult.Width = "8";
                 analyseResult.Space = "4";
@@ -492,305 +503,229 @@ namespace BorwinAnalyse.BaseClass
         public AnalyseResult AnalyseMethod_copy(string description)
         {
             AnalyseResult analyseResult = new AnalyseResult();
-            List<string> specList = new List<string>(); //分隔符处理后
+            List<string> specList = new List<string>(); //物料描述分隔符处理后
+            List<string> unitResList = ResistanceUnit.Split(',').ToList(); //电阻单位
+            List<string> unitCapList = CapacitanceUnit.Split(',').ToList();//电容单位
+
             string LCR_Type = "";
+
+            #region 删除首位
             if (IsDeleteString)
             {
                 description = RemoveLeft(description, PrefixNumber);
                 description = RemoveRight(description, SuffixNumber);
             }
+            #endregion
 
+            #region 替换
             if (IsSubstitutionRules)
             {
                 SubstitutionRule(ref description);
             }
+            #endregion
 
+            #region 分割符
             if (IsSeparator)
             {
                 specList = Separator(description);
             }
 
+            if (specList.Count <= 1)
+            {
+                analyseResult.Type = "分割不成功";
+                return analyseResult;
+            }
+            #endregion
+
+            #region 获取类型
             GetType(description, ref analyseResult, ref LCR_Type);
-            if (analyseResult.LcrItem.Type == "Other") return analyseResult;
-
-            GetSize(description, ref analyseResult);
-            if (analyseResult.LcrItem.Size == "Error") return analyseResult;
-
-
-            var gradeResult = specList.Where("CDFGJKMN".Contains).ToList();
-            if (gradeResult?.Count > 0)
-                analyseResult.LcrItem.Grade = gradeResult[0];
-
-            if (string.IsNullOrEmpty(analyseResult.LcrItem.Grade))
-            {
-                string textValue = string.Empty;
-                for (int i = 0; i < specList?.Count; i++)
-                {
-                    textValue = specList[i];
-                    if (textValue.StartsWith("%"))
-                    {
-                        if (textValue.EndsWith("%"))
-                        {
-                            analyseResult.LcrItem.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
-                        }
-                        else
-                        {
-                            string tempGrade = Regex.Replace(textValue, @"[^0-9.]", "");
-                            if (IsNumeric(tempGrade))
-                            {
-                                analyseResult.LcrItem.Grade = tempGrade + "%";
-                            }
-                            else
-                            {
-                                analyseResult.LcrItem.Grade = tempGrade;
-                            }
-                        }
-                        break;
-                    }
-                    else if (textValue.Contains("%"))
-                    {
-                        analyseResult.LcrItem.Grade = TheGrade(textValue);
-                        break;
-                    }
-                    if (string.IsNullOrEmpty(analyseResult.LcrItem.Grade) && IsValueGrade(textValue))
-                    {
-                        if (IsValueContainsGrade)
-                        {
-                            Regex r = new Regex(@"[a-zA-Z]+");
-                            System.Text.RegularExpressions.Match m = r.Match(textValue);
-                            string grade = m.Value;
-                            if (!string.IsNullOrEmpty(grade))
-                            {
-                                analyseResult.LcrItem.Grade = grade;
-                                textValue = textValue.Replace(grade, "");
-
-                                if (textValue.Length == 3 && IsNumeric(textValue))
-                                {
-                                    int v1 = int.Parse(textValue.Substring(0, 2));
-                                    int v2 = int.Parse(textValue.Substring(2, 1));
-                                    double val = v1 * Math.Pow(10, v2);
-                                    analyseResult.LcrItem.Value = val.ToString();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                string textValue = string.Empty;
-                for (int i = 0; i < specList?.Count; i++)
-                {
-                    textValue = specList[i];
-                    if (textValue.StartsWith("%"))
-                    {
-                        if (textValue.EndsWith("%"))
-                        {
-                            analyseResult.LcrItem.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
-                        }
-                        else
-                        {
-                            string tempGrade = Regex.Replace(textValue, @"[^0-9.]", "");
-                            //string tempGrade = textValue.TrimStart('%');
-                            if (IsNumeric(tempGrade))
-                            {
-                                analyseResult.LcrItem.Grade = tempGrade + "%";
-                            }
-                            else
-                            {
-                                analyseResult.LcrItem.Grade = tempGrade;
-                            }
-                        }
-                        break;
-                    }
-                    else if (textValue.Contains("%"))
-                    {
-                        analyseResult.LcrItem.Grade = TheGrade(textValue);
-                        break;
-                    }
-                }
-            }
-            if (string.IsNullOrEmpty(analyseResult.LcrItem.Grade) && IsGrade_ON_NO_Find)
-            {
-                if (analyseResult.LcrItem.Type == "电阻".tr())
-                {
-                    analyseResult.LcrItem.Grade = ResGrade_ON_NO_Find;
-                }
-                else if (analyseResult.LcrItem.Type == "电容".tr())
-                {
-                    analyseResult.LcrItem.Grade = CapGrade_ON_NO_Find;
-                }
-            }
-
+            if (analyseResult.Type == "Other") return analyseResult;
             //去掉物料类型
             var typeList = specList.Where(u => u.Contains(LCR_Type)).ToList();
             foreach (var item in typeList)
             {
                 specList.Remove(item);
             }
-            //去掉包含规格项
-            var sizeIndexList = specList.Where(u => u.Contains(analyseResult.LcrItem.Size)).ToList();
+            #endregion
+
+            #region 获取尺寸
+            GetSize(description, ref analyseResult);
+            if (analyseResult.Size == "Error") return analyseResult;
+            //去掉尺寸
+            var sizeIndexList = specList.Where(u => u.Contains(analyseResult.Size)).ToList();
             foreach (var item in sizeIndexList)
             {
                 specList.Remove(item);
             }
-            //去掉包含偏差等级项
-            if (!string.IsNullOrEmpty(analyseResult.LcrItem.Grade))
+            #endregion
+
+            #region 获取值，单位，等级
+            for (int i = 0; i < specList.Count; i++)
             {
-                specList.Remove(analyseResult.LcrItem.Grade);
-            }
-            //找到可能包含值得项
-            List<string> listValue = new List<string>();
-            foreach (var item in specList)
-            {
-                if (Regex.IsMatch(item.Trim(), "^[0-9].*[A-Za-z0-9.]*$"))//修改正则表达式，当为0的时候匹配失败
+                #region 获取单位
+                if (string.IsNullOrEmpty(analyseResult.Unit))
                 {
-
-                    listValue.Add(item);
-                }
-            }
-
-            if (listValue.Count > 0)//找到多个待处理
-            {
-                if (analyseResult.LcrItem.Type == "电阻".tr())
-                {
-                    //通过单位分割
-                    analyseResult.LcrItem.Unit = "";
-                    for (int i = 0; i < listValue.Count; i++)
+                    List<string> units = new List<string>();
+                    if (analyseResult.Type == "电阻")
                     {
-                        string textValue = listValue[i];
-                        var unitList = ResistanceUnit.Split(',').Where(textValue.Contains).ToList();
-                        if (unitList?.Count > 0)
-                        {
-                            analyseResult.LcrItem.Unit = TheLongestName(unitList.ToArray());
-                            //提取值
-                            string[] valueArray = textValue.Split(analyseResult.LcrItem.Unit.ToCharArray()[0]);
-
-                            if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
-                            {
-                                analyseResult.LcrItem.Value = valueArray[0];
-                            }
-                            else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
-                            {
-                                if (IsInt(valueArray[1]))
-                                {
-                                    analyseResult.LcrItem.Value = textValue.Replace(analyseResult.LcrItem.Unit.ToCharArray()[0], '.');
-                                }
-                                else
-                                {
-                                    analyseResult.LcrItem.Value = valueArray[0];
-                                }
-                            }
-                            break;
-                        }
+                        units = unitResList.Where(x => specList[i].Contains(x)).ToList();
                     }
-                }
-                else if (analyseResult.LcrItem.Type == "电容".tr())
-                {
-                    //通过单位分割
-                    analyseResult.LcrItem.Unit = "";
-                    for (int i = 0; i < listValue.Count; i++)
+                    else if (analyseResult.Type == "电容")
                     {
-                        string textValue = listValue[i];
-                        var unitList = CapacitanceUnit.ToUpper().Split(',').Where(textValue.ToUpper().Contains).ToList();
-                        if (unitList?.Count > 0)
-                        {
-                            //找出最长
-                            analyseResult.LcrItem.Unit = TheLongestName(unitList.ToArray());
-                            //提取值
-                            string[] valueArray = textValue.ToUpper().Split(analyseResult.LcrItem.Unit.ToCharArray()[0]);
-                            if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
-                            {
-                                analyseResult.LcrItem.Value = valueArray[0];
-                            }
-                            else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
-                            {
-                                if (IsInt(valueArray[1]))
-                                {
-                                    analyseResult.LcrItem.Value = textValue.ToUpper().Replace(analyseResult.LcrItem.Unit.ToCharArray()[0], '.');
-                                }
-                                else
-                                {
-                                    analyseResult.LcrItem.Value = valueArray[0];
-                                }
-                            }
-                            break;
-                        }
+                        units = unitCapList.Where(x => specList[i].Contains(x)).ToList();
                     }
-                }
-
-                //找出数字字符串
-                if (string.IsNullOrEmpty(analyseResult.LcrItem.Value))
-                {
-                    if (analyseResult.LcrItem.Type == "电阻".tr())
+                    if (units.Count > 0)
                     {
-                        for (int i = 0; i < listValue.Count; i++)
+                        analyseResult.Unit = units[0];
+                        //提取值
+                        string[] valueArray = specList[i].Split(analyseResult.Unit.ToCharArray()[0]);
+                        if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
                         {
-                            string textValue = listValue[i];
-                            if (IsNumeric(textValue))
-                            {
-                                if (textValue?.Length > 0)
-                                {
-                                    if (IsIdentifyingDigits)
-                                    {
-                                        int factor = (int)Math.Pow(10, Convert.ToInt32(textValue.Substring(textValue.Length - 1)));
-                                        analyseResult.LcrItem.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
-                                    }
-                                    else
-                                    {
-                                        analyseResult.LcrItem.Value = textValue;
-                                    }
-
-                                }
-                                break;
-                            }
-                            else
-                            {   //电阻分析加入特殊处理 如0R5 5R00...
-                                string pattern = @"(?<=\d)\D+(?=\d)";
-                                Regex regex = new Regex(pattern);
-                                string result = regex.Replace(textValue, ".");
-                                if (IsIntermediateUnit)
-                                    analyseResult.LcrItem.Value = Regex.Replace(result, @"[^0-9.]", "");
-                                break;
-                            }
+                            analyseResult.Value = valueArray[0];
                         }
-                    }
-                    else if (analyseResult.LcrItem.Type == "电容".tr())
-                    {
-                        for (int i = 0; i < listValue.Count; i++)
+                        else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
                         {
-                            string textValue = listValue[i];
-                            if (IsNumeric(textValue))
+                            if (IsInt(valueArray[1]))
                             {
-                                if (IsIdentifyingDigits)
-                                {
-                                    int factor = (int)Math.Pow(10, Convert.ToInt32(textValue.Substring(textValue.Length - 1)));
-                                    analyseResult.LcrItem.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
-                                }
-                                else
-                                {
-                                    analyseResult.LcrItem.Value = textValue;
-                                }
-                                break;
+                                analyseResult.Value = specList[i].Replace(analyseResult.Unit.ToCharArray()[0], '.');
                             }
                             else
                             {
-                                //电阻分析加入特殊处理 如0R5 5R00...
-                                string pattern = @"(?<=\d)\D+(?=\d)";
-                                Regex regex = new Regex(pattern);
-                                string result = regex.Replace(textValue, ".");
-                                if (IsIntermediateUnit)
-                                    analyseResult.LcrItem.Value = Regex.Replace(result, @"[^0-9.]", "");
-                                break;
+                                analyseResult.Value = valueArray[0];
                             }
+                        }
+                        continue;
+                    }
+
+                }
+                #endregion
+
+                #region 获取等级
+                string textValue = specList[i];
+                if (string.IsNullOrEmpty(analyseResult.Grade))
+                {
+                    //值含偏差等级
+                    if (IsValueContainsGrade && IsValueGrade(textValue))
+                    {
+                        Regex r = new Regex(@"[a-zA-Z]+");
+                        System.Text.RegularExpressions.Match m = r.Match(textValue);
+                        string grade = m.Value;
+                        if (!string.IsNullOrEmpty(grade))
+                        {
+                            analyseResult.Grade = grade;
+                            textValue = textValue.Replace(grade, "");
+                            if (textValue.Length == 3 && IsNumeric(textValue))
+                            {
+                                int v1 = int.Parse(textValue.Substring(0, 2));
+                                int v2 = int.Parse(textValue.Substring(2, 1));
+                                double val = v1 * Math.Pow(10, v2);
+                                textValue = val.ToString();
+                            }
+                            analyseResult.Value = textValue;
+                            continue;
+                        }
+                    }
+                    else if (textValue.Contains("%"))
+                    {
+                        if (textValue.StartsWith("%"))
+                        {
+                            if (textValue.EndsWith("%"))
+                            {
+                                analyseResult.Grade = Regex.Replace(textValue, @"[^\d.\d]", "") + "%";
+                            }
+                            else
+                            {
+                                string tempGrade = Regex.Replace(textValue, @"[^0-9.]", "");
+                                if (IsNumeric(tempGrade))
+                                {
+                                    analyseResult.Grade = tempGrade + "%";
+                                }
+                                else
+                                {
+                                    analyseResult.Grade = tempGrade;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            analyseResult.Grade = TheGrade(textValue);
                         }
                     }
                 }
+                #endregion
+
+                #region 获取值
+                if (string.IsNullOrEmpty(analyseResult.Value))
+                {
+                    textValue = specList[i];
+                    if (IsNumeric(textValue))
+                    {
+                        analyseResult.Value = textValue;
+                    }
+                    else
+                    {
+                        //电阻分析加入特殊处理 如0R5 5R00...
+                        string pattern = @"(?<=\d)\D+(?=\d)";
+                        Regex regex = new Regex(pattern);
+                        string result = regex.Replace(textValue, ".");
+                        if (IsIntermediateUnit)
+                            analyseResult.Value = Regex.Replace(result, @"[^0-9.]", "");
+                    }
+                }
+                #endregion
             }
+
+            #region 删除单位
+            if (!string.IsNullOrEmpty(analyseResult.Unit))
+            {
+                var unitList = specList.Where(u => u.Contains(analyseResult.Unit)).ToList();
+                foreach (var item in unitList)
+                {
+                    specList.Remove(item);
+                }
+            }
+            #endregion
+
+            #endregion
+
+            #region 最后未找到的项处理
+            if (IsResDefaultUnit&&string.IsNullOrEmpty(analyseResult.Unit)&& analyseResult.Type == "电阻".tr())
+            {
+                //如果电阻没找到，默认单位为Ω
+                analyseResult.Unit = ResDefaultUnit;
+            }
+
+            if (!string.IsNullOrEmpty(analyseResult.Grade))
+            {
+                var gradeResult = specList.Where("CDFGJKMN".Contains).ToList();
+                if (gradeResult?.Count > 0)
+                    analyseResult.Grade = gradeResult[0];
+                else if (IsGrade_ON_NO_Find)
+                {
+                    //自定义等级偏差
+                    if (analyseResult.Type == "电阻".tr())
+                    {
+                        analyseResult.Grade = ResGrade_ON_NO_Find;
+                    }
+                    else if (analyseResult.Type == "电容".tr())
+                    {
+                        analyseResult.Grade = CapGrade_ON_NO_Find;
+                    }
+                }
+            }
+            #endregion
 
             analyseResult.Check();
-
             return analyseResult;
+        }
+
+        private void GetValueAndUnit(ref AnalyseResult analyseResult, string value, List<string> unitList)
+        {
+            List<string> units = unitList.Where(x => value.Contains(x)).ToList();
+            if (units.Count > 0)
+            {
+
+            }
         }
 
         /// <summary>
@@ -806,14 +741,13 @@ namespace BorwinAnalyse.BaseClass
 
             if (resResult?.Count > 0)
             {
-                analyseResult.LcrItem.Type = "电阻".tr();
+                analyseResult.Type = "电阻".tr();
                 LCR_Type = resResult[0];
+
             }
-
-
-            if (capResult?.Count > 0)
+            else if (capResult?.Count > 0)
             {
-                analyseResult.LcrItem.Type = "电容".tr();
+                analyseResult.Type = "电容".tr();
                 LCR_Type = capResult[0];
             }
         }
@@ -825,7 +759,7 @@ namespace BorwinAnalyse.BaseClass
         {
             var sizeResult = ComponentSpecifications.ToUpper().Split(',').Where(description.ToUpper().Contains).ToList();
             if (sizeResult?.Count > 0)
-                analyseResult.LcrItem.Size = sizeResult[0];
+                analyseResult.Size = sizeResult[0];
         }
 
         /// <summary>
@@ -838,9 +772,9 @@ namespace BorwinAnalyse.BaseClass
             List<char> listSplitChar = new List<char>();
             foreach (var item in splitCharList)
             {
-                char singleSplitChar = MidStrEx(item.Acsii, "(", ")").ToCharArray()[0];
-                if (!listSplitChar.Contains(singleSplitChar))
-                    listSplitChar.Add(singleSplitChar);
+                //char singleSplitChar = MidStrEx(item.Acsii, "(", ")").ToCharArray()[0];
+                if (!listSplitChar.Contains(item.Acsii.ToArray()[0]))
+                    listSplitChar.Add(item.Acsii.ToArray()[0]);
             }
             List<string> specList = description.Split(listSplitChar.ToArray(), StringSplitOptions.RemoveEmptyEntries).Where(a => a.Length >= 1).Select(b => b).ToList();
 
@@ -1073,6 +1007,14 @@ namespace BorwinAnalyse.BaseClass
 
     public sealed class AnalyseResult
     {
+        /// <summary>
+        /// 条码
+        /// </summary>
+        public string BarCode = "";
+        /// <summary>
+        /// 物料描述
+        /// </summary>
+        public string Description;
         public bool Result = false;
 
         /// <summary>
@@ -1085,22 +1027,6 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public string Space { get; set; } = "4";
 
-        public LCRItem LcrItem { get; set; } = new LCRItem();
-
-        public void Check()
-        {
-            if (LcrItem.Type != "Other" && LcrItem.Size != "Error" && !string.IsNullOrEmpty(LcrItem.Value) && !string.IsNullOrEmpty(LcrItem.Unit) && !string.IsNullOrEmpty(LcrItem.Grade))
-            {
-                Result = true;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Bom解析内容
-    /// </summary>
-    public sealed class LCRItem
-    {
         public string Type { get; set; } = "Other";
         public string Size { get; set; } = "Error";
         public string Value { get; set; } = string.Empty;
@@ -1125,5 +1051,15 @@ namespace BorwinAnalyse.BaseClass
         {
             return "类型".tr() + ":" + Type + "规格".tr() + ":" + Size + " 标准值".tr() + ":" + Value + "单位".tr() + ":" + Unit + " 等级".tr() + ":" + Grade;
         }
+
+        public void Check()
+        {
+            if (Type != "Other" && Size != "Error" && !string.IsNullOrEmpty(Value) && !string.IsNullOrEmpty(Unit) && !string.IsNullOrEmpty(Grade))
+            {
+                Result = true;
+            }
+        }
     }
+
+
 }

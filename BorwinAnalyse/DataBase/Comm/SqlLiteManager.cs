@@ -55,7 +55,6 @@ namespace BorwinAnalyse.DataBase.Comm
             {
                 DB = new SQLConnect(DicPath + "\\AnalyseData.db");
             }
-
             DB.OpenDB();
         }
 

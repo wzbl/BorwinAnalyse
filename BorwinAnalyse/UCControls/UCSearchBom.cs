@@ -49,10 +49,12 @@ namespace BorwinAnalyse.UCControls
 
         private void btnSearchBom_Click(object sender, EventArgs e)
         {
+            btnSearchBom.Enabled = false;
             Search();
         }
 
-        public void Search()
+
+        public async void Search()
         {
             List<BomDataModel> bomDataModels;
             if (comModelName.Text == "ALL")
@@ -61,34 +63,46 @@ namespace BorwinAnalyse.UCControls
             }
             else
             {
-                bomDataModels = BomManager.Instance.AllBomData.Where(x => x.modelName == comModelName.Text ).ToList<BomDataModel>();
+                bomDataModels = BomManager.Instance.AllBomData.Where(x => x.modelName == comModelName.Text).ToList<BomDataModel>();
             }
             gridBomData.Rows.Clear();
             if (bomDataModels != null)
             {
-                foreach (var item in bomDataModels)
+                await Task.Run(() =>
                 {
-                    gridBomData.Rows.Add(
-                        item.id,
-                        item.modelName,
-                        item.barCode,
-                        item.replaceCode,
-                        item.description,
-                        item.result,
-                        item.type,
-                        item.size,
-                        item.value,
-                        item.unit,
-                        item.grade,
-                        item.exp1,
-                        item.exp2,
-                        item.exp3,
-                        item.exp4,
-                        item.exp5
-                  );
-                }
+                    foreach (var item in bomDataModels)
+                    {
+                        this.Invoke(new Action(() =>
+                        {
+                            gridBomData.Rows.Add(
+                            gridBomData.RowCount + "_" + item.id,
+                                item.modelName,
+                                item.barCode,
+                                item.replaceCode,
+                                item.description,
+                                item.result,
+                                item.type,
+                                item.size,
+                                item.value,
+                                item.unit,
+                                item.grade,
+                                item.exp1,
+                                item.exp2,
+                                item.exp3,
+                                item.exp4,
+                                item.exp5
+                          );
+                           
+                            if (gridBomData.RowCount % 5000 == 0)
+                            {
+                                gridBomData.Refresh();
+                            }
+                        }));
+                    }
+                });
                 gridBomData.Refresh();
             }
+            btnSearchBom.Enabled = true;
         }
 
         private void btnUpdataBom_Click(object sender, EventArgs e)
@@ -103,7 +117,7 @@ namespace BorwinAnalyse.UCControls
                 BomManager.Instance.Init();
                 Search();
             }
-            
+
         }
 
         private void UpdataBomData(DataGridViewCellCollection row)
@@ -145,7 +159,7 @@ namespace BorwinAnalyse.UCControls
                 BomManager.Instance.SetCurrentModel(comModelName.Text);
                 MessageBox.Show("设为模板成功");
             }
-            
+
         }
 
         private void btnAddBom_Click(object sender, EventArgs e)
@@ -153,15 +167,24 @@ namespace BorwinAnalyse.UCControls
             if (!BomManager.Instance.BomNames.Contains(comModelName.Text))
             {
                 MessageBox.Show("未选择模板".tr());
+                return;
             }
             if (string.IsNullOrEmpty(txtbarCode.Text))
             {
                 MessageBox.Show("未输入条码".tr());
+                return;
             }
+            if (BomManager.Instance.AllBomData.Where(x => x.barCode == txtbarCode.Text).ToList<BomDataModel>().ToList().Count > 0)
+            {
+                MessageBox.Show("当前条码已存在".tr());
+                return;
+            }
+
+
             BomDataModel bomDataModel = new BomDataModel();
-            bomDataModel.id=Guid.NewGuid().ToString();
-            bomDataModel.modelName=comModelName.Text;
-            bomDataModel.barCode=txtbarCode.Text;
+            bomDataModel.id = Guid.NewGuid().ToString();
+            bomDataModel.modelName = comModelName.Text;
+            bomDataModel.barCode = txtbarCode.Text;
             bomDataModel.description = txtDescription.Text;
             bomDataModel.type = txtType.Text;
             bomDataModel.result = txtResult.Text;
@@ -170,8 +193,8 @@ namespace BorwinAnalyse.UCControls
             bomDataModel.unit = txtUnit.Text;
             bomDataModel.grade = txtGrade.Text;
             bomDataModel.exp1 = string.Format("{0}-{1}-{2}-{3}-{4}", bomDataModel.type, bomDataModel.size, bomDataModel.value, bomDataModel.unit, bomDataModel.grade);
-            bomDataModel.exp2=txtWidth.Text;
-            bomDataModel.exp3=txtPitch.Text;
+            bomDataModel.exp2 = txtWidth.Text;
+            bomDataModel.exp3 = txtPitch.Text;
             BomManager.Instance.InserIntoBomData(bomDataModel);
             Search();
         }
@@ -186,15 +209,15 @@ namespace BorwinAnalyse.UCControls
             int index = e.RowIndex;
             if (index < 0) return;
             txtbarCode.Text = gridBomData.Rows[index].Cells[2].FormattedValue.ToString();
-            txtDescription.Text= gridBomData.Rows[index].Cells[4].FormattedValue.ToString();
-            txtResult.Text= gridBomData.Rows[index].Cells[5].FormattedValue.ToString();
-            txtType.Text= gridBomData.Rows[index].Cells[6].FormattedValue.ToString();
-            txtSize.Text= gridBomData.Rows[index].Cells[7].FormattedValue.ToString();
-            txtValue.Text= gridBomData.Rows[index].Cells[8].FormattedValue.ToString();
-            txtUnit.Text= gridBomData.Rows[index].Cells[9].FormattedValue.ToString();
-            txtGrade.Text= gridBomData.Rows[index].Cells[10].FormattedValue.ToString();
-            txtWidth.Text= gridBomData.Rows[index].Cells[12].FormattedValue.ToString();
-            txtPitch.Text= gridBomData.Rows[index].Cells[13].FormattedValue.ToString();
+            txtDescription.Text = gridBomData.Rows[index].Cells[4].FormattedValue.ToString();
+            txtResult.Text = gridBomData.Rows[index].Cells[5].FormattedValue.ToString();
+            txtType.Text = gridBomData.Rows[index].Cells[6].FormattedValue.ToString();
+            txtSize.Text = gridBomData.Rows[index].Cells[7].FormattedValue.ToString();
+            txtValue.Text = gridBomData.Rows[index].Cells[8].FormattedValue.ToString();
+            txtUnit.Text = gridBomData.Rows[index].Cells[9].FormattedValue.ToString();
+            txtGrade.Text = gridBomData.Rows[index].Cells[10].FormattedValue.ToString();
+            txtWidth.Text = gridBomData.Rows[index].Cells[12].FormattedValue.ToString();
+            txtPitch.Text = gridBomData.Rows[index].Cells[13].FormattedValue.ToString();
         }
 
         private void btnSearchByCode_Click(object sender, EventArgs e)
