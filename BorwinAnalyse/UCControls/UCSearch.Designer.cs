@@ -32,14 +32,18 @@
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonCommand1 = new ComponentFactory.Krypton.Toolkit.KryptonCommand();
+            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ucSearchLanguage1 = new BorwinAnalyse.UCControls.UCSearchLanguage();
             this.ucSearchBom1 = new BorwinAnalyse.UCControls.UCSearchBom();
+            this.ucParam1 = new BorwinAnalyse.UCControls.UCParam();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             this.kryptonPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
+            this.kryptonPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonNavigator1
@@ -49,8 +53,9 @@
             this.kryptonNavigator1.Name = "kryptonNavigator1";
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
-            this.kryptonPage2});
-            this.kryptonNavigator1.SelectedIndex = 1;
+            this.kryptonPage2,
+            this.kryptonPage3});
+            this.kryptonNavigator1.SelectedIndex = 2;
             this.kryptonNavigator1.Size = new System.Drawing.Size(1408, 669);
             this.kryptonNavigator1.TabIndex = 1;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -85,6 +90,19 @@
             // 
             this.kryptonCommand1.Text = "kryptonCommand1";
             // 
+            // kryptonPage3
+            // 
+            this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage3.Controls.Add(this.ucParam1);
+            this.kryptonPage3.Flags = 65534;
+            this.kryptonPage3.LastVisibleSet = true;
+            this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage3.Name = "kryptonPage3";
+            this.kryptonPage3.Size = new System.Drawing.Size(1406, 642);
+            this.kryptonPage3.Text = "参数";
+            this.kryptonPage3.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage3.UniqueName = "4DC698D57A1C4F8EA1ACCF46528D551E";
+            // 
             // ucSearchLanguage1
             // 
             this.ucSearchLanguage1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -101,6 +119,14 @@
             this.ucSearchBom1.Size = new System.Drawing.Size(1406, 642);
             this.ucSearchBom1.TabIndex = 0;
             // 
+            // ucParam1
+            // 
+            this.ucParam1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucParam1.Location = new System.Drawing.Point(0, 0);
+            this.ucParam1.Name = "ucParam1";
+            this.ucParam1.Size = new System.Drawing.Size(1406, 642);
+            this.ucParam1.TabIndex = 0;
+            // 
             // UCSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -114,6 +140,8 @@
             this.kryptonPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             this.kryptonPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
+            this.kryptonPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -125,5 +153,7 @@
         private UCSearchLanguage ucSearchLanguage1;
         public UCSearchBom ucSearchBom1;
         public ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
+        private UCParam ucParam1;
     }
 }

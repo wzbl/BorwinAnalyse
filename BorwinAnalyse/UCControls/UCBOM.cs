@@ -57,6 +57,7 @@ namespace BorwinAnalyse.UCControls
             AnalyseDt.Columns.Add("exp3");
             AnalyseDt.Columns.Add("exp4");
             AnalyseDt.Columns.Add("exp5");
+            //InitDataGrid();
         }
 
         /// <summary>
@@ -67,6 +68,14 @@ namespace BorwinAnalyse.UCControls
         private void InitDataGrid()
         {
             DataGridView_Result.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+             new DataGridViewTextBoxColumn()
+            {
+                FillWeight = 45.07613F,
+                HeaderText = "序号".tr(),
+                MinimumWidth = 6,
+                Name = "Column1",
+                ReadOnly = true,
+            },
             new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
@@ -389,7 +398,7 @@ namespace BorwinAnalyse.UCControls
             this.Invoke(new Action(() =>
             {
                 lbResult.Text = "总数".tr() + ":" + AllCount + "成功".tr() + ":" + OKCount + "失败".tr() + ":" + NGCount;
-                if (AllCount % 1000 == 0)
+                if (AllCount % 5000 == 0)
                 {
                     DataGridView_Result.DataSource = null;
                     DataGridView_Result.DataSource = AnalyseDt;

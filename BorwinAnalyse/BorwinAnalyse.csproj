@@ -141,6 +141,7 @@
     <Compile Include="BaseClass\CommonAnalyse.cs" />
     <Compile Include="BaseClass\LanguageManager.cs" />
     <Compile Include="BaseClass\NOPIHelper.cs" />
+    <Compile Include="BaseClass\ParamManager.cs" />
     <Compile Include="DataBase\Comm\SQLConnect.cs" />
     <Compile Include="DataBase\Comm\SqlLiteManager.cs" />
     <Compile Include="DataBase\Model\BaseModel.cs" />
@@ -169,6 +170,12 @@
     </Compile>
     <Compile Include="UCControls\UCBOM.Designer.cs">
       <DependentUpon>UCBOM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCControls\UCParam.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCParam.Designer.cs">
+      <DependentUpon>UCParam.cs</DependentUpon>
     </Compile>
     <Compile Include="UCControls\UCSearch.cs">
       <SubType>UserControl</SubType>
@@ -206,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCBOM.resx">
       <DependentUpon>UCBOM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\UCParam.resx">
+      <DependentUpon>UCParam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCSearch.resx">
       <DependentUpon>UCSearch.cs</DependentUpon>

@@ -577,21 +577,24 @@ namespace BorwinAnalyse.BaseClass
                     if (units.Count > 0)
                     {
                         analyseResult.Unit = units[0];
-                        //提取值
-                        string[] valueArray = specList[i].Split(analyseResult.Unit.ToCharArray()[0]);
-                        if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
+                        if (string.IsNullOrEmpty(analyseResult.Value))
                         {
-                            analyseResult.Value = valueArray[0];
-                        }
-                        else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
-                        {
-                            if (IsInt(valueArray[1]))
-                            {
-                                analyseResult.Value = specList[i].Replace(analyseResult.Unit.ToCharArray()[0], '.');
-                            }
-                            else
+                            //提取值
+                            string[] valueArray = specList[i].Split(analyseResult.Unit.ToCharArray()[0]);
+                            if (valueArray.Length == 2 && string.IsNullOrEmpty(valueArray[1]))
                             {
                                 analyseResult.Value = valueArray[0];
+                            }
+                            else if (valueArray.Length == 2 && !string.IsNullOrEmpty(valueArray[1]))
+                            {
+                                if (IsInt(valueArray[1]))
+                                {
+                                    analyseResult.Value = specList[i].Replace(analyseResult.Unit.ToCharArray()[0], '.');
+                                }
+                                else
+                                {
+                                    analyseResult.Value = valueArray[0];
+                                }
                             }
                         }
                         continue;
@@ -605,7 +608,7 @@ namespace BorwinAnalyse.BaseClass
                 if (string.IsNullOrEmpty(analyseResult.Grade))
                 {
                     //值含偏差等级
-                    if (IsValueContainsGrade && IsValueGrade(textValue))
+                    if (IsValueContainsGrade && IsValueGrade(textValue)&&string.IsNullOrEmpty(analyseResult.Value))
                     {
                         Regex r = new Regex(@"[a-zA-Z]+");
                         System.Text.RegularExpressions.Match m = r.Match(textValue);
@@ -695,7 +698,7 @@ namespace BorwinAnalyse.BaseClass
                 analyseResult.Unit = ResDefaultUnit;
             }
 
-            if (!string.IsNullOrEmpty(analyseResult.Grade))
+            if (string.IsNullOrEmpty(analyseResult.Grade))
             {
                 var gradeResult = specList.Where("CDFGJKMN".Contains).ToList();
                 if (gradeResult?.Count > 0)
