@@ -137,6 +137,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass\BartenderPrintModel.cs" />
     <Compile Include="BaseClass\BomManager.cs" />
     <Compile Include="BaseClass\CommonAnalyse.cs" />
     <Compile Include="BaseClass\LanguageManager.cs" />
@@ -238,6 +239,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-暂停-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="BarTender">
+      <Guid>{D58562C1-E51B-11CF-8941-00A024A9083F}</Guid>
+      <VersionMajor>11</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
