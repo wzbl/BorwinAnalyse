@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.txtResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.IsResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.IsValueContainsGrade = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txtCapGrade_ON_NO_Find = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -84,7 +85,7 @@
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.txtResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.IsIdentifyingDigits = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -116,6 +117,7 @@
             // kryptonSplitContainer1.Panel1
             // 
             this.kryptonSplitContainer1.Panel1.AutoScroll = true;
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.IsIdentifyingDigits);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtResDefaultUnit);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.IsResDefaultUnit);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.IsValueContainsGrade);
@@ -148,6 +150,14 @@
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1137, 686);
             this.kryptonSplitContainer1.SplitterDistance = 339;
             this.kryptonSplitContainer1.TabIndex = 0;
+            // 
+            // txtResDefaultUnit
+            // 
+            this.txtResDefaultUnit.Location = new System.Drawing.Point(522, 275);
+            this.txtResDefaultUnit.Name = "txtResDefaultUnit";
+            this.txtResDefaultUnit.Size = new System.Drawing.Size(73, 23);
+            this.txtResDefaultUnit.TabIndex = 44;
+            this.txtResDefaultUnit.Text = "Ω";
             // 
             // IsResDefaultUnit
             // 
@@ -566,13 +576,13 @@
             // 
             this.buttonSpecAny4.UniqueName = "36EF95A540F847F1D0BFDAD41991F1BA";
             // 
-            // txtResDefaultUnit
+            // IsIdentifyingDigits
             // 
-            this.txtResDefaultUnit.Location = new System.Drawing.Point(522, 275);
-            this.txtResDefaultUnit.Name = "txtResDefaultUnit";
-            this.txtResDefaultUnit.Size = new System.Drawing.Size(73, 23);
-            this.txtResDefaultUnit.TabIndex = 44;
-            this.txtResDefaultUnit.Text = "Ω";
+            this.IsIdentifyingDigits.Location = new System.Drawing.Point(389, 304);
+            this.IsIdentifyingDigits.Name = "IsIdentifyingDigits";
+            this.IsIdentifyingDigits.Size = new System.Drawing.Size(88, 20);
+            this.IsIdentifyingDigits.TabIndex = 54;
+            this.IsIdentifyingDigits.Values.Text = "识别数码法";
             // 
             // UCAnalyseSet
             // 
@@ -661,5 +671,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox IsValueContainsGrade;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox IsResDefaultUnit;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtResDefaultUnit;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox IsIdentifyingDigits;
     }
 }

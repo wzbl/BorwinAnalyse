@@ -660,19 +660,29 @@ namespace BorwinAnalyse.BaseClass
                 #region 获取值
                 if (string.IsNullOrEmpty(analyseResult.Value))
                 {
-                    textValue = specList[i];
-                    if (IsNumeric(textValue))
+                    string value = textValue.Substring(textValue.Length - 1);
+                    if (IsIdentifyingDigits && textValue.Length > 2 &&int.TryParse(textValue,out int res0) && int.TryParse(value,out int res))
                     {
-                        analyseResult.Value = textValue;
+                        int factor = (int)Math.Pow(10, Convert.ToInt32(res));
+                        analyseResult.Value = (Convert.ToDouble(textValue.Remove(textValue.Length - 1, 1)) * factor).ToString();
                     }
-                    else
+
+                    if (string.IsNullOrEmpty(analyseResult.Value))
                     {
-                        //电阻分析加入特殊处理 如0R5 5R00...
-                        string pattern = @"(?<=\d)\D+(?=\d)";
-                        Regex regex = new Regex(pattern);
-                        string result = regex.Replace(textValue, ".");
-                        if (IsIntermediateUnit)
-                            analyseResult.Value = Regex.Replace(result, @"[^0-9.]", "");
+                        textValue = specList[i];
+                        if (IsNumeric(textValue))
+                        {
+                            analyseResult.Value = textValue;
+                        }
+                        else
+                        {
+                            //电阻分析加入特殊处理 如0R5 5R00...
+                            string pattern = @"(?<=\d)\D+(?=\d)";
+                            Regex regex = new Regex(pattern);
+                            string result = regex.Replace(textValue, ".");
+                            if (IsIntermediateUnit)
+                                analyseResult.Value = Regex.Replace(result, @"[^0-9.]", "");
+                        }
                     }
                 }
                 #endregion

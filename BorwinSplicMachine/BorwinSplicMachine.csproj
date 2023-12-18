@@ -87,10 +87,26 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LCR\LCRHelper.cs" />
+    <Compile Include="LCR\UCLCR.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LCR\UCLCR.Designer.cs">
+      <DependentUpon>UCLCR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMain.Designer.cs">
+      <DependentUpon>UCMain.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LCR\UCLCR.resx">
+      <DependentUpon>UCLCR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +118,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UCMain.resx">
+      <DependentUpon>UCMain.cs</DependentUpon>
+    </EmbeddedResource>
     <Fakes Include="Fakes\ComponentFactory.Krypton.Docking.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

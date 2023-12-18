@@ -10,6 +10,7 @@ using PdfSharp.Pdf.Content.Objects;
 using System.Security.Cryptography;
 using System.IO;
 using System.ComponentModel;
+using BorwinAnalyse.UCControls;
 
 namespace BorwinSplicMachine
 {
@@ -53,40 +54,40 @@ namespace BorwinSplicMachine
             XGraphics gfx = XGraphics.FromPdfPage(page);
             XFont font = new XFont("华文宋体", 10, XFontStyle.Bold);
             XPen xPen = new XPen(XColor.FromArgb(50, 50, 50));
-            double width = (page.Width / kryptonDataGridView1.ColumnCount) - 10;
-            int ii = 0;
-            for (int i = 0; i < kryptonDataGridView1.RowCount; i++)
-            {
-                if (ii * 50 > page.Height)
-                {
-                    ii = 0;
-                    page = document.AddPage();
-                    page.Size = PageSize.A4;
-                    gfx = XGraphics.FromPdfPage(page);
-                }
-                for (int j = 0; j < kryptonDataGridView1.ColumnCount; j++)
-                {
-                    if (kryptonDataGridView1.Rows[i].Cells[j].FormattedValue is Bitmap)
-                    {
-                        XPoint xPoint1 = new XPoint(j * width, (ii * 50));
-                        XPoint xPoint2 = new XPoint(j * width + width+50, (ii * 50));
-                        XPoint xPoint3 = new XPoint(j * width, (ii * 50) + 50);
-                        XPoint xPoint4 = new XPoint(j * width + width+50, (ii * 50) + 50);
-                        gfx.DrawLines(xPen, new XPoint[] { xPoint1, xPoint2, xPoint4, xPoint3, xPoint1 });
-                        gfx.DrawImage(XImage.FromFile("D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg"), j * width+1, ii * 50+1, width + 48, 48);
-                    }
-                    else
-                    {
-                        XPoint xPoint1 = new XPoint(j * width, (ii * 50));
-                        XPoint xPoint2 = new XPoint(j * width + width, (ii * 50));
-                        XPoint xPoint3 = new XPoint(j * width, (ii * 50) + 50);
-                        XPoint xPoint4 = new XPoint(j * width + width, (ii * 50) + 50);
-                        gfx.DrawLines(xPen, new XPoint[] { xPoint1, xPoint2, xPoint4, xPoint3 , xPoint1});
-                        gfx.DrawString(kryptonDataGridView1.Rows[i].Cells[j].FormattedValue.ToString(), font, XBrushes.Blue, new XRect(1 + j * width, (4 + ii * 50), width, 50), XStringFormats.Center);
-                    }
-                }
-                ii++;
-            }
+            //double width = (page.Width / kryptonDataGridView1.ColumnCount) - 10;
+            //int ii = 0;
+            //for (int i = 0; i < kryptonDataGridView1.RowCount; i++)
+            //{
+            //    if (ii * 50 > page.Height)
+            //    {
+            //        ii = 0;
+            //        page = document.AddPage();
+            //        page.Size = PageSize.A4;
+            //        gfx = XGraphics.FromPdfPage(page);
+            //    }
+            //    for (int j = 0; j < kryptonDataGridView1.ColumnCount; j++)
+            //    {
+            //        if (kryptonDataGridView1.Rows[i].Cells[j].FormattedValue is Bitmap)
+            //        {
+            //            XPoint xPoint1 = new XPoint(j * width, (ii * 50));
+            //            XPoint xPoint2 = new XPoint(j * width + width+50, (ii * 50));
+            //            XPoint xPoint3 = new XPoint(j * width, (ii * 50) + 50);
+            //            XPoint xPoint4 = new XPoint(j * width + width+50, (ii * 50) + 50);
+            //            gfx.DrawLines(xPen, new XPoint[] { xPoint1, xPoint2, xPoint4, xPoint3, xPoint1 });
+            //            gfx.DrawImage(XImage.FromFile("D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg"), j * width+1, ii * 50+1, width + 48, 48);
+            //        }
+            //        else
+            //        {
+            //            XPoint xPoint1 = new XPoint(j * width, (ii * 50));
+            //            XPoint xPoint2 = new XPoint(j * width + width, (ii * 50));
+            //            XPoint xPoint3 = new XPoint(j * width, (ii * 50) + 50);
+            //            XPoint xPoint4 = new XPoint(j * width + width, (ii * 50) + 50);
+            //            gfx.DrawLines(xPen, new XPoint[] { xPoint1, xPoint2, xPoint4, xPoint3 , xPoint1});
+            //            gfx.DrawString(kryptonDataGridView1.Rows[i].Cells[j].FormattedValue.ToString(), font, XBrushes.Blue, new XRect(1 + j * width, (4 + ii * 50), width, 50), XStringFormats.Center);
+            //        }
+            //    }
+            //    ii++;
+            //}
 
             //6. 保存文档
             document.Save(path);
@@ -241,30 +242,66 @@ namespace BorwinSplicMachine
         {
             Stopwatch sp = new Stopwatch();
             sp.Start();
-            for (int i = 0; i < 300; i++)
-            {
-                Bitmap bitmap = new Bitmap(Image.FromFile("D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg"), 100, 50);
-                Bitmap bitmap2 = new Bitmap(Image.FromFile("D:\\我的资料库\\Documents\\Downloads\\icons8-刷新-120.png"), 100, 50);
-                kryptonDataGridView1.Rows.Add(
-                   i + 1,
-                   sp.ElapsedMilliseconds,
-                   i + 1,
-                   i + 1,
-                   i + 1,
-                   i + 1,
-                   i + 1,
-                   bitmap2,
-                   i + 1,
-                   i + 1,
-                   i + 1,
-                   i + 1,
-                   i + 1,
-                   bitmap
-                );
-                kryptonDataGridView1.Refresh();
-            }
+            //for (int i = 0; i < 300; i++)
+            //{
+            //    Bitmap bitmap = new Bitmap(Image.FromFile("D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg"), 100, 50);
+            //    Bitmap bitmap2 = new Bitmap(Image.FromFile("D:\\我的资料库\\Documents\\Downloads\\icons8-刷新-120.png"), 100, 50);
+            //    kryptonDataGridView1.Rows.Add(
+            //       i + 1,
+            //       sp.ElapsedMilliseconds,
+            //       i + 1,
+            //       i + 1,
+            //       i + 1,
+            //       i + 1,
+            //       i + 1,
+            //       bitmap2,
+            //       i + 1,
+            //       i + 1,
+            //       i + 1,
+            //       i + 1,
+            //       i + 1,
+            //       bitmap
+            //    );
+            //    kryptonDataGridView1.Refresh();
+            //}
             MessageBox.Show("完成");
             sp.Stop();
+        }
+
+        private void ShowUCBom_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(new UCBOM());
+        }
+
+        private void ShowUCBomSearch_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(new UCSearchBom());
+        }
+
+        private void ShowUCBomSet_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(new UCAnalyseSet());
+        }
+
+        private void ShowLanguageSearch_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(new UCSearchLanguage());
+        }
+
+        private void ShowUCParam_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(new UCParam());
+        }
+
+        private void ShowUCMain_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(new UCMain());
         }
     }
 

@@ -44,9 +44,6 @@ namespace BorwinAnalyse.Forms
 
         private void AnalyseMainForm_Load(object sender, EventArgs e)
         {
-            SqlLiteManager.Instance.Init();
-            CommonAnalyse.Instance.Load();
-            BomManager.Instance.Init();
             InitUI();
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
 

@@ -73,6 +73,7 @@ namespace BorwinAnalyse.UCControls
             IsValueContainsGrade.Checked = CommonAnalyse.Instance.IsValueContainsGrade;
             IsResDefaultUnit.Checked = CommonAnalyse.Instance.IsResDefaultUnit;
             txtResDefaultUnit.Text = CommonAnalyse.Instance.ResDefaultUnit;
+            IsIdentifyingDigits.Checked = CommonAnalyse.Instance.IsIdentifyingDigits;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -120,21 +121,19 @@ namespace BorwinAnalyse.UCControls
             CommonAnalyse.Instance.ResistanceUnit = txtResUnit.Text;
             CommonAnalyse.Instance.CapacitanceUnit = txtCapUnit.Text;
             CommonAnalyse.Instance.ComponentSpecifications = txtSize.Text;
-
             CommonAnalyse.Instance.IsDeleteString = IsDeleteString.Checked;
             CommonAnalyse.Instance.PrefixNumber = int.Parse(txtPrefixNumber.Text);
             CommonAnalyse.Instance.SuffixNumber = int.Parse(txtSuffixNumber.Text);
-
             CommonAnalyse.Instance.IsIntermediateUnit = IsIntermediateUnit.Checked;
-
             CommonAnalyse.Instance.IsGrade_ON_NO_Find = IsGrade_ON_NO_Find.Checked;
             CommonAnalyse.Instance.ResGrade_ON_NO_Find = txtResGrade_ON_NO_Find.Text;
             CommonAnalyse.Instance.CapGrade_ON_NO_Find = txtCapGrade_ON_NO_Find.Text;
             CommonAnalyse.Instance.IsValueContainsGrade = IsValueContainsGrade.Checked;
             CommonAnalyse.Instance.IsResDefaultUnit = IsResDefaultUnit.Checked;
             CommonAnalyse.Instance.ResDefaultUnit = txtResDefaultUnit.Text.Trim();
+            CommonAnalyse.Instance.IsIdentifyingDigits = IsIdentifyingDigits.Checked;
             CommonAnalyse.Instance.Save();
-
+            MessageBox.Show("保存成功".tr());
         }
 
 
