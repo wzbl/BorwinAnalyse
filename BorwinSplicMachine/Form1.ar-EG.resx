@@ -117,4 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonText" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipBody" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value />
+  </data>
+  <assembly alias="ComponentFactory.Krypton.Toolkit" name="ComponentFactory.Krypton.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipStyle" type="ComponentFactory.Krypton.Toolkit.LabelStyle, ComponentFactory.Krypton.Toolkit">
+    <value>SuperTip</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="kryptonRibbon1.RibbonShortcuts.ToggleKeyboardAccess1" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Alt+Menu</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonShortcuts.ToggleKeyboardAccess2" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F10</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonShortcuts.ToggleMinimizeMode" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F1</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.AppButtonKeyTip" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.CustomizeQuickAccessToolbar" xml:space="preserve">
+    <value>Customize Quick Access Toolbar</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.Minimize" xml:space="preserve">
+    <value>Mi&amp;nimize the Ribbon</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.MoreColors" xml:space="preserve">
+    <value>&amp;More Colors...</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.NoColor" xml:space="preserve">
+    <value>&amp;No Color</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.RecentColors" xml:space="preserve">
+    <value>Recent Colors</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.RecentDocuments" xml:space="preserve">
+    <value>Recent Documents</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.ShowAboveRibbon" xml:space="preserve">
+    <value>&amp;Show Above the Ribbon</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.ShowBelowRibbon" xml:space="preserve">
+    <value>&amp;Show Below the Ribbon</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.ShowQATAboveRibbon" xml:space="preserve">
+    <value>&amp;Show Quick Access Toolbar Above the Ribbon</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.ShowQATBelowRibbon" xml:space="preserve">
+    <value>&amp;Show Quick Access Toolbar Below the Ribbon</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.StandardColors" xml:space="preserve">
+    <value>Standard Colors</value>
+  </data>
+  <data name="kryptonRibbon1.RibbonStrings.ThemeColors" xml:space="preserve">
+    <value>Theme Colors</value>
+  </data>
 </root>

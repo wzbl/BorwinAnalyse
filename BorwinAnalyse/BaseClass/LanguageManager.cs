@@ -77,7 +77,7 @@ namespace BorwinAnalyse.BaseClass
                 languages.Add(lang);
                 return res;
             }
-          
+            language[0].exp5 = "1";
             switch (CurrenIndex)
             {
                 case 0:
@@ -101,6 +101,7 @@ namespace BorwinAnalyse.BaseClass
                 case 6:
                     res = language[0].exp4;
                     break;
+                   
             }
             if (string.IsNullOrEmpty(res))
             {
@@ -239,10 +240,28 @@ namespace BorwinAnalyse.BaseClass
                         {
                             kryptonDataGridView.Columns[i].HeaderText = kryptonDataGridView.Columns[i].HeaderText.tr();
                         }
-                    }else if (control is KryptonGroupBox)
+                    }
+                    else if (control is KryptonGroupBox)
                     {
                         KryptonGroupBox kryptonGroupBox = (KryptonGroupBox)control;
                         kryptonGroupBox.Values.Heading= kryptonGroupBox.Values.Heading.tr();
+                    }
+                    else if ((control is ComponentFactory.Krypton.Ribbon.KryptonRibbon))
+                    {
+                        ComponentFactory.Krypton.Ribbon.KryptonRibbon kryptonRibbon = control as ComponentFactory.Krypton.Ribbon.KryptonRibbon;
+
+                         for (int i = 0;i< kryptonRibbon.RibbonTabs.Count; i++)
+                        {
+                            kryptonRibbon.RibbonTabs[i].Text = kryptonRibbon.RibbonTabs[i].Text.tr();
+                            for (int j = 0;j< kryptonRibbon.RibbonTabs[i].Groups.Count; j++)
+                            {
+                                for (int k = 0; k < kryptonRibbon.RibbonTabs[i].Groups[j].Items.Count; k++)
+                                {
+                                   
+                                }
+                                
+                            }
+                        }
                     }
                 }));
                
@@ -324,6 +343,11 @@ namespace BorwinAnalyse.BaseClass
         {
             if (str == null||string.IsNullOrEmpty(str))
             {
+                return str;
+            }
+            if (int.TryParse(str,out int i))
+            {
+                //数字返回
                 return str;
             }
             string res = LanguageManager.Instance.SearchLanguage(str);

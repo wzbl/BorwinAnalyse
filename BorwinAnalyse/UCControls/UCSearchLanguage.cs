@@ -20,10 +20,11 @@ namespace BorwinAnalyse.UCControls
             InitializeComponent();
             Dock = DockStyle.Fill;
             this.Load += UCSearch_Load;
+            this.components = new System.ComponentModel.Container();
         }
         private void UCSearch_Load(object sender, EventArgs e)
         {
-            //LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         private void initUI()

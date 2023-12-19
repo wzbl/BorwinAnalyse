@@ -70,6 +70,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,14 +95,24 @@
     <Compile Include="LCR\UCLCR.Designer.cs">
       <DependentUpon>UCLCR.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCControls\UCBaseSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCBaseSet.Designer.cs">
+      <DependentUpon>UCBaseSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UCMain.Designer.cs">
       <DependentUpon>UCMain.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form1.ar-EG.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +129,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UCControls\UCBaseSet.resx">
+      <DependentUpon>UCBaseSet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCMain.resx">
       <DependentUpon>UCMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +155,12 @@
       <Project>{e24f3998-ff55-4a8f-a7b5-b2dcc34eb3c2}</Project>
       <Name>BorwinAnalyse</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag_australia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_mini_normal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

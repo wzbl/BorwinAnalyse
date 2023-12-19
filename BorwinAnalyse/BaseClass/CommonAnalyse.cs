@@ -52,6 +52,8 @@ namespace BorwinAnalyse.BaseClass
         public bool IsSubstitutionRules = false;
         public List<SubstitutionRules> SubstitutionRules = new List<SubstitutionRules>();
 
+        public List<GradeChange> GradeChanges = new List<GradeChange>();
+
         /// <summary>
         /// 电阻
         /// </summary>
@@ -712,7 +714,15 @@ namespace BorwinAnalyse.BaseClass
             {
                 var gradeResult = specList.Where("CDFGJKMN".Contains).ToList();
                 if (gradeResult?.Count > 0)
-                    analyseResult.Grade = gradeResult[0];
+                {
+                    string Grade = gradeResult[0];
+                    if (GradeChanges.Where(x => x.Grade == Grade).ToList().Count>0)
+                    {
+                        Grade = GradeChanges.Where(x => x.Grade == Grade).ToList()[0].Percent;
+                    }
+                    analyseResult.Grade = Grade;   
+                }
+                    
                 else if (IsGrade_ON_NO_Find)
                 {
                     //自定义等级偏差
@@ -918,6 +928,19 @@ namespace BorwinAnalyse.BaseClass
             return longest;
         }
 
+    }
+
+    [Serializable]
+    public class GradeChange
+    {
+        /// <summary>
+        /// 字符等级
+        /// </summary>
+        public string Grade;
+        /// <summary>
+        /// 百分比
+        /// </summary>
+        public string Percent;
     }
 
     /// <summary>

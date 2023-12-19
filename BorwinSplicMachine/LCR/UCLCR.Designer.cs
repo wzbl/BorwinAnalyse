@@ -29,38 +29,38 @@
         private void InitializeComponent()
         {
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.comType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonWrapLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.txtValue = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWrapLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.comUnit = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.comSize = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.kryptonWrapLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.txtGrade = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonWrapLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.kryptonWrapLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.kryptonWrapLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.txtMin = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.txtMax = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.txtRealValue = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txtRealValue = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtMax = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtMin = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonWrapLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonWrapLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.txtGrade = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.comSize = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.comUnit = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonWrapLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txtValue = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.comType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comUnit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comUnit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comType)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonSplitContainer1
@@ -93,75 +93,114 @@
             this.kryptonSplitContainer1.SplitterDistance = 800;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
-            // kryptonWrapLabel1
+            // kryptonDataGridView1
             // 
-            this.kryptonWrapLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
-            this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel1.Text = "类型";
+            this.kryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kryptonDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonDataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonDataGridView1.Name = "kryptonDataGridView1";
+            this.kryptonDataGridView1.RowTemplate.Height = 23;
+            this.kryptonDataGridView1.Size = new System.Drawing.Size(800, 334);
+            this.kryptonDataGridView1.TabIndex = 1;
             // 
-            // comType
+            // kryptonPanel1
             // 
-            this.comType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comType.DropDownWidth = 135;
-            this.comType.Items.AddRange(new object[] {
-            "RES",
-            "CAP"});
-            this.comType.Location = new System.Drawing.Point(0, 15);
-            this.comType.Name = "comType";
-            this.comType.Size = new System.Drawing.Size(135, 21);
-            this.comType.TabIndex = 2;
-            this.comType.SelectedIndexChanged += new System.EventHandler(this.comType_SelectedIndexChanged);
+            this.kryptonPanel1.Controls.Add(this.txtRealValue);
+            this.kryptonPanel1.Controls.Add(this.txtMax);
+            this.kryptonPanel1.Controls.Add(this.txtMin);
+            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel8);
+            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel7);
+            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel6);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 334);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(800, 37);
+            this.kryptonPanel1.TabIndex = 0;
             // 
-            // kryptonWrapLabel3
+            // txtRealValue
             // 
-            this.kryptonWrapLabel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel3.Location = new System.Drawing.Point(0, 36);
-            this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
-            this.kryptonWrapLabel3.Size = new System.Drawing.Size(20, 15);
-            this.kryptonWrapLabel3.Text = "值";
+            this.txtRealValue.Location = new System.Drawing.Point(500, 8);
+            this.txtRealValue.Name = "txtRealValue";
+            this.txtRealValue.Size = new System.Drawing.Size(156, 23);
+            this.txtRealValue.TabIndex = 6;
             // 
-            // txtValue
+            // txtMax
             // 
-            this.txtValue.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtValue.Location = new System.Drawing.Point(0, 51);
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(135, 23);
-            this.txtValue.TabIndex = 6;
+            this.txtMax.Location = new System.Drawing.Point(290, 8);
+            this.txtMax.Name = "txtMax";
+            this.txtMax.Size = new System.Drawing.Size(126, 23);
+            this.txtMax.TabIndex = 5;
             // 
-            // kryptonWrapLabel4
+            // txtMin
             // 
-            this.kryptonWrapLabel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel4.Location = new System.Drawing.Point(0, 74);
-            this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
-            this.kryptonWrapLabel4.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel4.Text = "单位";
+            this.txtMin.Location = new System.Drawing.Point(73, 8);
+            this.txtMin.Name = "txtMin";
+            this.txtMin.Size = new System.Drawing.Size(126, 23);
+            this.txtMin.TabIndex = 4;
             // 
-            // comUnit
+            // kryptonWrapLabel8
             // 
-            this.comUnit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comUnit.DropDownWidth = 149;
-            this.comUnit.Location = new System.Drawing.Point(0, 89);
-            this.comUnit.Name = "comUnit";
-            this.comUnit.Size = new System.Drawing.Size(135, 21);
-            this.comUnit.TabIndex = 13;
+            this.kryptonWrapLabel8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel8.Location = new System.Drawing.Point(438, 12);
+            this.kryptonWrapLabel8.Name = "kryptonWrapLabel8";
+            this.kryptonWrapLabel8.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel8.Text = "实测值";
             // 
-            // kryptonWrapLabel2
+            // kryptonWrapLabel7
             // 
-            this.kryptonWrapLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(0, 110);
-            this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
-            this.kryptonWrapLabel2.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel2.Text = "尺寸";
+            this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel7.Location = new System.Drawing.Point(230, 12);
+            this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
+            this.kryptonWrapLabel7.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel7.Text = "最大值";
+            // 
+            // kryptonWrapLabel6
+            // 
+            this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel6.Location = new System.Drawing.Point(12, 12);
+            this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
+            this.kryptonWrapLabel6.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel6.Text = "最小值";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnStart.Location = new System.Drawing.Point(0, 294);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(135, 40);
+            this.btnStart.TabIndex = 21;
+            this.btnStart.Values.Text = "启动";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.kryptonButton1.Location = new System.Drawing.Point(0, 334);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(135, 37);
+            this.kryptonButton1.TabIndex = 20;
+            this.kryptonButton1.Values.Text = "校准";
+            // 
+            // txtGrade
+            // 
+            this.txtGrade.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtGrade.Location = new System.Drawing.Point(0, 161);
+            this.txtGrade.Name = "txtGrade";
+            this.txtGrade.Size = new System.Drawing.Size(135, 23);
+            this.txtGrade.TabIndex = 19;
+            // 
+            // kryptonWrapLabel5
+            // 
+            this.kryptonWrapLabel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel5.Location = new System.Drawing.Point(0, 146);
+            this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
+            this.kryptonWrapLabel5.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel5.Text = "等级";
             // 
             // comSize
             // 
@@ -180,114 +219,75 @@
             this.comSize.Size = new System.Drawing.Size(135, 21);
             this.comSize.TabIndex = 16;
             // 
-            // kryptonWrapLabel5
+            // kryptonWrapLabel2
             // 
-            this.kryptonWrapLabel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel5.Location = new System.Drawing.Point(0, 146);
-            this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
-            this.kryptonWrapLabel5.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel5.Text = "等级";
+            this.kryptonWrapLabel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(0, 110);
+            this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
+            this.kryptonWrapLabel2.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel2.Text = "尺寸";
             // 
-            // txtGrade
+            // comUnit
             // 
-            this.txtGrade.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtGrade.Location = new System.Drawing.Point(0, 161);
-            this.txtGrade.Name = "txtGrade";
-            this.txtGrade.Size = new System.Drawing.Size(135, 23);
-            this.txtGrade.TabIndex = 19;
+            this.comUnit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comUnit.DropDownWidth = 149;
+            this.comUnit.Location = new System.Drawing.Point(0, 89);
+            this.comUnit.Name = "comUnit";
+            this.comUnit.Size = new System.Drawing.Size(135, 21);
+            this.comUnit.TabIndex = 13;
             // 
-            // kryptonButton1
+            // kryptonWrapLabel4
             // 
-            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonButton1.Location = new System.Drawing.Point(0, 334);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(135, 37);
-            this.kryptonButton1.TabIndex = 20;
-            this.kryptonButton1.Values.Text = "校准";
+            this.kryptonWrapLabel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel4.Location = new System.Drawing.Point(0, 74);
+            this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
+            this.kryptonWrapLabel4.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel4.Text = "单位";
             // 
-            // btnStart
+            // txtValue
             // 
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnStart.Location = new System.Drawing.Point(0, 294);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(135, 40);
-            this.btnStart.TabIndex = 21;
-            this.btnStart.Values.Text = "启动";
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.txtValue.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtValue.Location = new System.Drawing.Point(0, 51);
+            this.txtValue.Name = "txtValue";
+            this.txtValue.Size = new System.Drawing.Size(135, 23);
+            this.txtValue.TabIndex = 6;
             // 
-            // kryptonPanel1
+            // kryptonWrapLabel3
             // 
-            this.kryptonPanel1.Controls.Add(this.txtRealValue);
-            this.kryptonPanel1.Controls.Add(this.txtMax);
-            this.kryptonPanel1.Controls.Add(this.txtMin);
-            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel8);
-            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel7);
-            this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel6);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 334);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(800, 37);
-            this.kryptonPanel1.TabIndex = 0;
+            this.kryptonWrapLabel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel3.Location = new System.Drawing.Point(0, 36);
+            this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
+            this.kryptonWrapLabel3.Size = new System.Drawing.Size(20, 15);
+            this.kryptonWrapLabel3.Text = "值";
             // 
-            // kryptonWrapLabel6
+            // comType
             // 
-            this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel6.Location = new System.Drawing.Point(22, 12);
-            this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
-            this.kryptonWrapLabel6.Size = new System.Drawing.Size(46, 15);
-            this.kryptonWrapLabel6.Text = "最小值";
+            this.comType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comType.DropDownWidth = 135;
+            this.comType.Items.AddRange(new object[] {
+            "RES",
+            "CAP"});
+            this.comType.Location = new System.Drawing.Point(0, 15);
+            this.comType.Name = "comType";
+            this.comType.Size = new System.Drawing.Size(135, 21);
+            this.comType.TabIndex = 2;
+            this.comType.SelectedIndexChanged += new System.EventHandler(this.comType_SelectedIndexChanged);
             // 
-            // kryptonWrapLabel7
+            // kryptonWrapLabel1
             // 
-            this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel7.Location = new System.Drawing.Point(240, 12);
-            this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
-            this.kryptonWrapLabel7.Size = new System.Drawing.Size(46, 15);
-            this.kryptonWrapLabel7.Text = "最大值";
-            // 
-            // kryptonWrapLabel8
-            // 
-            this.kryptonWrapLabel8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel8.Location = new System.Drawing.Point(450, 12);
-            this.kryptonWrapLabel8.Name = "kryptonWrapLabel8";
-            this.kryptonWrapLabel8.Size = new System.Drawing.Size(46, 15);
-            this.kryptonWrapLabel8.Text = "实测值";
-            // 
-            // txtMin
-            // 
-            this.txtMin.Location = new System.Drawing.Point(73, 8);
-            this.txtMin.Name = "txtMin";
-            this.txtMin.Size = new System.Drawing.Size(126, 23);
-            this.txtMin.TabIndex = 4;
-            // 
-            // txtMax
-            // 
-            this.txtMax.Location = new System.Drawing.Point(290, 8);
-            this.txtMax.Name = "txtMax";
-            this.txtMax.Size = new System.Drawing.Size(126, 23);
-            this.txtMax.TabIndex = 5;
-            // 
-            // txtRealValue
-            // 
-            this.txtRealValue.Location = new System.Drawing.Point(500, 8);
-            this.txtRealValue.Name = "txtRealValue";
-            this.txtRealValue.Size = new System.Drawing.Size(156, 23);
-            this.txtRealValue.TabIndex = 6;
-            // 
-            // kryptonDataGridView1
-            // 
-            this.kryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.kryptonDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonDataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonDataGridView1.Name = "kryptonDataGridView1";
-            this.kryptonDataGridView1.RowTemplate.Height = 23;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(800, 334);
-            this.kryptonDataGridView1.TabIndex = 1;
+            this.kryptonWrapLabel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
+            this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel1.Text = "类型";
             // 
             // UCLCR
             // 
@@ -303,13 +303,13 @@
             this.kryptonSplitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.comType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comUnit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
             this.kryptonPanel1.ResumeLayout(false);
             this.kryptonPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comUnit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comType)).EndInit();
             this.ResumeLayout(false);
 
         }

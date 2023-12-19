@@ -20,20 +20,21 @@ namespace BorwinAnalyse.UCControls
 {
     public partial class UCBOM : UserControl
     {
-
         CancellationTokenSource tokenSource;
         bool isStart = false;
         public UCBOM()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-            this.components = new System.ComponentModel.Container();
             this.Load += UCBOM_Load;
+            this.components = new System.ComponentModel.Container();
         }
 
         private void UCBOM_Load(object sender, EventArgs e)
         {
-            InitUI();
+            if (AnalyseDt==null)
+                      InitUI();
+
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
         DataTable AnalyseDt;

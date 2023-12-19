@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.IsIdentifyingDigits = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txtResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.IsResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.IsValueContainsGrade = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -85,7 +86,9 @@
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.IsIdentifyingDigits = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.dataGridRule3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.kryptonDataGridViewTextBoxColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.kryptonDataGridViewTextBoxColumn2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -104,6 +107,7 @@
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRule3)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonSplitContainer1
@@ -117,6 +121,7 @@
             // kryptonSplitContainer1.Panel1
             // 
             this.kryptonSplitContainer1.Panel1.AutoScroll = true;
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.dataGridRule3);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.IsIdentifyingDigits);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtResDefaultUnit);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.IsResDefaultUnit);
@@ -147,9 +152,17 @@
             // kryptonSplitContainer1.Panel2
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonSplitContainer2);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1137, 686);
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1137, 687);
             this.kryptonSplitContainer1.SplitterDistance = 339;
             this.kryptonSplitContainer1.TabIndex = 0;
+            // 
+            // IsIdentifyingDigits
+            // 
+            this.IsIdentifyingDigits.Location = new System.Drawing.Point(389, 304);
+            this.IsIdentifyingDigits.Name = "IsIdentifyingDigits";
+            this.IsIdentifyingDigits.Size = new System.Drawing.Size(88, 20);
+            this.IsIdentifyingDigits.TabIndex = 54;
+            this.IsIdentifyingDigits.Values.Text = "识别数码法";
             // 
             // txtResDefaultUnit
             // 
@@ -186,7 +199,7 @@
             // kryptonWrapLabel7
             // 
             this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel7.Location = new System.Drawing.Point(426, 223);
             this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
             this.kryptonWrapLabel7.Size = new System.Drawing.Size(33, 15);
@@ -211,7 +224,7 @@
             // kryptonWrapLabel6
             // 
             this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel6.Location = new System.Drawing.Point(426, 194);
             this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
             this.kryptonWrapLabel6.Size = new System.Drawing.Size(33, 15);
@@ -244,7 +257,7 @@
             // kryptonWrapLabel5
             // 
             this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel5.Location = new System.Drawing.Point(389, 109);
             this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
             this.kryptonWrapLabel5.Size = new System.Drawing.Size(85, 15);
@@ -253,7 +266,7 @@
             // kryptonWrapLabel4
             // 
             this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel4.Location = new System.Drawing.Point(389, 78);
             this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
             this.kryptonWrapLabel4.Size = new System.Drawing.Size(85, 15);
@@ -269,7 +282,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(604, 0);
+            this.btnSave.Location = new System.Drawing.Point(514, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(240, 53);
             this.btnSave.TabIndex = 13;
@@ -295,7 +308,7 @@
             // kryptonWrapLabel2
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel2.Location = new System.Drawing.Point(27, 231);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(59, 15);
@@ -304,7 +317,7 @@
             // kryptonWrapLabel3
             // 
             this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel3.Location = new System.Drawing.Point(27, 178);
             this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
             this.kryptonWrapLabel3.Size = new System.Drawing.Size(59, 15);
@@ -321,7 +334,7 @@
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(27, 127);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
@@ -346,7 +359,7 @@
             // lbCAP
             // 
             this.lbCAP.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lbCAP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbCAP.ForeColor = System.Drawing.Color.Black;
             this.lbCAP.Location = new System.Drawing.Point(27, 76);
             this.lbCAP.Name = "lbCAP";
             this.lbCAP.Size = new System.Drawing.Size(33, 15);
@@ -355,7 +368,7 @@
             // lbRes
             // 
             this.lbRes.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lbRes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbRes.ForeColor = System.Drawing.Color.Black;
             this.lbRes.Location = new System.Drawing.Point(27, 25);
             this.lbRes.Name = "lbRes";
             this.lbRes.Size = new System.Drawing.Size(33, 15);
@@ -379,7 +392,7 @@
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonButton2);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.dataGridRule2);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.IsSeparator);
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1137, 342);
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1137, 343);
             this.kryptonSplitContainer2.SplitterDistance = 793;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
@@ -407,7 +420,7 @@
             this.dataGridRule1.Location = new System.Drawing.Point(0, 20);
             this.dataGridRule1.Name = "dataGridRule1";
             this.dataGridRule1.RowTemplate.Height = 23;
-            this.dataGridRule1.Size = new System.Drawing.Size(793, 322);
+            this.dataGridRule1.Size = new System.Drawing.Size(793, 323);
             this.dataGridRule1.TabIndex = 0;
             this.dataGridRule1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.kryptonDataGridView1_MouseClick);
             this.dataGridRule1.MouseEnter += new System.EventHandler(this.kryptonDataGridView1_MouseEnter);
@@ -496,7 +509,7 @@
             this.dataGridRule2.Location = new System.Drawing.Point(0, 20);
             this.dataGridRule2.Name = "dataGridRule2";
             this.dataGridRule2.RowTemplate.Height = 23;
-            this.dataGridRule2.Size = new System.Drawing.Size(339, 322);
+            this.dataGridRule2.Size = new System.Drawing.Size(339, 323);
             this.dataGridRule2.TabIndex = 1;
             // 
             // Column7
@@ -555,7 +568,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1137, 686);
+            this.kryptonPage1.Size = new System.Drawing.Size(1137, 687);
             this.kryptonPage1.Text = "BOM设置";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "9B30A0A1E85948E75780EC2FA1FCDF5A";
@@ -576,13 +589,31 @@
             // 
             this.buttonSpecAny4.UniqueName = "36EF95A540F847F1D0BFDAD41991F1BA";
             // 
-            // IsIdentifyingDigits
+            // dataGridRule3
             // 
-            this.IsIdentifyingDigits.Location = new System.Drawing.Point(389, 304);
-            this.IsIdentifyingDigits.Name = "IsIdentifyingDigits";
-            this.IsIdentifyingDigits.Size = new System.Drawing.Size(88, 20);
-            this.IsIdentifyingDigits.TabIndex = 54;
-            this.IsIdentifyingDigits.Values.Text = "识别数码法";
+            this.dataGridRule3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridRule3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridRule3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.kryptonDataGridViewTextBoxColumn1,
+            this.kryptonDataGridViewTextBoxColumn2});
+            this.dataGridRule3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridRule3.Location = new System.Drawing.Point(970, 0);
+            this.dataGridRule3.Name = "dataGridRule3";
+            this.dataGridRule3.RowTemplate.Height = 23;
+            this.dataGridRule3.Size = new System.Drawing.Size(167, 339);
+            this.dataGridRule3.TabIndex = 64;
+            // 
+            // kryptonDataGridViewTextBoxColumn1
+            // 
+            this.kryptonDataGridViewTextBoxColumn1.HeaderText = "等级";
+            this.kryptonDataGridViewTextBoxColumn1.Name = "kryptonDataGridViewTextBoxColumn1";
+            this.kryptonDataGridViewTextBoxColumn1.Width = 63;
+            // 
+            // kryptonDataGridViewTextBoxColumn2
+            // 
+            this.kryptonDataGridViewTextBoxColumn2.HeaderText = "百分比";
+            this.kryptonDataGridViewTextBoxColumn2.Name = "kryptonDataGridViewTextBoxColumn2";
+            this.kryptonDataGridViewTextBoxColumn2.Width = 63;
             // 
             // UCAnalyseSet
             // 
@@ -612,6 +643,7 @@
             this.kryptonNavigator1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRule3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -672,5 +704,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox IsResDefaultUnit;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtResDefaultUnit;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox IsIdentifyingDigits;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridRule3;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn kryptonDataGridViewTextBoxColumn2;
     }
 }

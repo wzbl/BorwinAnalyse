@@ -11,16 +11,20 @@ using System.Security.Cryptography;
 using System.IO;
 using System.ComponentModel;
 using BorwinAnalyse.UCControls;
+using ComponentFactory.Krypton.Toolkit;
+using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.Forms;
 
 namespace BorwinSplicMachine
 {
-    public partial class Form1 : Form
+    public partial class Form1 : KryptonForm
     {
+        public static MainControl MainControl;
         public Form1()
         {
             InitializeComponent();
+            MainControl=new MainControl();
         }
-
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             BorwinAnalyse.Forms.AnalyseMainForm analyseMainForm = new BorwinAnalyse.Forms.AnalyseMainForm();
@@ -29,7 +33,11 @@ namespace BorwinSplicMachine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (this.components==null)
+            {
+                this.components= new System.ComponentModel.Container();
+            }
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         private void ExportPDF()
@@ -271,37 +279,63 @@ namespace BorwinSplicMachine
         private void ShowUCBom_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(new UCBOM());
+            kryptonPanel1.Controls.Add(MainControl.UCBOM);
         }
 
         private void ShowUCBomSearch_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(new UCSearchBom());
+            kryptonPanel1.Controls.Add(MainControl.UCSearchBom);
         }
 
         private void ShowUCBomSet_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(new UCAnalyseSet());
+            kryptonPanel1.Controls.Add(MainControl.UCAnalyseSet);
         }
 
         private void ShowLanguageSearch_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(new UCSearchLanguage());
+            kryptonPanel1.Controls.Add(MainControl.UCSearchLanguage);
         }
 
         private void ShowUCParam_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(new UCParam());
+            kryptonPanel1.Controls.Add(MainControl.UCParam);
         }
 
         private void ShowUCMain_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(new UCMain());
+            kryptonPanel1.Controls.Add(MainControl.UCMain);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMax_Click(object sender, EventArgs e)
+        {
+            this.WindowState = this.WindowState==FormWindowState.Maximized? FormWindowState.Normal : FormWindowState.Maximized;
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void kryptonRibbonGroup7_DialogBoxLauncherClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowUCBaseSet_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCBaseSet);
         }
     }
 

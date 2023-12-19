@@ -54,6 +54,15 @@ namespace BorwinAnalyse.UCControls
                    );
             }
 
+            for (int i = 0; i < CommonAnalyse.Instance.GradeChanges.Count; i++)
+            {
+                GradeChange GradeChange = CommonAnalyse.Instance.GradeChanges[i];
+                dataGridRule3.Rows.Add(
+                   GradeChange.Grade,
+                   GradeChange.Percent
+                   );
+            }
+
             txtRes.Text = CommonAnalyse.Instance.Resistance;
             txtCAP.Text = CommonAnalyse.Instance.Capacitance;
             txtResUnit.Text = CommonAnalyse.Instance.ResistanceUnit;
@@ -114,6 +123,18 @@ namespace BorwinAnalyse.UCControls
                 separator.Acsii = dataGridRule2.Rows[i].Cells[1].AccessibilityObject.Value.ToString().Contains("null") ? "" : dataGridRule2.Rows[i].Cells[1].AccessibilityObject.Value.ToString(); ;
                 separator.Illustrate = dataGridRule2.Rows[i].Cells[2].AccessibilityObject.Value.ToString().Contains("null") ? "" : dataGridRule2.Rows[i].Cells[2].AccessibilityObject.Value.ToString();
                 CommonAnalyse.Instance.Separators.Add(separator);
+            }
+
+            for (int i = 0; i < dataGridRule3.RowCount; i++)
+            {
+                if (dataGridRule2.Rows[i].IsNewRow)
+                {
+                    continue;
+                }
+                GradeChange GradeChange = new GradeChange();
+                GradeChange.Grade = dataGridRule3.Rows[i].Cells[0].AccessibilityObject.Value.ToString();
+                GradeChange.Percent = dataGridRule3.Rows[i].Cells[1].AccessibilityObject.Value.ToString();
+                CommonAnalyse.Instance.GradeChanges.Add(GradeChange);
             }
 
             CommonAnalyse.Instance.Resistance = txtRes.Text;

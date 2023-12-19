@@ -23,17 +23,18 @@ namespace BorwinSplicMachine.LCR
             InitializeComponent();
             this.Load += UCLCR_Load;
             Init();
+            this.components = new System.ComponentModel.Container();
         }
 
         private void Init()
         {
             LCRHelper = new LCRHelper();
-            initDataGrid();
         }
 
         private void UCLCR_Load(object sender, EventArgs e)
         {
-
+            initDataGrid();
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         private void initDataGrid()
@@ -141,6 +142,11 @@ namespace BorwinSplicMachine.LCR
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            CheckMaterialMsg();
+        }
+
+        private void CheckMaterialMsg()
+        {
             if (string.IsNullOrEmpty(comType.Text))
             {
                 MessageBox.Show("请选择类型".tr());
@@ -159,7 +165,7 @@ namespace BorwinSplicMachine.LCR
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtValue.Text)|| !double.TryParse(txtValue.Text, out double value))
+            if (string.IsNullOrEmpty(txtValue.Text) || !double.TryParse(txtValue.Text, out double value))
             {
                 MessageBox.Show("值不正确".tr());
                 return;
@@ -189,12 +195,12 @@ namespace BorwinSplicMachine.LCR
         /// <summary>
         /// 开始测值
         /// </summary>
-        public void StartLCR()
+        private void StartLCR()
         {
             LCR_Type lCR_Type = LCR_Type.Error;
             LCR_Size lCR_Size = LCR_Size.Error;
             Unit unit = Unit.Error;
-            if (comType.Text=="RES")
+            if (comType.Text=="RES"|| comType.Text =="电阻")
             {
                 lCR_Type= LCR_Type.电阻;
                 switch (comUnit.Text.Trim())
@@ -213,7 +219,7 @@ namespace BorwinSplicMachine.LCR
                         break;
                 }
             }
-            else if (comType.Text == "CAP")
+            else if (comType.Text == "CAP"||comType.Text =="电容")
             {
                 lCR_Type = LCR_Type.电容;
                 switch (comUnit.Text.Trim())
@@ -246,6 +252,16 @@ namespace BorwinSplicMachine.LCR
 
             txtMax.Text = LCRHelper.Max_Value.ToString();
             txtMin.Text = LCRHelper.Min_Value.ToString();
+        }
+
+        public void LoadSplic(string type,string size,string value,string unit,string grade)
+        {
+            comType.Text = type;
+            comSize.Text = size;
+            txtValue.Text = value;
+            comUnit.Text = unit;
+            txtGrade.Text = grade;
+            CheckMaterialMsg();
         }
 
         private void comType_SelectedIndexChanged(object sender, EventArgs e)

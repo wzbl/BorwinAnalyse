@@ -19,12 +19,14 @@ namespace BorwinAnalyse.UCControls
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             this.Load += UCParam_Load;
+            this.components = new System.ComponentModel.Container();
         }
 
         private void UCParam_Load(object sender, EventArgs e)
         {
             InitParam();
             InitType();
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         /// <summary>

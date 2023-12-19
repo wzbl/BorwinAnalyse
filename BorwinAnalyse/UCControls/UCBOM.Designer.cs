@@ -119,12 +119,13 @@
             this.btnShowModelData.Size = new System.Drawing.Size(98, 31);
             this.btnShowModelData.TabIndex = 5;
             this.btnShowModelData.Values.Text = "显示模板数据";
+            this.btnShowModelData.Visible = false;
             this.btnShowModelData.Click += new System.EventHandler(this.btnShowModelData_Click);
             // 
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(17, 12);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
@@ -334,7 +335,7 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(1228, 606);
+            this.kryptonPage2.Size = new System.Drawing.Size(1228, 612);
             this.kryptonPage2.Text = "解析结果";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "98C0C56E816840DFA2AF84A99BCB948E";
@@ -346,7 +347,7 @@
             this.DataGridView_Result.Location = new System.Drawing.Point(0, 0);
             this.DataGridView_Result.Name = "DataGridView_Result";
             this.DataGridView_Result.RowTemplate.Height = 23;
-            this.DataGridView_Result.Size = new System.Drawing.Size(1228, 606);
+            this.DataGridView_Result.Size = new System.Drawing.Size(1228, 612);
             this.DataGridView_Result.TabIndex = 1;
             // 
             // UCBOM
