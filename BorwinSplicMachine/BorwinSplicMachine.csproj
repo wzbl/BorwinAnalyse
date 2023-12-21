@@ -104,6 +104,12 @@
     <Compile Include="UCControls\UCBaseSet.Designer.cs">
       <DependentUpon>UCBaseSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCControls\UCLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCLog.Designer.cs">
+      <DependentUpon>UCLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     </Compile>
     <EmbeddedResource Include="UCControls\UCBaseSet.resx">
       <DependentUpon>UCBaseSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\UCLog.resx">
+      <DependentUpon>UCLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCMain.resx">
       <DependentUpon>UCMain.cs</DependentUpon>
@@ -161,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\btn_mini_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BarCode\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

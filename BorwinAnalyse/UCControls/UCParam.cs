@@ -26,9 +26,12 @@ namespace BorwinAnalyse.UCControls
         {
             InitParam();
             InitType();
+            UpdataLanguage();
+        }
+        public void UpdataLanguage()
+        {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-
         /// <summary>
         /// 初始化类别
         /// </summary>

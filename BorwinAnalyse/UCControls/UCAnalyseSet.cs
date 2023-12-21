@@ -25,6 +25,12 @@ namespace BorwinAnalyse.UCControls
         private void UCAnalyseSet_Load(object sender, EventArgs e)
         {
             InitUI();
+            UpdataLanguage();
+        }
+
+        public void UpdataLanguage()
+        {
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         private void InitUI()

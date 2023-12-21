@@ -24,9 +24,12 @@ namespace BorwinAnalyse.UCControls
         }
         private void UCSearch_Load(object sender, EventArgs e)
         {
+            UpdataLanguage();
+        }
+        public void UpdataLanguage()
+        {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-
         private void initUI()
         {
             DGV_Language.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

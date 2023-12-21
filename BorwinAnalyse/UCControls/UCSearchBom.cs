@@ -27,9 +27,12 @@ namespace BorwinAnalyse.UCControls
         private void UCSearchBom_Load(object sender, EventArgs e)
         {
             ComModelUpdata();
+            UpdataLanguage();
+        }
+        public void UpdataLanguage()
+        {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-
         /// <summary>
         /// 更新模板下拉框
         /// </summary>

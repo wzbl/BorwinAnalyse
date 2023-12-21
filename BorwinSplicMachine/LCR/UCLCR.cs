@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,11 @@ namespace BorwinSplicMachine.LCR
         private void UCLCR_Load(object sender, EventArgs e)
         {
             initDataGrid();
+            UpdateLanguage();
+        }
+
+        public void UpdateLanguage()
+        {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
@@ -48,18 +54,17 @@ namespace BorwinSplicMachine.LCR
                 Name = "Column1",
                 ReadOnly = true,
             },
-            new DataGridViewTextBoxColumn()
+               new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
-                HeaderText = "条码",
+                HeaderText = "左/右",
                 MinimumWidth = 6,
                 Name = "Column2",
                 ReadOnly = true,
-            },
-            new DataGridViewTextBoxColumn()
+            }, new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
-                HeaderText = "最大值",
+                HeaderText = "两线/四线",
                 MinimumWidth = 6,
                 Name = "Column3",
                 ReadOnly = true,
@@ -67,7 +72,7 @@ namespace BorwinSplicMachine.LCR
             new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
-                HeaderText = "最小值",
+                HeaderText = "条码",
                 MinimumWidth = 6,
                 Name = "Column4",
                 ReadOnly = true,
@@ -75,9 +80,17 @@ namespace BorwinSplicMachine.LCR
             new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
-                HeaderText = "标准值",
+                HeaderText = "最大值",
                 MinimumWidth = 6,
                 Name = "Column5",
+                ReadOnly = true,
+            },
+            new DataGridViewTextBoxColumn()
+            {
+                FillWeight = 45.07613F,
+                HeaderText = "最小值",
+                MinimumWidth = 6,
+                Name = "Column6",
                 ReadOnly = true,
             },
              new DataGridViewTextBoxColumn()
@@ -85,7 +98,7 @@ namespace BorwinSplicMachine.LCR
                 FillWeight = 45.07613F,
                 HeaderText = "实测值",
                 MinimumWidth = 6,
-                Name = "Column5",
+                Name = "Column7",
                 ReadOnly = true,
             },
             new DataGridViewTextBoxColumn()
@@ -93,7 +106,7 @@ namespace BorwinSplicMachine.LCR
                 FillWeight = 45.07613F,
                 HeaderText = "类型",
                 MinimumWidth = 6,
-                Name = "Column6",
+                Name = "Column8",
                 ReadOnly = true,
             },
                new DataGridViewTextBoxColumn()
@@ -101,7 +114,16 @@ namespace BorwinSplicMachine.LCR
                 FillWeight = 45.07613F,
                 HeaderText = "尺寸",
                 MinimumWidth = 6,
-                Name = "Column6",
+                Name = "Column9",
+                ReadOnly = true,
+            },
+
+            new DataGridViewTextBoxColumn()
+            {
+                FillWeight = 45.07613F,
+                HeaderText = "标准值",
+                MinimumWidth = 6,
+                Name = "Column10",
                 ReadOnly = true,
             },
             new DataGridViewTextBoxColumn()
@@ -109,7 +131,7 @@ namespace BorwinSplicMachine.LCR
                 FillWeight = 45.07613F,
                 HeaderText = "单位",
                 MinimumWidth = 6,
-                Name = "Column6",
+                Name = "Column11",
                 ReadOnly = true,
             },
                new DataGridViewTextBoxColumn()
@@ -117,15 +139,7 @@ namespace BorwinSplicMachine.LCR
                 FillWeight = 45.07613F,
                 HeaderText = "等级",
                 MinimumWidth = 6,
-                Name = "Column6",
-                ReadOnly = true,
-            },
-            new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "线号",
-                MinimumWidth = 6,
-                Name = "Column7",
+                Name = "Column12",
                 ReadOnly = true,
             },
             new DataGridViewTextBoxColumn()
@@ -133,7 +147,7 @@ namespace BorwinSplicMachine.LCR
                 FillWeight = 45.07613F,
                 HeaderText = "结果",
                 MinimumWidth = 6,
-                Name = "Column8",
+                Name = "Column13",
                 ReadOnly = true,
             }
             });
@@ -200,9 +214,9 @@ namespace BorwinSplicMachine.LCR
             LCR_Type lCR_Type = LCR_Type.Error;
             LCR_Size lCR_Size = LCR_Size.Error;
             Unit unit = Unit.Error;
-            if (comType.Text=="RES"|| comType.Text =="电阻")
+            if (comType.Text == "RES" || comType.Text == "电阻")
             {
-                lCR_Type= LCR_Type.电阻;
+                lCR_Type = LCR_Type.电阻;
                 switch (comUnit.Text.Trim())
                 {
                     case "mΩ":
@@ -219,7 +233,7 @@ namespace BorwinSplicMachine.LCR
                         break;
                 }
             }
-            else if (comType.Text == "CAP"||comType.Text =="电容")
+            else if (comType.Text == "CAP" || comType.Text == "电容")
             {
                 lCR_Type = LCR_Type.电容;
                 switch (comUnit.Text.Trim())
@@ -241,7 +255,7 @@ namespace BorwinSplicMachine.LCR
                         break;
                 }
             }
-            lCR_Size = (LCR_Size)comSize.SelectedIndex+1;
+            lCR_Size = (LCR_Size)comSize.SelectedIndex + 1;
             string grade = txtGrade.Text;
             if (grade.Contains("%"))
             {
@@ -254,7 +268,7 @@ namespace BorwinSplicMachine.LCR
             txtMin.Text = LCRHelper.Min_Value.ToString();
         }
 
-        public void LoadSplic(string type,string size,string value,string unit,string grade)
+        public void LoadSplic(string type, string size, string value, string unit, string grade)
         {
             comType.Text = type;
             comSize.Text = size;
@@ -282,7 +296,78 @@ namespace BorwinSplicMachine.LCR
                 comUnit.Items.Add("MF");
                 comUnit.Items.Add("F");
             }
-           
+
+        }
+
+        /// <summary>
+        /// LCR测值线程
+        /// </summary>
+        public void LCRFlow()
+        {
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    switch (LCRHelper.LCRFlow)
+                    {
+                        case LCR.LCRFlow.None:
+                            //判断有无开始测值信号
+
+                            break;
+                        case LCR.LCRFlow.Start:
+                            //开启超时定时器，给电表发指令
+                            break;
+                        case LCR.LCRFlow.ValueIsSuccess:
+                            switch (LCRHelper.ReadStatus)
+                            {
+                                case ReadStatus.None:
+                                    //判断是否超时
+                                    break;
+                                case ReadStatus.Success:
+
+                                    break;
+                                case ReadStatus.Fail:
+
+                                    break;
+                            }
+                            break;
+                        case LCR.LCRFlow.Judgement:
+                            //判断值是否在范围
+
+                            break;
+                        case LCR.LCRFlow.Finish:
+                            //测值完成
+                            break;
+                    }
+                }
+            });
+        }
+
+        /// <summary>
+        /// 增加一条测值记录
+        /// </summary>
+        public void GridAddData()
+        {
+            kryptonDataGridView1.Rows.Add(
+                kryptonDataGridView1.RowCount,
+                LCRHelper.Side.ToString(),
+                LCRHelper.LineNo.ToString(),
+                "Code",
+                LCRHelper.Max_Value,
+                LCRHelper.Min_Value,
+                LCRHelper.RealValue,
+                LCRHelper.Type,
+                LCRHelper.Size.ToString(),
+                LCRHelper.Value,
+                LCRHelper.Unit,
+                LCRHelper.Grade,
+                LCRHelper.Result
+            );
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            LCRHelper.SendReadCommand();
         }
     }
 }

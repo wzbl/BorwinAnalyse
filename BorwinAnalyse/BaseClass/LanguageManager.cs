@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.DataBase.Comm;
 using BorwinAnalyse.DataBase.Model;
 using ComponentFactory.Krypton.Navigator;
+using ComponentFactory.Krypton.Ribbon;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BorwinAnalyse.BaseClass
@@ -50,14 +52,14 @@ namespace BorwinAnalyse.BaseClass
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
                 Language language = new Language();
-                language.context= dataTable.Rows[i].ItemArray[0].ToString();
-                language.chinese= dataTable.Rows[i].ItemArray[1].ToString();
-                language.english= dataTable.Rows[i].ItemArray[2].ToString();
-                language.exp1= dataTable.Rows[i].ItemArray[3].ToString();
-                language.exp2= dataTable.Rows[i].ItemArray[4].ToString();
-                language.exp3= dataTable.Rows[i].ItemArray[5].ToString();
-                language.exp4= dataTable.Rows[i].ItemArray[6].ToString();
-                language.exp5= dataTable.Rows[i].ItemArray[7].ToString();
+                language.context = dataTable.Rows[i].ItemArray[0].ToString();
+                language.chinese = dataTable.Rows[i].ItemArray[1].ToString();
+                language.english = dataTable.Rows[i].ItemArray[2].ToString();
+                language.exp1 = dataTable.Rows[i].ItemArray[3].ToString();
+                language.exp2 = dataTable.Rows[i].ItemArray[4].ToString();
+                language.exp3 = dataTable.Rows[i].ItemArray[5].ToString();
+                language.exp4 = dataTable.Rows[i].ItemArray[6].ToString();
+                language.exp5 = dataTable.Rows[i].ItemArray[7].ToString();
                 languages.Add(language);
             }
         }
@@ -66,8 +68,8 @@ namespace BorwinAnalyse.BaseClass
         public string SearchLanguage(string context)
         {
             string res = context;
-            List<Language> language =  languages.Where(x=>x.context==context || x.chinese == context || x.english == context).ToList<Language>();
-            if (languages == null|| language.Count==0)
+            List<Language> language = languages.Where(x => x.context == context || x.chinese == context || x.english == context).ToList<Language>();
+            if (languages == null || language.Count == 0)
             {
                 string comm = string.Format("insert into Language values('{0}','{1}','','','','','','')", context, context);
                 SqlLiteManager.Instance.DB.Insert(comm);
@@ -101,7 +103,7 @@ namespace BorwinAnalyse.BaseClass
                 case 6:
                     res = language[0].exp4;
                     break;
-                   
+
             }
             if (string.IsNullOrEmpty(res))
             {
@@ -112,12 +114,12 @@ namespace BorwinAnalyse.BaseClass
 
         public void UpdateCurrentLanguage(int index)
         {
-            if (index + 1== CurrenIndex)
+            if (index + 1 == CurrenIndex)
             {
                 return;
             }
             CurrenIndex = index + 1;
-            string cmd = string.Format("update LanguageType set currentLanguage = '{0}'",(index + 1).ToString());
+            string cmd = string.Format("update LanguageType set currentLanguage = '{0}'", (index + 1).ToString());
             SqlLiteManager.Instance.DB.Insert(cmd);
             foreach (var item in Controls)
             {
@@ -126,19 +128,24 @@ namespace BorwinAnalyse.BaseClass
             }
         }
 
-        public void UpdateLanguage(Control control, ComponentCollection componentCollection)
+        public async void UpdateLanguage(Control control, ComponentCollection componentCollection)
         {
-            if (!Controls.ContainsKey(control))
+            await Task.Run(() =>
             {
-                Controls.Add(control, componentCollection);
-            }
-            if (control is Form)
-            {
-                control.Text = control.Text.tr();
-            }
-            MethodA(control);
-            LoopWinform(componentCollection);
-
+                if (!Controls.ContainsKey(control))
+                {
+                    Controls.Add(control, componentCollection);
+                }
+                if (control is Form)
+                {
+                    control.Invoke(new Action(() =>
+                    {
+                        control.Text = control.Text.tr();
+                    }));
+                }
+                MethodA(control);
+                LoopWinform(componentCollection);
+            });
         }
 
         /// <summary>
@@ -166,8 +173,8 @@ namespace BorwinAnalyse.BaseClass
             Control.ControlCollection sonControls = fatherControl.Controls;
             foreach (Control control in sonControls)
             {
-               
-                if (control is Label || control is Button|| control is KryptonButton)
+
+                if (control is Label || control is Button || control is KryptonButton)
                 {
                     control.Text = control.Text.tr();
                 }
@@ -210,9 +217,11 @@ namespace BorwinAnalyse.BaseClass
             Control.ControlCollection sonControls = fatherControl.Controls;
             foreach (Control control in sonControls)
             {
+                if (!control.IsHandleCreated)
+                    continue;
                 fatherControl.Invoke(new Action(() =>
                 {
-                    if (control is Label || control is Button || control is KryptonButton||control is KryptonCheckBox)
+                    if (control is Label || control is Button || control is KryptonButton || control is KryptonCheckBox)
                     {
                         control.Text = control.Text.tr();
                     }
@@ -244,27 +253,32 @@ namespace BorwinAnalyse.BaseClass
                     else if (control is KryptonGroupBox)
                     {
                         KryptonGroupBox kryptonGroupBox = (KryptonGroupBox)control;
-                        kryptonGroupBox.Values.Heading= kryptonGroupBox.Values.Heading.tr();
+                        kryptonGroupBox.Values.Heading = kryptonGroupBox.Values.Heading.tr();
                     }
                     else if ((control is ComponentFactory.Krypton.Ribbon.KryptonRibbon))
                     {
                         ComponentFactory.Krypton.Ribbon.KryptonRibbon kryptonRibbon = control as ComponentFactory.Krypton.Ribbon.KryptonRibbon;
 
-                         for (int i = 0;i< kryptonRibbon.RibbonTabs.Count; i++)
+                        for (int i = 0; i < kryptonRibbon.RibbonTabs.Count; i++)
                         {
                             kryptonRibbon.RibbonTabs[i].Text = kryptonRibbon.RibbonTabs[i].Text.tr();
-                            for (int j = 0;j< kryptonRibbon.RibbonTabs[i].Groups.Count; j++)
+                            for (int j = 0; j < kryptonRibbon.RibbonTabs[i].Groups.Count; j++)
                             {
                                 for (int k = 0; k < kryptonRibbon.RibbonTabs[i].Groups[j].Items.Count; k++)
                                 {
-                                   
+                                    KryptonRibbonGroupTriple triple = kryptonRibbon.RibbonTabs[i].Groups[j].Items[k] as KryptonRibbonGroupTriple;
+                                    for (int l = 0; l < triple.Items.Count; l++)
+                                    {
+                                        KryptonRibbonGroupButton button = triple.Items[l] as KryptonRibbonGroupButton;
+                                        button.TextLine1 = button.TextLine1.tr();
+                                    }
                                 }
-                                
+
                             }
                         }
                     }
                 }));
-               
+
                 if (control.Controls != null)
                 {
                     MethodB(control);
@@ -274,11 +288,11 @@ namespace BorwinAnalyse.BaseClass
 
         public void MethodB(Control fatherControl)
         {
-
-
             Control.ControlCollection sonControls = fatherControl.Controls;
             foreach (Control control in sonControls)
             {
+                if (!control.IsHandleCreated)
+                    continue;
                 fatherControl.Invoke(new Action(() =>
                 {
                     if (control is Label || control is Button || control is KryptonButton)
@@ -332,7 +346,6 @@ namespace BorwinAnalyse.BaseClass
                     MethodA(control);
                 }
             }
-         
         }
 
 
@@ -341,11 +354,11 @@ namespace BorwinAnalyse.BaseClass
     {
         public static string tr(this string str)
         {
-            if (str == null||string.IsNullOrEmpty(str))
+            if (str == null || string.IsNullOrEmpty(str))
             {
                 return str;
             }
-            if (int.TryParse(str,out int i))
+            if (int.TryParse(str, out int i))
             {
                 //数字返回
                 return str;

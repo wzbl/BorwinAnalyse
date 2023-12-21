@@ -35,6 +35,11 @@ namespace BorwinAnalyse.UCControls
             if (AnalyseDt==null)
                       InitUI();
 
+            UpdataLanguage();
+        }
+
+        public void UpdataLanguage()
+        {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
         DataTable AnalyseDt;

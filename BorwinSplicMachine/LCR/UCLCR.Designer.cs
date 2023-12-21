@@ -183,6 +183,7 @@
             this.kryptonButton1.Size = new System.Drawing.Size(135, 37);
             this.kryptonButton1.TabIndex = 20;
             this.kryptonButton1.Values.Text = "校准";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // txtGrade
             // 

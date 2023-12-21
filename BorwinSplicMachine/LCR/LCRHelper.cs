@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
@@ -6,6 +8,8 @@ using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BorwinSplicMachine.LCR
 {
@@ -15,15 +19,15 @@ namespace BorwinSplicMachine.LCR
     /// </summary>
     public class LCRHelper
     {
-        public LCRHelper() 
+        public LCRHelper()
         {
             SerialPort = new SerialPort
             {
                 PortName = "COM1",
-                BaudRate=115200,
-                DataBits=8,
-                Parity=Parity.None,
-                StopBits=StopBits.One
+                BaudRate = 115200,
+                DataBits = 8,
+                Parity = Parity.None,
+                StopBits = StopBits.One
             };
             Init();
         }
@@ -47,9 +51,19 @@ namespace BorwinSplicMachine.LCR
         public double Value = 0;
 
         /// <summary>
+        /// 转换单位后的值
+        /// </summary>
+        public double UnitValue = 0;
+
+        /// <summary>
+        /// 实测值
+        /// </summary>
+        public double RealValue = 0;
+
+        /// <summary>
         /// 单位
         /// </summary>
-        public Unit Unit =Unit.Error;
+        public Unit Unit = Unit.Error;
 
         /// <summary>
         /// 等级
@@ -73,6 +87,15 @@ namespace BorwinSplicMachine.LCR
         {
             get { return SerialPort.IsOpen; }
         }
+
+        public ReadStatus ReadStatus = ReadStatus.None;
+        public LCRFlow LCRFlow = LCRFlow.None;
+        public double ReadData = -1;
+
+        public WhichSide Side = WhichSide.None;
+
+        public WhichLine LineNo = WhichLine.None;
+        public LCRResult Result = LCRResult.None;
         #endregion
 
         #region 公开方法
@@ -87,15 +110,18 @@ namespace BorwinSplicMachine.LCR
                 {
                     //打开串口成功
                     SerialPort.DataReceived += SerialPort_DataReceived;
+                    LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, "电表连接成功", "黄飞鸿"));
                 }
                 else
                 {
                     //打开串口失败
+                    LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, "电表连接失败", "黄飞鸿"));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //打开串口失败
+                LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, "电表连接异常"+":"+ex.Message, "黄飞鸿"));
             }
         }
 
@@ -111,6 +137,7 @@ namespace BorwinSplicMachine.LCR
             this.Grade = Grade;
             SetMaxValue();
             SetMinValue();
+            SetUnitValue();
             if (IsOpenSerialPort)
             {
                 SendTypeCommand();
@@ -124,8 +151,11 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void SendReadCommand()
         {
-            SerialPort.DiscardInBuffer();
-            SerialPort.Write("FETC?" + "\r\n");
+            if (SerialPort.IsOpen)
+            {
+                SerialPort.DiscardInBuffer();
+                SerialPort.Write("FETC?" + "\r\n");
+            }
         }
 
         /// <summary>
@@ -133,7 +163,28 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void Clear()
         {
+            Side = WhichSide.None;
+            LineNo = WhichLine.None;
+            Result = LCRResult.None;
+            Max_Value = 0;
+            Min_Value = 0;
+            RealValue = 0;
+            Type = LCR_Type.Error;
+            Size = LCR_Size.Error;
+            Value = 0;
+            Unit = Unit.Error;
+            Grade = 0;
+        }
 
+        /// <summary>
+        /// 清除结果
+        /// </summary>
+        public void ClearResult()
+        {
+            Side = WhichSide.None;
+            LineNo = WhichLine.None;
+            Result = LCRResult.None;
+            RealValue = 0;
         }
         #endregion
 
@@ -149,8 +200,54 @@ namespace BorwinSplicMachine.LCR
         /// <param name="e"></param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-           
+            Thread.Sleep(200);
+            byte[] recvData = new byte[SerialPort.BytesToRead];
+            SerialPort.Read(recvData, 0, recvData.Length);
+            string Recv = Encoding.Default.GetString(recvData);
+            LogManager.Instance.WriteLog(new LogModel(LogType.测值日志,"接收到电表数据"+":"+ Recv,"黄飞鸿"));
+            try
+            {
+                ReadStatus = ReadStatus.None;
+                ReadData = -1;
+                string[] datels = Recv.Trim().Split(',');
+                if ((datels.Length != 5) & (datels.Length != 4) & (datels.Length != 3) & (datels.Length != 2))
+                {
+                    ReadData = -0.00000000000001;
+                    ReadStatus = ReadStatus.Fail;
+                    return;
+                }
+                double.TryParse(datels[0], out ReadData);
+                if (ReadData < 0)
+                {
+                    ReadStatus = ReadStatus.Fail;
+                }
+                else
+                {
+                    ReadStatus = ReadStatus.Success;
+                }
+            }
+            catch (Exception)
+            {
+                ReadStatus = ReadStatus.Fail;
+            }
         }
+
+        /// <summary>
+        /// 保存测值过程数据
+        /// </summary>
+        public void SaveLCRData()
+        {
+
+        }
+
+        /// <summary>
+        /// 保存接料完成数据
+        /// </summary>
+        public void SaveData()
+        {
+
+        }
+
 
         /// <summary>
         /// 测值信息发送给PLC
@@ -189,8 +286,12 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         private void CAPTypeCommand()
         {
-            //根据电压值发
             bool WriteVOLT = true;
+            //根据电压值发
+            if (UnitValue >= ParamManager.Instance.ReWriteV_Min.D / 1000000 && UnitValue <= ParamManager.Instance.ReWriteV_Max.D / 1000000)
+                WriteVOLT = true;
+            else WriteVOLT = false;
+           
             string sendstrV = WriteVOLT ? "VOLT 1" : "VOLT 2";
             SerialPort.Write(sendstrV + "\r\n");
 
@@ -240,60 +341,67 @@ namespace BorwinSplicMachine.LCR
                 case LCR_Type.电感:
                     break;
                 case LCR_Type.电容:
-                    if (Value >= (basic * Math.Pow(10, -5)))
+                    if (UnitValue >= (basic * Math.Pow(10, -5)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_477.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -6)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -6)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_476.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -7)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -7)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_475.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -8)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -8)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_474.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -9)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -9)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_473.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -10)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -10)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_472.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -11)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -11)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_471.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -12)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -12)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_470.S;
                     }
-                    else if (Value >= (basic * Math.Pow(10, -13)))
+                    else if (UnitValue >= (basic * Math.Pow(10, -13)))
                     {
-
+                        LCR = ParamManager.Instance.Clock_47.S;
                     }
-
-                    break;
-                case LCR_Type.电阻:
-                    if (Value > (1 * Math.Pow(10, 6)))
+                    else if (UnitValue >= (Math.Pow(10, -12)))
                     {
-
-                    }
-                    else if (Value > (1 * Math.Pow(10, 5)))
-                    {
-
-                    }
-                    else if (Value > (1 * Math.Pow(10, 4)))
-                    {
-
+                        LCR = ParamManager.Instance.Clock_10.S;
                     }
                     else
                     {
-
+                        LCR = ParamManager.Instance.Clock_1.S;
+                    }
+                    break;
+                case LCR_Type.电阻:
+                    if (UnitValue > (basic * Math.Pow(10, 5)))
+                    {
+                        LCR = ParamManager.Instance.Rlock_47D.S;
+                    }
+                    else if (UnitValue > (Math.Pow(10, 6)))
+                    {
+                        LCR = ParamManager.Instance.Rlock_47.S;
+                    }
+                    else if (UnitValue > (basic * Math.Pow(10, 4)))
+                    {
+                        LCR = ParamManager.Instance.Rlock_1.S;
+                    }
+                    else
+                    {
+                        LCR = ParamManager.Instance.Rlock_470.S;
                     }
                     break;
                 case LCR_Type.其他:
@@ -311,7 +419,7 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         private void SetMaxValue()
         {
-            Max_Value = Value+ Value*Grade/100;
+            Max_Value = Value + Value * Grade / 100;
         }
         /// <summary>
         /// 获取最小值
@@ -320,6 +428,64 @@ namespace BorwinSplicMachine.LCR
         {
             Min_Value = Value - Value * Grade / 100;
         }
+
+        private void SetUnitValue()
+        {
+            double sta = Value;
+            switch (Unit)
+            {
+                case Unit.mΩ:
+                    sta = sta / 1000;
+                    break;
+                case Unit.Ω:
+                    break;
+                case Unit.KΩ:
+                    sta = sta * 1000;
+                    break;
+                case Unit.MΩ:
+                    sta = sta * 1000 * 1000;
+                    break;
+                case Unit.PF:
+                    sta = sta / (1000000000000);
+                    break;
+                case Unit.NF:
+                    sta = sta / (1000 * 1000 * 1000);
+                    break;
+                case Unit.UF:
+                    sta = sta / (1000 * 1000);
+                    break;
+                case Unit.MF:
+                    sta = sta / (1000);
+                    break;
+                case Unit.F:
+                    break;
+                default:
+                    break;
+            }
+            UnitValue = sta;
+        }
+    }
+
+    /// <summary>
+    /// 读表状态
+    /// </summary>
+    public enum ReadStatus
+    {
+        None,
+        Success,
+        Fail
+    }
+
+    /// <summary>
+    /// LCR测值流程
+    /// </summary>
+    public enum LCRFlow
+    {
+        None,
+        Start,//开始
+        ValueIsSuccess,//电表读值是否OK
+        Judgement,//判断值是否在范围
+        Finish//完成
     }
 
     public enum LCR_Type
@@ -357,4 +523,33 @@ namespace BorwinSplicMachine.LCR
         F
     }
 
+    /// <summary>
+    /// 左边/右边
+    /// </summary>
+    public enum WhichSide
+    {
+        None,
+        Left,
+        Right
+    }
+
+    /// <summary>
+    /// 两线/四线
+    /// </summary>
+    public enum WhichLine
+    {
+        None,
+        L2,
+        L4
+    }
+
+    /// <summary>
+    /// 测值结果
+    /// </summary>
+    public enum LCRResult
+    {
+        None,
+        Pass,
+        Fail
+    }
 }

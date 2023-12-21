@@ -117,8 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="ComponentFactory.Krypton.Ribbon" name="ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
+  <data name="kryptonRibbon1.QATLocation" type="ComponentFactory.Krypton.Ribbon.QATLocation, ComponentFactory.Krypton.Ribbon">
+    <value>Below</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAA5lJREFUeF7tmcurTWEYxrf7JbeQeyhF7qGcExFh4GTgMuEMJQMZEWZEipHLSMrU
+        zMREkgyUGMnAUCQlhz/itd693t3Z53ievdc+vrVrr/386tdZre991q7nnNZa3z41IYQQQgghhBBCCCGE
+        EEIIIfoL21czWZ5RMweFZDqjZg4KyXRGzRwUkumMmjko1BXPzTU7NROvVciomYNCXfHJWrO7K/BahYya
+        OShUqjeWmL3fbvZ90OzrgNm7bWaXF+LZChg1c1CodG8vM/uzN/dSdct3o2YOCpXu4zVmz9abvdxkdmc5
+        nqmIUTMHhQo7PDsXrbXSH8D+c3/TcUWNmjkoVNiHq8weZKI1WTdq5qBQYT9kD1N/oKI1WTdq5qBQIY9P
+        N/udPUTdEzPwzP94ZpbZ6Uy01kNGzRwUKqQ/PBtvMmU8SP3Wdr/3b29RMweFCvlmy+gvwI/RzES8ssjs
+        9WazL7tz/djPodkeMGrmoFBbh6aa/doz+gvwYz+HZieib9Ya1/ZjNNMjRs0cFKp7bXH+vo58vmG0oIZ+
+        Ds26fi30Gcx7K81eZXsE14/RTI8YNXNQqO7BSWaPVo/9S+9Uz/o1/FroM5gX5ud7BNeP0UyPGDVzUGiM
+        Z+eYfdqJC27l511m5+fha/aRUTMHhf7x0OT8VjICih6vv5Y+XWd2ZAq+Vp8ZNXNQiHpxgdmPQVy862s+
+        g7J9atTMQSHq0LTWz4SRbO1YNoOyfWrUzEEh6q2luPhmb2YzKNup2gkD/bWwueyPO3Kbz/kMynaq74K1
+        E27yaLbR+tl0+/EH7eHs4ez6ceO8z/gsukYRtRMmXo/d6bcBs6ugED/naz7js+PXO1E7YeCLjWZvt5qd
+        bPHNp6/5jM+i9aJqJzxOv834t5MHCuxofcZnPYPWi6idsExl1MxBIZnOqJmDQl2xIu/57YyaOSjUFSvy
+        H692Rs0cFCrVir3ntzNq5qBQ6VboPb+dUTMHhUq3Qu/57YyaOShUuhV6z29n1MxBIZnOqJmDQjKdUTMH
+        hWQ6o2YOCsl0Rs0cFJLpjJo5KCTTGTVzUEimM2rmoJBMZ9TMQSGZzqiZg0IynVEzB4VkOqNmDgrJdEbN
+        HBSS6YyaOSgk0xk1c1BIpjNq5qCQTGfUzEEhmc6omYNCMp1RMweFZDqjZg4KyXRGzRwUkumMmjkoJNMZ
+        NXNQSKYzauagkExn1CyEEEIIIYQQQgghhBBCCCFEX1Cr/QWVnpm/zVIUeAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="kryptonRibbonGroupButton1.TextLine1" xml:space="preserve">
-    <value>主</value>
+    <value>主界面</value>
+  </data>
+  <data name="kryptonRibbonGroupButton2.TextLine1" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="kryptonRibbonGroupButton10.TextLine1" xml:space="preserve">
+    <value>测值信息</value>
+  </data>
+  <data name="kryptonRibbonGroupButton11.TextLine1" xml:space="preserve">
+    <value>PLC</value>
+  </data>
+  <data name="kryptonRibbonGroupButton12.TextLine1" xml:space="preserve">
+    <value>相机</value>
   </data>
   <data name="kryptonRibbonTab1.Text" xml:space="preserve">
     <value>主界面</value>
@@ -147,9 +185,8 @@
   <data name="kryptonRibbonTab3.Text" xml:space="preserve">
     <value>设置</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="kryptonRibbon1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 115</value>
+    <value>1150, 142</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="kryptonRibbon1.TabIndex" type="System.Int32, mscorlib">
@@ -172,10 +209,10 @@
     <value>Fill</value>
   </data>
   <data name="kryptonPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 115</value>
+    <value>0, 142</value>
   </data>
   <data name="kryptonPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 577</value>
+    <value>1150, 469</value>
   </data>
   <data name="kryptonPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -199,10 +236,22 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 692</value>
+    <value>1150, 611</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Form1</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonQATButton1.Name" xml:space="preserve">
+    <value>kryptonRibbonQATButton1</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonQATButton1.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonQATButton2.Name" xml:space="preserve">
+    <value>kryptonRibbonQATButton2</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonQATButton2.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;kryptonRibbonTab1.Name" xml:space="preserve">
     <value>kryptonRibbonTab1</value>
@@ -234,10 +283,28 @@
   <data name="&gt;&gt;kryptonRibbonGroupButton2.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton3.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupButton3</value>
+  <data name="&gt;&gt;kryptonRibbonGroupTriple4.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupTriple4</value>
   </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton3.Type" xml:space="preserve">
+  <data name="&gt;&gt;kryptonRibbonGroupTriple4.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton10.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupButton10</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton10.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton11.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupButton11</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton11.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton12.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupButton12</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton12.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;kryptonRibbonTab2.Name" xml:space="preserve">

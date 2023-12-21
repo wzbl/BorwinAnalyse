@@ -24,9 +24,12 @@ namespace BorwinSplicMachine.UCControls
 
         private void UCBaseSet_Load(object sender, EventArgs e)
         {
+            UpdataLanguage();
+        }
+        public void UpdataLanguage()
+        {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-
         private void kryptonOffice2007Black_Click(object sender, EventArgs e)
         {
             int model = int.Parse(((KryptonRadioButton)sender).Tag.ToString());
@@ -37,6 +40,8 @@ namespace BorwinSplicMachine.UCControls
         {
             int index = int.Parse(((KryptonButton)sender).Tag.ToString());
             LanguageManager.Instance.UpdateCurrentLanguage(index);
+
+            Form1.MainControl.UpdataLanguage();
         }
     }
 }

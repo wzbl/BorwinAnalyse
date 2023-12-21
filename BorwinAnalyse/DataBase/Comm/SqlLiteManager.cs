@@ -78,7 +78,9 @@ namespace BorwinAnalyse.DataBase.Comm
             string commandText3 = "CREATE TABLE IF NOT EXISTS " + tableName3 + "(languageIndex varchar PRIMARY KEY,name varchar,currentLanguage varchar )";
             DB.NewTable(commandText3);
 
-
+            string log = "Log";
+            string logCom = "CREATE TABLE IF NOT EXISTS " + log + "(time datetime ,type varchar,content varchar,operator varchar,exp1 varchar,exp2 varchar,exp3 varchar,exp4 varchar,exp5 varchar)";
+            DB.NewTable(logCom);
         }
     }
 }

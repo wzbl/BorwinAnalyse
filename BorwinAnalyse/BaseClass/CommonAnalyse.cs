@@ -656,6 +656,19 @@ namespace BorwinAnalyse.BaseClass
                             analyseResult.Grade = TheGrade(textValue);
                         }
                     }
+                    else if (!string.IsNullOrEmpty(analyseResult.Value) && textValue.StartsWith("±"))
+                    {
+                        textValue = textValue.Replace("±", "");
+                        Regex r = new Regex(@"[a-zA-Z]+");
+                        System.Text.RegularExpressions.Match m = r.Match(textValue);
+                        string grade = m.Value;
+                        if (!string.IsNullOrEmpty(grade))
+                        {
+                            textValue = textValue.Replace(grade, "");
+                        }
+
+                        analyseResult.Grade = (double.Parse(textValue) / double.Parse(analyseResult.Value) * 100).ToString("0.000") + "%";
+                    }
                 }
                 #endregion
 
