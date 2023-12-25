@@ -89,6 +89,7 @@
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonWrapLabel3);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.comType);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonWrapLabel1);
+            this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(940, 371);
             this.kryptonSplitContainer1.SplitterDistance = 800;
             this.kryptonSplitContainer1.TabIndex = 0;
@@ -114,6 +115,7 @@
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 334);
             this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ButtonCluster;
             this.kryptonPanel1.Size = new System.Drawing.Size(800, 37);
             this.kryptonPanel1.TabIndex = 0;
             // 
@@ -141,28 +143,31 @@
             // kryptonWrapLabel8
             // 
             this.kryptonWrapLabel8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel8.Location = new System.Drawing.Point(438, 12);
             this.kryptonWrapLabel8.Name = "kryptonWrapLabel8";
             this.kryptonWrapLabel8.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel8.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel8.Text = "实测值";
             // 
             // kryptonWrapLabel7
             // 
             this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel7.Location = new System.Drawing.Point(230, 12);
             this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
             this.kryptonWrapLabel7.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel7.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel7.Text = "最大值";
             // 
             // kryptonWrapLabel6
             // 
             this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel6.Location = new System.Drawing.Point(12, 12);
             this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
             this.kryptonWrapLabel6.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel6.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel6.Text = "最小值";
             // 
             // btnStart
@@ -197,10 +202,11 @@
             // 
             this.kryptonWrapLabel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel5.Location = new System.Drawing.Point(0, 146);
             this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
             this.kryptonWrapLabel5.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel5.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel5.Text = "等级";
             // 
             // comSize
@@ -224,10 +230,11 @@
             // 
             this.kryptonWrapLabel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel2.Location = new System.Drawing.Point(0, 110);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel2.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel2.Text = "尺寸";
             // 
             // comUnit
@@ -243,10 +250,11 @@
             // 
             this.kryptonWrapLabel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel4.Location = new System.Drawing.Point(0, 74);
             this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
             this.kryptonWrapLabel4.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel4.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel4.Text = "单位";
             // 
             // txtValue
@@ -261,10 +269,11 @@
             // 
             this.kryptonWrapLabel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel3.Location = new System.Drawing.Point(0, 36);
             this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
             this.kryptonWrapLabel3.Size = new System.Drawing.Size(20, 15);
+            this.kryptonWrapLabel3.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel3.Text = "值";
             // 
             // comType
@@ -284,10 +293,11 @@
             // 
             this.kryptonWrapLabel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.White;
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel1.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel1.Text = "类型";
             // 
             // UCLCR

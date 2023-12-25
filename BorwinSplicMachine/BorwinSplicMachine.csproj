@@ -82,6 +82,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlowModel\FlowBaseModel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowModel\FlowBaseModel.Designer.cs">
+      <DependentUpon>FlowBaseModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     <Compile Include="UCMain.Designer.cs">
       <DependentUpon>UCMain.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FlowModel\FlowBaseModel.resx">
+      <DependentUpon>FlowBaseModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.ar-EG.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -163,6 +172,10 @@
     <ProjectReference Include="..\BorwinAnalyse\BorwinAnalyse.csproj">
       <Project>{e24f3998-ff55-4a8f-a7b5-b2dcc34eb3c2}</Project>
       <Name>BorwinAnalyse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisionModel\VisionModel.csproj">
+      <Project>{4fc18e6e-e14e-4c08-94f3-fa4d6793a012}</Project>
+      <Name>VisionModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

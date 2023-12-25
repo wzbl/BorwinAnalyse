@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCSearchLanguage));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -46,6 +47,12 @@
             this.Column6 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column7 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column8 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -53,6 +60,7 @@
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Language)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonSplitContainer1
@@ -90,7 +98,7 @@
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(67, 39);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
@@ -173,6 +181,7 @@
             this.Column6,
             this.Column7,
             this.Column8});
+            this.DGV_Language.ContextMenuStrip = this.contextMenuStrip1;
             this.DGV_Language.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGV_Language.Location = new System.Drawing.Point(0, 0);
             this.DGV_Language.Name = "DGV_Language";
@@ -230,6 +239,53 @@
             this.Column8.Name = "Column8";
             this.Column8.Width = 168;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem,
+            this.searchToolStripMenuItem,
+            this.删除ToolStripMenuItem,
+            this.导入ToolStripMenuItem,
+            this.导出ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 114);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.deleteToolStripMenuItem.Text = "查找";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // searchToolStripMenuItem
+            // 
+            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.searchToolStripMenuItem.Text = "更新";
+            this.searchToolStripMenuItem.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // 导入ToolStripMenuItem
+            // 
+            this.导入ToolStripMenuItem.Name = "导入ToolStripMenuItem";
+            this.导入ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.导入ToolStripMenuItem.Text = "导入";
+            this.导入ToolStripMenuItem.Click += new System.EventHandler(this.btnImPort_Click);
+            // 
+            // 导出ToolStripMenuItem
+            // 
+            this.导出ToolStripMenuItem.Name = "导出ToolStripMenuItem";
+            this.导出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.导出ToolStripMenuItem.Text = "导出";
+            this.导出ToolStripMenuItem.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // UCSearchLanguage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -245,6 +301,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Language)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -268,5 +325,11 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column6;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column7;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导入ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 导出ToolStripMenuItem;
     }
 }

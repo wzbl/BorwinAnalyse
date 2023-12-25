@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCRichLog));
+            this.components = new System.ComponentModel.Container();
             this.richLog = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.buttonSpecAny1 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richLog
             // 
-            this.richLog.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
-            this.buttonSpecAny1});
+            this.richLog.ContextMenuStrip = this.contextMenuStrip1;
             this.richLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richLog.HideSelection = false;
             this.richLog.Location = new System.Drawing.Point(0, 0);
@@ -46,15 +47,20 @@
             this.richLog.TabIndex = 0;
             this.richLog.Text = "";
             // 
-            // buttonSpecAny1
+            // contextMenuStrip1
             // 
-            this.buttonSpecAny1.Edge = ComponentFactory.Krypton.Toolkit.PaletteRelativeEdgeAlign.Near;
-            this.buttonSpecAny1.Image = ((System.Drawing.Image)(resources.GetObject("buttonSpecAny1.Image")));
-            this.buttonSpecAny1.Orientation = ComponentFactory.Krypton.Toolkit.PaletteButtonOrientation.FixedLeft;
-            this.buttonSpecAny1.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Alternate;
-            this.buttonSpecAny1.Type = ComponentFactory.Krypton.Toolkit.PaletteButtonSpecStyle.FormMin;
-            this.buttonSpecAny1.UniqueName = "6E4B46122B0E4367A494F0DA9EEE8D4F";
-            this.buttonSpecAny1.Click += new System.EventHandler(this.buttonSpecAny1_Click);
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.clearToolStripMenuItem.Text = "清空";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.buttonSpecAny1_Click);
             // 
             // UCRichLog
             // 
@@ -63,6 +69,7 @@
             this.Controls.Add(this.richLog);
             this.Name = "UCRichLog";
             this.Size = new System.Drawing.Size(347, 363);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -70,6 +77,7 @@
         #endregion
 
         private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox richLog;
-        private ComponentFactory.Krypton.Toolkit.ButtonSpecAny buttonSpecAny1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
     }
 }

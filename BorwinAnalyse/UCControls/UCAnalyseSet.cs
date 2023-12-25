@@ -130,10 +130,10 @@ namespace BorwinAnalyse.UCControls
                 separator.Illustrate = dataGridRule2.Rows[i].Cells[2].AccessibilityObject.Value.ToString().Contains("null") ? "" : dataGridRule2.Rows[i].Cells[2].AccessibilityObject.Value.ToString();
                 CommonAnalyse.Instance.Separators.Add(separator);
             }
-
+            CommonAnalyse.Instance.GradeChanges.Clear();
             for (int i = 0; i < dataGridRule3.RowCount; i++)
             {
-                if (dataGridRule2.Rows[i].IsNewRow)
+                if (dataGridRule3.Rows[i].IsNewRow)
                 {
                     continue;
                 }
@@ -175,14 +175,6 @@ namespace BorwinAnalyse.UCControls
             isEnterDataGridView1 = false;
         }
 
-        private void kryptonDataGridView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                //ShowMenu(dataGridRule1, kryptonContextMenu1);
-            }
-        }
-
         private void ShowMenu(Control c, KryptonContextMenu kcm)
         {
             kcm.Show(c.RectangleToScreen(c.ClientRectangle), KryptonContextMenuPositionH.Left,
@@ -192,6 +184,34 @@ namespace BorwinAnalyse.UCControls
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             DeleteSubstitutionRules();
+        }
+
+        /// <summary>
+        /// 菜单删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            DeleteGradeChange();
+        }
+
+        private void DeleteGradeChange()
+        {
+            int count = dataGridRule3.SelectedRows.Count;
+            for (int i = 0; i < count;)
+            {
+                if (!dataGridRule3.SelectedRows[i].IsNewRow)
+                {
+                    dataGridRule3.Rows.Remove(dataGridRule3.SelectedRows[i]);
+                    count = dataGridRule3.SelectedRows.Count;
+                }
+                else
+                {
+                    dataGridRule3.SelectedRows[i].Selected = false;
+                }
+
+            }
         }
 
         /// <summary>
@@ -240,5 +260,7 @@ namespace BorwinAnalyse.UCControls
         {
             DeleteSeparator();
         }
+
+      
     }
 }

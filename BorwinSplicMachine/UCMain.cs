@@ -28,8 +28,11 @@ namespace BorwinSplicMachine
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-            kryptonSplitContainer1.Panel2.Controls.Add(Form1.MainControl.UCLCR);
-            kryptonSplitContainer2.Panel2.Controls.Add(new UCRichLog());
+            //this.DoubleBuffered = true;//设置本窗体
+            //SetStyle(ControlStyles.UserPaint, true);
+            //SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            //SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+            kryptonSplitContainer1.Panel2.Controls.Add(new UCRichLog());
         }
         public void UpdataLanguage()
         {
@@ -37,16 +40,34 @@ namespace BorwinSplicMachine
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            LogManager.Instance.WriteLog(new LogModel(LogType.扫码日志, "输入条码"+":"+ txtBarCode1.Text,"周星星"));
-            List<BomDataModel> bomDataModels = BomManager.Instance.AllBomData.Where(x => x.barCode == txtBarCode1.Text).ToList<BomDataModel>();
-            if (bomDataModels.Count > 0)
-            {
-                Form1.MainControl.UCLCR.LoadSplic(bomDataModels[0].type, bomDataModels[0].size, bomDataModels[0].value, bomDataModels[0].unit, bomDataModels[0].grade);
-            }
-            else
-            {
-                MessageBox.Show("Bom中不存在条码:" + txtBarCode1.Text);
-            }
+            //LogManager.Instance.WriteLog(new LogModel(LogType.扫码日志, "输入条码"+":"+ txtBarCode1.Text,"周星星"));
+            //List<BomDataModel> bomDataModels = BomManager.Instance.AllBomData.Where(x => x.barCode == txtBarCode1.Text).ToList<BomDataModel>();
+            //if (bomDataModels.Count > 0)
+            //{
+            //    Form1.MainControl.UCLCR.LoadSplic(bomDataModels[0].type, bomDataModels[0].size, bomDataModels[0].value, bomDataModels[0].unit, bomDataModels[0].grade);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Bom中不存在条码:" + txtBarCode1.Text);
+            //}
         }
+
+        /// <summary>
+        /// 添加测值到界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddLCR(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void toolStripButton1_MouseDown(object sender, MouseEventArgs e)
+        {
+           
+            kryptonSplitContainer1.Panel1.Controls.Add(new FlowModel.FlowBaseModel());
+         
+        }
+
     }
 }

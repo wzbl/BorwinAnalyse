@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BorwinAnalyse", "BorwinAnal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BorwinSplicMachine", "BorwinSplicMachine\BorwinSplicMachine.csproj", "{AD85DA65-1CA0-48C3-A8FE-C4AAE13C086D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisionModel", "VisionModel\VisionModel.csproj", "{4FC18E6E-E14E-4C08-94F3-FA4D6793A012}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD85DA65-1CA0-48C3-A8FE-C4AAE13C086D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD85DA65-1CA0-48C3-A8FE-C4AAE13C086D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD85DA65-1CA0-48C3-A8FE-C4AAE13C086D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC18E6E-E14E-4C08-94F3-FA4D6793A012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC18E6E-E14E-4C08-94F3-FA4D6793A012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC18E6E-E14E-4C08-94F3-FA4D6793A012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC18E6E-E14E-4C08-94F3-FA4D6793A012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

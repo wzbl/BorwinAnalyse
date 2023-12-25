@@ -20,7 +20,7 @@ namespace BorwinAnalyse.DataBase.Model
         public string exp5 { get; set; }
         public LogModel() { }
 
-        public LogModel(LogType type, string content, string Oper, string exp1="", string exp2 = "", string exp3 = "", string exp4 = "", string exp5="")
+        public LogModel(LogType type, string content, string Oper ="default", string exp1="", string exp2 = "", string exp3 = "", string exp4 = "", string exp5="")
         {
             Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Type = type.ToString();

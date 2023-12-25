@@ -125,7 +125,7 @@
   <data name="kryptonRibbon1.RibbonAppButton.AppButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAA5lJREFUeF7tmcurTWEYxrf7JbeQeyhF7qGcExFh4GTgMuEMJQMZEWZEipHLSMrU
+        DwAACw8BkvkDpQAAA5lJREFUeF7tmcurTWEYxrf7JbeQeyhF7qGcExFh4GTgMuEMJQMZEWZEipHLSMrU
         zMREkgyUGMnAUCQlhz/itd693t3Z53ievdc+vrVrr/386tdZre991q7nnNZa3z41IYQQQgghhBBCCCGE
         EEIIIfoL21czWZ5RMweFZDqjZg4KyXRGzRwUkumMmjko1BXPzTU7NROvVciomYNCXfHJWrO7K/BahYya
         OShUqjeWmL3fbvZ90OzrgNm7bWaXF+LZChg1c1CodG8vM/uzN/dSdct3o2YOCpXu4zVmz9abvdxkdmc5
@@ -186,7 +186,7 @@
     <value>设置</value>
   </data>
   <data name="kryptonRibbon1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 142</value>
+    <value>1264, 142</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="kryptonRibbon1.TabIndex" type="System.Int32, mscorlib">
@@ -212,7 +212,7 @@
     <value>0, 142</value>
   </data>
   <data name="kryptonPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 469</value>
+    <value>1264, 582</value>
   </data>
   <data name="kryptonPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -236,22 +236,10 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 611</value>
+    <value>1264, 724</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Form1</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonQATButton1.Name" xml:space="preserve">
-    <value>kryptonRibbonQATButton1</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonQATButton1.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonQATButton2.Name" xml:space="preserve">
-    <value>kryptonRibbonQATButton2</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonQATButton2.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;kryptonRibbonTab1.Name" xml:space="preserve">
     <value>kryptonRibbonTab1</value>
