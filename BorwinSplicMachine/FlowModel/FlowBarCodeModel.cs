@@ -19,7 +19,7 @@ namespace BorwinSplicMachine.FlowModel
             InitializeComponent();
             ModelName = "条码";
             FlowControl = new FlowBarCode();
-            FlowControl.FlowModel = this;
+            //FlowControl.FlowModel = this;
             CommFun();
         }
     }

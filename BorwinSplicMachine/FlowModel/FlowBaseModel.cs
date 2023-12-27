@@ -30,7 +30,7 @@ namespace BorwinSplicMachine.FlowModel
         public void CommFun()
         {
             if (Form1.MainControl.UCFlowControl.StartFlow == null)
-                Form1.MainControl.UCFlowControl.StartFlow = FlowControl;
+                Form1.MainControl.UCFlowControl.StartFlow = this;
         }
 
         bool IsEnter = false;
@@ -66,29 +66,29 @@ namespace BorwinSplicMachine.FlowModel
         {
             IsEnter = true;
             MouseEnterMove();
-            if (Form1.MainControl.UCFlowControl.StartFlow!= FlowControl&&Form1.MainControl.UCFlowControl.ConnectModel && FlowControl.InFlow.Count == 0)
+            if (Form1.MainControl.UCFlowControl.StartFlow!= this&&Form1.MainControl.UCFlowControl.ConnectModel && FlowControl.InFlow.Count == 0)
             {
                 if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0)
                 {
-                    Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel.FlowControl;
+                    Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel;
                 }
                 if (Form1.MainControl.UCFlowControl.CurrentModel.RightRec.IsEnter)
                 {
-                    FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel.FlowControl, Form1.MainControl.UCFlowControl.CurrentModel.RightRec.pos);
+                    FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel, Form1.MainControl.UCFlowControl.CurrentModel.RightRec.pos);
                 }
                 else if (Form1.MainControl.UCFlowControl.CurrentModel.LeftRec.IsEnter)
                 {
-                    FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel.FlowControl, Form1.MainControl.UCFlowControl.CurrentModel.LeftRec.pos);
+                    FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel, Form1.MainControl.UCFlowControl.CurrentModel.LeftRec.pos);
 
                 }
                 else if (Form1.MainControl.UCFlowControl.CurrentModel.BottomRec.IsEnter)
                 {
-                    FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel.FlowControl, Form1.MainControl.UCFlowControl.CurrentModel.BottomRec.pos);
+                    FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel, Form1.MainControl.UCFlowControl.CurrentModel.BottomRec.pos);
                 }
 
-                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0) Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel.FlowControl;
+                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0) Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel;
 
-                Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.outFlows.Add(FlowControl, TopRec.pos);
+                Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.outFlows.Add(this, TopRec.pos);
 
                 Form1.MainControl.UCFlowControl.ConnectModel = false;
             }
@@ -204,18 +204,18 @@ namespace BorwinSplicMachine.FlowModel
 
             if (FlowControl.InFlow.Count > 0)
             {
-                FlowBaseControl InFlow = null;
-                foreach (KeyValuePair<FlowBaseControl, BaseModelPos> kv in FlowControl.InFlow)
+                FlowBaseModel InFlow = null;
+                foreach (KeyValuePair<FlowBaseModel, BaseModelPos> kv in FlowControl.InFlow)
                 {
                     InFlow = kv.Key;
                 }
 
                 FlowControl.InFlow.Remove(InFlow);
-                InFlow.outFlows.Remove(FlowControl);
+                InFlow.FlowControl.outFlows.Remove(this);
 
                 if (FlowControl.outFlows.Count > 0)
                 {
-                    Form1.MainControl.UCFlowControl.StartFlow = FlowControl;
+                    Form1.MainControl.UCFlowControl.StartFlow = this;
                 }
             }
         }
@@ -225,11 +225,11 @@ namespace BorwinSplicMachine.FlowModel
         {
             if (FlowControl.outFlows.Count > 0)
             {
-                FlowBaseControl outFlow = null;
-                foreach (KeyValuePair<FlowBaseControl, BaseModelPos> kv in FlowControl.outFlows)
+                FlowBaseModel outFlow = null;
+                foreach (KeyValuePair<FlowBaseModel, BaseModelPos> kv in FlowControl.outFlows)
                 {
                     outFlow = kv.Key;
-                    outFlow.InFlow.TryGetValue(FlowControl, out BaseModelPos baseModelPos);
+                    outFlow.FlowControl.InFlow.TryGetValue(this, out BaseModelPos baseModelPos);
                     if (baseModelPos == BaseModelPos.Left)
                     {
                         outFlow = kv.Key;
@@ -244,7 +244,7 @@ namespace BorwinSplicMachine.FlowModel
                 if (outFlow != null)
                 {
                     FlowControl.outFlows.Remove(outFlow);
-                    outFlow.InFlow.Remove(FlowControl);
+                    outFlow.FlowControl.InFlow.Remove(this);
                 }
             }
         }
@@ -253,11 +253,11 @@ namespace BorwinSplicMachine.FlowModel
         {
             if (FlowControl.outFlows.Count > 0)
             {
-                FlowBaseControl outFlow = null;
-                foreach (KeyValuePair<FlowBaseControl, BaseModelPos> kv in FlowControl.outFlows)
+                FlowBaseModel outFlow = null;
+                foreach (KeyValuePair<FlowBaseModel, BaseModelPos> kv in FlowControl.outFlows)
                 {
                     outFlow = kv.Key;
-                    outFlow.InFlow.TryGetValue(FlowControl, out BaseModelPos baseModelPos);
+                    outFlow.FlowControl.InFlow.TryGetValue(this, out BaseModelPos baseModelPos);
                     if (baseModelPos == BaseModelPos.Right)
                     {
                         outFlow = kv.Key;
@@ -272,7 +272,7 @@ namespace BorwinSplicMachine.FlowModel
                 if (outFlow != null)
                 {
                     FlowControl.outFlows.Remove(outFlow);
-                    outFlow.InFlow.Remove(FlowControl);
+                    outFlow.FlowControl.InFlow.Remove(this);
                 }
             }
         }
@@ -281,11 +281,11 @@ namespace BorwinSplicMachine.FlowModel
         {
             if (FlowControl.outFlows.Count > 0)
             {
-                FlowBaseControl outFlow = null;
-                foreach (KeyValuePair<FlowBaseControl, BaseModelPos> kv in FlowControl.outFlows)
+                FlowBaseModel outFlow = null;
+                foreach (KeyValuePair<FlowBaseModel, BaseModelPos> kv in FlowControl.outFlows)
                 {
                     outFlow = kv.Key;
-                    outFlow.InFlow.TryGetValue(FlowControl, out BaseModelPos baseModelPos);
+                    outFlow.FlowControl.InFlow.TryGetValue(this, out BaseModelPos baseModelPos);
                     if (baseModelPos == BaseModelPos.Bottom)
                     {
                         outFlow = kv.Key;
@@ -300,7 +300,7 @@ namespace BorwinSplicMachine.FlowModel
                 if (outFlow != null)
                 {
                     FlowControl.outFlows.Remove(outFlow);
-                    outFlow.InFlow.Remove(FlowControl);
+                    outFlow.FlowControl.InFlow.Remove(this);
                 }
             }
         }
