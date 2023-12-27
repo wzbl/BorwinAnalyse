@@ -20,14 +20,19 @@ namespace VisionModel
         public MyCamera CameraL = new MyCamera();
         public MyCamera CameraR = new MyCamera();
 
-        public static MyCamera.cbExceptiondelegate L_CallBackFunc;
-        public static MyCamera.cbExceptiondelegate R_CallBackFunc;
+        public  MyCamera.cbExceptiondelegate L_CallBackFunc;
+        public  MyCamera.cbExceptiondelegate R_CallBackFunc;
 
-        public static MyCamera.cbOutputExdelegate L_ImageCallback;
-        public static MyCamera.cbOutputExdelegate R_ImageCallback;
+        public  MyCamera.cbOutputExdelegate L_ImageCallback;
+        public  MyCamera.cbOutputExdelegate R_ImageCallback;
 
-        public static int L_status = 0;
-        public static int R_status = 0;
+        public delegate void L_GrabImage(Bitmap bmap);
+
+        public  L_GrabImage CCDL_GrabImage = null;
+        public  L_GrabImage CCDR_GrabImage = null;
+
+        public  int L_status = 0;
+        public  int R_status = 0;
 
         public void initCam()
         {
@@ -147,34 +152,6 @@ namespace VisionModel
             }
         }
 
-        /// <summary>
-        /// 相机软件采图
-        /// </summary>
-        public static void SowftGrab(MyCamera camera)
-        {
-            try
-            {
-                camera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
-                camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
-                // ch:触发命令 | en:Trigger command
-                int nRet = camera.MV_CC_SetCommandValue_NET("TriggerSoftware");
-                if (MyCamera.MV_OK == nRet)
-                {
-                    //JYE.log("左相机单次采图成功！");
-                }
-                else
-                {
-                    //JYE.log("左相单次采图失败！：" + nRet.ToString());
-                }
-
-                camera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
-
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         private void Cmd_Status()
         {
             while (true)
@@ -216,7 +193,7 @@ namespace VisionModel
                 }
                 catch (Exception)
                 {
-
+                   
                 }
                 Thread.Sleep(100);
             }
@@ -244,10 +221,8 @@ namespace VisionModel
                     }
                     map.Palette = cp;
                     Bitmap grabmap = KiResizeImage(map, 800, 600, 0);
-                    //try { CCDR_GrabImage?.Invoke(grabmap); } catch { }
-                    //bmpR = new Bitmap(grabmap);
-                    //try { CCDR_GrabImage?.Invoke(map); } catch { }
-                    //bmpR = map;
+                    try { CCDR_GrabImage?.Invoke(grabmap); } catch { }
+                    
                 }
                 else
                 {
@@ -290,7 +265,40 @@ namespace VisionModel
 
         private void L_ImageCallbackFunc(IntPtr pData, ref MyCamera.MV_FRAME_OUT_INFO_EX pFrameInfo, IntPtr pUser)
         {
+            try
+            {
+                if (pFrameInfo.enPixelType == MyCamera.MvGvspPixelType.PixelType_Gvsp_Mono8)
+                {
+                    Bitmap map = new Bitmap(pFrameInfo.nWidth, pFrameInfo.nHeight, pFrameInfo.nWidth * 1,
+                        PixelFormat.Format8bppIndexed, pData);
+                    ColorPalette cp = map.Palette;
+                    for (int i = 0; i < 256; i++)
+                    {
+                        cp.Entries[i] = Color.FromArgb(i, i, i);
+                    }
+                    map.Palette = cp;
+                    Bitmap grabmap = KiResizeImage(map, 800, 600, 0);
+                    try { CCDL_GrabImage?.Invoke(grabmap); } catch { }
 
+                }
+                else
+                {
+                    try
+                    {
+                        Bitmap bmp = new Bitmap(pFrameInfo.nWidth, pFrameInfo.nHeight, pFrameInfo.nWidth * 3,
+                        PixelFormat.Format24bppRgb, pData);
+                    }
+                    catch (Exception ee)
+                    {
+                    }
+                }
+                MyCamera.MV_FRAME_OUT stFrameOut = new MyCamera.MV_FRAME_OUT();
+                CameraR.MV_CC_FreeImageBuffer_NET(ref stFrameOut);
+            }
+            catch (Exception ee)
+            {
+
+            }
         }
 
         /// <summary>

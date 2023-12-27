@@ -28,18 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
+            this.kryptonSplitContainer1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // kryptonSplitContainer1
+            // 
+            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1037, 595);
+            this.kryptonSplitContainer1.SplitterDistance = 482;
+            this.kryptonSplitContainer1.TabIndex = 0;
             // 
             // UCCCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.kryptonSplitContainer1);
             this.Name = "UCCCD";
-            this.Size = new System.Drawing.Size(544, 393);
+            this.Size = new System.Drawing.Size(1037, 595);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
+            this.kryptonSplitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
     }
 }

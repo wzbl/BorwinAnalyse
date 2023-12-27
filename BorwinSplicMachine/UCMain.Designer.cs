@@ -36,11 +36,11 @@
             this.日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.相机ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.ucRichLog1 = new BorwinAnalyse.UCControls.UCRichLog();
+            this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -48,6 +48,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).BeginInit();
+            this.kryptonSplitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -104,6 +108,21 @@
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // kryptonSplitContainer1
+            // 
+            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonSplitContainer1.Location = new System.Drawing.Point(57, 0);
+            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
+            // 
+            // kryptonSplitContainer1.Panel2
+            // 
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonSplitContainer2);
+            this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1326, 720);
+            this.kryptonSplitContainer1.SplitterDistance = 286;
+            this.kryptonSplitContainer1.TabIndex = 3;
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.AutoSize = false;
@@ -136,28 +155,16 @@
             this.toolStripButton3.Size = new System.Drawing.Size(55, 20);
             this.toolStripButton3.Text = "toolStripButton3";
             // 
-            // kryptonSplitContainer1
+            // kryptonSplitContainer2
             // 
-            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainer1.Location = new System.Drawing.Point(57, 0);
-            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
-            // 
-            // kryptonSplitContainer1.Panel2
-            // 
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.ucRichLog1);
-            this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1326, 720);
-            this.kryptonSplitContainer1.SplitterDistance = 495;
-            this.kryptonSplitContainer1.TabIndex = 3;
-            // 
-            // ucRichLog1
-            // 
-            this.ucRichLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucRichLog1.Location = new System.Drawing.Point(0, 0);
-            this.ucRichLog1.Name = "ucRichLog1";
-            this.ucRichLog1.Size = new System.Drawing.Size(826, 720);
-            this.ucRichLog1.TabIndex = 0;
+            this.kryptonSplitContainer2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonSplitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.kryptonSplitContainer2.Name = "kryptonSplitContainer2";
+            this.kryptonSplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1035, 720);
+            this.kryptonSplitContainer2.SplitterDistance = 117;
+            this.kryptonSplitContainer2.TabIndex = 0;
             // 
             // UCMain
             // 
@@ -175,6 +182,10 @@
             this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
+            this.kryptonSplitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -190,6 +201,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
-        private BorwinAnalyse.UCControls.UCRichLog ucRichLog1;
+        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
     }
 }

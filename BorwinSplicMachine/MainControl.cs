@@ -1,13 +1,16 @@
 ﻿using BorwinAnalyse.UCControls;
+using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using BorwinSplicMachine.UCControls;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using VisionModel.UCControls;
 
 namespace BorwinSplicMachine
 {
@@ -30,6 +33,13 @@ namespace BorwinSplicMachine
         public UCLog UCLog { get; set; }
 
         public UCLCR UCLCR { get; set; }
+
+        public UCRichLog UCRichLog { get; set; }
+
+        public UCCCD UCCCD { get; set; }
+
+        public UCFlowControl UCFlowControl { get; set; }
+
         Form1 MainForm;
         public MainControl(Form1 MainForm)
         {
@@ -42,6 +52,9 @@ namespace BorwinSplicMachine
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
             UCLCR = new UCLCR();
+            UCRichLog = new UCRichLog();
+            UCCCD = new UCCCD();
+            UCFlowControl = new UCFlowControl();
             this.MainForm = MainForm;
         }
 

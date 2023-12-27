@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
 using BorwinAnalyse.UCControls;
+using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using ComponentFactory.Krypton.Toolkit;
 using System;
@@ -32,7 +33,11 @@ namespace BorwinSplicMachine
             //SetStyle(ControlStyles.UserPaint, true);
             //SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             //SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
-            kryptonSplitContainer1.Panel2.Controls.Add(new UCRichLog());
+            Form1.MainControl.UCRichLog.Dock = DockStyle.Top;  
+            kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
+            Form1.MainControl.UCCCD.Dock = DockStyle.Fill;
+            kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCCCD);
+            kryptonSplitContainer1.Panel1.Controls.Add(Form1.MainControl.UCFlowControl);
         }
         public void UpdataLanguage()
         {
@@ -64,9 +69,8 @@ namespace BorwinSplicMachine
 
         private void toolStripButton1_MouseDown(object sender, MouseEventArgs e)
         {
-           
-            kryptonSplitContainer1.Panel1.Controls.Add(new FlowModel.FlowBaseModel());
-         
+            FlowBarCodeModel flowBarCodeModel = new FlowModel.FlowBarCodeModel();
+            Form1.MainControl.UCFlowControl.AddFlowControl(flowBarCodeModel);
         }
 
     }

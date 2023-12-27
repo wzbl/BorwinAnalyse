@@ -82,11 +82,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlowModel\FlowBarCode.cs" />
+    <Compile Include="FlowModel\FlowBarCodeModel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowModel\FlowBarCodeModel.Designer.cs">
+      <DependentUpon>FlowBarCodeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowModel\FlowBaseControl.cs" />
     <Compile Include="FlowModel\FlowBaseModel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FlowModel\FlowBaseModel.Designer.cs">
       <DependentUpon>FlowBaseModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowModel\UCFlowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowModel\UCFlowControl.Designer.cs">
+      <DependentUpon>UCFlowControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -124,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="FlowModel\FlowBaseModel.resx">
       <DependentUpon>FlowBaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlowModel\UCFlowControl.resx">
+      <DependentUpon>UCFlowControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.ar-EG.resx">
       <DependentUpon>Form1.cs</DependentUpon>

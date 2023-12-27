@@ -38,8 +38,7 @@ namespace BorwinSplicMachine
                 this.components= new System.ComponentModel.Container();
             }
             UpdataLanguage();
-            VisionModel.HIKVision hIKVision = new VisionModel.HIKVision();
-            hIKVision.initCam();
+      
         }
         public void UpdataLanguage()
         {
