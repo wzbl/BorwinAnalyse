@@ -1,13 +1,9 @@
-﻿using PdfSharp.Drawing;
+﻿using BorwinAnalyse.BaseClass;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace BorwinSplicMachine.FlowModel
@@ -71,11 +67,14 @@ namespace BorwinSplicMachine.FlowModel
         private void UCFlowControl_MouseDown(object sender, MouseEventArgs e)
         {
             currentModel = null;
-            ConnectModel = false;
         }
 
         private void UCFlowControl_MouseMove(object sender, MouseEventArgs e)
         {
+            if (currentModel==null|| !currentModel.IsDown)
+            {
+                ConnectModel = false;
+            }
             Refresh();
         }
 
@@ -105,11 +104,11 @@ namespace BorwinSplicMachine.FlowModel
             {
                 Point[] points =
                 {
-                    new Point(StartFlow.FlowModel.Location.X-2, StartFlow.FlowModel.Location.Y-2),
-                    new Point(StartFlow.FlowModel.Location.X+2+StartFlow.FlowModel.Width, StartFlow.FlowModel.Location.Y-2),
-                    new Point(StartFlow.FlowModel.Location.X+2+StartFlow.FlowModel.Width, StartFlow.FlowModel.Location.Y+2+StartFlow.FlowModel.Height),
-                    new Point(StartFlow.FlowModel.Location.X-2, StartFlow.FlowModel.Location.Y+2+StartFlow.FlowModel.Height),
-                    new Point(StartFlow.FlowModel.Location.X-2, StartFlow.FlowModel.Location.Y-2)
+                    //new Point(StartFlow.FlowModel.Location.X-2, StartFlow.FlowModel.Location.Y-2),
+                    //new Point(StartFlow.FlowModel.Location.X+2+StartFlow.FlowModel.Width, StartFlow.FlowModel.Location.Y-2),
+                    //new Point(StartFlow.FlowModel.Location.X+2+StartFlow.FlowModel.Width, StartFlow.FlowModel.Location.Y+2+StartFlow.FlowModel.Height),
+                    //new Point(StartFlow.FlowModel.Location.X-2, StartFlow.FlowModel.Location.Y+2+StartFlow.FlowModel.Height),
+                    //new Point(StartFlow.FlowModel.Location.X-2, StartFlow.FlowModel.Location.Y-2)
                 };
                 graphics.DrawLines(Pens.GreenYellow, points);
             }
@@ -202,12 +201,12 @@ namespace BorwinSplicMachine.FlowModel
         {
             if (startPoint.X == moucePoint.X || startPoint.Y == moucePoint.Y)
             {
-                graphics.DrawLine(new Pen(Brushes.Red,2), moucePoint, startPoint);
+                graphics.DrawLine(new Pen(Brushes.Red, 2), moucePoint, startPoint);
             }
             else
             {
                 Point midPoint1 = new Point(startPoint.X, moucePoint.Y - 10);
-               
+
                 if (startPoint.Y > moucePoint.Y)
                 {
                     midPoint1 = new Point(startPoint.X, moucePoint.Y + 10);
@@ -217,21 +216,21 @@ namespace BorwinSplicMachine.FlowModel
                     midPoint1 = new Point(startPoint.X, moucePoint.Y - 10);
                 }
                 Point midPoint2 = new Point(moucePoint.X, midPoint1.Y);
-                graphics.DrawLine(new Pen(Brushes.Red,2), startPoint, midPoint1);
-                graphics.DrawLine(new Pen(Brushes.Red,2), midPoint1, midPoint2);
-                graphics.DrawLine(new Pen(Brushes.Red,2), moucePoint, midPoint2);
+                graphics.DrawLine(new Pen(Brushes.Red, 2), startPoint, midPoint1);
+                graphics.DrawLine(new Pen(Brushes.Red, 2), midPoint1, midPoint2);
+                graphics.DrawLine(new Pen(Brushes.Red, 2), moucePoint, midPoint2);
 
 
             }
             if (startPoint.Y == moucePoint.Y)
             {
-                graphics.DrawLine(new Pen(Brushes.Red,2), moucePoint, new Point(moucePoint.X + 5, moucePoint.Y - 8));
-                graphics.DrawLine(new Pen(Brushes.Red,2), moucePoint, new Point(moucePoint.X - 5, moucePoint.Y - 8));
+                graphics.DrawLine(new Pen(Brushes.Red, 2), moucePoint, new Point(moucePoint.X + 5, moucePoint.Y - 8));
+                graphics.DrawLine(new Pen(Brushes.Red, 2), moucePoint, new Point(moucePoint.X - 5, moucePoint.Y - 8));
             }
             else
             {
-                graphics.DrawLine(new Pen(Brushes.Red,2), moucePoint, new Point(moucePoint.X+5, moucePoint.Y-8));
-                graphics.DrawLine(new Pen(Brushes.Red,2), moucePoint, new Point(moucePoint.X - 5, moucePoint.Y - 8));
+                graphics.DrawLine(new Pen(Brushes.Red, 2), moucePoint, new Point(moucePoint.X + 5, moucePoint.Y - 8));
+                graphics.DrawLine(new Pen(Brushes.Red, 2), moucePoint, new Point(moucePoint.X - 5, moucePoint.Y - 8));
             }
         }
 
@@ -244,6 +243,69 @@ namespace BorwinSplicMachine.FlowModel
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
+        }
+
+        private void 保存模板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FlowModel.Instance.FlowModels = FlowModels;
+            FlowModel.Instance.StartFlow = StartFlow;
+            FlowModel.Instance.Save();
+        }
+
+        private void 打开模板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    }
+
+    public class FlowModel
+    {
+        private static FlowModel instance;
+        public static FlowModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new FlowModel();
+                }
+                return instance;
+            }
+        }
+
+        /// <summary>
+        /// 添加控件
+        /// </summary>
+        public List<FlowBaseModel> FlowModels = new List<FlowBaseModel>();
+
+        /// <summary>
+        /// 开始流程
+        /// </summary>
+        public FlowBaseControl StartFlow;
+
+        public void Load()
+        {
+            string savePath = @"SqlLiteData/FlowModel.json";
+            if (!File.Exists(savePath))
+            {
+                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
+                fs1.Close();
+            }
+            else
+            {
+                instance = JsonConvert.DeserializeObject<FlowModel>(File.ReadAllText(savePath));
+            }
+        }
+        public void Save()
+        {
+            string savePath = @"SqlLiteData/FlowModel.json";
+            if (!File.Exists(savePath))
+            {
+                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
+                fs1.Close();
+            }
+            File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
         }
     }
 }

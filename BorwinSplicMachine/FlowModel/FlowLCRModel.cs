@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,13 +11,13 @@ using System.Windows.Forms;
 namespace BorwinSplicMachine.FlowModel
 {
     [Serializable]
-    public partial class FlowBarCodeModel : FlowBaseModel
+    public partial class FlowLCRModel : FlowBaseModel
     {
-        public FlowBarCodeModel()
+        public FlowLCRModel()
         {
             InitializeComponent();
-            ModelName = "条码";
-            FlowControl = new FlowBarCode();
+            ModelName = "LCR";
+            FlowControl = new FlowLCR();
             FlowControl.FlowModel = this;
             CommFun();
         }

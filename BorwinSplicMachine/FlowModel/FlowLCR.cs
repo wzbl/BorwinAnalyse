@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace BorwinSplicMachine.FlowModel
 {
     [Serializable]
-    public class FlowBarCode : FlowBaseControl
+    public class FlowLCR : FlowBaseControl
     {
         public override void Run()
         {
-            
+           
         }
     }
 }

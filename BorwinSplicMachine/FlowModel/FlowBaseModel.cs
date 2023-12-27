@@ -1,25 +1,25 @@
-﻿using BorwinAnalyse.BaseClass;
-using BorwinAnalyse.DataBase.Model;
-using PdfSharp.Drawing;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 using System.Windows.Forms;
 
 namespace BorwinSplicMachine.FlowModel
 {
-    public partial class FlowBaseModel : UserControl
+    [Serializable]
+    public partial class FlowBaseModel : UserControl,ISerializable
     {
         public string ModelName = "";
-
+       
         public FlowBaseControl FlowControl;
         Graphics graphics;
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("FlowControl", FlowControl);
+            info.AddValue("ModelName ", ModelName);
+            info.AddValue("Location ", this.Location);
+        }
 
         public FlowBaseModel()
         {
@@ -34,7 +34,7 @@ namespace BorwinSplicMachine.FlowModel
         }
 
         bool IsEnter = false;
-        bool IsDown = false;
+        public  bool IsDown = false;
         public bool IsCanMove = true;
         public BaseModel TopRec;
         public BaseModel LeftRec;
@@ -64,7 +64,9 @@ namespace BorwinSplicMachine.FlowModel
 
         private void FlowBaseModel_MouseEnter(object sender, EventArgs e)
         {
-            if (Form1.MainControl.UCFlowControl.ConnectModel && FlowControl.InFlow.Count == 0)
+            IsEnter = true;
+            MouseEnterMove();
+            if (Form1.MainControl.UCFlowControl.StartFlow!= FlowControl&&Form1.MainControl.UCFlowControl.ConnectModel && FlowControl.InFlow.Count == 0)
             {
                 if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0)
                 {
@@ -86,13 +88,11 @@ namespace BorwinSplicMachine.FlowModel
 
                 if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0) Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel.FlowControl;
 
-
                 Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.outFlows.Add(FlowControl, TopRec.pos);
 
                 Form1.MainControl.UCFlowControl.ConnectModel = false;
             }
-            IsEnter = true;
-            MouseEnterMove();
+          
         }
 
         private void MouseEnterMove()
@@ -304,6 +304,8 @@ namespace BorwinSplicMachine.FlowModel
                 }
             }
         }
+
+       
         #endregion
 
     }

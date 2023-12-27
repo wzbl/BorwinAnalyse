@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BorwinSplicMachine.FlowModel
 {
+    [Serializable]
     public abstract class FlowBaseControl
     {
 

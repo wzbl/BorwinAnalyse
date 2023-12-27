@@ -73,5 +73,20 @@ namespace BorwinSplicMachine
             Form1.MainControl.UCFlowControl.AddFlowControl(flowBarCodeModel);
         }
 
+        private void btnLCR_Click(object sender, EventArgs e)
+        {
+            FlowLCRModel flowLCRModel = new FlowModel.FlowLCRModel();
+            Form1.MainControl.UCFlowControl.AddFlowControl(flowLCRModel);
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
     }
 }
