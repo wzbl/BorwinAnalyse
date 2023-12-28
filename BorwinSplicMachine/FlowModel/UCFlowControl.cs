@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace BorwinSplicMachine.FlowModel
 {
@@ -50,6 +51,16 @@ namespace BorwinSplicMachine.FlowModel
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            this.Load += UCFlowControl_Load;
+        }
+
+        private void UCFlowControl_Load(object sender, EventArgs e)
+        {
+            FlowModel.Instance.Load();
+            for (int i = 0;i < FlowModel.Instance.FlowModels.Count; i++)
+            {
+
+            }
         }
 
         public void AddFlowControl(FlowBaseModel flowModel)
@@ -104,6 +115,7 @@ namespace BorwinSplicMachine.FlowModel
                     foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
                     {
                         flowModel.Key.Location = new Point(flowModel.Value.X - (mouseStart.X - MousePosition.X), flowModel.Value.Y - (mouseStart.Y - MousePosition.Y));
+                        flowModel.Key.FlowModeControl.Point = flowModel.Key.Location;
                     }
                 }
                 else
@@ -130,6 +142,7 @@ namespace BorwinSplicMachine.FlowModel
                     foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
                     {
                         flowModel.Key.Location = new Point(flowModel.Key.Location.X-decX, flowModel.Key.Location.Y-decY);
+                        flowModel.Key.FlowModeControl.Point = flowModel.Key.Location;
                     }
                 }
             }
@@ -196,20 +209,20 @@ namespace BorwinSplicMachine.FlowModel
                 Point moucePoint = PointToClient(MousePosition);
                 Point StartPoin = new Point(0, 0);
                 Point point = new Point(0, 0);
-                if (currentModel.RightRec.IsEnter)
+                if (currentModel.FlowModeControl.RightRec.IsEnter)
                 {
-                    StartPoin = new Point(currentModel.RightRec.point.X + currentModel.Location.X + currentModel.RightRec.recSize, currentModel.RightRec.point.Y + currentModel.Location.Y + currentModel.RightRec.recSize / 2);
+                    StartPoin = new Point(currentModel.FlowModeControl.RightRec.point.X + currentModel.Location.X + currentModel.FlowModeControl.RightRec.recSize, currentModel.FlowModeControl.RightRec.point.Y + currentModel.Location.Y + currentModel.FlowModeControl.RightRec.recSize / 2);
                     point = new Point(StartPoin.X + 6, StartPoin.Y);
                 }
-                else if (currentModel.LeftRec.IsEnter)
+                else if (currentModel.FlowModeControl.LeftRec.IsEnter)
                 {
-                    StartPoin = new Point(currentModel.LeftRec.point.X + currentModel.Location.X, currentModel.LeftRec.point.Y + currentModel.Location.Y + currentModel.LeftRec.recSize / 2);
+                    StartPoin = new Point(currentModel.FlowModeControl.LeftRec.point.X + currentModel.Location.X, currentModel.FlowModeControl.LeftRec.point.Y + currentModel.Location.Y + currentModel.FlowModeControl.LeftRec.recSize / 2);
                     point = new Point(StartPoin.X - 6, StartPoin.Y);
 
                 }
-                else if (currentModel.BottomRec.IsEnter)
+                else if (currentModel.FlowModeControl.BottomRec.IsEnter)
                 {
-                    StartPoin = new Point(currentModel.BottomRec.point.X + currentModel.Location.X + currentModel.BottomRec.recSize / 2, currentModel.BottomRec.point.Y + currentModel.Location.Y + currentModel.BottomRec.recSize);
+                    StartPoin = new Point(currentModel.FlowModeControl.BottomRec.point.X + currentModel.Location.X + currentModel.FlowModeControl.BottomRec.recSize / 2, currentModel.FlowModeControl.BottomRec.point.Y + currentModel.Location.Y + currentModel.FlowModeControl.BottomRec.recSize);
                     point = new Point(StartPoin.X, StartPoin.Y + 6);
                 }
                 else
@@ -230,11 +243,11 @@ namespace BorwinSplicMachine.FlowModel
 
             for (int i = 0; i < FlowModels.Count; i++)
             {
-                if (FlowModels[i].FlowControl.outFlows.Count > 0 && FlowModels[i].FlowControl.InFlow.Count == 0)
+                if (FlowModels[i].FlowModeControl.FlowControl.outFlows.Count > 0 && FlowModels[i].FlowModeControl.FlowControl.InFlow.Count == 0)
                 {
                     if (StartFlow == null)
                         StartFlow = FlowModels[i];
-                    DrawModel(FlowModels[i]);
+                    DrawModel(FlowModels[i].FlowModeControl);
                 }
             }
 
@@ -275,45 +288,45 @@ namespace BorwinSplicMachine.FlowModel
             }
         }
 
-        private void DrawModel(FlowBaseModel currentFlow)
+        private void DrawModel(FlowModeControl currentFlow)
         {
             Point startPoint = new Point(0, 0);
             Point endPoint = new Point(0, 0);
-            FlowBaseModel flowBaseControl = null;
+            FlowModeControl flowBaseControl = null;
             if (currentFlow.FlowControl.InFlow.Count > 0)
             {
-                foreach (KeyValuePair<FlowBaseModel, BaseModelPos> kv in currentFlow.FlowControl.InFlow)
+                foreach (KeyValuePair< FlowModeControl, BaseModelPos > kv in currentFlow.FlowControl.InFlow)
                 {
                     BaseModelPos pos = kv.Value;
                     switch (pos)
                     {
                         case BaseModelPos.Top:
-                            startPoint = new Point(kv.Key.TopRec.point.X + kv.Key.Location.X, kv.Key.TopRec.point.Y + kv.Key.Location.Y);
+                            startPoint = new Point(kv.Key.TopRec.point.X + kv.Key.Point.X, kv.Key.TopRec.point.Y + kv.Key.Point.Y);
                             break;
                         case BaseModelPos.Right:
-                            Point midP1 = new Point(kv.Key.RightRec.point.X + kv.Key.Location.X, kv.Key.RightRec.point.Y + kv.Key.Location.Y);
+                            Point midP1 = new Point(kv.Key.RightRec.point.X + kv.Key.Point.X, kv.Key.RightRec.point.Y + kv.Key.Point.Y);
                             startPoint = new Point(midP1.X + 12, midP1.Y);
                             graphics.DrawLine(new Pen(Brushes.Red, 2), midP1, startPoint);
                             break;
                         case BaseModelPos.Left:
-                            Point midP2 = new Point(kv.Key.LeftRec.point.X + kv.Key.Location.X, kv.Key.LeftRec.point.Y + kv.Key.Location.Y);
+                            Point midP2 = new Point(kv.Key.LeftRec.point.X + kv.Key.Point.X, kv.Key.LeftRec.point.Y + kv.Key.Point.Y);
                             startPoint = new Point(midP2.X - 5, midP2.Y);
                             graphics.DrawLine(new Pen(Brushes.Red, 2), midP2, startPoint);
                             break;
                         case BaseModelPos.Bottom:
-                            startPoint = new Point(kv.Key.BottomRec.point.X + kv.Key.Location.X, kv.Key.BottomRec.point.Y + kv.Key.Location.Y);
+                            startPoint = new Point(kv.Key.BottomRec.point.X + kv.Key.Point.X, kv.Key.BottomRec.point.Y + kv.Key.Point.Y);
                             break;
                         default:
                             break;
                     }
                 }
 
-                endPoint = new Point(currentFlow.TopRec.point.X + currentFlow.Location.X, currentFlow.TopRec.point.Y + currentFlow.Location.Y);
+                endPoint = new Point(currentFlow.TopRec.point.X + currentFlow.Point.X, currentFlow.TopRec.point.Y + currentFlow.Point.Y);
                 DrawLines(startPoint, endPoint);
             }
             if (currentFlow.FlowControl.outFlows.Count > 0)
             {
-                foreach (KeyValuePair<FlowBaseModel, BaseModelPos> kv in currentFlow.FlowControl.outFlows)
+                foreach (KeyValuePair< FlowModeControl, BaseModelPos > kv in currentFlow.FlowControl.outFlows)
                 {
                     flowBaseControl = kv.Key;
                     DrawModel(flowBaseControl);
@@ -371,14 +384,21 @@ namespace BorwinSplicMachine.FlowModel
 
         private void 保存模板ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FlowModel.Instance.FlowModels = FlowModels;
-            FlowModel.Instance.StartFlow = StartFlow.FlowControl;
+            FlowModel.Instance.FlowModels.Clear();
+            for (int i = 0;i< FlowModels.Count; i++)
+            {
+                FlowModel.Instance.FlowModels.Add(FlowModels[i].FlowModeControl.FlowControl);
+            }
             FlowModel.Instance.Save();
         }
 
         private void 打开模板ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FlowModel.Instance.Load();
+            for (int i = 0; i < FlowModel.Instance.FlowModels.Count; i++)
+            {
 
+            }
         }
 
     }
@@ -467,35 +487,55 @@ namespace BorwinSplicMachine.FlowModel
         /// <summary>
         /// 添加控件
         /// </summary>
-        public List<FlowBaseModel> FlowModels = new List<FlowBaseModel>();
-
-        /// <summary>
-        /// 开始流程
-        /// </summary>
-        public FlowBaseControl StartFlow;
+        public List<FlowBaseControl> FlowModels = new List<FlowBaseControl>();
 
         public void Load()
         {
-            string savePath = @"SqlLiteData/FlowModel.json";
-            if (!File.Exists(savePath))
-            {
-                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
-                fs1.Close();
-            }
-            else
-            {
-                instance = JsonConvert.DeserializeObject<FlowModel>(File.ReadAllText(savePath));
-            }
+            string savePath = @"SqlLiteData/FlowModel.xml";
+            instance= SerializeHelper.DeserializeXml<FlowModel>(savePath);
         }
         public void Save()
         {
-            string savePath = @"SqlLiteData/FlowModel.json";
-            if (!File.Exists(savePath))
+            string savePath = @"SqlLiteData/FlowModel.xml";
+            SerializeHelper.SerializeXml(savePath,this);
+        }
+    }
+
+    public class SerializeHelper
+    {
+        public static bool SerializeXml(string path, object obj)
+        {
+            try
             {
-                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
-                fs1.Close();
+                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+                {
+                    XmlSerializer serializer = new XmlSerializer(obj.GetType());
+                    serializer.Serialize(fs, obj);
+                    return true;
+                }
             }
-            File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
+            catch (Exception ex)
+            {
+                MessageBox.Show("序列化错误：" + ex.Message, "错误");
+                return false;
+            }
+        }
+        public static T DeserializeXml<T>(string path) where T : class
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    object obj = serializer.Deserialize(fs);
+                    return obj as T;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("反序列化错误：" + ex.Message, "错误");
+                return null;
+            }
         }
     }
 }

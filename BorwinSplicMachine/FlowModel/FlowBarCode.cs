@@ -9,6 +9,9 @@ namespace BorwinSplicMachine.FlowModel
     [Serializable]
     public class FlowBarCode : FlowBaseControl
     {
+        public FlowBarCode() {
+            ModelName = "条码";
+        }
         public override void Run()
         {
             

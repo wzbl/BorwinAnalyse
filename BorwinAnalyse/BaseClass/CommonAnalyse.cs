@@ -1015,45 +1015,6 @@ namespace BorwinAnalyse.BaseClass
         public string Remark = "";
     }
 
-    public class SerializeHelper
-    {
-        public static bool SerializeXml(string path, object obj)
-        {
-            try
-            {
-                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    XmlSerializer serializer = new XmlSerializer(obj.GetType());
-                    serializer.Serialize(fs, obj);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("序列化错误：" + ex.Message, "错误");
-                return false;
-            }
-        }
-        public static T DeserializeXml<T>(string path) where T : class
-        {
-            try
-            {
-                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    object obj = serializer.Deserialize(fs);
-                    return obj as T;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("反序列化错误：" + ex.Message, "错误");
-                return null;
-            }
-        }
-    }
-
-
     public sealed class AnalyseResult
     {
         /// <summary>

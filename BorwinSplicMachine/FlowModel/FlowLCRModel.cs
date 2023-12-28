@@ -16,10 +16,7 @@ namespace BorwinSplicMachine.FlowModel
         public FlowLCRModel()
         {
             InitializeComponent();
-            ModelName = "LCR";
-            FlowControl = new FlowLCR();
-            //FlowControl.FlowModel = this;
-            CommFun();
+            FlowModeControl = new FlowModeControl(new FlowLCR());
         }
     }
 }
