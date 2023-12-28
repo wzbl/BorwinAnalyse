@@ -29,8 +29,8 @@ namespace BorwinSplicMachine.FlowModel
 
         public void CommFun()
         {
-            if (Form1.MainControl.UCFlowControl.StartFlow == null)
-                Form1.MainControl.UCFlowControl.StartFlow = this;
+            //if (Form1.MainControl.UCFlowControl.StartFlow == null)
+            //    Form1.MainControl.UCFlowControl.StartFlow = this;
         }
 
         bool IsEnter = false;
@@ -133,7 +133,7 @@ namespace BorwinSplicMachine.FlowModel
 
         Point controlPos;
         Point mousePos;
-        private void FlowBaseModel_MouseDown(object sender, MouseEventArgs e)
+        public void FlowBaseModel_MouseDown(object sender, MouseEventArgs e)
         {
             IsDown = true;
             controlPos = Location;
@@ -146,7 +146,7 @@ namespace BorwinSplicMachine.FlowModel
             Form1.MainControl.UCFlowControl.CurrentModel = this;
         }
 
-        private void FlowBaseModel_MouseMove(object sender, MouseEventArgs e)
+        public void FlowBaseModel_MouseMove(object sender, MouseEventArgs e)
         {
             if (IsEnter && IsCanMove)
             {
@@ -158,7 +158,16 @@ namespace BorwinSplicMachine.FlowModel
                 {
                     if (IsCanMove)
                     {
-                        Location = new Point(controlPos.X - (mousePos.X - MousePosition.X), controlPos.Y - (mousePos.Y - MousePosition.Y));
+                        Point p = new Point(controlPos.X - (mousePos.X - MousePosition.X), controlPos.Y - (mousePos.Y - MousePosition.Y));
+                        Point pointToClient = PointToScreen(p);
+                        Point point = PointToScreen( Form1.MainControl.UCFlowControl.Location);
+                        int width = Form1.MainControl.UCFlowControl.Width;
+                        int height = Form1.MainControl.UCFlowControl.Height;
+
+                        if (pointToClient.X+Width< point.X+width&& pointToClient.X>point.X&& pointToClient.Y + Height < point.Y + height && pointToClient.Y > point.Y)
+                        {
+                            Location = p;
+                        }
                     }
                     else
                     {
@@ -190,7 +199,10 @@ namespace BorwinSplicMachine.FlowModel
         #region 菜单操作
         private void 删除控件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            if (Form1.MainControl.UCFlowControl.StartFlow==this)
+            {
+                Form1.MainControl.UCFlowControl.StartFlow = null;
+            }
             删除左节点ToolStripMenuItem_Click(sender, e);
             删除右节点ToolStripMenuItem_Click(sender, e);
             删除下节点ToolStripMenuItem_Click(sender, e);

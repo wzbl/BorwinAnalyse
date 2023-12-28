@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
 
@@ -68,7 +69,7 @@ namespace BorwinSplicMachine.FlowModel
         }
 
         bool isDown = false;
-        Point  controlPos = new Point();
+        Point controlPos = new Point();
         private void UCFlowControl_MouseDown(object sender, MouseEventArgs e)
         {
             currentModel = null;
@@ -76,12 +77,13 @@ namespace BorwinSplicMachine.FlowModel
             mouseStart = MousePosition;
             if (selectFlowModes.IsSelectFlowModes)
             {
-                if (selectFlowModes.CheckMousePos(PointToClient(mouseStart)))
+                if (selectFlowModes.CheckMousePos(PointToClient(MousePosition)))
                 {
                     selectFlowModes.Clear();
                 }
                 else
                 {
+                    selectFlowModes.IsLock = true;
                     controlPos = selectFlowModes.Point;
                 }
             }
@@ -94,13 +96,41 @@ namespace BorwinSplicMachine.FlowModel
                 ConnectModel = false;
             }
 
-            if (isDown && !selectFlowModes.CheckMousePos(PointToClient(mouseStart)))
+            if (isDown && selectFlowModes.IsSelectFlowModes && !selectFlowModes.CheckMousePos(PointToClient(MousePosition)))
             {
-                selectFlowModes.Point = new Point(controlPos.X - (mouseStart.X - MousePosition.X), controlPos.Y - (mouseStart.Y - MousePosition.Y));
-                for (int i = 0; i < selectFlowModes.FlowBaseModels.Count; i++)
+                if (selectFlowModes.Point.X + selectFlowModes.Width < Location.X + Width && selectFlowModes.Point.Y + selectFlowModes.Height < Location.Y + Height&& selectFlowModes.Point.X> Location.X&& selectFlowModes.Point.Y> Location.Y)
                 {
-                    Point p = selectFlowModes.FlowBaseModels[i].Location;
-                    selectFlowModes.FlowBaseModels[i].Location= new Point(p.X - (mouseStart.X - MousePosition.X), p.Y - (mouseStart.Y - MousePosition.Y));
+                    selectFlowModes.Point = new Point(controlPos.X - (mouseStart.X - MousePosition.X), controlPos.Y - (mouseStart.Y - MousePosition.Y));
+                    foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
+                    {
+                        flowModel.Key.Location = new Point(flowModel.Value.X - (mouseStart.X - MousePosition.X), flowModel.Value.Y - (mouseStart.Y - MousePosition.Y));
+                    }
+                }
+                else
+                {
+                    mouseStart= MousePosition;
+                    int decX = 0;
+                    int decY = 0;
+                    if (selectFlowModes.Point.X + selectFlowModes.Width >= Location.X + Width)
+                    {
+                        decX = selectFlowModes.Point.X + selectFlowModes.Width-(Location.X + Width)+4;
+                    }else if (selectFlowModes.Point.X <= Location.X)
+                    {
+                        decX = selectFlowModes.Point.X - Location.X-4;
+                    }
+                    if (selectFlowModes.Point.Y + selectFlowModes.Height >= Location.Y + Height)
+                    {
+                        decY = selectFlowModes.Point.Y + selectFlowModes.Height - (Location.Y + Height) + 4;
+                    }
+                    else if (selectFlowModes.Point.Y <= Location.Y)
+                    {
+                        decY = selectFlowModes.Point.Y - Location.Y - 4;
+                    }
+                    selectFlowModes.Point = new Point(selectFlowModes.Point.X-decX, selectFlowModes.Point.Y-decY);
+                    foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
+                    {
+                        flowModel.Key.Location = new Point(flowModel.Key.Location.X-decX, flowModel.Key.Location.Y-decY);
+                    }
                 }
             }
 
@@ -110,6 +140,24 @@ namespace BorwinSplicMachine.FlowModel
         private void UCFlowControl_MouseUp(object sender, MouseEventArgs e)
         {
             Refresh();
+            if (selectFlowModes.FlowBaseModels.Count > 0)
+            {
+                selectFlowModes.IsLock = false;
+                selectFlowModes.IsSelectFlowModes = true;
+            }
+            if (isDown && selectFlowModes.IsSelectFlowModes)
+            {
+                List<FlowBaseModel> flowModels = new List<FlowBaseModel>();
+                foreach (var item in selectFlowModes.FlowBaseModels)
+                {
+                    flowModels.Add(item.Key);
+                }
+
+                foreach (FlowBaseModel flowModel in flowModels)
+                {
+                    selectFlowModes.FlowBaseModels[flowModel] = flowModel.Location;
+                }
+            }
             isDown = false;
         }
 
@@ -175,12 +223,22 @@ namespace BorwinSplicMachine.FlowModel
 
             }
 
-            if (StartFlow != null && StartFlow.FlowControl.outFlows.Count > 0)
+            //if (StartFlow != null && StartFlow.FlowControl.outFlows.Count > 0)
+            //{
+            //    DrawModel(StartFlow);
+            //}
+
+            for (int i = 0; i < FlowModels.Count; i++)
             {
-                DrawModel(StartFlow);
+                if (FlowModels[i].FlowControl.outFlows.Count > 0 && FlowModels[i].FlowControl.InFlow.Count == 0)
+                {
+                    if (StartFlow == null)
+                        StartFlow = FlowModels[i];
+                    DrawModel(FlowModels[i]);
+                }
             }
 
-            if (isDown && selectFlowModes.CheckMousePos(PointToClient(MousePosition)))
+            if (!selectFlowModes.IsLock&&isDown)
             {
                 Point p1 = PointToClient(mouseStart);
                 Point p2 = PointToClient(MousePosition);
@@ -206,7 +264,6 @@ namespace BorwinSplicMachine.FlowModel
                 graphics.DrawRectangle(new Pen(Brushes.Yellow), p.X, p.Y, width, height);
                 selectFlowModes.Width = width; selectFlowModes.Height = height;
                 selectFlowModes.Point = p;
-                selectFlowModes.IsSelectFlowModes = true;
                 selectFlowModes.CheckFlowModel();
             }
             else
@@ -328,20 +385,16 @@ namespace BorwinSplicMachine.FlowModel
 
     public class SelectFlowModes
     {
+        public bool IsLock = false;
         public bool IsSelectFlowModes = false;
         public int Width = 0;
         public int Height = 0;
         public Point Point = new Point(0, 0);
 
-        public List<FlowBaseModel> FlowBaseModels = new List<FlowBaseModel>();
+        public Dictionary<FlowBaseModel, Point> FlowBaseModels = new Dictionary<FlowBaseModel, Point>();
 
         public bool CheckMousePos(Point p)
         {
-            if (!IsSelectFlowModes)
-            {
-                return true;
-            }
-
             if (p.X > Point.X && p.X < Point.X + Width && p.Y > Point.Y && p.Y < Point.Y + Height)
             {
                 return false;
@@ -362,21 +415,37 @@ namespace BorwinSplicMachine.FlowModel
                 Point p4 = new Point(p1.X, p1.Y + height);
                 if (!CheckMousePos(p1) && !CheckMousePos(p2) && !CheckMousePos(p3) && !CheckMousePos(p4))
                 {
-                    if (!FlowBaseModels.Contains(Form1.MainControl.UCFlowControl.FlowModels[i]))
-                        FlowBaseModels.Add(Form1.MainControl.UCFlowControl.FlowModels[i]);
+                    if (!FlowBaseModels.ContainsKey(Form1.MainControl.UCFlowControl.FlowModels[i]))
+                    {
+                        Point point = Form1.MainControl.UCFlowControl.FlowModels[i].Location;
+                        FlowBaseModels.Add(Form1.MainControl.UCFlowControl.FlowModels[i], point);
+                        //Form1.MainControl.UCFlowControl.FlowModels[i].MouseDown -= Form1.MainControl.UCFlowControl.FlowModels[i].FlowBaseModel_MouseDown;
+                        Form1.MainControl.UCFlowControl.FlowModels[i].MouseMove -= Form1.MainControl.UCFlowControl.FlowModels[i].FlowBaseModel_MouseMove;
+                    }
                 }
                 else
                 {
-                    if (FlowBaseModels.Contains(Form1.MainControl.UCFlowControl.FlowModels[i]))
+                    if (FlowBaseModels.ContainsKey(Form1.MainControl.UCFlowControl.FlowModels[i]))
+                    {
+                        //Form1.MainControl.UCFlowControl.FlowModels[i].MouseDown += Form1.MainControl.UCFlowControl.FlowModels[i].FlowBaseModel_MouseDown;
+                        Form1.MainControl.UCFlowControl.FlowModels[i].MouseMove += Form1.MainControl.UCFlowControl.FlowModels[i].FlowBaseModel_MouseMove;
                         FlowBaseModels.Remove(Form1.MainControl.UCFlowControl.FlowModels[i]);
+                    }
+
                 }
             }
         }
 
         public void Clear()
         {
+            foreach (var item in FlowBaseModels)
+            {
+                //item.Key.MouseDown += item.Key.FlowBaseModel_MouseDown;
+                item.Key.MouseMove += item.Key.FlowBaseModel_MouseMove;
+            }
             FlowBaseModels.Clear();
             IsSelectFlowModes = false;
+            IsLock = false;
         }
     }
 
