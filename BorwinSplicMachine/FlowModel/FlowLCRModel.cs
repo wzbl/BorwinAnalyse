@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +17,9 @@ namespace BorwinSplicMachine.FlowModel
         public FlowLCRModel()
         {
             InitializeComponent();
-            FlowModeControl = new FlowModeControl(new FlowLCR());
+            FlowControl = new FlowLCR();
+            FlowControl.FlowModeControl.FlowModel = this;
+            FlowControl.FlowModeControl.ModelName = ModelType.LCR;
         }
     }
 }

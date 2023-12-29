@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BorwinSplicMachine.FlowModel
 {
@@ -16,21 +17,18 @@ namespace BorwinSplicMachine.FlowModel
     [XmlInclude(typeof(FlowLCR))]
     public  class FlowBaseControl
     {
-        public string ModelName = "";
+        public FlowModeControl FlowModeControl=new FlowModeControl();
 
-        //public SerializableDictionary<FlowModeControl, BaseModelPos> InFlow = new SerializableDictionary<FlowModeControl, BaseModelPos>();
+        public List<OutOrInFlow> InFlow = new List<OutOrInFlow>();
 
-        //public SerializableDictionary<FlowModeControl, BaseModelPos> outFlows = new SerializableDictionary<FlowModeControl, BaseModelPos>();
-
-        public Dictionary<FlowModeControl, BaseModelPos> InFlow = new Dictionary<FlowModeControl, BaseModelPos>();
-
-        public Dictionary<FlowModeControl, BaseModelPos> outFlows = new Dictionary<FlowModeControl, BaseModelPos>();
+        public List<OutOrInFlow> outFlows = new List<OutOrInFlow>();
 
         public bool RunResult = false;
 
-        public FlowBaseControl()
-        { 
-
+      
+        public  FlowBaseControl()
+        {
+            
         }
 
 
@@ -41,6 +39,22 @@ namespace BorwinSplicMachine.FlowModel
 
     }
 
+    [Serializable]
+    public class OutOrInFlow
+    {
+        public OutOrInFlow()
+        {
+
+        }
+
+        public OutOrInFlow(FlowModeControl FlowModeControl, BaseModelPos baseModelPos)
+        {
+            this.baseModelPos = baseModelPos;
+            this.FlowModeControl = FlowModeControl;
+        }
+        public FlowModeControl FlowModeControl;
+        public BaseModelPos baseModelPos;
+    }
 
     [Serializable]
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
@@ -68,8 +82,8 @@ namespace BorwinSplicMachine.FlowModel
             reader.Read();
             XmlSerializer KeySerializer = new XmlSerializer(typeof(TKey));
             XmlSerializer ValueSerializer = new XmlSerializer(typeof(TValue));
-
-            while (reader.NodeType != XmlNodeType.EndElement)
+          
+            while (reader.NodeType != XmlNodeType.EndElement&& reader.HasValue)
             {
                 reader.ReadStartElement("SerializableDictionary");
                 reader.ReadStartElement("key");

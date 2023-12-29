@@ -12,7 +12,7 @@ namespace BorwinSplicMachine.FlowModel
     {
         public FlowLCR()
         {
-            ModelName = "LCR";
+
         }
 
         public override void Run()

@@ -8,13 +8,9 @@ using System.Xml.Serialization;
 
 namespace BorwinSplicMachine.FlowModel
 {
-    [Serializable]
-    [XmlInclude(typeof(FlowBarCodeModel))]
-    [XmlInclude(typeof(FlowLCRModel))]
     public partial class FlowBaseModel : UserControl
     {
-
-        public FlowModeControl FlowModeControl;
+        public  FlowBaseControl FlowControl;
 
         Graphics graphics;
 
@@ -50,38 +46,45 @@ namespace BorwinSplicMachine.FlowModel
         }
         private void FlowBaseModel_Load(object sender, EventArgs e)
         {
-            FlowModeControl.TopRec = new BaseModel(Width / 2, 0, BaseModelPos.Top);
-            FlowModeControl.LeftRec = new BaseModel(0, Height / 2, BaseModelPos.Left);
-            FlowModeControl.RightRec = new BaseModel(Width - 8, Height / 2, BaseModelPos.Right);
-            FlowModeControl.BottomRec = new BaseModel(Width / 2, Height - 8, BaseModelPos.Bottom);
+            FlowControl.FlowModeControl.TopRec = new BaseModel(Width / 2, 0, BaseModelPos.Top);
+            FlowControl.FlowModeControl.LeftRec = new BaseModel(0, Height / 2, BaseModelPos.Left);
+            FlowControl.FlowModeControl.RightRec = new BaseModel(Width - 8, Height / 2, BaseModelPos.Right);
+            FlowControl.FlowModeControl.BottomRec = new BaseModel(Width / 2, Height - 8, BaseModelPos.Bottom);
         }
 
         private void FlowBaseModel_MouseEnter(object sender, EventArgs e)
         {
             IsEnter = true;
             MouseEnterMove();
-            if (Form1.MainControl.UCFlowControl.StartFlow != this && Form1.MainControl.UCFlowControl.ConnectModel && FlowModeControl.FlowControl.InFlow.Count == 0)
+            if (Form1.MainControl.UCFlowControl.CurrentModel != this && Form1.MainControl.UCFlowControl.ConnectModel && FlowControl.InFlow.Count == 0)
             {
-                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.FlowControl.InFlow.Count == 0)
+                if (Form1.MainControl.UCFlowControl.StartFlow==this)
+                {
+                    if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count!=0)
+                    {
+                        return;
+                    }
+                }
+                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0)
                 {
                     Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel;
                 }
-                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.RightRec.IsEnter)
+                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl.RightRec.IsEnter)
                 {
-                    FlowModeControl.FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl, Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.RightRec.pos);
+                    FlowControl.InFlow.Add(new OutOrInFlow( Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl, Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl.RightRec.pos));
                 }
-                else if (Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.LeftRec.IsEnter)
+                else if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl.LeftRec.IsEnter)
                 {
-                    FlowModeControl.FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl, Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.LeftRec.pos);
+                    FlowControl.InFlow.Add(new OutOrInFlow(Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl, Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl.LeftRec.pos));
 
                 }
-                else if (Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.BottomRec.IsEnter)
+                else if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl.BottomRec.IsEnter)
                 {
-                    FlowModeControl.FlowControl.InFlow.Add(Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl, Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.BottomRec.pos);
+                    FlowControl.InFlow.Add(new OutOrInFlow(Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl, Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.FlowModeControl.BottomRec.pos));
                 }
 
-                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.FlowControl.InFlow.Count == 0) Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel;
-                Form1.MainControl.UCFlowControl.CurrentModel.FlowModeControl.FlowControl.outFlows.Add(FlowModeControl, FlowModeControl.TopRec.pos);
+                if (Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.InFlow.Count == 0) Form1.MainControl.UCFlowControl.StartFlow = Form1.MainControl.UCFlowControl.CurrentModel;
+                Form1.MainControl.UCFlowControl.CurrentModel.FlowControl.outFlows.Add(new OutOrInFlow(FlowControl.FlowModeControl, FlowControl.FlowModeControl.TopRec.pos));
 
                 Form1.MainControl.UCFlowControl.ConnectModel = false;
             }
@@ -91,12 +94,12 @@ namespace BorwinSplicMachine.FlowModel
         private void MouseEnterMove()
         {
             Point point1 = PointToClient(MousePosition);
-            MouseEnterRec(point1, ref FlowModeControl.TopRec);
-            MouseEnterRec(point1, ref FlowModeControl.LeftRec);
-            MouseEnterRec(point1, ref FlowModeControl.RightRec);
-            MouseEnterRec(point1, ref FlowModeControl.BottomRec);
-            FlowModeControl.RightRec.point = new Point(Width - FlowModeControl.RightRec.recSize, Height / 2);
-            FlowModeControl.BottomRec.point = new Point(Width / 2, Height - FlowModeControl.BottomRec.recSize);
+            MouseEnterRec(point1, ref FlowControl.FlowModeControl.TopRec);
+            MouseEnterRec(point1, ref FlowControl.FlowModeControl.LeftRec);
+            MouseEnterRec(point1, ref FlowControl.FlowModeControl.RightRec);
+            MouseEnterRec(point1, ref FlowControl.FlowModeControl.BottomRec);
+            FlowControl.FlowModeControl.RightRec.point = new Point(Width - FlowControl.FlowModeControl.RightRec.recSize, Height / 2);
+            FlowControl.FlowModeControl.BottomRec.point = new Point(Width / 2, Height - FlowControl.FlowModeControl.BottomRec.recSize);
             Refresh();
         }
 
@@ -131,7 +134,7 @@ namespace BorwinSplicMachine.FlowModel
             IsDown = true;
             controlPos = Location;
             mousePos = MousePosition;
-            if (FlowModeControl.LeftRec.IsEnter || FlowModeControl.RightRec.IsEnter || FlowModeControl.BottomRec.IsEnter || FlowModeControl.TopRec.IsEnter)
+            if (FlowControl.FlowModeControl.LeftRec.IsEnter || FlowControl.FlowModeControl.RightRec.IsEnter || FlowControl.FlowModeControl.BottomRec.IsEnter || FlowControl.FlowModeControl.TopRec.IsEnter)
             {
                 IsCanMove = false;
             }
@@ -161,7 +164,7 @@ namespace BorwinSplicMachine.FlowModel
                         {
                             Location = p;
                         }
-                        FlowModeControl.Point = p;
+                        FlowControl.FlowModeControl.Point = p;
                     }
                     else
                     {
@@ -180,13 +183,13 @@ namespace BorwinSplicMachine.FlowModel
         protected override void OnPaint(PaintEventArgs e)
         {
             graphics = e.Graphics;
-            graphics.DrawString(FlowModeControl.FlowControl.ModelName, this.Font, Brushes.Black, Width / 3, Height / 2);
+            graphics.DrawString(FlowControl.FlowModeControl.ModelName.ToString(), this.Font, Brushes.Black, Width / 3, Height / 2);
             if (IsEnter)
             {
-                graphics.FillRectangle(recBrush, FlowModeControl.LeftRec.point.X, FlowModeControl.LeftRec.point.Y, FlowModeControl.LeftRec.recSize, FlowModeControl.LeftRec.recSize);
-                graphics.FillRectangle(recBrush, FlowModeControl.RightRec.point.X, FlowModeControl.RightRec.point.Y, FlowModeControl.RightRec.recSize, FlowModeControl.RightRec.recSize);
-                graphics.FillRectangle(recBrush, FlowModeControl.TopRec.point.X, FlowModeControl.TopRec.point.Y, FlowModeControl.TopRec.recSize, FlowModeControl.TopRec.recSize);
-                graphics.FillRectangle(recBrush, FlowModeControl.BottomRec.point.X, FlowModeControl.BottomRec.point.Y, FlowModeControl.BottomRec.recSize, FlowModeControl.BottomRec.recSize);
+                graphics.FillRectangle(recBrush, FlowControl.FlowModeControl.LeftRec.point.X, FlowControl.FlowModeControl.LeftRec.point.Y, FlowControl.FlowModeControl.LeftRec.recSize, FlowControl.FlowModeControl.LeftRec.recSize);
+                graphics.FillRectangle(recBrush, FlowControl.FlowModeControl.RightRec.point.X, FlowControl.FlowModeControl.RightRec.point.Y, FlowControl.FlowModeControl.RightRec.recSize, FlowControl.FlowModeControl.RightRec.recSize);
+                graphics.FillRectangle(recBrush, FlowControl.FlowModeControl.TopRec.point.X, FlowControl.FlowModeControl.TopRec.point.Y, FlowControl.FlowModeControl.TopRec.recSize, FlowControl.FlowModeControl.TopRec.recSize);
+                graphics.FillRectangle(recBrush, FlowControl.FlowModeControl.BottomRec.point.X, FlowControl.FlowModeControl.BottomRec.point.Y, FlowControl.FlowModeControl.BottomRec.recSize, FlowControl.FlowModeControl.BottomRec.recSize);
             }
         }
 
@@ -207,19 +210,27 @@ namespace BorwinSplicMachine.FlowModel
 
         private void 删除父节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (FlowModeControl.FlowControl.InFlow.Count > 0)
+            if (FlowControl.InFlow.Count > 0)
             {
-                FlowModeControl InFlow = null;
-                foreach (KeyValuePair<FlowModeControl, BaseModelPos> kv in FlowModeControl.FlowControl.InFlow)
+                 OutOrInFlow InFlow = null;
+                foreach (var kv in FlowControl.InFlow)
                 {
-                    InFlow = kv.Key;
+                    InFlow = kv;
                 }
 
-                FlowModeControl.FlowControl.InFlow.Remove(InFlow);
-                InFlow.FlowControl.outFlows.Remove(FlowModeControl);
+                FlowControl.InFlow.Remove(InFlow);
 
-                if (FlowModeControl.FlowControl.outFlows.Count > 0)
+                OutOrInFlow outOrInFlow = null;
+                foreach (var item in InFlow.FlowModeControl.FlowModel.FlowControl.outFlows)
+                {
+                    if (item.FlowModeControl.FlowModel== FlowControl.FlowModeControl.FlowModel)
+                    {
+                        outOrInFlow = item;
+                    }
+                }
+                InFlow.FlowModeControl.FlowModel.FlowControl.outFlows.Remove(outOrInFlow);
+
+                if (FlowControl.outFlows.Count > 0)
                 {
                     Form1.MainControl.UCFlowControl.StartFlow = this;
                 }
@@ -228,16 +239,16 @@ namespace BorwinSplicMachine.FlowModel
 
         private void 删除左节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FlowModeControl.FlowControl.outFlows.Count > 0)
+            if (FlowControl.outFlows.Count > 0)
             {
-                FlowModeControl outFlow = null;
-                foreach (KeyValuePair<FlowModeControl, BaseModelPos> kv in FlowModeControl.FlowControl.outFlows)
+                OutOrInFlow outFlow = null;
+                OutOrInFlow InFlow = null;
+                foreach (var kv in FlowControl.outFlows)
                 {
-                    outFlow = kv.Key;
-                    outFlow.FlowControl.InFlow.TryGetValue(FlowModeControl, out BaseModelPos baseModelPos);
-                    if (baseModelPos == BaseModelPos.Left)
+                    InFlow = kv.FlowModeControl.FlowModel.FlowControl.InFlow[0];
+                    if (InFlow.baseModelPos == BaseModelPos.Left)
                     {
-                        outFlow = kv.Key;
+                        outFlow = kv;
                         break;
                     }
                     else
@@ -248,24 +259,24 @@ namespace BorwinSplicMachine.FlowModel
 
                 if (outFlow != null)
                 {
-                    FlowModeControl.FlowControl.outFlows.Remove(outFlow);
-                    outFlow.FlowControl.InFlow.Remove(FlowModeControl);
+                    FlowControl.outFlows.Remove(outFlow);
+                    outFlow.FlowModeControl.FlowModel.FlowControl.InFlow.Remove(InFlow);
                 }
             }
         }
 
         private void 删除右节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FlowModeControl.FlowControl.outFlows.Count > 0)
+            if (FlowControl.outFlows.Count > 0)
             {
-                FlowModeControl outFlow = null;
-                foreach (KeyValuePair<FlowModeControl, BaseModelPos> kv in FlowModeControl.FlowControl.outFlows)
+                OutOrInFlow outFlow = null;
+                OutOrInFlow InFlow = null;
+                foreach (var kv in FlowControl.outFlows)
                 {
-                    outFlow = kv.Key;
-                    outFlow.FlowControl.InFlow.TryGetValue(FlowModeControl, out BaseModelPos baseModelPos);
-                    if (baseModelPos == BaseModelPos.Right)
+                    InFlow = kv.FlowModeControl.FlowModel.FlowControl.InFlow[0];
+                    if (InFlow.baseModelPos == BaseModelPos.Right)
                     {
-                        outFlow = kv.Key;
+                        outFlow = kv;
                         break;
                     }
                     else
@@ -276,24 +287,24 @@ namespace BorwinSplicMachine.FlowModel
 
                 if (outFlow != null)
                 {
-                    FlowModeControl.FlowControl.outFlows.Remove(outFlow);
-                    outFlow.FlowControl.InFlow.Remove(FlowModeControl);
+                    FlowControl.outFlows.Remove(outFlow);
+                    outFlow.FlowModeControl.FlowModel.FlowControl.InFlow.Remove(InFlow);
                 }
             }
         }
 
         private void 删除下节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FlowModeControl.FlowControl.outFlows.Count > 0)
+            if (FlowControl.outFlows.Count > 0)
             {
-                FlowModeControl outFlow = null;
-                foreach (KeyValuePair<FlowModeControl, BaseModelPos> kv in FlowModeControl.FlowControl.outFlows)
+                OutOrInFlow outFlow = null;
+                OutOrInFlow InFlow = null;
+                foreach (var kv in FlowControl.outFlows)
                 {
-                    outFlow = kv.Key;
-                    outFlow.FlowControl.InFlow.TryGetValue(FlowModeControl, out BaseModelPos baseModelPos);
-                    if (baseModelPos == BaseModelPos.Bottom)
+                    InFlow = kv.FlowModeControl.FlowModel.FlowControl.InFlow[0];
+                    if (InFlow.baseModelPos == BaseModelPos.Bottom)
                     {
-                        outFlow = kv.Key;
+                        outFlow = kv;
                         break;
                     }
                     else
@@ -304,8 +315,8 @@ namespace BorwinSplicMachine.FlowModel
 
                 if (outFlow != null)
                 {
-                    FlowModeControl.FlowControl.outFlows.Remove(outFlow);
-                    outFlow.FlowControl.InFlow.Remove(FlowModeControl);
+                    FlowControl.outFlows.Remove(outFlow);
+                    outFlow.FlowModeControl.FlowModel.FlowControl.InFlow.Remove(InFlow);
                 }
             }
         }
@@ -322,19 +333,21 @@ namespace BorwinSplicMachine.FlowModel
         {
 
         }
-        public FlowModeControl(FlowBaseControl FlowControl) { 
-        this.FlowControl = FlowControl;
-        }
+        public ModelType ModelName = ModelType.None;
+
         public Point Point;
 
-        public FlowBaseControl FlowControl;
+        [Newtonsoft.Json.JsonIgnore]
+        [XmlIgnore]
         [NonSerialized]
+        public FlowBaseModel FlowModel;
+
         public BaseModel TopRec;
-        [NonSerialized]
+      
         public BaseModel LeftRec;
-        [NonSerialized]
+       
         public BaseModel RightRec;
-        [NonSerialized]
+     
         public BaseModel BottomRec;
     }
     [Serializable]
@@ -371,4 +384,11 @@ namespace BorwinSplicMachine.FlowModel
         Bottom
     }
 
+    [Serializable]
+    public enum ModelType
+    {
+        None,
+        条码,
+        LCR
+    }
 }
