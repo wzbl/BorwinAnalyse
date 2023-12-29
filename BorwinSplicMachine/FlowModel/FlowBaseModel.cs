@@ -196,23 +196,34 @@ namespace BorwinSplicMachine.FlowModel
         #region 菜单操作
         private void 删除控件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DeleteUC();
+        }
+
+        /// <summary>
+        /// 删除控件
+        /// </summary>
+        public void DeleteUC()
+        {
             if (Form1.MainControl.UCFlowControl.StartFlow == this)
             {
                 Form1.MainControl.UCFlowControl.StartFlow = null;
             }
-            删除左节点ToolStripMenuItem_Click(sender, e);
-            删除右节点ToolStripMenuItem_Click(sender, e);
-            删除下节点ToolStripMenuItem_Click(sender, e);
-            删除父节点ToolStripMenuItem_Click(sender, e);
+            DeleteOutFlow(BaseModelPos.Left);
+            DeleteOutFlow(BaseModelPos.Right);
+            DeleteOutFlow(BaseModelPos.Bottom);
+            DeleteInFlow();
 
             Form1.MainControl.UCFlowControl.DeleteFlowControl(this);
         }
 
-        private void 删除父节点ToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 删除输入流
+        /// </summary>
+        public void DeleteInFlow()
         {
             if (FlowControl.InFlow.Count > 0)
             {
-                 OutOrInFlow InFlow = null;
+                OutOrInFlow InFlow = null;
                 foreach (var kv in FlowControl.InFlow)
                 {
                     InFlow = kv;
@@ -223,7 +234,7 @@ namespace BorwinSplicMachine.FlowModel
                 OutOrInFlow outOrInFlow = null;
                 foreach (var item in InFlow.FlowModeControl.FlowModel.FlowControl.outFlows)
                 {
-                    if (item.FlowModeControl.FlowModel== FlowControl.FlowModeControl.FlowModel)
+                    if (item.FlowModeControl.FlowModel == FlowControl.FlowModeControl.FlowModel)
                     {
                         outOrInFlow = item;
                     }
@@ -237,7 +248,7 @@ namespace BorwinSplicMachine.FlowModel
             }
         }
 
-        private void 删除左节点ToolStripMenuItem_Click(object sender, EventArgs e)
+        public void DeleteOutFlow(BaseModelPos baseModelPos)
         {
             if (FlowControl.outFlows.Count > 0)
             {
@@ -246,7 +257,7 @@ namespace BorwinSplicMachine.FlowModel
                 foreach (var kv in FlowControl.outFlows)
                 {
                     InFlow = kv.FlowModeControl.FlowModel.FlowControl.InFlow[0];
-                    if (InFlow.baseModelPos == BaseModelPos.Left)
+                    if (InFlow.baseModelPos == baseModelPos)
                     {
                         outFlow = kv;
                         break;
@@ -263,62 +274,26 @@ namespace BorwinSplicMachine.FlowModel
                     outFlow.FlowModeControl.FlowModel.FlowControl.InFlow.Remove(InFlow);
                 }
             }
+        }
+
+        private void 删除父节点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteInFlow();
+        }
+
+        private void 删除左节点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteOutFlow(BaseModelPos.Left);
         }
 
         private void 删除右节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FlowControl.outFlows.Count > 0)
-            {
-                OutOrInFlow outFlow = null;
-                OutOrInFlow InFlow = null;
-                foreach (var kv in FlowControl.outFlows)
-                {
-                    InFlow = kv.FlowModeControl.FlowModel.FlowControl.InFlow[0];
-                    if (InFlow.baseModelPos == BaseModelPos.Right)
-                    {
-                        outFlow = kv;
-                        break;
-                    }
-                    else
-                    {
-                        outFlow = null;
-                    }
-                }
-
-                if (outFlow != null)
-                {
-                    FlowControl.outFlows.Remove(outFlow);
-                    outFlow.FlowModeControl.FlowModel.FlowControl.InFlow.Remove(InFlow);
-                }
-            }
+            DeleteOutFlow(BaseModelPos.Right);
         }
 
         private void 删除下节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FlowControl.outFlows.Count > 0)
-            {
-                OutOrInFlow outFlow = null;
-                OutOrInFlow InFlow = null;
-                foreach (var kv in FlowControl.outFlows)
-                {
-                    InFlow = kv.FlowModeControl.FlowModel.FlowControl.InFlow[0];
-                    if (InFlow.baseModelPos == BaseModelPos.Bottom)
-                    {
-                        outFlow = kv;
-                        break;
-                    }
-                    else
-                    {
-                        outFlow = null;
-                    }
-                }
-
-                if (outFlow != null)
-                {
-                    FlowControl.outFlows.Remove(outFlow);
-                    outFlow.FlowModeControl.FlowModel.FlowControl.InFlow.Remove(InFlow);
-                }
-            }
+            DeleteOutFlow(BaseModelPos.Bottom);
         }
 
         #endregion

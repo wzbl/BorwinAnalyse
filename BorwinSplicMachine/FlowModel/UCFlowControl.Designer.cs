@@ -32,6 +32,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.保存模板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开模板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.运行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,23 +41,31 @@
             this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.保存模板ToolStripMenuItem,
-            this.打开模板ToolStripMenuItem});
+            this.打开模板ToolStripMenuItem,
+            this.运行ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             // 
             // 保存模板ToolStripMenuItem
             // 
             this.保存模板ToolStripMenuItem.Name = "保存模板ToolStripMenuItem";
-            this.保存模板ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.保存模板ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存模板ToolStripMenuItem.Text = "保存模板";
             this.保存模板ToolStripMenuItem.Click += new System.EventHandler(this.保存模板ToolStripMenuItem_Click);
             // 
             // 打开模板ToolStripMenuItem
             // 
             this.打开模板ToolStripMenuItem.Name = "打开模板ToolStripMenuItem";
-            this.打开模板ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.打开模板ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.打开模板ToolStripMenuItem.Text = "打开模板";
             this.打开模板ToolStripMenuItem.Click += new System.EventHandler(this.打开模板ToolStripMenuItem_Click);
+            // 
+            // 运行ToolStripMenuItem
+            // 
+            this.运行ToolStripMenuItem.Name = "运行ToolStripMenuItem";
+            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.运行ToolStripMenuItem.Text = "运行";
+            this.运行ToolStripMenuItem.Click += new System.EventHandler(this.运行ToolStripMenuItem_Click);
             // 
             // UCFlowControl
             // 
@@ -79,5 +88,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 保存模板ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打开模板ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 运行ToolStripMenuItem;
     }
 }

@@ -32,7 +32,7 @@ namespace BorwinSplicMachine.FlowModel
         public bool ConnectModel = false;
 
         private SelectFlowModes selectFlowModes = new SelectFlowModes();
-
+        ToolStripMenuItem Delete;
         /// <summary>
         /// 当前选中流程控件
         /// </summary>
@@ -54,11 +54,42 @@ namespace BorwinSplicMachine.FlowModel
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             this.Load += UCFlowControl_Load;
+
         }
+
 
         private void UCFlowControl_Load(object sender, EventArgs e)
         {
             LoadModel();
+            Delete = new ToolStripMenuItem();
+            Delete.Name = "删除流程";
+            Delete.Size = new System.Drawing.Size(180, 22);
+            Delete.Text = "删除流程";
+            Delete.Click += Delete_Click;
+        }
+
+        /// <summary>
+        /// 删除框选流程
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            List<FlowBaseModel> models = new List<FlowBaseModel>();
+            int count = 0;
+            foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
+            {
+                models.Add(flowModel.Key);
+            }
+            selectFlowModes.Clear();
+            count = models.Count();
+            for (int i = 0; i < count;)
+            {
+                models[i].DeleteUC();
+                models.Remove(models[i]);
+                count = models.Count();
+            }
+
         }
 
         public void AddFlowControl(FlowBaseModel flowModel)
@@ -86,15 +117,28 @@ namespace BorwinSplicMachine.FlowModel
             mouseStart = MousePosition;
             if (selectFlowModes.IsSelectFlowModes)
             {
-                if (selectFlowModes.CheckMousePos(PointToClient(MousePosition)))
+                if (e.Button == MouseButtons.Left)
                 {
-                    selectFlowModes.Clear();
+                    if (selectFlowModes.CheckMousePos(PointToClient(MousePosition)))
+                    {
+                        selectFlowModes.Clear();
+                    }
+                    else
+                    {
+                        selectFlowModes.IsLock = true;
+                        controlPos = selectFlowModes.Point;
+                    }
                 }
-                else
+                else if (e.Button == MouseButtons.Right)
                 {
                     selectFlowModes.IsLock = true;
                     controlPos = selectFlowModes.Point;
+                    contextMenuStrip1.Items.Add(Delete);
                 }
+            }
+            else
+            {
+                contextMenuStrip1.Items.Remove(Delete);
             }
         }
         Point mouseStart = new Point(0, 0);
@@ -107,7 +151,7 @@ namespace BorwinSplicMachine.FlowModel
 
             if (isDown && selectFlowModes.IsSelectFlowModes && !selectFlowModes.CheckMousePos(PointToClient(MousePosition)))
             {
-                if (selectFlowModes.Point.X + selectFlowModes.Width < Location.X + Width && selectFlowModes.Point.Y + selectFlowModes.Height < Location.Y + Height&& selectFlowModes.Point.X> Location.X&& selectFlowModes.Point.Y> Location.Y)
+                if (selectFlowModes.Point.X + selectFlowModes.Width < Location.X + Width && selectFlowModes.Point.Y + selectFlowModes.Height < Location.Y + Height && selectFlowModes.Point.X > Location.X && selectFlowModes.Point.Y > Location.Y)
                 {
                     selectFlowModes.Point = new Point(controlPos.X - (mouseStart.X - MousePosition.X), controlPos.Y - (mouseStart.Y - MousePosition.Y));
                     foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
@@ -118,15 +162,16 @@ namespace BorwinSplicMachine.FlowModel
                 }
                 else
                 {
-                    mouseStart= MousePosition;
+                    mouseStart = MousePosition;
                     int decX = 0;
                     int decY = 0;
                     if (selectFlowModes.Point.X + selectFlowModes.Width >= Location.X + Width)
                     {
-                        decX = selectFlowModes.Point.X + selectFlowModes.Width-(Location.X + Width)+4;
-                    }else if (selectFlowModes.Point.X <= Location.X)
+                        decX = selectFlowModes.Point.X + selectFlowModes.Width - (Location.X + Width) + 4;
+                    }
+                    else if (selectFlowModes.Point.X <= Location.X)
                     {
-                        decX = selectFlowModes.Point.X - Location.X-4;
+                        decX = selectFlowModes.Point.X - Location.X - 4;
                     }
                     if (selectFlowModes.Point.Y + selectFlowModes.Height >= Location.Y + Height)
                     {
@@ -136,10 +181,10 @@ namespace BorwinSplicMachine.FlowModel
                     {
                         decY = selectFlowModes.Point.Y - Location.Y - 4;
                     }
-                    selectFlowModes.Point = new Point(selectFlowModes.Point.X-decX, selectFlowModes.Point.Y-decY);
+                    selectFlowModes.Point = new Point(selectFlowModes.Point.X - decX, selectFlowModes.Point.Y - decY);
                     foreach (KeyValuePair<FlowBaseModel, Point> flowModel in selectFlowModes.FlowBaseModels)
                     {
-                        flowModel.Key.Location = new Point(flowModel.Key.Location.X-decX, flowModel.Key.Location.Y-decY);
+                        flowModel.Key.Location = new Point(flowModel.Key.Location.X - decX, flowModel.Key.Location.Y - decY);
                         flowModel.Key.FlowControl.FlowModeControl.Point = flowModel.Key.Location;
                     }
                 }
@@ -249,7 +294,7 @@ namespace BorwinSplicMachine.FlowModel
                 }
             }
 
-            if (!selectFlowModes.IsLock&&isDown)
+            if (!selectFlowModes.IsLock && isDown)
             {
                 Point p1 = PointToClient(mouseStart);
                 Point p2 = PointToClient(MousePosition);
@@ -384,7 +429,7 @@ namespace BorwinSplicMachine.FlowModel
         private void 保存模板ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FlowModel.Instance.FlowModels.Clear();
-            for (int i = 0;i< FlowModels.Count; i++)
+            for (int i = 0; i < FlowModels.Count; i++)
             {
                 FlowModel.Instance.FlowModels.Add(FlowModels[i].FlowControl);
             }
@@ -425,11 +470,11 @@ namespace BorwinSplicMachine.FlowModel
             //添加InOrOutFlow
             for (int i = 0; i < FlowModel.Instance.FlowModels.Count; i++)
             {
-                if (FlowModel.Instance.FlowModels[i].InFlow.Count>0)
+                if (FlowModel.Instance.FlowModels[i].InFlow.Count > 0)
                 {
                     foreach (var item in FlowModel.Instance.FlowModels[i].InFlow)
                     {
-                      List<FlowBaseControl> flowBaseControls =  FlowModel.Instance.FlowModels.Where(x => x.FlowModeControl.Point == item.FlowModeControl.Point).ToList();
+                        List<FlowBaseControl> flowBaseControls = FlowModel.Instance.FlowModels.Where(x => x.FlowModeControl.Point == item.FlowModeControl.Point).ToList();
                         item.FlowModeControl.FlowModel = flowBaseControls[0].FlowModeControl.FlowModel;
                     }
                 }
@@ -448,7 +493,7 @@ namespace BorwinSplicMachine.FlowModel
             for (int i = 0; i < FlowModel.Instance.FlowModels.Count; i++)
             {
                 AddFlowControl(FlowModel.Instance.FlowModels[i].FlowModeControl.FlowModel);
-                if (FlowModel.Instance.FlowModels[i].InFlow.Count==0&& FlowModel.Instance.FlowModels[i].outFlows.Count > 0)
+                if (FlowModel.Instance.FlowModels[i].InFlow.Count == 0 && FlowModel.Instance.FlowModels[i].outFlows.Count > 0)
                 {
                     StartFlow = FlowModel.Instance.FlowModels[i].FlowModeControl.FlowModel;
                 }
@@ -456,6 +501,18 @@ namespace BorwinSplicMachine.FlowModel
 
         }
 
+        private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Run();
+        }
+
+        public void Run()
+        {
+            if (StartFlow != null)
+            {
+                StartFlow.FlowControl.Run();
+            }
+        }
     }
 
     public class SelectFlowModes
@@ -555,7 +612,7 @@ namespace BorwinSplicMachine.FlowModel
         public void Save()
         {
             string savePath = @"SqlLiteData/FlowModel.xml";
-            SerializeHelper.SerializeXml(savePath,this);
+            SerializeHelper.SerializeXml(savePath, this);
         }
     }
 
