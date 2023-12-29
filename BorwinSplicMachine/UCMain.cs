@@ -24,16 +24,18 @@ namespace BorwinSplicMachine
             this.Dock = DockStyle.Fill;
             this.Load += UCMain_Load;
             this.components = new System.ComponentModel.Container();
+
+            this.DoubleBuffered = true;//设置本窗体
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+           
         }
        
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-            //this.DoubleBuffered = true;//设置本窗体
-            //SetStyle(ControlStyles.UserPaint, true);
-            //SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-            //SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
-            Form1.MainControl.UCRichLog.Dock = DockStyle.Top;  
+            Form1.MainControl.UCRichLog.Dock = DockStyle.Top;
             kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
             Form1.MainControl.UCCCD.Dock = DockStyle.Fill;
             kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCCCD);
