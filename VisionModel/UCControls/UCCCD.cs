@@ -26,10 +26,10 @@ namespace VisionModel.UCControls
         private void UCCCD_Load(object sender, EventArgs e)
         {
             hIKVision.initCam();
-            CCD cCDL = new CCD(hIKVision,0);
+            CCD cCDL = new CCD(hIKVision.CameraL);
             kryptonSplitContainer1.Panel1.Controls.Add(cCDL);
            
-            CCD cCDR = new CCD(hIKVision,1);
+            CCD cCDR = new CCD(hIKVision.CameraR);
             kryptonSplitContainer1.Panel2.Controls.Add(cCDR);
         }
     }

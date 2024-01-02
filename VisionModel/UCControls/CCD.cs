@@ -15,35 +15,23 @@ namespace VisionModel.UCControls
 {
     public partial class CCD : UserControl
     {
-        MyCamera myCamera;
+        SplicCamera myCamera;
         public CCD()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
         }
         bool Run = false;
-        public CCD(HIKVision hIKVision, int index) : this
+        public CCD(SplicCamera myCamera) : this
             ()
         {
-            switch (index)
-            {
-                case 0:
-                    this.myCamera = hIKVision.CameraL;
-                    hIKVision.CCDL_GrabImage += CCD_GrabImage;
-                    break;
-                case 1:
-                    this.myCamera = hIKVision.CameraR;
-                    hIKVision.CCDR_GrabImage += CCD_GrabImage;
-                    break;
-                default:
-                    break;
-            }
+            this.myCamera = myCamera;
+            myCamera.CCD_GrabImage += CCD_GrabImage;
         }
 
         private void CCD_GrabImage(Bitmap bmap)
         {
-            LogManager.Instance.WriteLog(new BorwinAnalyse.DataBase.Model.LogModel(LogType.相机日志,"图片显示"));
-            mainWindow.Image = bmap;
+            cameraPic.Image = bmap;
         }
 
         private void 采集ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,11 +44,11 @@ namespace VisionModel.UCControls
                 int nRet = myCamera.MV_CC_SetCommandValue_NET("TriggerSoftware");
                 if (MyCamera.MV_OK == nRet)
                 {
-                    LogManager.Instance.WriteLog(new BorwinAnalyse.DataBase.Model.LogModel(LogType.相机日志, "单次采图成功"));
+                    myCamera.Log("单次采图成功");
                 }
                 else
                 {
-                    LogManager.Instance.WriteLog(new BorwinAnalyse.DataBase.Model.LogModel(LogType.相机日志, "单次采图失败"));
+                    myCamera.Log("单次采图失败");
                 }
 
                 myCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
@@ -89,7 +77,6 @@ namespace VisionModel.UCControls
                 myCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
             }
         }
-
 
     }
 }

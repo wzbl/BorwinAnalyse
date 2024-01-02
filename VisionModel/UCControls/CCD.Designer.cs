@@ -56,9 +56,9 @@
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.填加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.采集ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainWindow = new System.Windows.Forms.PictureBox();
+            this.cameraPic = new System.Windows.Forms.PictureBox();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainWindow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraPic)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -291,27 +291,27 @@
             // 
             // mainWindow
             // 
-            this.mainWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.mainWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainWindow.Location = new System.Drawing.Point(0, 25);
-            this.mainWindow.Margin = new System.Windows.Forms.Padding(0);
-            this.mainWindow.Name = "mainWindow";
-            this.mainWindow.Size = new System.Drawing.Size(623, 538);
-            this.mainWindow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.mainWindow.TabIndex = 8;
-            this.mainWindow.TabStop = false;
+            this.cameraPic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cameraPic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cameraPic.Location = new System.Drawing.Point(0, 25);
+            this.cameraPic.Margin = new System.Windows.Forms.Padding(0);
+            this.cameraPic.Name = "mainWindow";
+            this.cameraPic.Size = new System.Drawing.Size(623, 538);
+            this.cameraPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cameraPic.TabIndex = 8;
+            this.cameraPic.TabStop = false;
             // 
             // CCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.mainWindow);
+            this.Controls.Add(this.cameraPic);
             this.Controls.Add(this.toolStrip1);
             this.Name = "CCD";
             this.Size = new System.Drawing.Size(623, 563);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainWindow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cameraPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,6 +346,6 @@
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
         private System.Windows.Forms.ToolStripMenuItem 填加ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 采集ToolStripMenuItem1;
-        public System.Windows.Forms.PictureBox mainWindow;
+        public System.Windows.Forms.PictureBox cameraPic;
     }
 }
