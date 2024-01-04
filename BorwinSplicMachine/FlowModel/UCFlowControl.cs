@@ -462,6 +462,16 @@ namespace BorwinSplicMachine.FlowModel
                         flowLCRModel.Location = FlowModel.Instance.FlowModels[i].FlowModeControl.Point;
                         FlowModel.Instance.FlowModels[i].FlowModeControl.FlowModel = flowLCRModel;
                         break;
+                    case ModelType.找空料:
+                        FlowFindEmptyStrips FlowFindEmptyStrips = new FlowFindEmptyStrips();
+                        FlowFindEmptyStrips.Location = FlowModel.Instance.FlowModels[i].FlowModeControl.Point;
+                        FlowModel.Instance.FlowModels[i].FlowModeControl.FlowModel = FlowFindEmptyStrips;
+                        break;
+                    case ModelType.丝印:
+                        FlowMatchModel FlowMatchModel = new FlowMatchModel();
+                        FlowMatchModel.Location = FlowModel.Instance.FlowModels[i].FlowModeControl.Point;
+                        FlowModel.Instance.FlowModels[i].FlowModeControl.FlowModel = FlowMatchModel;
+                        break;
                     default:
                         break;
                 }
@@ -603,16 +613,20 @@ namespace BorwinSplicMachine.FlowModel
 
         public void Load()
         {
-            string savePath = @"SqlLiteData/FlowModel.xml";
-            if (File.Exists(savePath))
-            {
-                instance = SerializeHelper.DeserializeXml<FlowModel>(savePath);
-            }
+            //string savePath = @"SqlLiteData/FlowModel.xml";
+            //if (File.Exists(savePath))
+            //{
+            //    instance = SerializeHelper.DeserializeXml<FlowModel>(savePath);
+            //}
         }
+        
+        /// <summary>
+        /// 二进制保存
+        /// </summary>
         public void Save()
         {
-            string savePath = @"SqlLiteData/FlowModel.xml";
-            SerializeHelper.SerializeXml(savePath, this);
+            //string savePath = @"SqlLiteData/FlowModel.xml";
+            //SerializeHelper.SerializeXml(savePath, this);
         }
     }
 

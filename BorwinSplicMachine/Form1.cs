@@ -348,6 +348,23 @@ namespace BorwinSplicMachine
             kryptonPanel1.Controls.Clear();
             kryptonPanel1.Controls.Add(MainControl.UCLog);
         }
+
+        /// <summary>
+        /// 相机标定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void kryptonRibbonGroupButton12_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.CalibrationCCD);
+        }
+
+        private void kryptonRibbonGroupButton10_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCLCRSearch);
+        }
     }
 
 

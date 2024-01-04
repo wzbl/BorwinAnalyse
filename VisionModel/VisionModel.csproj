@@ -92,6 +92,12 @@
     <Compile Include="HIKVision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplicCamera.cs" />
+    <Compile Include="UCControls\CalibrationCCD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\CalibrationCCD.Designer.cs">
+      <DependentUpon>CalibrationCCD.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCControls\CCD.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UCControls\CalibrationCCD.resx">
+      <DependentUpon>CalibrationCCD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCControls\CCD.resx">
       <DependentUpon>CCD.cs</DependentUpon>
     </EmbeddedResource>

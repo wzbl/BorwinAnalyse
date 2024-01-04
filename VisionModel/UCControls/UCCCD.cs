@@ -15,8 +15,6 @@ namespace VisionModel.UCControls
     /// </summary>
     public partial class UCCCD : UserControl
     {
-        VisionModel.HIKVision hIKVision = new VisionModel.HIKVision();
-      
         public UCCCD()
         {
             InitializeComponent();
@@ -25,11 +23,10 @@ namespace VisionModel.UCControls
 
         private void UCCCD_Load(object sender, EventArgs e)
         {
-            hIKVision.initCam();
-            CCD cCDL = new CCD(hIKVision.CameraL);
+            CCD cCDL = new CCD(VisionModel.HIKVision.Instance.CameraL);
             kryptonSplitContainer1.Panel1.Controls.Add(cCDL);
            
-            CCD cCDR = new CCD(hIKVision.CameraR);
+            CCD cCDR = new CCD(VisionModel.HIKVision.Instance.CameraR);
             kryptonSplitContainer1.Panel2.Controls.Add(cCDR);
         }
     }

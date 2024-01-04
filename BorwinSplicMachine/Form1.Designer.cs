@@ -38,7 +38,7 @@
             this.kryptonRibbonGroupTriple4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.kryptonRibbonGroupButton10 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton11 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonRibbonGroupButton12 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.相机标定 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonTab2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -73,7 +73,6 @@
             this.kryptonRibbonTab1,
             this.kryptonRibbonTab2,
             this.kryptonRibbonTab3});
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             // 
             // kryptonRibbonTab1
@@ -109,19 +108,21 @@
             this.kryptonRibbonGroupTriple4.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
             this.kryptonRibbonGroupButton10,
             this.kryptonRibbonGroupButton11,
-            this.kryptonRibbonGroupButton12});
+            this.相机标定});
             // 
             // kryptonRibbonGroupButton10
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton10, "kryptonRibbonGroupButton10");
+            this.kryptonRibbonGroupButton10.Click += new System.EventHandler(this.kryptonRibbonGroupButton10_Click);
             // 
             // kryptonRibbonGroupButton11
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton11, "kryptonRibbonGroupButton11");
             // 
-            // kryptonRibbonGroupButton12
+            // 相机标定
             // 
-            resources.ApplyResources(this.kryptonRibbonGroupButton12, "kryptonRibbonGroupButton12");
+            resources.ApplyResources(this.相机标定, "相机标定");
+            this.相机标定.Click += new System.EventHandler(this.kryptonRibbonGroupButton12_Click);
             // 
             // kryptonRibbonTab2
             // 
@@ -200,6 +201,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.kryptonRibbon1);
+            this.CustomCaptionArea = new System.Drawing.Rectangle(228, 0, 1011, 26);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -235,6 +237,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple4;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton10;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton11;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton12;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton 相机标定;
     }
 }

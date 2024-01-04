@@ -40,9 +40,14 @@ namespace BorwinSplicMachine
 
         public UCFlowControl UCFlowControl { get; set; }
 
+        public CalibrationCCD CalibrationCCD { get; set;}
+
+        public UCLCRSearch UCLCRSearch { get; set; }
+
         Form1 MainForm;
         public MainControl(Form1 MainForm)
         {
+            VisionModel.HIKVision.Instance.initCam();
             UCBOM = new UCBOM();
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
@@ -55,6 +60,8 @@ namespace BorwinSplicMachine
             UCRichLog = new UCRichLog();
             UCCCD = new UCCCD();
             UCFlowControl = new UCFlowControl();
+            CalibrationCCD =new CalibrationCCD();
+            UCLCRSearch = new UCLCRSearch();
             this.MainForm = MainForm;
         }
 
@@ -78,6 +85,7 @@ namespace BorwinSplicMachine
                 MainForm.UpdataLanguage();
                 UCLog.UpdataLanguage();
                 UCLCR.UpdateLanguage();
+                CalibrationCCD.UpdateLanguage();
             });
         }
 

@@ -90,5 +90,17 @@ namespace BorwinSplicMachine
                 return cp;
             }
         }
+
+        private void 找空料_Click(object sender, EventArgs e)
+        {
+            FlowFindEmptyStrips FindEmptyStrips = new FlowModel.FlowFindEmptyStrips();
+            Form1.MainControl.UCFlowControl.AddFlowControl(FindEmptyStrips);
+        }
+
+        private void 丝印_Click(object sender, EventArgs e)
+        {
+            FlowMatchModel FlowMatch = new FlowModel.FlowMatchModel();
+            Form1.MainControl.UCFlowControl.AddFlowControl(FlowMatch);
+        }
     }
 }

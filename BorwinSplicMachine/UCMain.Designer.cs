@@ -32,7 +32,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.btnLCR = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.找空料 = new System.Windows.Forms.ToolStripButton();
+            this.丝印 = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.toolStrip1.SuspendLayout();
@@ -57,7 +58,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.btnLCR,
-            this.toolStripButton3});
+            this.找空料,
+            this.丝印});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -89,14 +91,27 @@
             this.btnLCR.Text = "LCR";
             this.btnLCR.Click += new System.EventHandler(this.btnLCR_Click);
             // 
-            // toolStripButton3
+            // 找空料
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(55, 20);
-            this.toolStripButton3.Text = "toolStripButton3";
+            this.找空料.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.找空料.Image = ((System.Drawing.Image)(resources.GetObject("找空料.Image")));
+            this.找空料.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.找空料.Name = "找空料";
+            this.找空料.Size = new System.Drawing.Size(55, 20);
+            this.找空料.Text = "toolStripButton3";
+            this.找空料.ToolTipText = "找空料";
+            this.找空料.Click += new System.EventHandler(this.找空料_Click);
+            // 
+            // 丝印
+            // 
+            this.丝印.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.丝印.Image = ((System.Drawing.Image)(resources.GetObject("丝印.Image")));
+            this.丝印.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.丝印.Name = "丝印";
+            this.丝印.Size = new System.Drawing.Size(55, 20);
+            this.丝印.Text = "toolStripButton2";
+            this.丝印.ToolTipText = "丝印";
+            this.丝印.Click += new System.EventHandler(this.丝印_Click);
             // 
             // kryptonSplitContainer1
             // 
@@ -151,8 +166,9 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton btnLCR;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton 找空料;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
+        private System.Windows.Forms.ToolStripButton 丝印;
     }
 }

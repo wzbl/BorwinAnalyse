@@ -29,34 +29,14 @@ namespace VisionModel.UCControls
             myCamera.CCD_GrabImage += CCD_GrabImage;
         }
 
-        private void CCD_GrabImage(Bitmap bmap)
+        private void CCD_GrabImage()
         {
-            cameraPic.Image = bmap;
+            cameraPic.Image = myCamera.Img;
         }
 
         private void 采集ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                myCamera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
-                myCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
-                // ch:触发命令 | en:Trigger command
-                int nRet = myCamera.MV_CC_SetCommandValue_NET("TriggerSoftware");
-                if (MyCamera.MV_OK == nRet)
-                {
-                    myCamera.Log("单次采图成功");
-                }
-                else
-                {
-                    myCamera.Log("单次采图失败");
-                }
-
-                myCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
-
-            }
-            catch (Exception)
-            {
-            }
+            myCamera.SigleTrigger();
         }
 
         private void 实时ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,16 +45,12 @@ namespace VisionModel.UCControls
             if (Run)
             {
                 实时ToolStripMenuItem.Text = "停止实时采集";
-                LogManager.Instance.WriteLog(new BorwinAnalyse.DataBase.Model.LogModel(LogType.相机日志, "相机连续采集"));
-                myCamera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_OFF);
-                myCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
+                myCamera.StartTrigger();
             }
             else
             {
                 实时ToolStripMenuItem.Text = "实时采集";
-                LogManager.Instance.WriteLog(new BorwinAnalyse.DataBase.Model.LogModel(LogType.相机日志, "相机停止采集"));
-                myCamera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
-                myCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
+                myCamera.StopTrigger();
             }
         }
 

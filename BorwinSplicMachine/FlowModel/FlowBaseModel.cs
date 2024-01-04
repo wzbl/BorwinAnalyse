@@ -14,15 +14,9 @@ namespace BorwinSplicMachine.FlowModel
 
         Graphics graphics;
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-
-        }
-
         public FlowBaseModel()
         {
             InitializeComponent();
-
             this.Load += FlowBaseModel_Load;
         }
 
@@ -362,6 +356,8 @@ namespace BorwinSplicMachine.FlowModel
     {
         None,
         条码,
-        LCR
+        找空料,
+        LCR,
+        丝印
     }
 }

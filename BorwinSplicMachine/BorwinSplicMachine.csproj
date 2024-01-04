@@ -103,12 +103,26 @@
     <Compile Include="FlowModel\FlowBaseModel.Designer.cs">
       <DependentUpon>FlowBaseModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlowModel\FlowFindEmptyStrips.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowModel\FlowFindEmptyStrips.Designer.cs">
+      <DependentUpon>FlowFindEmptyStrips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowModel\FlowFindEmptyStripsControl.cs" />
     <Compile Include="FlowModel\FlowLCR.cs" />
     <Compile Include="FlowModel\FlowLCRModel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FlowModel\FlowLCRModel.Designer.cs">
       <DependentUpon>FlowLCRModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowModel\FlowMatchControl.cs" />
+    <Compile Include="FlowModel\FlowMatchModel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowModel\FlowMatchModel.Designer.cs">
+      <DependentUpon>FlowMatchModel.cs</DependentUpon>
     </Compile>
     <Compile Include="FlowModel\UCFlowControl.cs">
       <SubType>UserControl</SubType>
@@ -122,12 +136,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="LCR\BoundGridView.cs" />
     <Compile Include="LCR\LCRHelper.cs" />
+    <Compile Include="LCR\PdfSharpHelper.cs" />
     <Compile Include="LCR\UCLCR.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="LCR\UCLCR.Designer.cs">
       <DependentUpon>UCLCR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LCR\UCLCRSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LCR\UCLCRSearch.Designer.cs">
+      <DependentUpon>UCLCRSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="MainControl.cs" />
     <Compile Include="Program.cs" />
@@ -153,6 +175,9 @@
     <EmbeddedResource Include="FlowModel\FlowBaseModel.resx">
       <DependentUpon>FlowBaseModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FlowModel\FlowFindEmptyStrips.resx">
+      <DependentUpon>FlowFindEmptyStrips.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FlowModel\UCFlowControl.resx">
       <DependentUpon>UCFlowControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LCR\UCLCR.resx">
       <DependentUpon>UCLCR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LCR\UCLCRSearch.resx">
+      <DependentUpon>UCLCRSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

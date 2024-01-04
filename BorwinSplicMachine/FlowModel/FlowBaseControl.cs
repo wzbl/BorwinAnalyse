@@ -15,6 +15,8 @@ namespace BorwinSplicMachine.FlowModel
     [Serializable]
     [XmlInclude(typeof(FlowBarCode))]
     [XmlInclude(typeof(FlowLCR))]
+    [XmlInclude(typeof(FlowMatchControl))]
+    [XmlInclude(typeof(FlowFindEmptyStripsControl))]
     public  class FlowBaseControl
     {
         public FlowModeControl FlowModeControl=new FlowModeControl();

@@ -298,7 +298,7 @@ namespace BorwinSplicMachine.LCR
             }
 
         }
-
+        
         /// <summary>
         /// LCR测值线程
         /// </summary>

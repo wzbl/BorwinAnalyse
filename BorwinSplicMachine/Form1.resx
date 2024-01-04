@@ -125,7 +125,7 @@
   <data name="kryptonRibbon1.RibbonAppButton.AppButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAA5lJREFUeF7tmcurTWEYxrf7JbeQeyhF7qGcExFh4GTgMuEMJQMZEWZEipHLSMrU
+        DAAACwwBP0AiyAAAA5lJREFUeF7tmcurTWEYxrf7JbeQeyhF7qGcExFh4GTgMuEMJQMZEWZEipHLSMrU
         zMREkgyUGMnAUCQlhz/itd693t3Z53ievdc+vrVrr/386tdZre991q7nnNZa3z41IYQQQgghhBBCCCGE
         EEIIIfoL21czWZ5RMweFZDqjZg4KyXRGzRwUkumMmjko1BXPzTU7NROvVciomYNCXfHJWrO7K/BahYya
         OShUqjeWmL3fbvZ90OzrgNm7bWaXF+LZChg1c1CodG8vM/uzN/dSdct3o2YOCpXu4zVmz9abvdxkdmc5
@@ -155,7 +155,7 @@
   <data name="kryptonRibbonGroupButton11.TextLine1" xml:space="preserve">
     <value>PLC</value>
   </data>
-  <data name="kryptonRibbonGroupButton12.TextLine1" xml:space="preserve">
+  <data name="相机标定.TextLine1" xml:space="preserve">
     <value>相机</value>
   </data>
   <data name="kryptonRibbonTab1.Text" xml:space="preserve">
@@ -289,10 +289,10 @@
   <data name="&gt;&gt;kryptonRibbonGroupButton11.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton12.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupButton12</value>
+  <data name="&gt;&gt;相机标定.Name" xml:space="preserve">
+    <value>相机标定</value>
   </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton12.Type" xml:space="preserve">
+  <data name="&gt;&gt;相机标定.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;kryptonRibbonTab2.Name" xml:space="preserve">

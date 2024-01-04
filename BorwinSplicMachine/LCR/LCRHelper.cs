@@ -2,6 +2,8 @@
 using BorwinAnalyse.DataBase.Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Security.Permissions;
@@ -9,7 +11,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using VisionModel;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BorwinSplicMachine.LCR
 {
@@ -61,6 +65,31 @@ namespace BorwinSplicMachine.LCR
         public double RealValue = 0;
 
         /// <summary>
+        /// 是否需要测值
+        /// </summary>
+        public bool IsLCR = false;
+
+        /// <summary>
+        /// 左实测值
+        /// </summary>
+        public double LRealValue = 0;
+
+        /// <summary>
+        /// 右实测值
+        /// </summary>
+        public double RRealValue = 0;
+
+        /// <summary>
+        /// 左实测值
+        /// </summary>
+        public string LResult = "NG";
+
+        /// <summary>
+        /// 右实测值
+        /// </summary>
+        public string RResult = "NG";
+
+        /// <summary>
         /// 单位
         /// </summary>
         public Unit Unit = Unit.Error;
@@ -110,18 +139,18 @@ namespace BorwinSplicMachine.LCR
                 {
                     //打开串口成功
                     SerialPort.DataReceived += SerialPort_DataReceived;
-                    LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, "电表连接成功", "黄飞鸿"));
+                    Log("电表连接成功");
                 }
                 else
                 {
                     //打开串口失败
-                    LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, "电表连接失败", "黄飞鸿"));
+                    Log("电表连接失败");
                 }
             }
             catch (Exception ex)
             {
                 //打开串口失败
-                LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, "电表连接异常"+":"+ex.Message, "黄飞鸿"));
+                Log("电表连接异常" + ":" + ex.Message);
             }
         }
 
@@ -186,6 +215,58 @@ namespace BorwinSplicMachine.LCR
             Result = LCRResult.None;
             RealValue = 0;
         }
+
+        /// <summary>
+        /// 保存测值过程数据
+        /// </summary>
+        public void SaveLCRData()
+        {
+
+        }
+
+        /// <summary>
+        /// 保存接料完成数据
+        /// </summary>
+        public void SaveData()
+        {
+            string dic = "D:\\HistoryData" + "\\" + DateTime.Now.ToString("yyyy-MM");
+            if (!Directory.Exists(dic))
+            {
+                Directory.CreateDirectory(dic);
+            }
+            string tmp = dic + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv";
+
+            if (!File.Exists(tmp))
+            {
+                File.AppendAllText(tmp, "接料时间,条码1,扫码1时间,条码2,扫码2时间,物料信息,是否测值,最大值,最小值,右实测值,右结果,左实测值,左结果,是否丝印,左丝印结果,左丝印图片,右丝印结果,右丝印图片,操作员,备注" + "\r\n", Encoding.UTF8);
+            }
+            Bitmap returnImage = new Bitmap(System.Drawing.Image.FromFile("D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg"));
+            Bitmap returnImage2 = new Bitmap(System.Drawing.Image.FromFile("D:\\我的资料库\\Documents\\Downloads\\icons8-刷新-120.png"));
+            File.AppendAllText(tmp,
+                               DateTime.Now.ToString("dd HH:mm:ss") + "," +      //接料时间  
+                               "12345678" + "," +                                        //条码1
+                               DateTime.Now.ToString("dd HH:mm:ss") + "," +      //扫码1时间
+                               "12345678" + "," +                                        //条码2
+                               DateTime.Now.ToString("dd HH:mm:ss") + "," +      //扫码2时间
+                               GetMaterial() + "," +      //物料信息
+                               IsLCR + "," +                                             //是否测值
+                               Max_Value + "," +                                         //最大值
+                               Min_Value + "," +                                         //最小值
+                               RRealValue + "," +                                        //右实测值
+                               RResult + "," +                                           //右结果
+                               LRealValue + "," +                                        //左实测值
+                               LResult + "," +                                           //左结果
+                               SplicCamera.IsMatch + "," +                               //是否丝印
+                               "" + "," +                                                 //右丝印结果
+                                "D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg" + "," +                                                 //右丝印图片
+                               "" + "," +                                               //左丝印结果
+                               "D:\\我的资料库\\Documents\\Downloads\\icons8-刷新-120.png" + "," +                                              //左丝印图片
+                               "李小龙" + "," +                                          //操作员
+                               "" + "," + "\r\n",                                        //备注
+                               Encoding.UTF8);
+
+
+        }
         #endregion
 
         private void Init()
@@ -204,7 +285,7 @@ namespace BorwinSplicMachine.LCR
             byte[] recvData = new byte[SerialPort.BytesToRead];
             SerialPort.Read(recvData, 0, recvData.Length);
             string Recv = Encoding.Default.GetString(recvData);
-            LogManager.Instance.WriteLog(new LogModel(LogType.测值日志,"接收到电表数据"+":"+ Recv,"黄飞鸿"));
+            Log("接收到电表数据" + ":" + Recv);
             try
             {
                 ReadStatus = ReadStatus.None;
@@ -230,22 +311,6 @@ namespace BorwinSplicMachine.LCR
             {
                 ReadStatus = ReadStatus.Fail;
             }
-        }
-
-        /// <summary>
-        /// 保存测值过程数据
-        /// </summary>
-        public void SaveLCRData()
-        {
-
-        }
-
-        /// <summary>
-        /// 保存接料完成数据
-        /// </summary>
-        public void SaveData()
-        {
-
         }
 
 
@@ -291,7 +356,7 @@ namespace BorwinSplicMachine.LCR
             if (UnitValue >= ParamManager.Instance.ReWriteV_Min.D / 1000000 && UnitValue <= ParamManager.Instance.ReWriteV_Max.D / 1000000)
                 WriteVOLT = true;
             else WriteVOLT = false;
-           
+
             string sendstrV = WriteVOLT ? "VOLT 1" : "VOLT 2";
             SerialPort.Write(sendstrV + "\r\n");
 
@@ -463,6 +528,19 @@ namespace BorwinSplicMachine.LCR
                     break;
             }
             UnitValue = sta;
+        }
+
+        public string GetMaterial()
+        {
+            string size = Size.ToString();
+            size = size.Replace("_","").Trim();
+            string  grade = Grade + "%";
+            return string.Format("{0}-{1}-{2}{3}-{4}",Type.ToString(), size, RealValue,Unit.ToString(),grade);
+        }
+
+        public void Log(string message)
+        {
+            LogManager.Instance.WriteLog(new LogModel(LogType.测值日志, message));
         }
     }
 

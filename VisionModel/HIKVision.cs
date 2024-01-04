@@ -17,14 +17,30 @@ namespace VisionModel
 {
     public class HIKVision
     {
-        public SplicCamera CameraL = new SplicCamera("左相机");
-        public SplicCamera CameraR = new SplicCamera("右相机");
+        private static HIKVision instance;
+        public static HIKVision Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new HIKVision();
+                }
+                return instance;
+            }
+        }
+
+
+        public SplicCamera CameraL ;
+        public SplicCamera CameraR ;
 
         public  int L_status = 0;
         public  int R_status = 0;
 
         public void initCam()
         {
+            CameraL = new SplicCamera("左相机");
+            CameraR = new SplicCamera("右相机");
             try
             {
                 AppDomain.CurrentDomain.ProcessExit += new EventHandler(AppExit);
