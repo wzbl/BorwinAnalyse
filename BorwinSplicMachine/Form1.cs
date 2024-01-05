@@ -365,6 +365,11 @@ namespace BorwinSplicMachine
             kryptonPanel1.Controls.Clear();
             kryptonPanel1.Controls.Add(MainControl.UCLCRSearch);
         }
+
+        private void kryptonRibbonGroup1_DialogBoxLauncherClick(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

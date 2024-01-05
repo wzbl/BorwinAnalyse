@@ -267,11 +267,15 @@ namespace BorwinAnalyse.BaseClass
                                 for (int k = 0; k < kryptonRibbon.RibbonTabs[i].Groups[j].Items.Count; k++)
                                 {
                                     KryptonRibbonGroupTriple triple = kryptonRibbon.RibbonTabs[i].Groups[j].Items[k] as KryptonRibbonGroupTriple;
-                                    for (int l = 0; l < triple.Items.Count; l++)
+                                    if (triple != null)
                                     {
-                                        KryptonRibbonGroupButton button = triple.Items[l] as KryptonRibbonGroupButton;
-                                        button.TextLine1 = button.TextLine1.tr();
+                                        for (int l = 0; l < triple.Items.Count; l++)
+                                        {
+                                            KryptonRibbonGroupButton button = triple.Items[l] as KryptonRibbonGroupButton;
+                                            button.TextLine1 = button.TextLine1.tr();
+                                        }
                                     }
+                                   
                                 }
 
                             }

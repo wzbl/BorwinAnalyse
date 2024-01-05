@@ -239,7 +239,7 @@ namespace BorwinSplicMachine.LCR
                              Min_Value + "," +                                         //最小值
                              RealValue + "," +                                        //实测值
                              Result + "," +                                           //结果
-                             Side + "," +                                        //左/右
+                             Side + "," +                                             //左/右
                              LResult + "," +                                           //线体
                              "李小龙" + "," +                                          //操作员
                              "" + "," + "\r\n",                                        //备注
@@ -263,20 +263,20 @@ namespace BorwinSplicMachine.LCR
                 File.AppendAllText(tmp, "接料时间,条码1,扫码1时间,条码2,扫码2时间,物料信息,是否测值,最大值,最小值,右实测值,右结果,左实测值,左结果,是否丝印,左丝印结果,左丝印图片,右丝印结果,右丝印图片,操作员,备注" + "\r\n", Encoding.UTF8);
             }
             File.AppendAllText(tmp,
-                               DateTime.Now.ToString("dd HH:mm:ss") + "," +      //接料时间  
-                               "12345678" + "," +                                        //条码1
-                               DateTime.Now.ToString("dd HH:mm:ss") + "," +      //扫码1时间
-                               "12345678" + "," +                                        //条码2
-                               DateTime.Now.ToString("dd HH:mm:ss") + "," +      //扫码2时间
+                               DateTime.Now.ToString("dd HH:mm:ss") + "," +    //接料时间  
+                               "12345678" + "," +                              //条码1
+                               DateTime.Now.ToString("dd HH:mm:ss") + "," +    //扫码1时间
+                               "12345678" + "," +                              //条码2
+                               DateTime.Now.ToString("dd HH:mm:ss") + "," +    //扫码2时间
                                GetMaterial() + "," +      //物料信息
-                               IsLCR + "," +                                             //是否测值
-                               Max_Value + "," +                                         //最大值
-                               Min_Value + "," +                                         //最小值
-                               RRealValue + "," +                                        //右实测值
-                               RResult + "," +                                           //右结果
-                               LRealValue + "," +                                        //左实测值
-                               LResult + "," +                                           //左结果
-                               SplicCamera.IsMatch + "," +                               //是否丝印
+                               IsLCR + "," +                                   //是否测值
+                               Max_Value + "," +                               //最大值
+                               Min_Value + "," +                                //最小值
+                               RRealValue + "," +                               //右实测值
+                               RResult + "," +                                  //右结果
+                               LRealValue + "," +                               //左实测值
+                               LResult + "," +                                  //左结果
+                               SplicCamera.IsMatch + "," +                      //是否丝印
                                HIKVision.Instance.CameraR.MatchResult + "," +                                                 //右丝印结果
                                 HIKVision.Instance.CameraR.ImgPath + "," +                                                 //右丝印图片
                                HIKVision.Instance.CameraL.MatchResult + "," +                                               //左丝印结果

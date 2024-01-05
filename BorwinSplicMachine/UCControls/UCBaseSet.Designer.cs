@@ -46,8 +46,8 @@
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonHeaderGroup2 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -233,18 +233,6 @@
             this.kryptonHeaderGroup2.TabIndex = 25;
             this.kryptonHeaderGroup2.ValuesPrimary.Heading = "Language";
             // 
-            // btnStart
-            // 
-            this.btnStart.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Form;
-            this.btnStart.Location = new System.Drawing.Point(5, 3);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(107, 108);
-            this.btnStart.TabIndex = 4;
-            this.btnStart.Tag = "0";
-            this.btnStart.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Values.Image")));
-            this.btnStart.Values.Text = "";
-            this.btnStart.Click += new System.EventHandler(this.kryptonButton1_Click_1);
-            // 
             // kryptonButton1
             // 
             this.kryptonButton1.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Form;
@@ -256,6 +244,18 @@
             this.kryptonButton1.Values.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton1.Values.Image")));
             this.kryptonButton1.Values.Text = "";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click_1);
+            // 
+            // btnStart
+            // 
+            this.btnStart.ButtonStyle = ComponentFactory.Krypton.Toolkit.ButtonStyle.Form;
+            this.btnStart.Location = new System.Drawing.Point(5, 3);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(107, 108);
+            this.btnStart.TabIndex = 4;
+            this.btnStart.Tag = "0";
+            this.btnStart.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Values.Image")));
+            this.btnStart.Values.Text = "";
+            this.btnStart.Click += new System.EventHandler(this.kryptonButton1_Click_1);
             // 
             // UCBaseSet
             // 
