@@ -120,6 +120,10 @@ namespace BorwinSplicMachine.LCR
 
                 for (int i = 0; i < dataGridView.RowCount; i++)
                 {
+                    if (string.IsNullOrEmpty(dataGridView.Rows[i].Cells[0].FormattedValue.ToString()))
+                    {
+                        continue;
+                    }
                     Width = 0;
                     if (ii * hight + hight1 > page.Height)
                     {
@@ -143,7 +147,7 @@ namespace BorwinSplicMachine.LCR
                             XPoint xPoint3 = new XPoint(Width, (ii * hight) + hight + hight1);
                             XPoint xPoint4 = new XPoint(Width + widths[j] + hight, (ii * hight) + hight + hight1);
                             gfx.DrawLines(xPen, new XPoint[] { xPoint1, xPoint2, xPoint4, xPoint3, xPoint1 });
-                            gfx.DrawImage(xfoto, Width + 1, ii * hight + 1 + hight1, widths[j], hight);
+                            gfx.DrawImage(xfoto, Width + 1, ii * hight + hight1, widths[j], hight);
                         }
                         else
                         {

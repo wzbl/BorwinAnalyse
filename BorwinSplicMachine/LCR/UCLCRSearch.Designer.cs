@@ -33,7 +33,6 @@
             this.endDateTime = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.startDateTime = new System.Windows.Forms.DateTimePicker();
-            this.btnAdd = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnExport = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnImport = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.boundGridView1 = new BorwinSplicMachine.LCR.BoundGridView();
@@ -62,7 +61,6 @@
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.endDateTime);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.label4);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.startDateTime);
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnAdd);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnExport);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnImport);
             // 
@@ -119,15 +117,6 @@
             this.startDateTime.Size = new System.Drawing.Size(178, 38);
             this.startDateTime.TabIndex = 11;
             this.startDateTime.Value = new System.DateTime(2024, 1, 4, 0, 0, 0, 0);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(703, 24);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(116, 37);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Values.Text = "测试";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnExport
             // 
@@ -192,7 +181,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnExport;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnImport;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnAdd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker endDateTime;
         private System.Windows.Forms.Label label4;

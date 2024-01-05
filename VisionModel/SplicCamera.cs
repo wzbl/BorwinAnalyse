@@ -27,6 +27,7 @@ namespace VisionModel
         public static bool IsFindEmptyStrips = false;
         public static bool IsMatch = false;
         public bool MatchResult = false;
+        public string ImgPath;
         public SplicCamera(string Name)
         {
             this.Name = Name;

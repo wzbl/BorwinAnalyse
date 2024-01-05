@@ -463,13 +463,6 @@ namespace BorwinSplicMachine.LCR
             }
         }
 
-
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            LCRHelper lCRHelper = new LCRHelper();
-            lCRHelper.SaveData();
-        }
     }
 
     /// <summary>

@@ -217,11 +217,33 @@ namespace BorwinSplicMachine.LCR
         }
 
         /// <summary>
-        /// 保存测值过程数据
+        /// 保存测值明细
         /// </summary>
         public void SaveLCRData()
         {
-
+            string dic = "D:\\HistoryData" + "\\LCR"+"\\" + DateTime.Now.ToString("yyyy-MM");
+            if (!Directory.Exists(dic))
+            {
+                Directory.CreateDirectory(dic);
+            }
+            string tmp = dic + "\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv";
+            if (!File.Exists(tmp))
+            {
+                File.AppendAllText(tmp, "测值时间,条码1,物料信息,最大值,最小值,实测值,结果,左/右,线体,操作员,备注" + "\r\n", Encoding.UTF8);
+            }
+            File.AppendAllText(tmp,
+                             DateTime.Now.ToString("dd HH:mm:ss") + "," +      //测值时间  
+                             "12345678" + "," +                                        //条码1
+                             GetMaterial() + "," +      //物料信息
+                             Max_Value + "," +                                         //最大值
+                             Min_Value + "," +                                         //最小值
+                             RealValue + "," +                                        //实测值
+                             Result + "," +                                           //结果
+                             Side + "," +                                        //左/右
+                             LResult + "," +                                           //线体
+                             "李小龙" + "," +                                          //操作员
+                             "" + "," + "\r\n",                                        //备注
+                             Encoding.UTF8);
         }
 
         /// <summary>
@@ -240,8 +262,6 @@ namespace BorwinSplicMachine.LCR
             {
                 File.AppendAllText(tmp, "接料时间,条码1,扫码1时间,条码2,扫码2时间,物料信息,是否测值,最大值,最小值,右实测值,右结果,左实测值,左结果,是否丝印,左丝印结果,左丝印图片,右丝印结果,右丝印图片,操作员,备注" + "\r\n", Encoding.UTF8);
             }
-            Bitmap returnImage = new Bitmap(System.Drawing.Image.FromFile("D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg"));
-            Bitmap returnImage2 = new Bitmap(System.Drawing.Image.FromFile("D:\\我的资料库\\Documents\\Downloads\\icons8-刷新-120.png"));
             File.AppendAllText(tmp,
                                DateTime.Now.ToString("dd HH:mm:ss") + "," +      //接料时间  
                                "12345678" + "," +                                        //条码1
@@ -257,10 +277,10 @@ namespace BorwinSplicMachine.LCR
                                LRealValue + "," +                                        //左实测值
                                LResult + "," +                                           //左结果
                                SplicCamera.IsMatch + "," +                               //是否丝印
-                               "" + "," +                                                 //右丝印结果
-                                "D:\\IMG\\IF670-0411-001\\L-2023-11-10 08-39-13-IF670-0411-001.jpg" + "," +                                                 //右丝印图片
-                               "" + "," +                                               //左丝印结果
-                               "D:\\我的资料库\\Documents\\Downloads\\icons8-刷新-120.png" + "," +                                              //左丝印图片
+                               HIKVision.Instance.CameraR.MatchResult + "," +                                                 //右丝印结果
+                                HIKVision.Instance.CameraR.ImgPath + "," +                                                 //右丝印图片
+                               HIKVision.Instance.CameraL.MatchResult + "," +                                               //左丝印结果
+                               HIKVision.Instance.CameraL.ImgPath + "," +                                              //左丝印图片
                                "李小龙" + "," +                                          //操作员
                                "" + "," + "\r\n",                                        //备注
                                Encoding.UTF8);
