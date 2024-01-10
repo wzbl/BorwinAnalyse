@@ -90,7 +90,6 @@
             this.kryptonRibbonGroupSeparator3,
             this.kryptonRibbonGroupTriple6});
             resources.ApplyResources(this.kryptonRibbonGroup1, "kryptonRibbonGroup1");
-            this.kryptonRibbonGroup1.DialogBoxLauncherClick += new System.EventHandler(this.kryptonRibbonGroup1_DialogBoxLauncherClick);
             // 
             // kryptonRibbonGroupTriple1
             // 

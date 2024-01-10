@@ -19,12 +19,13 @@ namespace BorwinSplicMachine
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             SqlLiteManager.Instance.Init();
             CommonAnalyse.Instance.Load();
             BomManager.Instance.Init();
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             if (dataTable == null) { return; }
-         
+            
             if (dataTable.Rows.Count > 0)
             {
                 int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
@@ -32,5 +33,6 @@ namespace BorwinSplicMachine
             }
             Application.Run(new Form1());
         }
+
     }
 }
