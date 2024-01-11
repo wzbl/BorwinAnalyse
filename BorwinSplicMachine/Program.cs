@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Comm;
+using Mes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,10 +20,10 @@ namespace BorwinSplicMachine
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             SqlLiteManager.Instance.Init();
             CommonAnalyse.Instance.Load();
             BomManager.Instance.Init();
+            MesControl.Instance.Load();
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             if (dataTable == null) { return; }
             

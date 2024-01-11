@@ -35,12 +35,11 @@
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.kryptonRibbonGroupButton1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupSeparator1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator();
             this.kryptonRibbonGroupTriple4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.kryptonRibbonGroupButton10 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton11 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.相机标定 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonRibbonGroupSeparator1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator();
             this.kryptonRibbonGroupSeparator2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator();
             this.kryptonRibbonGroupTriple5 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.kryptonRibbonGroupButton3 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
@@ -51,6 +50,10 @@
             this.kryptonRibbonGroupButton14 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton15 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonRibbonGroupButton16 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonRibbonGroupSeparator4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator();
+            this.kryptonRibbonGroupTriple2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
+            this.kryptonRibbonGroupButton4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.SuspendLayout();
@@ -71,6 +74,7 @@
             this.kryptonRibbon1.RibbonAppButton.AppButtonMaxRecentSize = new System.Drawing.Size(500, 500);
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             // 
             // kryptonRibbonTab1
@@ -88,7 +92,9 @@
             this.kryptonRibbonGroupSeparator2,
             this.kryptonRibbonGroupTriple5,
             this.kryptonRibbonGroupSeparator3,
-            this.kryptonRibbonGroupTriple6});
+            this.kryptonRibbonGroupTriple6,
+            this.kryptonRibbonGroupSeparator4,
+            this.kryptonRibbonGroupTriple2});
             resources.ApplyResources(this.kryptonRibbonGroup1, "kryptonRibbonGroup1");
             // 
             // kryptonRibbonGroupTriple1
@@ -127,11 +133,6 @@
             // 
             resources.ApplyResources(this.相机标定, "相机标定");
             this.相机标定.Click += new System.EventHandler(this.kryptonRibbonGroupButton12_Click);
-            // 
-            // kryptonPanel1
-            // 
-            resources.ApplyResources(this.kryptonPanel1, "kryptonPanel1");
-            this.kryptonPanel1.Name = "kryptonPanel1";
             // 
             // kryptonRibbonGroupTriple5
             // 
@@ -177,6 +178,21 @@
             resources.ApplyResources(this.kryptonRibbonGroupButton16, "kryptonRibbonGroupButton16");
             this.kryptonRibbonGroupButton16.Click += new System.EventHandler(this.ShowUCParam_Click);
             // 
+            // kryptonPanel1
+            // 
+            resources.ApplyResources(this.kryptonPanel1, "kryptonPanel1");
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            // 
+            // kryptonRibbonGroupTriple2
+            // 
+            this.kryptonRibbonGroupTriple2.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
+            this.kryptonRibbonGroupButton4});
+            // 
+            // kryptonRibbonGroupButton4
+            // 
+            resources.ApplyResources(this.kryptonRibbonGroupButton4, "kryptonRibbonGroupButton4");
+            this.kryptonRibbonGroupButton4.Click += new System.EventHandler(this.kryptonRibbonGroupButton4_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -218,5 +234,8 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton14;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton15;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton16;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator kryptonRibbonGroupSeparator4;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple2;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton4;
     }
 }

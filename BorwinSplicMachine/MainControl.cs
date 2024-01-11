@@ -44,6 +44,8 @@ namespace BorwinSplicMachine
 
         public UCLCRSearch UCLCRSearch { get; set; }
 
+        public UCMes UCMes { get; set; }
+
         Form1 MainForm;
         public MainControl(Form1 MainForm)
         {
@@ -62,6 +64,7 @@ namespace BorwinSplicMachine
             UCFlowControl = new UCFlowControl();
             CalibrationCCD =new CalibrationCCD();
             UCLCRSearch = new UCLCRSearch();
+            UCMes= new UCMes();
             this.MainForm = MainForm;
         }
 
@@ -86,6 +89,7 @@ namespace BorwinSplicMachine
                 UCLog.UpdataLanguage();
                 UCLCR.UpdateLanguage();
                 CalibrationCCD.UpdateLanguage();
+                UCMes.UpdataLanguage();
             });
         }
 
