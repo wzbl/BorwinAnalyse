@@ -41,6 +41,27 @@
   <PropertyGroup>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentFactory.Krypton.Docking">
       <HintPath>..\..\lib\ComponentFactory.Krypton.Docking.dll</HintPath>
@@ -245,6 +266,9 @@
     <EmbeddedResource Include="UCControls\MES\UCCode1Check.resx">
       <DependentUpon>UCCode1Check.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\MES\UCCode2Check.resx">
+      <DependentUpon>UCCode2Check.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCControls\MES\UCMesLogin.resx">
       <DependentUpon>UCMesLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +307,10 @@
       <Project>{e24f3998-ff55-4a8f-a7b5-b2dcc34eb3c2}</Project>
       <Name>BorwinAnalyse</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibSDK\LibSDK.csproj">
+      <Project>{a47ac91f-e7ad-4ba2-af85-b59b0872b372}</Project>
+      <Name>LibSDK</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mes\Mes.csproj">
       <Project>{63498bce-fb6c-4b1b-83cb-efb920803616}</Project>
       <Name>Mes</Name>
@@ -303,6 +331,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

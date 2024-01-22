@@ -28,8 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // btnRun
+            // 
+            this.btnRun.Values.Text = "上传";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Values.Text = "保存";
+            // 
+            // UCCode2Check
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "UCCode2Check";
+            this.Size = new System.Drawing.Size(1495, 640);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

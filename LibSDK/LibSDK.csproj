@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A47AC91F-E7AD-4BA2-AF85-B59B0872B372}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibSDK</RootNamespace>
+    <AssemblyName>LibSDK</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Docking">
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator">
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon">
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit">
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI.Excel.2.1.1\lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\NPOI.Excel.2.1.1\lib\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\标准软件最新版\2023-11-21\BorwinDotNet\bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\EnumControl.cs" />
+    <Compile Include="IO\Input.cs" />
+    <Compile Include="IO\InBase.cs" />
+    <Compile Include="IO\IOParm.cs" />
+    <Compile Include="IO\Output.cs" />
+    <Compile Include="KTimer.cs" />
+    <Compile Include="MotionControl.cs" />
+    <Compile Include="Motion\API\CardAPI.cs" />
+    <Compile Include="Motion\API\IOAPI.cs" />
+    <Compile Include="Motion\API\MotAPI.cs" />
+    <Compile Include="Motion\API\MotionAPI.cs" />
+    <Compile Include="Motion\API\SafeMove.cs" />
+    <Compile Include="Motion\API\ScpAPI.cs" />
+    <Compile Include="Motion\AxisParm.cs" />
+    <Compile Include="Motion\BoardSwitchCs.cs" />
+    <Compile Include="Motion\CardExpansion\DMC.cs" />
+    <Compile Include="Motion\CardExpansion\Dmc6040.cs" />
+    <Compile Include="Motion\CardExpansion\GCS.cs" />
+    <Compile Include="Motion\CardExpansion\GTS.cs" />
+    <Compile Include="Motion\CardInterface.cs" />
+    <Compile Include="Motion\CardLib\gc_scpt_itf.cs" />
+    <Compile Include="Motion\CardLib\gts.cs" />
+    <Compile Include="Motion\CardLib\IOC0640.cs" />
+    <Compile Include="Motion\CardLib\LTDMC.cs" />
+    <Compile Include="Motion\CardLib\nmc_lib20.cs" />
+    <Compile Include="Motion\DataXml.cs" />
+    <Compile Include="Motion\ErrorClass\ErrorClass.cs" />
+    <Compile Include="Motion\IOInterface.cs" />
+    <Compile Include="Motion\MotionBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCMotion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMotion.Designer.cs">
+      <DependentUpon>UCMotion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCMotionParamSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMotionParamSet.Designer.cs">
+      <DependentUpon>UCMotionParamSet.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UCMotion.resx">
+      <DependentUpon>UCMotion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMotionParamSet.resx">
+      <DependentUpon>UCMotionParamSet.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BorwinAnalyse\BorwinAnalyse.csproj">
+      <Project>{E24F3998-FF55-4A8F-A7B5-B2DCC34EB3C2}</Project>
+      <Name>BorwinAnalyse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

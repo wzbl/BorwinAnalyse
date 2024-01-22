@@ -222,25 +222,38 @@ namespace VisionModel
 
         /// <summary>
         /// 找空料带
+        /// 找到裁切位置
         /// </summary>
         private void FindEmptyStrips()
         {
-
+            //产品间距
+            double DesMaterial = 0;
+            //空料与非空料中间位置
+            double DesMidMaterial = 0;
         }
 
         /// <summary>
         /// 丝印
+        /// 模版比对，确认同一种料
         /// </summary>
         private void Match()
         {
 
         }
 
+        
+        /// <summary>
+        /// 产品尺寸,宽高,用于测值补偿
+        /// </summary>
+        private void MaterialSize()
+        {
+            double width = 0;
+            double height = 0;
+        }
+
         public void Log(string msg)
         {
             LogManager.Instance.WriteLog(new LogModel(LogType.相机日志, Name + ":" + msg));
         }
-
-
     }
 }

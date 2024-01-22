@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{34D4FA88-91F4-46FD-A45C-3DB509BD1894}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MotionLibrary</RootNamespace>
+    <AssemblyName>MotionLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Navigator">
+      <HintPath>E:\工具\皮肤\Krypton-master\Bin\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AxisParam\UCAxisParams.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AxisParam\UCAxisParams.Designer.cs">
+      <DependentUpon>UCAxisParams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AxisStatus.cs" />
+    <Compile Include="IOControls\DSignalLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IOControls\DSignalLamp.Designer.cs">
+      <DependentUpon>DSignalLamp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IOControls\InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IOControls\InputControl.Designer.cs">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IOControls\IOControl.cs" />
+    <Compile Include="IOControls\IOParameter.cs" />
+    <Compile Include="IOControls\OutputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IOControls\OutputControl.Designer.cs">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IOControls\UCMotionIO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IOControls\UCMotionIO.Designer.cs">
+      <DependentUpon>UCMotionIO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IOControls\UCSignalLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IOControls\UCSignalLamp.Designer.cs">
+      <DependentUpon>UCSignalLamp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\BaseTimer.cs" />
+    <Compile Include="Managers\IOManager.cs" />
+    <Compile Include="Managers\MotionManager.cs" />
+    <Compile Include="MotionControl.cs" />
+    <Compile Include="Motion_GC.cs" />
+    <Compile Include="nmc_lib20.cs" />
+    <Compile Include="OptionAxis.cs" />
+    <Compile Include="OptionMotion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AxisParam\UCAxisParams.resx">
+      <DependentUpon>UCAxisParams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IOControls\InputControl.resx">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IOControls\OutputControl.resx">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IOControls\UCMotionIO.resx">
+      <DependentUpon>UCMotionIO.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

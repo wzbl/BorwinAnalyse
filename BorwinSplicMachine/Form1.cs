@@ -115,6 +115,12 @@ namespace BorwinSplicMachine
             kryptonPanel1.Controls.Clear();
             kryptonPanel1.Controls.Add(MainControl.UCMes);
         }
+
+        private void kryptonRibbonGroupButton11_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCMotion);
+        }
     }
 
 

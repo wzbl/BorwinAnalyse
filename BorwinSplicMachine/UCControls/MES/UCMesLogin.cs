@@ -66,9 +66,7 @@ namespace BorwinSplicMachine.UCControls.MES
         public override void GetDataMesIn()
         {
             base.GetDataMesIn();
-            DataGridViewInAdd(MesControl.Instance.loginIn.UserName);
             DataGridViewInAdd(MesControl.Instance.loginIn.Pwd);
-
         }
 
         public override void GetDataMesOut()
@@ -114,7 +112,5 @@ namespace BorwinSplicMachine.UCControls.MES
             }
             GetDataMesOut();
         }
-
-
     }
 }

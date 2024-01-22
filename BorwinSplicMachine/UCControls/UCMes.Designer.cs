@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.richLog = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.comMesData = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
@@ -37,13 +38,12 @@
             this.chkIsEnableMes = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.richLog = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
             this.ucMesLogin1 = new BorwinSplicMachine.UCControls.MES.UCMesLogin();
+            this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ucCode1Check1 = new BorwinSplicMachine.UCControls.MES.UCCode1Check();
+            this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ucCode2Check1 = new BorwinSplicMachine.UCControls.MES.UCCode2Check();
+            this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.ucUpData1 = new BorwinSplicMachine.UCControls.MES.UCUpData();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -90,9 +90,18 @@
             this.kryptonSplitContainer1.SplitterDistance = 168;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
+            // richLog
+            // 
+            this.richLog.Dock = System.Windows.Forms.DockStyle.Right;
+            this.richLog.Location = new System.Drawing.Point(530, 0);
+            this.richLog.Name = "richLog";
+            this.richLog.Size = new System.Drawing.Size(608, 168);
+            this.richLog.TabIndex = 8;
+            this.richLog.Text = "";
+            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(28, 114);
+            this.btnSave.Location = new System.Drawing.Point(28, 101);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(193, 57);
             this.btnSave.TabIndex = 5;
@@ -114,7 +123,7 @@
             // kryptonWrapLabel2
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel2.Location = new System.Drawing.Point(26, 78);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(59, 15);
@@ -123,7 +132,7 @@
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(26, 43);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
@@ -160,7 +169,7 @@
             this.kryptonPage2,
             this.kryptonPage3,
             this.kryptonPage4});
-            this.kryptonNavigator1.SelectedIndex = 3;
+            this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(1138, 476);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -173,10 +182,18 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(1136, 450);
+            this.kryptonPage1.Size = new System.Drawing.Size(1136, 449);
             this.kryptonPage1.Text = "用户接口";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "404A2A72502A4F2FDFB45B546050FE75";
+            // 
+            // ucMesLogin1
+            // 
+            this.ucMesLogin1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucMesLogin1.Location = new System.Drawing.Point(0, 0);
+            this.ucMesLogin1.Name = "ucMesLogin1";
+            this.ucMesLogin1.Size = new System.Drawing.Size(1136, 449);
+            this.ucMesLogin1.TabIndex = 0;
             // 
             // kryptonPage2
             // 
@@ -186,10 +203,18 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(1136, 450);
+            this.kryptonPage2.Size = new System.Drawing.Size(1136, 449);
             this.kryptonPage2.Text = "条码1接口";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "F75DF81903C449C3ECB5E0E0FF8D7CF2";
+            // 
+            // ucCode1Check1
+            // 
+            this.ucCode1Check1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCode1Check1.Location = new System.Drawing.Point(0, 0);
+            this.ucCode1Check1.Name = "ucCode1Check1";
+            this.ucCode1Check1.Size = new System.Drawing.Size(1136, 449);
+            this.ucCode1Check1.TabIndex = 0;
             // 
             // kryptonPage3
             // 
@@ -199,10 +224,18 @@
             this.kryptonPage3.LastVisibleSet = true;
             this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage3.Name = "kryptonPage3";
-            this.kryptonPage3.Size = new System.Drawing.Size(1136, 450);
+            this.kryptonPage3.Size = new System.Drawing.Size(1136, 449);
             this.kryptonPage3.Text = "条码2接口";
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "BB5E40209D6A4C351EB4EBD5E05708A1";
+            // 
+            // ucCode2Check1
+            // 
+            this.ucCode2Check1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCode2Check1.Location = new System.Drawing.Point(0, 0);
+            this.ucCode2Check1.Name = "ucCode2Check1";
+            this.ucCode2Check1.Size = new System.Drawing.Size(1136, 449);
+            this.ucCode2Check1.TabIndex = 0;
             // 
             // kryptonPage4
             // 
@@ -212,49 +245,17 @@
             this.kryptonPage4.LastVisibleSet = true;
             this.kryptonPage4.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage4.Name = "kryptonPage4";
-            this.kryptonPage4.Size = new System.Drawing.Size(1136, 450);
+            this.kryptonPage4.Size = new System.Drawing.Size(1136, 449);
             this.kryptonPage4.Text = "数据上传接口";
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "6A4D1C4FC2F7455677851C5C0C5F27E4";
-            // 
-            // richLog
-            // 
-            this.richLog.Location = new System.Drawing.Point(286, 3);
-            this.richLog.Name = "richLog";
-            this.richLog.Size = new System.Drawing.Size(849, 163);
-            this.richLog.TabIndex = 8;
-            this.richLog.Text = "kryptonRichTextBox1";
-            // 
-            // ucMesLogin1
-            // 
-            this.ucMesLogin1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucMesLogin1.Location = new System.Drawing.Point(0, 0);
-            this.ucMesLogin1.Name = "ucMesLogin1";
-            this.ucMesLogin1.Size = new System.Drawing.Size(1136, 450);
-            this.ucMesLogin1.TabIndex = 0;
-            // 
-            // ucCode1Check1
-            // 
-            this.ucCode1Check1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucCode1Check1.Location = new System.Drawing.Point(0, 0);
-            this.ucCode1Check1.Name = "ucCode1Check1";
-            this.ucCode1Check1.Size = new System.Drawing.Size(1136, 450);
-            this.ucCode1Check1.TabIndex = 0;
-            // 
-            // ucCode2Check1
-            // 
-            this.ucCode2Check1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucCode2Check1.Location = new System.Drawing.Point(0, 0);
-            this.ucCode2Check1.Name = "ucCode2Check1";
-            this.ucCode2Check1.Size = new System.Drawing.Size(1136, 450);
-            this.ucCode2Check1.TabIndex = 0;
             // 
             // ucUpData1
             // 
             this.ucUpData1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucUpData1.Location = new System.Drawing.Point(0, 0);
             this.ucUpData1.Name = "ucUpData1";
-            this.ucUpData1.Size = new System.Drawing.Size(1136, 450);
+            this.ucUpData1.Size = new System.Drawing.Size(1136, 449);
             this.ucUpData1.TabIndex = 0;
             // 
             // UCMes

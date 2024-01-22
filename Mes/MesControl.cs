@@ -109,6 +109,7 @@ namespace Mes
         public MesValue Line = new MesValue("线体", "", true);
         public MesValue MachineCode = new MesValue("设备代码", "", true);
         public MesValue Wo = new MesValue("工单单号", "", true);
+        public MesValue UserName = new MesValue("用户名", "", true);
     }
 
     public class MesOut
@@ -122,7 +123,6 @@ namespace Mes
     public class LoginIn : MesIn
     {
         //上传
-        public MesValue UserName = new MesValue("用户名", "", true);
         public MesValue Pwd = new MesValue("密码", "", true);
     }
 

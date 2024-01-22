@@ -32,6 +32,7 @@ namespace BorwinSplicMachine.UCControls.MES
             DataGridViewInAdd(MesIn.Line);
             DataGridViewInAdd(MesIn.MachineCode);
             DataGridViewInAdd(MesIn.Wo);
+            DataGridViewInAdd(MesIn.UserName);
         }
 
         protected void DataGridViewInAdd(MesValue mesValue)

@@ -143,6 +143,10 @@
         NXNQSKYzauagkExn1CyEEEIIIYQQQgghhBBCCCFEX1Cr/QWVnpm/zVIUeAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <assembly alias="ComponentFactory.Krypton.Toolkit" name="ComponentFactory.Krypton.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
+  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipStyle" type="ComponentFactory.Krypton.Toolkit.LabelStyle, ComponentFactory.Krypton.Toolkit">
+    <value>SuperTip</value>
+  </data>
   <data name="kryptonRibbonGroupButton1.TextLine1" xml:space="preserve">
     <value>主界面</value>
   </data>
@@ -153,7 +157,7 @@
     <value>测值信息</value>
   </data>
   <data name="kryptonRibbonGroupButton11.TextLine1" xml:space="preserve">
-    <value>PLC</value>
+    <value>运动控制</value>
   </data>
   <data name="相机标定.TextLine1" xml:space="preserve">
     <value>相机</value>

@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Comm;
+using LibSDK;
 using Mes;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace BorwinSplicMachine
             CommonAnalyse.Instance.Load();
             BomManager.Instance.Init();
             MesControl.Instance.Load();
+            MotionControl.CardAPI.InitCard(2, new int[] { 6, 6 }, 1, new string[] { "", "" });
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             if (dataTable == null) { return; }
             

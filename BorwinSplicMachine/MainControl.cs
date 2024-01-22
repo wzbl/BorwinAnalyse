@@ -3,6 +3,7 @@ using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using BorwinSplicMachine.UCControls;
 using ComponentFactory.Krypton.Toolkit;
+using LibSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,7 @@ namespace BorwinSplicMachine
         public UCLCRSearch UCLCRSearch { get; set; }
 
         public UCMes UCMes { get; set; }
+        public UCMotion UCMotion { get; set; }
 
         Form1 MainForm;
         public MainControl(Form1 MainForm)
@@ -65,9 +67,9 @@ namespace BorwinSplicMachine
             CalibrationCCD =new CalibrationCCD();
             UCLCRSearch = new UCLCRSearch();
             UCMes= new UCMes();
+            UCMotion = new UCMotion();
             this.MainForm = MainForm;
         }
-
 
         public async void UpdataLanguage()
         {

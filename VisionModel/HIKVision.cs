@@ -68,6 +68,10 @@ namespace VisionModel
                         {
                             CameraR.CreatCamera(ref stDevInfo);
                         }
+                        else
+                        {
+                            CameraL.CreatCamera(ref stDevInfo);
+                        }
                     }
                 }
                 LogManager.Instance.WriteLog(new LogModel(LogType.相机日志, "初始化相机完成"));
@@ -76,7 +80,6 @@ namespace VisionModel
             {
                 AppExit(this, new EventArgs());
             }
-
             //注册回调
             try
             {
@@ -133,7 +136,7 @@ namespace VisionModel
                 {
                    
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(2000);
             }
         }
 
