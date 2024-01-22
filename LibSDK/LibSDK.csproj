@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AxisControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AxisControl.Designer.cs">
+      <DependentUpon>AxisControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enums\EnumControl.cs" />
     <Compile Include="IO\Input.cs" />
     <Compile Include="IO\InBase.cs" />
@@ -109,6 +115,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AxisControl.resx">
+      <DependentUpon>AxisControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCMotion.resx">
       <DependentUpon>UCMotion.cs</DependentUpon>
     </EmbeddedResource>

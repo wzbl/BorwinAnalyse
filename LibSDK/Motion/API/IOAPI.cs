@@ -34,6 +34,7 @@ namespace LibSDK.Motion
             if (cIOType.Invert) { return !BoolRtn; }
             else { return BoolRtn; }
         }
+
         /// <summary>
         /// 读输入IO(strig  IO名称)
         /// </summary>
@@ -59,6 +60,7 @@ namespace LibSDK.Motion
             if (cIO.Invert) { return !BoolRtn; }
             else { return BoolRtn;}
         }
+
         /// <summary>
         /// 读取输入IO(参数（int IO序号)
         /// </summary>
@@ -107,6 +109,7 @@ namespace LibSDK.Motion
             }
             return BoolRtn;
         }
+
         /// <summary>
         /// 读取输出IO(参数（strig IO名称)
         /// </summary>
@@ -204,6 +207,7 @@ namespace LibSDK.Motion
             }
             return BoolRtn;
         }
+
         /// <summary>
         /// 写输出IO(参数（int IO序号)
         /// </summary>

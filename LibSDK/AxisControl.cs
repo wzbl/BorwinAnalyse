@@ -1,5 +1,4 @@
-﻿using LibSDK.Motion;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,16 +10,11 @@ using System.Windows.Forms;
 
 namespace LibSDK
 {
-    public partial class UCMotionParamSet : UserControl
+    public partial class AxisControl : UserControl
     {
-        public UCMotionParamSet()
+        public AxisControl()
         {
             InitializeComponent();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

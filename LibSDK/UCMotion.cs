@@ -23,15 +23,12 @@ namespace LibSDK
         private void UCMotion_Load(object sender, EventArgs e)
         {
             xzhou =  MotionControl.AddAxis("1", Enums.MotorType.Step);
-            CAxisParm[] obj = new CAxisParm[AxisParm.AParms.Count];
-            for (int i = 0; i < AxisParm.AParms.Count;i++)
-            {
-               
-                obj[i]= AxisParm.AParms[i];
-          
-            }
-            
-            PPTAxisParam.PPTParam.SelectedObject = obj;
+            //CAxisParm[] obj = new CAxisParm[AxisParm.AParms.Count];
+            //for (int i = 0; i < AxisParm.AParms.Count;i++)
+            //{
+            //    obj[i]= AxisParm.AParms[i];
+            //}
+         
         }
 
 

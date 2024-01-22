@@ -1,6 +1,6 @@
 ﻿namespace LibSDK
 {
-    partial class UCMotion
+    partial class AxisControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // UCMotion
+            // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "UCMotion";
-            this.Size = new System.Drawing.Size(1436, 709);
+            this.Name = "AxisControl";
+            this.Size = new System.Drawing.Size(403, 260);
             this.ResumeLayout(false);
 
         }

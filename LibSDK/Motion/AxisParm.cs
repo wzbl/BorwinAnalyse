@@ -10,16 +10,28 @@ namespace LibSDK.Motion
 {
     public class AxisParm
     {
-        public static List<CAxisParm> AParms = new List<CAxisParm>();
+
+        [Browsable(false)]
+        public static  List<CAxisParm> AParms =new List<CAxisParm>();
+
+        [Category("运动轴")]
+        public CAxisParm A { get { return AParms[0]; } }
+        [Category("运动轴")]
+        public CAxisParm B { get { return AParms[1]; } }
+        [Category("运动轴")]
+        public CAxisParm C { get { return AParms[2]; } }
+        [Category("运动轴")]
+        public CAxisParm D { get { return AParms[3]; } }
 
         [Browsable(false)]
         private string MyAxisParmPath = @"Ini/AxisCfg.xml";
-        
+
         public AxisParm()
         {
             AxisConfigIni();
         }
 
+        [Browsable(false)]
         /// <summary>
         /// 默认加载路径
         /// </summary>
@@ -129,12 +141,12 @@ namespace LibSDK.Motion
         /// <summary>
         /// 轴名称
         /// </summary>
-         [Category("基础信息"), Description("轴名称"), DisplayName("轴名称")]
+        [Category("基础信息"), Description("轴名称"), DisplayName("轴名称")]
         public string AxisName { get; set; }
         /// <summary>
         /// 轴编号（从1开始）
         /// </summary>
-          [Category("基础信息"),Description("轴编号（从1开始）"), DisplayName("轴编号（从1开始）")]
+        [Category("基础信息"), Description("轴编号（从1开始）"), DisplayName("轴编号（从1开始）")]
         public short AxisID { get; set; }
         [Category("基础信息"), Description("控制卡ID"), DisplayName("控制卡ID")]
         public short CardID { get; set; }
@@ -246,6 +258,6 @@ namespace LibSDK.Motion
         /// </summary>
         [Category("回零"), Description("回零捕获电平"), DisplayName("回零捕获电平")]
         public short Level { get; set; }
-      
+
     }
 }
