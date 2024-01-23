@@ -16,7 +16,7 @@ namespace LibSDK.Motion
         /// </summary>
         /// <param name="cIOType"></param>
         /// <returns></returns>
-        public bool IoReadIn(IO.IOParm.CIOType cIOType)
+        public bool IoReadIn(IO.CIOType cIOType)
         {
             bool BoolRtn = false;
             if (cIOType.Extmdl == 0)
@@ -43,7 +43,7 @@ namespace LibSDK.Motion
         public bool IoReadIn(string IoName)
         {
            bool BoolRtn=false;
-           IO.IOParm.CIOType cIO= MotionControl.IOParm.GetIOprame(IoName);
+           IO.CIOType cIO= MotionControl.IOParmIn.GetIOprame(IoName);
 
            if(cIO.Extmdl==0)
             {
@@ -69,7 +69,7 @@ namespace LibSDK.Motion
         public bool IoReadIn(int Index)
         {
             bool BoolRtn=false;
-            IO.IOParm.CIOType cIO = MotionControl.IOParm.GetIOprame(Index);
+            IO.CIOType cIO = MotionControl.IOParmIn.GetIOprame(Index);
             
             if (cIO.Extmdl == 0)
             {
@@ -92,7 +92,7 @@ namespace LibSDK.Motion
         /// </summary>
         /// <param name="cIOType"></param>
         /// <returns></returns>
-        public bool IoRadOut(IO.IOParm.CIOType cIOType)
+        public bool IoRadOut(IO.CIOType cIOType)
         {
             bool BoolRtn = false;
             if (cIOType.Extmdl == 0)
@@ -118,7 +118,7 @@ namespace LibSDK.Motion
         public bool IoRadOut(string IoName)
         {
             bool BoolRtn = false;
-            IO.IOParm.CIOType cIO = MotionControl.IOParm.GetIOprame(IoName);
+            IO.CIOType cIO = MotionControl.IOParmOut.GetIOprame(IoName);
             if (cIO.Extmdl == 0)
             {
                 BoolRtn= Card.API.GetDo(cIO.CardNum, cIO.IONum);
@@ -142,7 +142,7 @@ namespace LibSDK.Motion
         public bool IoRadOut(int Index)
         {
             bool BoolRtn = false;
-            IO.IOParm.CIOType cIO = MotionControl.IOParm.GetIOprame(Index);
+            IO.CIOType cIO = MotionControl.IOParmOut.GetIOprame(Index);
             if (cIO.Extmdl == 0)
             {
                 BoolRtn= Card.API.GetDo(cIO.CardNum, cIO.IONum);
@@ -164,7 +164,7 @@ namespace LibSDK.Motion
         /// <param name="cIOType"></param>
         /// <param name="oUTtype"></param>
         /// <returns></returns>
-        public bool IoWrite(IO.IOParm.CIOType cIOType, short Pvalue)
+        public bool IoWrite(IO.CIOType cIOType, short Pvalue)
         {
             bool BoolRtn = false;
             if (cIOType.Extmdl == 0)
@@ -191,7 +191,7 @@ namespace LibSDK.Motion
         public bool IoWrite(string IoName, short Pvalue)
         {
             bool BoolRtn = false;
-            IO.IOParm.CIOType cIO = MotionControl.IOParm.GetIOprame(IoName);
+            IO.CIOType cIO = MotionControl.IOParmOut.GetIOprame(IoName);
 
             if (cIO.Extmdl == 0)
             {
@@ -217,7 +217,7 @@ namespace LibSDK.Motion
         public bool IoWrite(int Index, OUTtype oUTtype)
         {
             bool BoolRtn = false;
-            IO.IOParm.CIOType cIO = MotionControl.IOParm.GetIOprame(Index);
+            IO.CIOType cIO = MotionControl.IOParmOut.GetIOprame(Index);
 
             if (cIO.Extmdl == 0)
             {

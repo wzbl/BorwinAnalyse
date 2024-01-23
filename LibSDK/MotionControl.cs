@@ -12,7 +12,8 @@ namespace LibSDK
 {
     public class MotionControl
     {
-        public static IOParm IOParm { get; internal set; }
+        public static IOParm IOParmIn = new IOParm("In");
+        public static IOParm IOParmOut = new IOParm("Out");
         public static EventHandler IoRefEventHandler { get; internal set; }
         public static int[] ErrorCode = { -1, 0, 1, 2, 3, 4, 5 };
         public static EnumControl EnumControl = new EnumControl();
@@ -24,21 +25,70 @@ namespace LibSDK
         public static bool HomeFlag = false;
         public static CardAPI CardAPI = new CardAPI();
 
-        public static MotAPI AddAxis(string AxisName, MotorType motorType)
+        public static MotAPI AddAxis(string AxisName)
         {
             MotAPI motAPI = null;
             foreach (CAxisParm cAxisParm in AxisParm.AParms)
             {
                 if (cAxisParm.AxisName == AxisName)
                 {
-                    motAPI = new MotAPI(cAxisParm, motorType);
-                    motAPI = new MotAPI(cAxisParm, motorType);
+                    motAPI = new MotAPI(cAxisParm);
                     Motions.Add(AxisName, motAPI);
                 }
+            }
+            if (motAPI == null)
+            {
+                CAxisParm AxisParms = new CAxisParm();
+                AxisParms.AxisName = AxisName;
+                AxisParm.AParms.Add(AxisParms);
+                Motions.Add(AxisName, motAPI);
+                motAPI = new MotAPI(AxisParms);
             }
             return motAPI;
         }
 
+        public static void AddInPutIO(string Name)
+        {
+            Input input = null;
+            foreach (CIOType iOType in IOParmIn.IOParms)
+            {
+                if (iOType.IoName == Name)
+                {
+                    input = new Input(iOType);
+                    InPort.Add(Name, input);
+                }
+            }
+            if (input == null)
+            {
+                CIOType CIOType = new CIOType();
+                CIOType.IoName = Name;
+                CIOType.IONum = (short)(IOParmIn.IOParms.Count);
+                input = new Input(CIOType);
+                IOParmIn.IOParms.Add(CIOType);
+                InPort.Add(Name, input);
+            }
+        }
+        public static void AddOutPutIO(string Name)
+        {
+            Output input = null;
+            foreach (CIOType iOType in IOParmOut.IOParms)
+            {
+                if (iOType.IoName == Name)
+                {
+                    input = new Output(iOType);
+                    Output.Add(Name, input);
+                }
+            }
+            if (input == null)
+            {
+                CIOType CIOType = new CIOType();
+                CIOType.IoName = Name;
+                CIOType.IONum = (short)(IOParmOut.IOParms.Count);
+                IOParmOut.IOParms.Add(CIOType);
+                input = new Output(CIOType);
+                Output.Add(Name, input);
+            }
 
+        }
     }
 }

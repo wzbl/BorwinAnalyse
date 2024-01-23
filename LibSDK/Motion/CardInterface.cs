@@ -164,12 +164,14 @@ namespace LibSDK.Motion
         /// <param name="option"></param>
         /// <returns></returns>
         bool AxisStop(short CardNum, short Axis, int option);
+
         /// <summary>
         /// 紧急停止所有轴
         /// </summary>
         /// <param name="CardNum"></param>
         /// <returns></returns>
         bool EmgStop(short CardNum);
+
         /// <summary>
         /// 单轴回零
         /// </summary>

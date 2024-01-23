@@ -143,9 +143,30 @@
         NXNQSKYzauagkExn1CyEEEIIIYQQQgghhBBCCCFEX1Cr/QWVnpm/zVIUeAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <assembly alias="ComponentFactory.Krypton.Toolkit" name="ComponentFactory.Krypton.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
-  <data name="kryptonRibbon1.RibbonAppButton.AppButtonToolTipStyle" type="ComponentFactory.Krypton.Toolkit.LabelStyle, ComponentFactory.Krypton.Toolkit">
-    <value>SuperTip</value>
+  <data name="kryptonRibbonTab1.Text" xml:space="preserve">
+    <value>主界面</value>
+  </data>
+  <data name="kryptonRibbon1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1264, 142</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="kryptonRibbon1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbon1.Name" xml:space="preserve">
+    <value>kryptonRibbon1</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbon1.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbon, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbon1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbon1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="kryptonRibbonGroup1.TextLine1" xml:space="preserve">
+    <value>主菜单</value>
   </data>
   <data name="kryptonRibbonGroupButton1.TextLine1" xml:space="preserve">
     <value>主界面</value>
@@ -182,31 +203,6 @@
   </data>
   <data name="kryptonRibbonGroupButton4.TextLine1" xml:space="preserve">
     <value>Mes</value>
-  </data>
-  <data name="kryptonRibbonGroup1.TextLine1" xml:space="preserve">
-    <value>主菜单</value>
-  </data>
-  <data name="kryptonRibbonTab1.Text" xml:space="preserve">
-    <value>主界面</value>
-  </data>
-  <data name="kryptonRibbon1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1264, 142</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="kryptonRibbon1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbon1.Name" xml:space="preserve">
-    <value>kryptonRibbon1</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbon1.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbon, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbon1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbon1.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="kryptonPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">

@@ -72,9 +72,9 @@
             resources.ApplyResources(this.kryptonRibbon1, "kryptonRibbon1");
             this.kryptonRibbon1.RibbonAppButton.AppButtonImage = ((System.Drawing.Image)(resources.GetObject("kryptonRibbon1.RibbonAppButton.AppButtonImage")));
             this.kryptonRibbon1.RibbonAppButton.AppButtonMaxRecentSize = new System.Drawing.Size(500, 500);
-            this.kryptonRibbon1.RibbonAppButton.AppButtonToolTipStyle = ((ComponentFactory.Krypton.Toolkit.LabelStyle)(resources.GetObject("kryptonRibbon1.RibbonAppButton.AppButtonToolTipStyle")));
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
             // 
             // kryptonRibbonTab1
@@ -106,13 +106,11 @@
             // kryptonRibbonGroupButton1
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton1, "kryptonRibbonGroupButton1");
-            this.kryptonRibbonGroupButton1.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton1.Click += new System.EventHandler(this.ShowUCMain_Click);
             // 
             // kryptonRibbonGroupButton2
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton2, "kryptonRibbonGroupButton2");
-            this.kryptonRibbonGroupButton2.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton2.Click += new System.EventHandler(this.kryptonRibbonGroupButton2_Click);
             // 
             // kryptonRibbonGroupTriple4
@@ -125,19 +123,16 @@
             // kryptonRibbonGroupButton10
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton10, "kryptonRibbonGroupButton10");
-            this.kryptonRibbonGroupButton10.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton10.Click += new System.EventHandler(this.kryptonRibbonGroupButton10_Click);
             // 
             // kryptonRibbonGroupButton11
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton11, "kryptonRibbonGroupButton11");
-            this.kryptonRibbonGroupButton11.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton11.Click += new System.EventHandler(this.kryptonRibbonGroupButton11_Click);
             // 
             // 相机标定
             // 
             resources.ApplyResources(this.相机标定, "相机标定");
-            this.相机标定.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.相机标定.Click += new System.EventHandler(this.kryptonRibbonGroupButton12_Click);
             // 
             // kryptonRibbonGroupTriple5
@@ -150,19 +145,16 @@
             // kryptonRibbonGroupButton3
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton3, "kryptonRibbonGroupButton3");
-            this.kryptonRibbonGroupButton3.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton3.Click += new System.EventHandler(this.ShowUCBom_Click);
             // 
             // kryptonRibbonGroupButton12
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton12, "kryptonRibbonGroupButton12");
-            this.kryptonRibbonGroupButton12.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton12.Click += new System.EventHandler(this.ShowUCBomSearch_Click);
             // 
             // kryptonRibbonGroupButton13
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton13, "kryptonRibbonGroupButton13");
-            this.kryptonRibbonGroupButton13.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton13.Click += new System.EventHandler(this.ShowUCBomSet_Click);
             // 
             // kryptonRibbonGroupTriple6
@@ -175,19 +167,16 @@
             // kryptonRibbonGroupButton14
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton14, "kryptonRibbonGroupButton14");
-            this.kryptonRibbonGroupButton14.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton14.Click += new System.EventHandler(this.ShowUCBaseSet_Click);
             // 
             // kryptonRibbonGroupButton15
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton15, "kryptonRibbonGroupButton15");
-            this.kryptonRibbonGroupButton15.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton15.Click += new System.EventHandler(this.ShowLanguageSearch_Click);
             // 
             // kryptonRibbonGroupButton16
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton16, "kryptonRibbonGroupButton16");
-            this.kryptonRibbonGroupButton16.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton16.Click += new System.EventHandler(this.ShowUCParam_Click);
             // 
             // kryptonRibbonGroupTriple2
@@ -198,7 +187,6 @@
             // kryptonRibbonGroupButton4
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton4, "kryptonRibbonGroupButton4");
-            this.kryptonRibbonGroupButton4.ToolTipStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.SuperTip;
             this.kryptonRibbonGroupButton4.Click += new System.EventHandler(this.kryptonRibbonGroupButton4_Click);
             // 
             // kryptonPanel1

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LibSDK.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,20 +10,29 @@ using System.Threading.Tasks;
 
 namespace LibSDK.Motion
 {
+    [TypeConverter(typeof(NullConverter))]
     public class AxisParm
     {
 
-        [Browsable(false)]
-        public static  List<CAxisParm> AParms =new List<CAxisParm>();
+        [Category("轴")]
+        public static List<CAxisParm> AParms = new List<CAxisParm>();
 
-        [Category("运动轴")]
-        public CAxisParm A { get { return AParms[0]; } }
-        [Category("运动轴")]
-        public CAxisParm B { get { return AParms[1]; } }
-        [Category("运动轴")]
-        public CAxisParm C { get { return AParms[2]; } }
-        [Category("运动轴")]
-        public CAxisParm D { get { return AParms[3]; } }
+        //[Category("运动轴")]
+        //public CAxisParm A { get { return AParms[0]; } }
+        //[Category("运动轴")]
+        //public CAxisParm B { get { return AParms[1]; } }
+        //[Category("运动轴")]
+        //public CAxisParm C { get { return AParms[2]; } }
+        //[Category("运动轴")]
+        //public CAxisParm D { get { return AParms[3]; } }
+        //[Category("运动轴")]
+        //public CAxisParm E { get { return AParms[4]; } }
+        //[Category("运动轴")]
+        //public CAxisParm F { get { return AParms[5]; } }
+        //[Category("运动轴")]
+        //public CAxisParm G { get { return AParms[6]; } }
+        //[Category("运动轴")]
+        //public CAxisParm H { get { return AParms[7]; } }
 
         [Browsable(false)]
         private string MyAxisParmPath = @"Ini/AxisCfg.xml";
@@ -80,9 +91,7 @@ namespace LibSDK.Motion
         }
         public void Read(string Path)
         {
-
             Rwfile.CDataXml XML = new Rwfile.CDataXml();
-
             AParms = XML.DeserializeFile<List<CAxisParm>>(Path);
         }
         #endregion
@@ -135,97 +144,104 @@ namespace LibSDK.Motion
         #endregion
     }
 
-
+    [TypeConverter(typeof(NullConverter))]
     public class CAxisParm
     {
         /// <summary>
         /// 轴名称
         /// </summary>
-        [Category("基础信息"), Description("轴名称"), DisplayName("轴名称")]
+        [Category("基础信息"),ReadOnly(false), Description("轴名称"), DisplayName("轴名称")]
         public string AxisName { get; set; }
         /// <summary>
         /// 轴编号（从1开始）
         /// </summary>
-        [Category("基础信息"), Description("轴编号（从1开始）"), DisplayName("轴编号（从1开始）")]
+        [Category("基础信息"), ReadOnly(false), Description("轴编号（从1开始）"), DisplayName("轴编号")]
         public short AxisID { get; set; }
-        [Category("基础信息"), Description("控制卡ID"), DisplayName("控制卡ID")]
+        [Category("基础信息"), ReadOnly(false),Description("控制卡ID"), DisplayName("控制卡ID")]
         public short CardID { get; set; }
         /// <summary>
         /// 伺服细分
         /// </summary>
-        [Category("基础信息"), Description("伺服细分"), DisplayName("伺服细分")]
+        [Category("基础信息"), ReadOnly(false), Description("伺服细分"), DisplayName("伺服细分")]
         public int GearRatio { get; set; }
         /// <summary>
         /// 导程
         /// </summary>
-        [Category("基础信息"), Description("导程"), DisplayName("导程")]
+        [Category("基础信息"), ReadOnly(false), Description("导程"), DisplayName("导程")]
         public float Lead { get; set; }
         /// <summary>
         /// 减速比
         /// </summary>
-        [Category("基础信息"), Description("减速比"), DisplayName("减速比")]
-        public float ScaleFactor { get; set; }
+        [Category("基础信息"), ReadOnly(false), Description("减速比"), DisplayName("减速比")]
+        public float ScaleFactor { get; set; } = 1;
         /// <summary>
         /// 电子齿轮比
         /// </summary>
-        [Category("基础信息"), Description("电子齿轮比"), DisplayName("电子齿轮比")]
-        public float ELGearRatio { get; set; }
+        [Category("基础信息"), ReadOnly(false), Description("电子齿轮比"), DisplayName("电子齿轮比")]
+        public float ELGearRatio { get; set; } = 1;
 
         /// <summary>
         /// 软件模块号
         /// </summary>
-        [Category("基础信息"), Description("软件模块号"), DisplayName("软件模块号")]
+        [Category("基础信息"), ReadOnly(false), Description("软件模块号"), DisplayName("软件模块号")]
         public int Sofmodule { get; set; }
         /// <summary>
         /// 电机类型 0，伺服电机 1，步进电机 ，2直线电机
         /// </summary>
-        [Category("基础信息"), Description("电机类型 0，伺服电机 1，步进电机 ，2直线电机"), DisplayName("电机类型 0，伺服电机 1，步进电机 ，2直线电机")]
-        public int MotType { get; set; }
+        [Category("基础信息"), ReadOnly(false), Description("电机类型 0，伺服电机 1，步进电机 ，2直线电机"), DisplayName("电机类型")]
+        public MotorType MotType { get; set; }
 
         /// <summary>
         /// 回零方向（0为负方向，1为正方向）
         /// </summary>
-        [Category("回零"), Description("回零方向（0为负方向，1为正方向）"), DisplayName("回零方向（0为负方向，1为正方向）")]
-        public short HomeDirection { get; set; }
+        [Category("回零"), ReadOnly(false), Description("回零方向（0为负方向，1为正方向）"), DisplayName("回零方向")]
+        public short HomeDirection { get; set; } = 0;
         /// <summary>
         /// 回零模式
         /// </summary>
-        [Category("回零"), Description("回零模式"), DisplayName("回零模式")]
-        public int HomeMode { get; set; }
+        [Category("回零"), ReadOnly(false), Description("回零模式"), DisplayName("回零模式")]
+        public ReturnMode HomeMode { get; set; }
         /// <summary>
         /// 回零速度
         /// </summary>
-        [Category("回零"), Description("回零速度"), DisplayName("回零速度")]
-        public float HomeSpd { get; set; }
+        [Category("回零"), ReadOnly(false), Description("回零速度"), DisplayName("回零速度")]
+        public float HomeSpd { get; set; } = 10;
         /// <summary>
         /// 寻找原点速度
         /// </summary>
-        [Category("回零"), Description("寻找原点速度"), DisplayName("寻找原点速度")]
-        public float SearchHomeSpd { get; set; }
+        [Category("回零"), ReadOnly(false), Description("寻找原点速度"), DisplayName("寻找原点速度")]
+        public float SearchHomeSpd { get; set; } = 2;
         /// <summary>
         /// 回零偏移量
         /// </summary>
-        [Category("回零"), Description("回零偏移量"), DisplayName("回零偏移量")]
-        public float Homeoffset { get; set; }
+        [Category("回零"), ReadOnly(false), Description("回零偏移量"), DisplayName("回零偏移量")]
+        public float Homeoffset { get; set; } = 50;
         /// <summary>
         /// 起始反向距离(不用时设为0)
         /// </summary>
-        [Category("回零"), Description("起始反向距离(不用时设为0)"), DisplayName("起始反向距离(不用时设为0)")]
+        [Category("回零"), ReadOnly(false), Description("起始反向距离(不用时设为0)"), DisplayName("起始反向距离")]
         public int HomeRetPos { get; set; } = 0;
         /// <summary>
         ///  // 反向运动时离开开关距离(可选,不用时设为0)
         /// </summary>
-        [Category("回零"), Description("反向运动时离开开关距离(可选,不用时设为0)"), DisplayName("反向运动时离开开关距离(可选,不用时设为0)")]
+        [Category("回零"), ReadOnly(false), Description("反向运动时离开开关距离(可选,不用时设为0)"), DisplayName("反向运动时离开开关距离")]
         public int HomeretSwOffset { get; set; } = 0;
         /// <summary>
         /// 安全距离,回零时最远搜寻距离(可选,不用时设为0,不限制距离)
         /// </summary>
-        [Category("回零"), Description("安全距离,回零时最远搜寻距离"), DisplayName("安全距离,回零时最远搜寻距离(可选,不用时设为0,不限制距离)")]
+        [Category("回零"), ReadOnly(false), Description("安全距离,回零时最远搜寻距离"), DisplayName("安全距离,回零时最远搜寻距离")]
         public int HomesafeLen { get; set; } = 0;
+
+        /// <summary>
+        ///回零捕获电平
+        /// </summary>
+        [Category("回零"), Description("回零捕获电平"), DisplayName("回零捕获电平")]
+        public short Level { get; set; }
+
         /// <summary>
         /// 最大加速度
         /// </summary>
-        [Category("运动"), Description("最大加速度"), DisplayName("最大加速度")]
+        [Category("运动"), ReadOnly(false), Description("最大加速度"), DisplayName("最大加速度")]
         public float MaxAcc { get; set; }
         /// <summary>
         /// 最大手动速度
@@ -252,12 +268,26 @@ namespace LibSDK.Motion
         /// </summary>
         [Category("运动"), Description("负向限位"), DisplayName("负向限位")]
         public float NegLimit { get; set; }
+    }
 
-        /// <summary>
-        ///回零捕获电平
-        /// </summary>
-        [Category("回零"), Description("回零捕获电平"), DisplayName("回零捕获电平")]
-        public short Level { get; set; }
+    public class NullConverter : ExpandableObjectConverter
+    {
+        #region ExpandableObjectConverter
 
+        public override bool CanConvertTo(ITypeDescriptorContext context, System.Type destinationType)
+        {
+            return base.CanConvertTo(context, destinationType);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+            {
+                return string.Format("");
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+
+        #endregion
     }
 }

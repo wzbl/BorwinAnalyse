@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LibSDK.Motion;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,54 +13,20 @@ namespace LibSDK.IO
 {
     public class IOParm
     {
-        public static List<CIOType> IOParms = new List<CIOType>();
+        public  List<CIOType> IOParms = new List<CIOType>();
 
-        private string MyIOParmPath = @"./IOCfg.xml";
+        private string MyIOParmPath = @"Ini/OutIOCfg.xml";
 
         //private string MyIOParmPath =SDK.GlobPath+"\\IOCfg.xml";
-        public IOParm()
+        public IOParm(string type)
         {
+            if (type == "In")
+            {
+                MyIOParmPath = @"Ini/InIOCfg.xml";
+            }
             IOConfigIni();
         }
-        public class CIOType
-        {
-            /// <summary>
-            /// IO名称
-            /// </summary>
-            public string IoName { get; set; }
-            /// <summary>
-            /// IO类型
-            /// </summary>u
-            public string IOType { get; set; }
-            /// <summary>
-            /// 卡号
-            /// </summary>
-            public short CardNum { get; set; }
-            /// <summary>
-            /// 模块号从0开始
-            /// </summary>
-            public short Extmdl { get; set; }
-            /// <summary>
-            /// IO端口号
-            /// </summary>
-            public short IONum { get; set; }
-            /// <summary>
-            /// 是/否(取反)
-            /// </summary>
-            public bool Invert { get; set; }
-            /// <summary>
-            ///  所属软件模块
-            /// </summary>
-            public int SMode { get; set; }
-            /// <summary>
-            /// 检测延时
-            /// </summary>
-            public double Delay { get; set;}
-            /// <summary>
-            /// 序号
-            /// </summary>
-            public int Index { get; set; }
-        }
+     
 
         public string IOParmPath
         {
@@ -74,24 +42,11 @@ namespace LibSDK.IO
                 }
                 else
                 {
-                    MyIOParmPath = @"./IOCfg.xml";
+                    MyIOParmPath = @"Ini/IOCfg.xml";
                 }
             }
         }
 
-        /// <summary>
-        /// 加载IO参数
-        /// </summary>
-        /// <param name="FPath"></param>
-        public void IOConfigIni(string FPath)
-        {
-            if (!File.Exists(FPath))
-            {
-                //new Alarm.Alarm().MesShow(0, "File Error", "Path:" + FPath + "<--未找到IO参数配置文件！！！", "OK");
-                return;
-            }
-            Read(FPath);
-        }
         /// <summary>
         /// 加载IO参数
         /// </summary>
@@ -103,18 +58,18 @@ namespace LibSDK.IO
                 //new Alarm.Alarm().MesShow(0, "File Error", "Path:" + path + "<--未找到IO参数配置文件！！！", "OK");
                 return;
             }
-            Read(path);
+            Read();
         }
-        public void Write(string Path)
+        public void Write()
         {
             LibSDK.Rwfile.CDataXml XML = new Rwfile.CDataXml();
-            XML.Serializer<List<CIOType>>(Path, IOParms);
+            XML.Serializer<List<CIOType>>(MyIOParmPath, IOParms);
         }
-        public void Read(string Path)
+        public void Read()
         {
             Rwfile.CDataXml XML = new Rwfile.CDataXml();
 
-            IOParms = XML.DeserializeFile<List<CIOType>>(Path);
+            IOParms = XML.DeserializeFile<List<CIOType>>(MyIOParmPath);
         }
         public CIOType GetIOprame(string IOName)
         {
@@ -128,9 +83,51 @@ namespace LibSDK.IO
             }
             return cIO;
         }
+
        public CIOType GetIOprame(int Index)
         {
           return IOParms[Index];
         }
+    }
+
+    [TypeConverter(typeof(NullConverter))]
+    public class CIOType
+    {
+        /// <summary>
+        /// IO名称
+        /// </summary>
+        public string IoName { get; set; }
+        /// <summary>
+        /// IO类型
+        /// </summary>u
+        public string IOType { get; set; }
+        /// <summary>
+        /// 卡号
+        /// </summary>
+        public short CardNum { get; set; }
+        /// <summary>
+        /// 模块号从0开始
+        /// </summary>
+        public short Extmdl { get; set; }
+        /// <summary>
+        /// IO端口号
+        /// </summary>
+        public short IONum { get; set; }
+        /// <summary>
+        /// 是/否(取反)
+        /// </summary>
+        public bool Invert { get; set; }
+        /// <summary>
+        ///  所属软件模块
+        /// </summary>
+        public int SMode { get; set; }
+        /// <summary>
+        /// 检测延时
+        /// </summary>
+        public double Delay { get; set; }
+        /// <summary>
+        /// 序号
+        /// </summary>
+        public int Index { get; set; }
     }
 }

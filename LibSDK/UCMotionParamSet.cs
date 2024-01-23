@@ -20,7 +20,20 @@ namespace LibSDK
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+            if (this.Tag.ToString().Trim() == "Axis")
+            {
+                MotionControl.AxisParm.Write();
+            }
+            else if (this.Tag.ToString().Trim() == "INIO")
+            {
+                MotionControl.IOParmIn.Write();
+            }
+            else if (this.Tag.ToString().Trim() == "OUTIO")
+            {
+                MotionControl.IOParmOut.Write();
+            }
+
+
         }
     }
 }

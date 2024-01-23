@@ -14,6 +14,8 @@ using BorwinAnalyse.UCControls;
 using ComponentFactory.Krypton.Toolkit;
 using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.Forms;
+using LibSDK.Motion;
+using LibSDK;
 
 namespace BorwinSplicMachine
 {
@@ -24,6 +26,7 @@ namespace BorwinSplicMachine
         {
             InitializeComponent();
             MainControl=new MainControl(this);
+            MainControl.Init();
         }
      
         private void Form1_Load(object sender, EventArgs e)
@@ -33,7 +36,7 @@ namespace BorwinSplicMachine
                 this.components= new System.ComponentModel.Container();
             }
             UpdataLanguage();
-      
+            
         }
         public void UpdataLanguage()
         {

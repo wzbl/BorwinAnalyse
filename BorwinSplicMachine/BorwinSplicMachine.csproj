@@ -173,6 +173,7 @@
       <DependentUpon>UCLCRSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="MainControl.cs" />
+    <Compile Include="MotControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UCControls\MES\UCBase.cs">

@@ -4,6 +4,8 @@ using BorwinSplicMachine.LCR;
 using BorwinSplicMachine.UCControls;
 using ComponentFactory.Krypton.Toolkit;
 using LibSDK;
+using LibSDK.IO;
+using LibSDK.Motion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,12 +43,14 @@ namespace BorwinSplicMachine
 
         public UCFlowControl UCFlowControl { get; set; }
 
-        public CalibrationCCD CalibrationCCD { get; set;}
+        public CalibrationCCD CalibrationCCD { get; set; }
 
         public UCLCRSearch UCLCRSearch { get; set; }
 
         public UCMes UCMes { get; set; }
         public UCMotion UCMotion { get; set; }
+
+        public MotControl motControl { get; set; }
 
         Form1 MainForm;
         public MainControl(Form1 MainForm)
@@ -64,12 +68,15 @@ namespace BorwinSplicMachine
             UCRichLog = new UCRichLog();
             UCCCD = new UCCCD();
             UCFlowControl = new UCFlowControl();
-            CalibrationCCD =new CalibrationCCD();
+            CalibrationCCD = new CalibrationCCD();
             UCLCRSearch = new UCLCRSearch();
-            UCMes= new UCMes();
+            UCMes = new UCMes();
             UCMotion = new UCMotion();
+            motControl = new MotControl();
+       
             this.MainForm = MainForm;
         }
+
 
         public async void UpdataLanguage()
         {
@@ -95,5 +102,17 @@ namespace BorwinSplicMachine
             });
         }
 
+        internal void Init()
+        {
+           UCMotion.ucMotionParamSet1.PPTParam.SelectedObject
+               = AxisParm.AParms.ToArray();
+
+            UCMotion.ucOUTIOParam.PPTParam.SelectedObject
+             = MotionControl.IOParmOut.IOParms.ToArray();
+
+            UCMotion.ucINIOParam.PPTParam.SelectedObject
+            = MotionControl.IOParmIn.IOParms.ToArray();
+
+        }
     }
 }

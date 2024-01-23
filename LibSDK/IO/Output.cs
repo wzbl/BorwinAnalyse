@@ -9,11 +9,11 @@ namespace LibSDK.IO
 {
     public class Output
     {
-        private IOParm.CIOType IOParm;
+        private CIOType IOParm;
 
         private readonly IOAPI IO = new IOAPI();
 
-        public Output(IOParm.CIOType iOParm)
+        public Output(CIOType iOParm)
         {
           this.IOParm = iOParm;
         }

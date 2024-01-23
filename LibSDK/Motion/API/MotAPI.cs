@@ -1,6 +1,7 @@
 ﻿using LibSDK.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,6 +18,8 @@ namespace LibSDK.Motion
 
         public int HError;
         private bool homeStop;
+
+        private static string CategoryName="";
         /// <summary>
         /// 回零停止
         /// </summary>
@@ -30,9 +33,8 @@ namespace LibSDK.Motion
                 Card.API.HomeStop = value;
             }
         }
-       
 
-        private CAxisParm AxisParm;
+        public CAxisParm AxisParm;
 
         /// <summary>
         /// 回零结果
@@ -66,12 +68,13 @@ namespace LibSDK.Motion
             return false;
         }
         public MotAPI() { }
-        public MotAPI(CAxisParm axisParm, MotorType motorType = MotorType.Servo)
+        public MotAPI(CAxisParm axisParm)
         {
             this.CardNum = axisParm.CardID;
             this.Axis = axisParm.AxisID;
-            this.MotorType = motorType;
+            this.MotorType = axisParm.MotType;
             this.AxisParm = axisParm;
+            this.Name = axisParm.AxisName;
         }
         /// <summary>
         /// 连续运动
@@ -359,6 +362,8 @@ namespace LibSDK.Motion
                 if (HomeRtn == 0) { HomeState = true; };
             });
         }
+
+
         /// <summary>
         /// 单轴回零（提示）
         /// </summary>

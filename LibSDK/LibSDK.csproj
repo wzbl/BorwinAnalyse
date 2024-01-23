@@ -72,10 +72,40 @@
       <DependentUpon>AxisControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums\EnumControl.cs" />
+    <Compile Include="IO\DSignalLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IO\DSignalLamp.Designer.cs">
+      <DependentUpon>DSignalLamp.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\Input.cs" />
     <Compile Include="IO\InBase.cs" />
+    <Compile Include="IO\InputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IO\InputControl.Designer.cs">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\IOParm.cs" />
     <Compile Include="IO\Output.cs" />
+    <Compile Include="IO\OutputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IO\OutputControl.Designer.cs">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IO\UCIOControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IO\UCIOControl.Designer.cs">
+      <DependentUpon>UCIOControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IO\UCSignalLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IO\UCSignalLamp.Designer.cs">
+      <DependentUpon>UCSignalLamp.cs</DependentUpon>
+    </Compile>
     <Compile Include="KTimer.cs" />
     <Compile Include="MotionControl.cs" />
     <Compile Include="Motion\API\CardAPI.cs" />
@@ -117,6 +147,12 @@
   <ItemGroup>
     <EmbeddedResource Include="AxisControl.resx">
       <DependentUpon>AxisControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IO\OutputControl.resx">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IO\UCIOControl.resx">
+      <DependentUpon>UCIOControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCMotion.resx">
       <DependentUpon>UCMotion.cs</DependentUpon>

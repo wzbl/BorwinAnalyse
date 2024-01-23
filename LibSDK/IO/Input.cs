@@ -9,7 +9,7 @@ namespace LibSDK.IO
 {
     public class Input: InBase
     {
-        private IOParm.CIOType IOParm;
+        private CIOType IOParm;
 
         private readonly IOAPI IO = new IOAPI();
 
@@ -21,7 +21,7 @@ namespace LibSDK.IO
 
         private bool _ReverseStatus;
 
-        public Input(IOParm.CIOType iOParm)
+        public Input(CIOType iOParm)
         {
           this.IOParm = iOParm;
         }
@@ -60,6 +60,11 @@ namespace LibSDK.IO
         public void Refresh()
         {
           base.Status=IO.IoReadIn(IOParm);
+        }
+
+        public bool State()
+        {
+            return IO.IoReadIn(IOParm);
         }
     }
 }

@@ -37,12 +37,12 @@
             this.PPTParam.Dock = System.Windows.Forms.DockStyle.Top;
             this.PPTParam.Location = new System.Drawing.Point(0, 0);
             this.PPTParam.Name = "PPTParam";
-            this.PPTParam.Size = new System.Drawing.Size(648, 547);
+            this.PPTParam.Size = new System.Drawing.Size(648, 452);
             this.PPTParam.TabIndex = 0;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(78, 553);
+            this.btnSave.Location = new System.Drawing.Point(42, 458);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(126, 46);
             this.btnSave.TabIndex = 1;
@@ -57,7 +57,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.PPTParam);
             this.Name = "UCMotionParamSet";
-            this.Size = new System.Drawing.Size(648, 602);
+            this.Size = new System.Drawing.Size(648, 517);
             this.ResumeLayout(false);
 
         }
