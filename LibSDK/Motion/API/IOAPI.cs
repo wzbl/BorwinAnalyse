@@ -107,6 +107,10 @@ namespace LibSDK.Motion
             {
                 BoolRtn= Card.IoAPI.C_ReadOut(cIOType.CardNum, cIOType.IONum);
             }
+            if (cIOType.Invert)
+            {
+                BoolRtn = !BoolRtn;
+            }
             return BoolRtn;
         }
 

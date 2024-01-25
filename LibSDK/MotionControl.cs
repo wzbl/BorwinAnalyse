@@ -1,4 +1,6 @@
-﻿using LibSDK.Enums;
+﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
+using LibSDK.Enums;
 using LibSDK.IO;
 using LibSDK.Motion;
 using NPOI.SS.Formula.Functions;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static GC.Frame.Motion.Privt.CNMCLib20;
 using static LibSDK.IO.IOParm;
 
 namespace LibSDK
@@ -45,14 +48,32 @@ namespace LibSDK
 
         public static void AddCard()
         {
-
             CardConfig cardConfig = new CardConfig();
             cardConfig.CardNo = BaseConfig.Instance.cardConfigs.Count;
             cardConfig.AxisNum = 6;
             cardConfig.ConigPath = "";
             BaseConfig.Instance.cardConfigs.Add(cardConfig);
             BaseConfig.Instance.Write();
-            Init();
+            Log("添加卡:" + cardConfig.CardNo);
+        }
+
+        public static void AddAxis(CAxisParm cAxisParm)
+        {
+            AxisParm.Write();
+            InitAxis();
+            Log("添加轴:" + cAxisParm.AxisInfo.AxisName);
+        }
+
+        public static void AddInIO(CIOType cIOType)
+        {
+            cIOType.IOType = "IN";
+            IOParmIn.IOParms.Add(cIOType);
+        }
+
+        public static void AddOutIO(CIOType cIOType)
+        {
+            cIOType.IOType = "OUT";
+            IOParmOut.IOParms.Add(cIOType);
         }
 
         public static void Init()
@@ -70,11 +91,11 @@ namespace LibSDK
                     ConfigFile[i] = BaseConfig.Instance.cardConfigs[i].ConigPath;
                 }
                 CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile);
-
+                Log("开始加载轴");
                 InitAxis();
+                Log("开始加载IO");
                 InitINIO();
                 InitOUTIO();
-
                 for (int i = 0; i < CardNum; i++)
                 {
                     int cardNo = BaseConfig.Instance.cardConfigs[i].CardNo;
@@ -83,7 +104,10 @@ namespace LibSDK
                 }
                 BaseConfig.Instance.Write();
             }
-
+            else
+            {
+                Log("未配置运动控制卡");
+            }
         }
 
         public static void InitAxis()
@@ -129,6 +153,11 @@ namespace LibSDK
                 Output.Add(iOType.IoName, ouput);
             }
             UpDateOUTIO?.Invoke();
+        }
+
+        public static void Log(string message)
+        {
+            LogManager.Instance.WriteLog(new LogModel(LogType.运动控制日志, message));
         }
 
         public static MotAPI AddAxis(string AxisName)

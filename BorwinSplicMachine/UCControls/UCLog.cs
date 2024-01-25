@@ -25,6 +25,7 @@ namespace BorwinSplicMachine.UCControls
 
         private void UCLog_Load(object sender, EventArgs e)
         {
+            comType.SelectedIndex = 0;
             startTime.Value= DateTime.Today;
             endTime.Value= DateTime.Now;
             UpdataLanguage();
@@ -41,13 +42,30 @@ namespace BorwinSplicMachine.UCControls
             {
                 MessageBox.Show("开始时间大于结束时间".tr());
             }
-            Search(startTime.Value, endTime.Value);
+
+            if (comType.Text.Trim()!= "ALL")
+            {
+                Search(startTime.Value, endTime.Value, comType.Text.Trim());
+            }
+            else
+            {
+                Search(startTime.Value, endTime.Value);
+            }
         }
 
         public async void Search(DateTime startTime, DateTime endTime)
         {
             List<LogModel> logs = LogManager.Instance.SearchByTime(startTime, endTime);
            
+            await Task.Run(() => {
+                UpdataGrid(logs);
+            });
+        }
+
+        public async void Search(DateTime startTime, DateTime endTime,string type)
+        {
+            List<LogModel> logs = LogManager.Instance.SearchByType(startTime, endTime, type);
+
             await Task.Run(() => {
                 UpdataGrid(logs);
             });

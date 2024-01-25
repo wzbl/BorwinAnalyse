@@ -133,7 +133,7 @@ namespace BorwinSplicMachine.LCR
             try
             {
                 if (SerialPort.IsOpen) SerialPort.Close();
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
                 SerialPort.Open();
                 if (SerialPort.IsOpen)
                 {

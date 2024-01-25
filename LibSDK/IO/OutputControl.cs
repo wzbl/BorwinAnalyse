@@ -27,14 +27,29 @@ namespace LibSDK.IO
 
         private void DSignalLamp_Click(object sender, EventArgs e)
         {
-            if (Value==1)
+            if (output.IOParm.Invert)
             {
-                output.Off();
+                if (Value == 0)
+                {
+                    output.Off();
+                }
+                else
+                {
+                    output.On();
+                }
             }
             else
             {
-                output.On();
+                if (Value == 1)
+                {
+                    output.Off();
+                }
+                else
+                {
+                    output.On();
+                }
             }
+          
         }
 
         public int Value

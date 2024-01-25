@@ -46,6 +46,29 @@ namespace BorwinAnalyse.BaseClass
             return logModels;
         }
 
+
+        public List<LogModel> SearchByType(DateTime startTime, DateTime endTime,string type)
+        {
+            string startT = startTime.ToString("yyyy-MM-dd HH:mm:ss");
+            string endT = endTime.ToString("yyyy-MM-dd HH:mm:ss");
+            List<LogModel> logModels = new List<LogModel>();
+            string comm = string.Format("select time,type,content,operator from Log where time between '{0}' and '{1}' and type='{2}' ", startT, endT,type);
+            DataTable dataTable = SqlLiteManager.Instance.DB.Search(comm, "Log");
+            if (dataTable != null && dataTable.Rows.Count > 0)
+            {
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    LogModel logModel = new LogModel();
+                    logModel.Time = ((DateTime)dataTable.Rows[i].ItemArray[0]).ToString("yyyy-MM-dd HH:mm:ss");
+                    logModel.Type = dataTable.Rows[i].ItemArray[1].ToString();
+                    logModel.Content = dataTable.Rows[i].ItemArray[2].ToString();
+                    logModel.Operator = dataTable.Rows[i].ItemArray[3].ToString();
+                    logModels.Add(logModel);
+                }
+            }
+            return logModels;
+        }
+
         public void WriteLog(LogModel logModel)
         {
             LogMsg?.Invoke(string.Format("[{0}][{1}]:{2}", logModel.Time,logModel.Type, logModel.Content));

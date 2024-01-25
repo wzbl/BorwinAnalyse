@@ -23,14 +23,13 @@ namespace BorwinSplicMachine
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SqlLiteManager.Instance.Init();
+            MainControl.Log("打开程序");
             CommonAnalyse.Instance.Load();
             BomManager.Instance.Init();
             MesControl.Instance.Load();
             MotionControl.Init();
-          
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             if (dataTable == null) { return; }
-            
             if (dataTable.Rows.Count > 0)
             {
                 int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());

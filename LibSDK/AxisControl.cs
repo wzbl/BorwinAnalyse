@@ -30,7 +30,7 @@ namespace LibSDK
             Color = btnPositive.BackColor;
         }
 
-      
+
         private void btnOpenSero_Click(object sender, EventArgs e)
         {
             if (btnOpenSero.BackColor == Color.Green)
@@ -86,7 +86,7 @@ namespace LibSDK
             switch (UCAxisControl.moveType)
             {
                 case MoveType.相对运动模式:
-                    MotAPI.PMove(-spd, 0,true);
+                    MotAPI.PMove(-spd, 0, true);
                     break;
                 case MoveType.绝对运动模式:
                     MotAPI.PMove(-spd, 1, true);
@@ -112,12 +112,21 @@ namespace LibSDK
             if (MotAPI.axisError.IsError)
             {
                 errorPanel.Visible = true;
-                lbErrorMsg.Text = MotAPI.Name+":"+ MotAPI.axisError.ErrorMsg;
+                lbErrorMsg.Text = MotAPI.Name + ":" + MotAPI.axisError.ErrorMsg;
             }
             else
             {
                 errorPanel.Visible = false;
             }
+            if (MotAPI.GetHomeDirection() == 0)
+            {
+                dSignalLamp1.Value = MotAPI.HomeState ? 1 : 0;
+            }
+            else
+            {
+                dSignalLamp2.Value = MotAPI.HomeState ? 1 : 0;
+            }
+
         }
 
         public void EmgStop()
@@ -135,6 +144,7 @@ namespace LibSDK
         /// </summary>
         public void ClearAlarm()
         {
+            MotionControl.CardAPI.ClearSts();
             MotAPI.axisError.ErrorMsg = "";
             MotAPI.axisError.IsError = false;
         }

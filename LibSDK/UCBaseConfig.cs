@@ -56,21 +56,17 @@ namespace LibSDK
                 MessageBox.Show("先选择卡号");
                 return;
             }
-
             if (string.IsNullOrEmpty(txtAxisName.Text))
             {
                 MessageBox.Show("轴名称不能空");
                 return;
             }
-
             if (MotionControl.Motions.ContainsKey(txtAxisName.Text.Trim()))
             {
                 MessageBox.Show("轴名称已经存在");
                 return;
             }
-
             short cardID = short.Parse(comCardNo.Text);
-
             CardConfig cardConfig = BaseConfig.Instance.cardConfigs.Where(x => x.CardNo == cardID).ToList()[0];
             if (cardConfig.AxisNum > cardConfig.AxisCurrentNum)
             {
@@ -123,13 +119,10 @@ namespace LibSDK
                 cAxisParm.AxisMotionPara.PosLimit = PosLimit;   
                 float.TryParse(txtNegLimit.Text, out float NegLimit);
                 cAxisParm.AxisMotionPara.NegLimit = NegLimit;
-
                 AddAxis(cAxisParm);
-                MotionControl.AxisParm.Write();
-                MotionControl.InitAxis();
-                MessageBox.Show("添加成功");
-                BaseConfig.Instance.cardConfigs.Where(x => x.CardNo == cardID).ToList()[0].AxisCurrentNum++;
+                BaseConfig.Instance.cardConfigs.Where(x => x.CardNo == cAxisParm.AxisInfo.CardNo).ToList()[0].AxisCurrentNum++;
                 BaseConfig.Instance.Write();
+                MessageBox.Show("添加成功");
             }
             else
             {
@@ -143,7 +136,7 @@ namespace LibSDK
         /// </summary>
         private void AddAxis(CAxisParm cAxisParm)
         {
-            AxisParm.AParms.Add(cAxisParm);
+            MotionControl.AddAxis(cAxisParm);
             RefreshAxisNum();
         }
 
@@ -194,7 +187,6 @@ namespace LibSDK
                 MotionControl.IOParmOut.Write();
                 MotionControl.InitOUTIO();
             }
-
             RefreshIONum();
         }
 
@@ -203,8 +195,7 @@ namespace LibSDK
         /// </summary>
         private void AddINIO(CIOType cIOType)
         {
-            cIOType.IOType = "IN";
-            MotionControl.IOParmIn.IOParms.Add(cIOType);
+            MotionControl.AddInIO(cIOType);
         }
 
         /// <summary>
@@ -212,8 +203,7 @@ namespace LibSDK
         /// </summary>
         private void AddOUTIO(CIOType cIOType)
         {
-            cIOType.IOType = "OUT";
-            MotionControl.IOParmOut.IOParms.Add(cIOType);
+            MotionControl.AddOutIO(cIOType);
         }
 
         private void btnAddCard_Click(object sender, EventArgs e)

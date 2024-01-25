@@ -83,14 +83,16 @@ namespace LibSDK.Motion
                         {
                             Rtn = Card.API.CrdIni((short)i, Pfile[i]);
                             if (!Rtn) {
-                                MessageBox.Show(string.Format("初始化卡{0}失败", i));
+                                MotionControl.Log(string.Format("初始化卡{0}失败",i));
                                 return Rtn;
                             }
+                            MotionControl.Log(string.Format("初始化卡{0}成功", i));
                         }
                         if (MdlNum > 0)
                         {
                             Rtn = Card.API.ExMdlIni(0, MdlNum,"");
                         }
+                        MotionControl.Log(string.Format("打开所有轴使能"));
                         Rtn = Servon();//所有轴使能
                     }
                     break;
@@ -150,6 +152,7 @@ namespace LibSDK.Motion
             {
                 for (int j = 0; j < AxisNumList[i, 0]; j++)
                 {
+                    
                     Rtn = Card.API.Servon((short)i, (short)(j + 1));
                     if (!Rtn) { return Rtn; }
                 }

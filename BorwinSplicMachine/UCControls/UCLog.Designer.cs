@@ -32,7 +32,7 @@
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.btnSearch = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnDelete = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.comType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.endTime = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.startTime = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
@@ -49,7 +49,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +65,7 @@
             // 
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnSearch);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnDelete);
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonComboBox1);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.comType);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.endTime);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.startTime);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel2);
@@ -109,20 +109,21 @@
             this.btnDelete.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Values.Image")));
             this.btnDelete.Values.Text = "";
             // 
-            // kryptonComboBox1
+            // comType
             // 
-            this.kryptonComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.kryptonComboBox1.DropDownWidth = 164;
-            this.kryptonComboBox1.Items.AddRange(new object[] {
+            this.comType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comType.DropDownWidth = 164;
+            this.comType.Items.AddRange(new object[] {
             "ALL",
             "操作日志",
             "扫码日志",
             "测值日志",
-            "相机日志"});
-            this.kryptonComboBox1.Location = new System.Drawing.Point(114, 50);
-            this.kryptonComboBox1.Name = "kryptonComboBox1";
-            this.kryptonComboBox1.Size = new System.Drawing.Size(164, 21);
-            this.kryptonComboBox1.TabIndex = 4;
+            "相机日志",
+            "运动控制日志"});
+            this.comType.Location = new System.Drawing.Point(114, 50);
+            this.comType.Name = "comType";
+            this.comType.Size = new System.Drawing.Size(164, 21);
+            this.comType.TabIndex = 4;
             // 
             // endTime
             // 
@@ -150,7 +151,7 @@
             // kryptonWrapLabel2
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel2.Location = new System.Drawing.Point(65, 56);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(33, 15);
@@ -159,7 +160,7 @@
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(65, 24);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
@@ -227,7 +228,7 @@
             this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -242,7 +243,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn 类型;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn 内容;
         private System.Windows.Forms.DataGridViewTextBoxColumn 操作员;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox kryptonComboBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox comType;
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker endTime;
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker startTime;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;

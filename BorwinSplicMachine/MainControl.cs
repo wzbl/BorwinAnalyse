@@ -1,4 +1,6 @@
-﻿using BorwinAnalyse.UCControls;
+﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
+using BorwinAnalyse.UCControls;
 using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using BorwinSplicMachine.UCControls;
@@ -20,6 +22,10 @@ namespace BorwinSplicMachine
 {
     public class MainControl
     {
+        public static void Log(string message)
+        {
+            LogManager.Instance.WriteLog(new LogModel(LogType.操作日志, message));
+        }
         public UCMain UCMain
         {
             get;
@@ -44,12 +50,10 @@ namespace BorwinSplicMachine
 
         public UCFlowControl UCFlowControl { get; set; }
 
-        public CalibrationCCD CalibrationCCD { get; set; }
 
         public UCLCRSearch UCLCRSearch { get; set; }
 
         public UCMes UCMes { get; set; }
-        public UCMotion UCMotion { get; set; }
 
         public MotControl motControl { get; set; }
 
@@ -69,11 +73,9 @@ namespace BorwinSplicMachine
             UCRichLog = new UCRichLog();
             UCCCD = new UCCCD();
             UCFlowControl = new UCFlowControl();
-            CalibrationCCD = new CalibrationCCD();
             UCLCRSearch = new UCLCRSearch();
             UCMes = new UCMes();
             motControl = new MotControl();
-            UCMotion = new UCMotion();
             this.MainForm = MainForm;
         }
 
@@ -97,15 +99,13 @@ namespace BorwinSplicMachine
                 MainForm.UpdataLanguage();
                 UCLog.UpdataLanguage();
                 UCLCR.UpdateLanguage();
-                CalibrationCCD.UpdateLanguage();
                 UCMes.UpdataLanguage();
             });
         }
 
         internal void Init()
         {
-           UCMotion.Init();
-
+         
         }
     }
 }

@@ -40,5 +40,6 @@ namespace BorwinAnalyse.DataBase.Model
         扫码日志,
         测值日志,
         相机日志,
+        运动控制日志
     }
 }

@@ -13,7 +13,7 @@ namespace LibSDK.IO
 {
     public class IOParm
     {
-        public  List<CIOType> IOParms = new List<CIOType>();
+        public List<CIOType> IOParms = new List<CIOType>();
 
         private string MyIOParmPath = @"Ini/OutIOCfg.xml";
 
@@ -26,7 +26,7 @@ namespace LibSDK.IO
             }
             IOConfigIni();
         }
-     
+
 
         public string IOParmPath
         {
@@ -74,9 +74,9 @@ namespace LibSDK.IO
         public CIOType GetIOprame(string IOName)
         {
             CIOType cIO = new CIOType();
-            foreach(CIOType cIOType in IOParms)
+            foreach (CIOType cIOType in IOParms)
             {
-                if(cIOType.IoName== IOName)
+                if (cIOType.IoName == IOName)
                 {
                     cIO = cIOType;
                 }
@@ -84,51 +84,38 @@ namespace LibSDK.IO
             return cIO;
         }
 
-       public CIOType GetIOprame(int Index)
+        public CIOType GetIOprame(int Index)
         {
-          return IOParms[Index];
+            return IOParms[Index];
         }
     }
 
     [TypeConverter(typeof(NullConverter))]
     public class CIOType
     {
-        /// <summary>
-        /// IO名称
-        /// </summary>
+        [DisplayName("IO名称"), Description("IO名称")]
         public string IoName { get; set; }
-        /// <summary>
-        /// IO类型
-        /// </summary>u
+        [DisplayName("IO类型"), Description("IO类型")]
         [ReadOnly(true)]
         public string IOType { get; set; } = "IN";
-        /// <summary>
-        /// 卡号
-        /// </summary>
+        [DisplayName("控制卡号"), Description("控制卡号")]
         public short CardNum { get; set; }
-        /// <summary>
-        /// 模块号从0开始
-        /// </summary>
+        [DisplayName("模块号从0开始"), Description("模块号从0开始")]
         public short Extmdl { get; set; }
-        /// <summary>
-        /// IO端口号
-        /// </summary>
+  
+        [DisplayName("IO端口号"), Description("IO端口号")]
         public short IONum { get; set; }
-        /// <summary>
-        /// 是/否(取反)
-        /// </summary>
+ 
+        [DisplayName("是/否(取反)"), Description("是/否(取反)")]
         public bool Invert { get; set; }
-        /// <summary>
-        ///  所属软件模块
-        /// </summary>
+ 
+        [DisplayName("所属软件模块"), Description("所属软件模块")]
         public int SMode { get; set; }
-        /// <summary>
-        /// 检测延时
-        /// </summary>
+   
+        [DisplayName("检测延时"), Description("检测延时")]
         public double Delay { get; set; }
-        /// <summary>
-        /// 序号
-        /// </summary>
+  
+        [DisplayName("序号"), Description("序号")]
         public int Index { get; set; }
     }
 }

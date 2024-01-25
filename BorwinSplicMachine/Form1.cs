@@ -98,8 +98,7 @@ namespace BorwinSplicMachine
         /// <param name="e"></param>
         private void kryptonRibbonGroupButton12_Click(object sender, EventArgs e)
         {
-            kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(MainControl.CalibrationCCD);
+           
         }
 
         private void kryptonRibbonGroupButton10_Click(object sender, EventArgs e)
@@ -121,8 +120,12 @@ namespace BorwinSplicMachine
 
         private void kryptonRibbonGroupButton11_Click(object sender, EventArgs e)
         {
-            kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(MainControl.UCMotion);
+            
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainControl.Log("程序关闭");
         }
     }
 

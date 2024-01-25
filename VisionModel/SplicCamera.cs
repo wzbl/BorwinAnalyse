@@ -90,6 +90,7 @@ namespace VisionModel
             {
                 Log("开启抓图失败");
             }
+           Log("初始化相机完成");
         }
 
         /// <summary>

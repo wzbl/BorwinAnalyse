@@ -54,6 +54,11 @@ namespace LibSDK.Motion
         /// </summary>
         public CancellationTokenSource StopManualTask = new CancellationTokenSource();
 
+        public int GetHomeDirection()
+        {
+            return AxisParm.AxisHomeParam.HomeDirection;
+        }
+
         public void ExecuteHome(Action ation)
         {
             if (HomeTask != null)
@@ -207,6 +212,8 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool ALM()
         {
+            axisError.IsError= true;
+            axisError.ErrorMsg= "伺服报警";
             return Card.API.Mot_ALM(CardNum, Axis);
         }
         /// <summary>

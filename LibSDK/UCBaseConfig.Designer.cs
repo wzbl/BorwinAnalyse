@@ -227,7 +227,7 @@
             this.kryptonPage1.LastVisibleSet = true;
             this.kryptonPage1.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage1.Name = "kryptonPage1";
-            this.kryptonPage1.Size = new System.Drawing.Size(463, 688);
+            this.kryptonPage1.Size = new System.Drawing.Size(463, 689);
             this.kryptonPage1.Text = "添加单轴";
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "C43BB5F227BE41C1E8A1BD665AA1C1C8";
@@ -290,7 +290,7 @@
             this.kryptonPage3.LastVisibleSet = true;
             this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage3.Name = "kryptonPage3";
-            this.kryptonPage3.Size = new System.Drawing.Size(444, 642);
+            this.kryptonPage3.Size = new System.Drawing.Size(444, 643);
             this.kryptonPage3.Text = "添加单个IO";
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "C43BB5F227BE41C1E8A1BD665AA1C1C8";
@@ -696,7 +696,7 @@
             this.txtAxisMotionPara.Panel.Controls.Add(this.kryptonWrapLabel17);
             this.txtAxisMotionPara.Panel.Controls.Add(this.txtMotionSped);
             this.txtAxisMotionPara.Panel.Controls.Add(this.kryptonWrapLabel16);
-            this.txtAxisMotionPara.Size = new System.Drawing.Size(463, 388);
+            this.txtAxisMotionPara.Size = new System.Drawing.Size(463, 389);
             this.txtAxisMotionPara.TabIndex = 13;
             this.txtAxisMotionPara.Values.Heading = "AxisMotionPara";
             // 
@@ -852,7 +852,7 @@
             this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(444, 642);
+            this.kryptonPanel2.Size = new System.Drawing.Size(444, 643);
             this.kryptonPanel2.TabIndex = 0;
             // 
             // kryptonWrapLabel24

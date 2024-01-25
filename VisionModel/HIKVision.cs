@@ -68,13 +68,8 @@ namespace VisionModel
                         {
                             CameraR.CreatCamera(ref stDevInfo);
                         }
-                        else
-                        {
-                            CameraL.CreatCamera(ref stDevInfo);
-                        }
                     }
                 }
-                LogManager.Instance.WriteLog(new LogModel(LogType.相机日志, "初始化相机完成"));
             }
             catch (Exception)
             {
