@@ -72,6 +72,12 @@
       <DependentUpon>AxisControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Enums\EnumControl.cs" />
+    <Compile Include="Enums\UCMotionParam.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Enums\UCMotionParam.Designer.cs">
+      <DependentUpon>UCMotionParam.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\DSignalLamp.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -115,6 +121,7 @@
     <Compile Include="Motion\API\SafeMove.cs" />
     <Compile Include="Motion\API\ScpAPI.cs" />
     <Compile Include="Motion\AxisParm.cs" />
+    <Compile Include="Motion\BaseConfig.cs" />
     <Compile Include="Motion\BoardSwitchCs.cs" />
     <Compile Include="Motion\CardExpansion\DMC.cs" />
     <Compile Include="Motion\CardExpansion\Dmc6040.cs" />
@@ -131,6 +138,18 @@
     <Compile Include="Motion\IOInterface.cs" />
     <Compile Include="Motion\MotionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCAxisControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCAxisControl.Designer.cs">
+      <DependentUpon>UCAxisControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCBaseConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCBaseConfig.Designer.cs">
+      <DependentUpon>UCBaseConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCMotion.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -148,11 +167,20 @@
     <EmbeddedResource Include="AxisControl.resx">
       <DependentUpon>AxisControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Enums\UCMotionParam.resx">
+      <DependentUpon>UCMotionParam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IO\OutputControl.resx">
       <DependentUpon>OutputControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IO\UCIOControl.resx">
       <DependentUpon>UCIOControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAxisControl.resx">
+      <DependentUpon>UCAxisControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCBaseConfig.resx">
+      <DependentUpon>UCBaseConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCMotion.resx">
       <DependentUpon>UCMotion.cs</DependentUpon>

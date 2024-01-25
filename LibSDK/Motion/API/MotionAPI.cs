@@ -33,7 +33,7 @@ namespace LibSDK.Motion
             CAxisParm ReturnParm = new CAxisParm();
             foreach (CAxisParm axisParm in AxisParm.AParms)
             {
-                if (axisParm.AxisID == Axis && axisParm.CardID == CardNum)
+                if (axisParm.AxisInfo.AxisNo == Axis && axisParm.AxisInfo.CardNo == CardNum)
                 {
                     ReturnParm = axisParm;
                     break;
@@ -61,13 +61,13 @@ namespace LibSDK.Motion
             CAxisParm YaxisParm = GetAxisParm(0, 2);
             if (IsLimt)
             {
-                if (Xpos > XaxisParm.PosLimit || Xpos <= 0)
+                if (Xpos > XaxisParm.AxisMotionPara.PosLimit || Xpos <= 0)
                 {
                     //SDK.Log.AddLog("X轴" + "目标位置超过软极限", 2);
                     //SDK.Alarm.Show("System Error", "S0002", "X轴" + "目标位置超过软极限", "I");
                     return false;
                 }
-                if (Ypos > YaxisParm.PosLimit || Ypos <= 0)
+                if (Ypos > YaxisParm.AxisMotionPara.PosLimit || Ypos <= 0)
                 {
                     //SDK.Log.AddLog("Y轴" + "目标位置超过软极限", 2);
                     //SDK.Alarm.Show("System Error", "S0002", "Y轴" + "目标位置超过软极限", "I");
@@ -103,13 +103,13 @@ namespace LibSDK.Motion
             CAxisParm YaxisParm = GetAxisParm(0, 2);
             if (IsLimt)
             {
-                if (Xpos > XaxisParm.PosLimit || Xpos <= 0)
+                if (Xpos > XaxisParm.AxisMotionPara.PosLimit || Xpos <= 0)
                 {
                     //SDK.Log.AddLog("X轴" + "目标位置超过软极限", 2);
                     //SDK.Alarm.Show("System Error", "S0002", "X轴" + "目标位置超过软极限", "I");
                     return false;
                 }
-                if (Ypos > YaxisParm.PosLimit || Ypos <= 0)
+                if (Ypos > YaxisParm.AxisMotionPara.PosLimit || Ypos <= 0)
                 {
                     //SDK.Log.AddLog("Y轴" + "目标位置超过软极限", 2);
                     //SDK.Alarm.Show("System Error", "S0002", "Y轴" + "目标位置超过软极限", "I");

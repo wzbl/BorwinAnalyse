@@ -28,42 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt = new System.Windows.Forms.TextBox();
+            this.txtRel = new System.Windows.Forms.TextBox();
             this.txtPos = new System.Windows.Forms.TextBox();
             this.btnPositive = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnNagetive = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnStop = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.btnStopGoHome = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnStartGoHome = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonWrapLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.ComMoveType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.lbAxisName = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.btnOpenSero = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.ComMoveType)).BeginInit();
+            this.btnOpenSero = new System.Windows.Forms.Button();
+            this.lbName = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.dSignalLamp2 = new LibSDK.IO.DSignalLamp();
+            this.dSignalLamp1 = new LibSDK.IO.DSignalLamp();
+            this.dSignalLamp3 = new LibSDK.IO.DSignalLamp();
+            this.dSignalLamp4 = new LibSDK.IO.DSignalLamp();
+            this.errorPanel = new System.Windows.Forms.Panel();
+            this.btnAlarmReset = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.lbErrorMsg = new System.Windows.Forms.Label();
+            this.errorPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txt
+            // txtRel
             // 
-            this.txt.Font = new System.Drawing.Font("宋体", 12F);
-            this.txt.Location = new System.Drawing.Point(82, 68);
-            this.txt.Name = "txt";
-            this.txt.ReadOnly = true;
-            this.txt.Size = new System.Drawing.Size(140, 26);
-            this.txt.TabIndex = 0;
+            this.txtRel.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtRel.Location = new System.Drawing.Point(108, 6);
+            this.txtRel.Name = "txtRel";
+            this.txtRel.ReadOnly = true;
+            this.txtRel.Size = new System.Drawing.Size(140, 26);
+            this.txtRel.TabIndex = 0;
             // 
             // txtPos
             // 
             this.txtPos.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPos.Location = new System.Drawing.Point(82, 98);
+            this.txtPos.Location = new System.Drawing.Point(108, 38);
             this.txtPos.Name = "txtPos";
+            this.txtPos.ReadOnly = true;
             this.txtPos.Size = new System.Drawing.Size(140, 26);
             this.txtPos.TabIndex = 1;
             // 
             // btnPositive
             // 
-            this.btnPositive.Location = new System.Drawing.Point(25, 127);
+            this.btnPositive.Location = new System.Drawing.Point(71, 76);
             this.btnPositive.Name = "btnPositive";
             this.btnPositive.Size = new System.Drawing.Size(51, 50);
             this.btnPositive.TabIndex = 2;
@@ -72,7 +76,7 @@
             // 
             // btnNagetive
             // 
-            this.btnNagetive.Location = new System.Drawing.Point(138, 127);
+            this.btnNagetive.Location = new System.Drawing.Point(130, 76);
             this.btnNagetive.Name = "btnNagetive";
             this.btnNagetive.Size = new System.Drawing.Size(51, 50);
             this.btnNagetive.TabIndex = 3;
@@ -81,71 +85,21 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(81, 127);
+            this.btnStop.Location = new System.Drawing.Point(187, 76);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(51, 50);
             this.btnStop.TabIndex = 4;
             this.btnStop.Values.Text = "停止";
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // kryptonWrapLabel1
-            // 
-            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(17, 79);
-            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
-            this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
-            this.kryptonWrapLabel1.Text = "实际位置";
-            // 
-            // kryptonWrapLabel2
-            // 
-            this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(17, 105);
-            this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
-            this.kryptonWrapLabel2.Size = new System.Drawing.Size(59, 15);
-            this.kryptonWrapLabel2.Text = "目标位置";
-            // 
-            // btnStopGoHome
-            // 
-            this.btnStopGoHome.Location = new System.Drawing.Point(289, 127);
-            this.btnStopGoHome.Name = "btnStopGoHome";
-            this.btnStopGoHome.Size = new System.Drawing.Size(80, 50);
-            this.btnStopGoHome.TabIndex = 8;
-            this.btnStopGoHome.Values.Text = "停止回零";
-            this.btnStopGoHome.Click += new System.EventHandler(this.btnStopGoHome_Click);
-            // 
             // btnStartGoHome
             // 
-            this.btnStartGoHome.Location = new System.Drawing.Point(203, 127);
+            this.btnStartGoHome.Location = new System.Drawing.Point(244, 76);
             this.btnStartGoHome.Name = "btnStartGoHome";
-            this.btnStartGoHome.Size = new System.Drawing.Size(77, 50);
+            this.btnStartGoHome.Size = new System.Drawing.Size(53, 50);
             this.btnStartGoHome.TabIndex = 9;
-            this.btnStartGoHome.Values.Text = "开始回零";
+            this.btnStartGoHome.Values.Text = "回零";
             this.btnStartGoHome.Click += new System.EventHandler(this.btnStartGoHome_Click);
-            // 
-            // kryptonWrapLabel3
-            // 
-            this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel3.Location = new System.Drawing.Point(267, 70);
-            this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
-            this.kryptonWrapLabel3.Size = new System.Drawing.Size(59, 15);
-            this.kryptonWrapLabel3.Text = "运动方式";
-            // 
-            // ComMoveType
-            // 
-            this.ComMoveType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComMoveType.DropDownWidth = 128;
-            this.ComMoveType.Items.AddRange(new object[] {
-            "相对运动模式",
-            "绝对运动模式",
-            "JOG"});
-            this.ComMoveType.Location = new System.Drawing.Point(241, 95);
-            this.ComMoveType.Name = "ComMoveType";
-            this.ComMoveType.Size = new System.Drawing.Size(128, 21);
-            this.ComMoveType.TabIndex = 11;
-            this.ComMoveType.SelectedIndexChanged += new System.EventHandler(this.ComMoveType_SelectedIndexChanged);
             // 
             // lbAxisName
             // 
@@ -157,33 +111,137 @@
             // 
             // btnOpenSero
             // 
-            this.btnOpenSero.Location = new System.Drawing.Point(280, 10);
+            this.btnOpenSero.Location = new System.Drawing.Point(9, 76);
             this.btnOpenSero.Name = "btnOpenSero";
-            this.btnOpenSero.Size = new System.Drawing.Size(91, 42);
+            this.btnOpenSero.Size = new System.Drawing.Size(53, 50);
             this.btnOpenSero.TabIndex = 14;
-            this.btnOpenSero.Values.Text = "打开使能";
+            this.btnOpenSero.Text = "使能";
             this.btnOpenSero.Click += new System.EventHandler(this.btnOpenSero_Click);
+            // 
+            // lbName
+            // 
+            this.lbName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbName.Location = new System.Drawing.Point(14, 25);
+            this.lbName.Name = "lbName";
+            this.lbName.Size = new System.Drawing.Size(31, 15);
+            this.lbName.Text = "A轴:";
+            // 
+            // dSignalLamp2
+            // 
+            this.dSignalLamp2.CanClick = false;
+            this.dSignalLamp2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp2.IsHighlight = true;
+            this.dSignalLamp2.IsShowBorder = false;
+            this.dSignalLamp2.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp2.Location = new System.Drawing.Point(71, 1);
+            this.dSignalLamp2.Name = "dSignalLamp2";
+            this.dSignalLamp2.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp2.TabIndex = 17;
+            this.dSignalLamp2.TwinkleSpeed = 0;
+            this.dSignalLamp2.Value = 0;
+            // 
+            // dSignalLamp1
+            // 
+            this.dSignalLamp1.CanClick = false;
+            this.dSignalLamp1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp1.IsHighlight = true;
+            this.dSignalLamp1.IsShowBorder = false;
+            this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp1.Location = new System.Drawing.Point(254, 1);
+            this.dSignalLamp1.Name = "dSignalLamp1";
+            this.dSignalLamp1.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp1.TabIndex = 19;
+            this.dSignalLamp1.TwinkleSpeed = 0;
+            this.dSignalLamp1.Value = 0;
+            // 
+            // dSignalLamp3
+            // 
+            this.dSignalLamp3.CanClick = false;
+            this.dSignalLamp3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp3.IsHighlight = true;
+            this.dSignalLamp3.IsShowBorder = false;
+            this.dSignalLamp3.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp3.Location = new System.Drawing.Point(71, 36);
+            this.dSignalLamp3.Name = "dSignalLamp3";
+            this.dSignalLamp3.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp3.TabIndex = 20;
+            this.dSignalLamp3.TwinkleSpeed = 0;
+            this.dSignalLamp3.Value = 0;
+            // 
+            // dSignalLamp4
+            // 
+            this.dSignalLamp4.CanClick = false;
+            this.dSignalLamp4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp4.IsHighlight = true;
+            this.dSignalLamp4.IsShowBorder = false;
+            this.dSignalLamp4.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp4.Location = new System.Drawing.Point(254, 36);
+            this.dSignalLamp4.Name = "dSignalLamp4";
+            this.dSignalLamp4.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp4.TabIndex = 21;
+            this.dSignalLamp4.TwinkleSpeed = 0;
+            this.dSignalLamp4.Value = 0;
+            // 
+            // errorPanel
+            // 
+            this.errorPanel.BackColor = System.Drawing.Color.Red;
+            this.errorPanel.Controls.Add(this.btnAlarmReset);
+            this.errorPanel.Controls.Add(this.lbErrorMsg);
+            this.errorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.errorPanel.Location = new System.Drawing.Point(0, 0);
+            this.errorPanel.Name = "errorPanel";
+            this.errorPanel.Size = new System.Drawing.Size(306, 127);
+            this.errorPanel.TabIndex = 22;
+            this.errorPanel.Visible = false;
+            // 
+            // btnAlarmReset
+            // 
+            this.btnAlarmReset.Location = new System.Drawing.Point(203, 76);
+            this.btnAlarmReset.Name = "btnAlarmReset";
+            this.btnAlarmReset.Size = new System.Drawing.Size(86, 47);
+            this.btnAlarmReset.TabIndex = 1;
+            this.btnAlarmReset.Values.Text = "清除报警";
+            this.btnAlarmReset.Click += new System.EventHandler(this.btnAlarmReset_Click);
+            // 
+            // lbErrorMsg
+            // 
+            this.lbErrorMsg.AutoSize = true;
+            this.lbErrorMsg.BackColor = System.Drawing.Color.Red;
+            this.lbErrorMsg.Font = new System.Drawing.Font("宋体", 15F);
+            this.lbErrorMsg.ForeColor = System.Drawing.Color.Yellow;
+            this.lbErrorMsg.Location = new System.Drawing.Point(5, 25);
+            this.lbErrorMsg.Name = "lbErrorMsg";
+            this.lbErrorMsg.Size = new System.Drawing.Size(69, 20);
+            this.lbErrorMsg.TabIndex = 0;
+            this.lbErrorMsg.Text = "label1";
             // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.errorPanel);
+            this.Controls.Add(this.dSignalLamp4);
+            this.Controls.Add(this.dSignalLamp3);
+            this.Controls.Add(this.dSignalLamp1);
+            this.Controls.Add(this.lbName);
+            this.Controls.Add(this.dSignalLamp2);
             this.Controls.Add(this.btnOpenSero);
             this.Controls.Add(this.lbAxisName);
-            this.Controls.Add(this.ComMoveType);
-            this.Controls.Add(this.kryptonWrapLabel3);
             this.Controls.Add(this.btnStartGoHome);
-            this.Controls.Add(this.btnStopGoHome);
-            this.Controls.Add(this.kryptonWrapLabel2);
-            this.Controls.Add(this.kryptonWrapLabel1);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnNagetive);
             this.Controls.Add(this.btnPositive);
             this.Controls.Add(this.txtPos);
-            this.Controls.Add(this.txt);
+            this.Controls.Add(this.txtRel);
             this.Name = "AxisControl";
-            this.Size = new System.Drawing.Size(380, 186);
-            ((System.ComponentModel.ISupportInitialize)(this.ComMoveType)).EndInit();
+            this.Size = new System.Drawing.Size(306, 127);
+            this.errorPanel.ResumeLayout(false);
+            this.errorPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,18 +249,21 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txt;
+        private System.Windows.Forms.TextBox txtRel;
         private System.Windows.Forms.TextBox txtPos;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnPositive;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnNagetive;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnStop;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnStopGoHome;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnStartGoHome;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox ComMoveType;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbAxisName;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnOpenSero;
+        private System.Windows.Forms.Button btnOpenSero;
+        private IO.DSignalLamp dSignalLamp2;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbName;
+        private IO.DSignalLamp dSignalLamp1;
+        private IO.DSignalLamp dSignalLamp3;
+        private IO.DSignalLamp dSignalLamp4;
+        private System.Windows.Forms.Panel errorPanel;
+        private System.Windows.Forms.Label lbErrorMsg;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnAlarmReset;
     }
 }

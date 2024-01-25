@@ -100,7 +100,8 @@ namespace LibSDK.IO
         /// <summary>
         /// IO类型
         /// </summary>u
-        public string IOType { get; set; }
+        [ReadOnly(true)]
+        public string IOType { get; set; } = "IN";
         /// <summary>
         /// 卡号
         /// </summary>

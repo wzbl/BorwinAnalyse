@@ -19,13 +19,17 @@ namespace LibSDK.Motion
         public int HError;
         private bool homeStop;
 
-        private static string CategoryName="";
+        private static string CategoryName = "";
+        public AxisError axisError = new AxisError();
+
         /// <summary>
         /// 回零停止
         /// </summary>
-        public bool HomeStop {
+        public bool HomeStop
+        {
             get
-            { return homeStop;
+            {
+                return homeStop;
             }
             set
             {
@@ -34,7 +38,7 @@ namespace LibSDK.Motion
             }
         }
 
-        public CAxisParm AxisParm;
+        private CAxisParm AxisParm;
 
         /// <summary>
         /// 回零结果
@@ -53,9 +57,12 @@ namespace LibSDK.Motion
         public void ExecuteHome(Action ation)
         {
             if (HomeTask != null)
-                if (HomeTask.Status == TaskStatus.Running) { 
-                    //new Alarm.Alarm().MesShow(0, "Warning", "Return to zero task execution, can not be repeated!", "OK"); 
-                    return; }
+                if (HomeTask.Status == TaskStatus.Running)
+                {
+                    axisError.IsError = true;
+                    axisError.ErrorMsg = "Return to zero task execution, can not be repeated!";
+                    return;
+                }
             StopManualTask.Dispose();
             StopManualTask = new CancellationTokenSource();
             HomeTask = Task.Factory.StartNew(ation, StopManualTask.Token);
@@ -70,11 +77,11 @@ namespace LibSDK.Motion
         public MotAPI() { }
         public MotAPI(CAxisParm axisParm)
         {
-            this.CardNum = axisParm.CardID;
-            this.Axis = axisParm.AxisID;
-            this.MotorType = axisParm.MotType;
+            this.CardNum = axisParm.AxisInfo.CardNo;
+            this.Axis = axisParm.AxisInfo.AxisNo;
+            this.MotorType = axisParm.AxisInfo.MotType;
             this.AxisParm = axisParm;
-            this.Name = axisParm.AxisName;
+            this.Name = axisParm.AxisInfo.AxisName;
         }
         /// <summary>
         /// 连续运动
@@ -82,9 +89,9 @@ namespace LibSDK.Motion
         /// <param name="directon"></param>
         /// <param name="Spd"></param>
         /// <returns></returns>
-        public bool JOP(short directon, double Spd)
+        public bool JOP(short directon)
         {
-            double Vel = this.PosToVel(Spd, CardNum, Axis);//速度换算
+            double Vel = this.PosToVel(AxisParm.AxisMotionPara.MotionSped, CardNum, Axis);//速度换算
             return Card.API.JogMove(CardNum, Axis, directon, Vel);
         }
         /// <summary>
@@ -95,31 +102,34 @@ namespace LibSDK.Motion
         /// <param name="Pos"></param>
         /// <param name="Mode">0.相对运动模式，1.绝对运动模式</param>
         /// <returns></returns>
-        public bool PMove(double Spd, double Acc, double Pos, int Mode,bool IsLimt=false)
+        public bool PMove(double Pos, int Mode, bool IsLimt = false)
         {
+            IsLimt = AxisParm.AxisMotionPara.IsEnableSoftLimit;
             double _Pos = PosToPulse(Pos, CardNum, Axis);//位置换算
-            double _Spd = PosToVel(Spd, CardNum, Axis);//速度换算
-            double _Acc = PosToVcc(Acc, CardNum, Axis);//加速度换算
-            if(IsLimt)
+            double _Spd = PosToVel(AxisParm.AxisMotionPara.MotionSped, CardNum, Axis);//速度换算
+            double _Acc = PosToVcc(AxisParm.AxisMotionPara.MotionAcc, CardNum, Axis);//加速度换算
+            if (IsLimt)
             {
-                if(Pos < AxisParm.PosLimit&& Pos > 0)
+                if (Pos < AxisParm.AxisMotionPara.PosLimit && Pos > AxisParm.AxisMotionPara.NegLimit)
                 {
                     return Card.API.PMove(CardNum, Axis, _Pos, _Spd, _Acc, Mode);
                 }
                 else
                 {
-                  //SDK.Log.AddLog(AxisParm.AxisName + "目标位置超过软极限", 2);
-                  //SDK.Alarm.Show("System Error", "S0002", AxisParm.AxisName + "目标位置超过软极限", "I");
-                  return false;
+                    //SDK.Log.AddLog(AxisParm.AxisName + "目标位置超过软极限", 2);
+                    //SDK.Alarm.Show("System Error", "S0002", AxisParm.AxisName + "目标位置超过软极限", "I");
+                    axisError.IsError = true;
+                    axisError.ErrorMsg = "目标位置超过软极限";
+                    return false;
                 }
             }
             else
             {
-              return Card.API.PMove(CardNum, Axis, _Pos, _Spd, _Acc, Mode);
+                return Card.API.PMove(CardNum, Axis, _Pos, _Spd, _Acc, Mode);
             }
         }
 
-        public bool S_PMove(double hightPos,double LowPos,double MinVel, double MaxVel, double Acc, int Mode)
+        public bool S_PMove(double hightPos, double LowPos, double MinVel, double MaxVel, double Acc, int Mode)
         {
             double _hightPos = PosToPulse(hightPos, CardNum, Axis);//位置换算
             double _LowPos = PosToPulse(LowPos, CardNum, Axis);//位置换算
@@ -134,9 +144,9 @@ namespace LibSDK.Motion
         /// <param name="P_Limit"></param>
         /// <param name="N_Limit"></param>
         /// <returns></returns>
-        public bool SetLimit(double P_Limit,double N_Limit,bool Enable)
+        public bool SetLimit(double P_Limit, double N_Limit, bool Enable)
         {
-            double _P_Limit= PosToPulse(P_Limit, CardNum, Axis);//位置换算
+            double _P_Limit = PosToPulse(P_Limit, CardNum, Axis);//位置换算
             double _N_Limit = PosToPulse(N_Limit, CardNum, Axis);//位置换算
             return Card.API.SetSofLimit(CardNum, Axis, Enable, _P_Limit, _N_Limit);
         }
@@ -148,8 +158,8 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool SetLimit(bool Enable)
         {
-            double _P_Limit = PosToPulse(AxisParm.PosLimit, CardNum, Axis);//位置换算
-            double _N_Limit = PosToPulse(AxisParm.NegLimit, CardNum, Axis);//位置换算
+            double _P_Limit = PosToPulse(AxisParm.AxisMotionPara.PosLimit, CardNum, Axis);//位置换算
+            double _N_Limit = PosToPulse(AxisParm.AxisMotionPara.NegLimit, CardNum, Axis);//位置换算
             return Card.API.SetSofLimit(CardNum, Axis, Enable, _P_Limit, _N_Limit);
         }
 
@@ -158,14 +168,14 @@ namespace LibSDK.Motion
             double _Spd = PosToVel(Spd, CardNum, Axis);//速度换算
             Card.API.ChangeSpeed(CardNum, Axis, _Spd);
         }
-       /// <summary>
-       /// 设置轴硬限位
-       /// </summary>
-       /// <param name="Enable"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// 设置轴硬限位
+        /// </summary>
+        /// <param name="Enable"></param>
+        /// <returns></returns>
         public bool SetELMode(short Enable)
         {
-            return Card.API.SetELMode(CardNum, Axis, Enable,0,1);
+            return Card.API.SetELMode(CardNum, Axis, Enable, 0, 1);
         }
         /// <summary>
         /// 轴使能
@@ -221,7 +231,7 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool ORG()
         {
-          return Card.API.Mot_ORG(CardNum, Axis);
+            return Card.API.Mot_ORG(CardNum, Axis);
         }
         /// <summary>
         /// 软负限位
@@ -229,7 +239,7 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool SLN()
         {
-          return Card.API.Mot_SLN(CardNum, Axis);
+            return Card.API.Mot_SLN(CardNum, Axis);
         }
         /// <summary>
         /// 软正限位
@@ -245,7 +255,7 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool Runing()
         {
-          return Card.API.Mot_Running(CardNum, Axis);
+            return Card.API.Mot_Running(CardNum, Axis);
         }
         /// <summary>
         /// 电机到位状态
@@ -253,22 +263,22 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool CheckMotor()
         {
-          return Card.API.GetCheckDone(CardNum, Axis);
+            return Card.API.GetCheckDone(CardNum, Axis);
         }
-        public bool CheckAxisDone(double Acc,double vel , double Pos,double offset)
+        public bool CheckAxisDone(double Acc, double vel, double Pos, double offset)
         {
             bool bDone = false;
             double dis = Math.Abs(GetPrfPluse() - Pos);//位置差
-            if (dis < offset )//比较位置
+            if (dis < offset)//比较位置
             {
-              if (Runing()) { bDone = true; }
-              else { bDone = false; }
+                if (Runing()) { bDone = true; }
+                else { bDone = false; }
             }
             else
             {
-                if(Runing()&&!ALM())
+                if (Runing() && !ALM())
                 {
-                    PMove(vel, Acc, Pos, 1);
+                    PMove(Pos, 1);
                 }
             }
             return bDone;
@@ -280,15 +290,15 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public double GetPrfPluse()
         {
-          return Card.API.GetPrfPluse(CardNum, Axis);
+            return Card.API.GetPrfPluse(CardNum, Axis);
         }
         public double GetPrfPos()
         {
-         return GetPrfPluse() / MotionControl.AxisParm.GetMotionPix(CardNum, Axis);
+            return GetPrfPluse() / MotionControl.AxisParm.GetMotionPix(CardNum, Axis);
         }
         public double GetEncPos()
         {
-         return GetEncPluse() / MotionControl.AxisParm.GetMotionPix(CardNum, Axis);
+            return GetEncPluse() / MotionControl.AxisParm.GetMotionPix(CardNum, Axis);
         }
         /// <summary>
         /// 读取编码器位置
@@ -296,7 +306,7 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public double GetEncPluse()
         {
-          return Card.API.GetEncPluse(CardNum, Axis);
+            return Card.API.GetEncPluse(CardNum, Axis);
         }
         /// <summary>
         /// 单轴停止
@@ -304,12 +314,12 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool AxisStop()
         {
-          return Card.API.AxisStop(CardNum, Axis, 0);
+            return Card.API.AxisStop(CardNum, Axis, 0);
 
         }
         public bool EmgAxisStop()
         {
-          return Card.API.AxisStop(CardNum, Axis, 1);
+            return Card.API.AxisStop(CardNum, Axis, 1);
         }
         /// <summary>
         /// 回零错误处理
@@ -321,32 +331,34 @@ namespace LibSDK.Motion
             switch (Code)
             {
                 case 1:
-                    Error = AxisParm.AxisName+":Instruction call error!/指令调用错误!!!";
+                    Error = AxisParm.AxisInfo.AxisName + ":Instruction call error!/指令调用错误!!!";
                     break;
                 case 2:
-                    Error = AxisParm.AxisName+":Drive alarm failed to return to zero!/轴驱器报警!";//驱动器报警
+                    Error = AxisParm.AxisInfo.AxisName + ":Drive alarm failed to return to zero!/轴驱器报警!";//驱动器报警
                     break;
                 case 3:
-                    Error = AxisParm.AxisName+":Return to zero timeout!/轴回零超时！";//回零超时！！！
+                    Error = AxisParm.AxisInfo.AxisName + ":Return to zero timeout!/轴回零超时！";//回零超时！！！
                     break;
                 case 4:
-                    Error = AxisParm.AxisName + ":Emergency abort back to zero!/紧急停止回零！";//回零超时！！！
+                    Error = AxisParm.AxisInfo.AxisName + ":Emergency abort back to zero!/紧急停止回零！";//回零超时！！！
                     break;
             }
             if (Error != null)
             {
                 MotionControl.HomeFlag = true;
                 new CardAPI().StopAxis();//回零失败紧急停止所有轴
-                //new Alarm.Alarm().MesShow(0, "Home Error", Error, "Yes/确定");
+                                         //new Alarm.Alarm().MesShow(0, "Home Error", Error, "Yes/确定");
+                axisError.IsError = true;
+                axisError.ErrorMsg = Error;
                 return false;
             }
             else
             {
-             return true;
+                return true;
             }
         }
 
-        public void Home(double HomeOffset, double Spd, double Capspd, int HomeMode, short Level, short HomeDir,int Timeout)
+        public void Home(double HomeOffset, double Spd, double Capspd, int HomeMode, short Level, short HomeDir, int Timeout)
         {
             HomeState = false;
             HError = 0;
@@ -368,16 +380,16 @@ namespace LibSDK.Motion
         /// 单轴回零（提示）
         /// </summary>
         /// <returns></returns>
-        public void Home(Action action,int Timeout)
+        public void Home(Action action, int Timeout)
         {
             if (IsHomeRun()) return;
             ExecuteHome(() =>
             {
                 HomeStop = false;
-                double Offset = PosToPulse(this.AxisParm.Homeoffset, CardNum, Axis);//位置换算
-                double HSpd = PosToVel(this.AxisParm.HomeSpd, CardNum, Axis);
-                double Lspd = PosToVel(this.AxisParm.SearchHomeSpd, CardNum, Axis);
-                this.HomeRtn = Card.API.AxisHome(CardNum, Axis, Offset, HSpd, Lspd, MotionControl.HomeMode, 0, this.AxisParm.HomeDirection, Timeout);
+                double Offset = PosToPulse(this.AxisParm.AxisHomeParam.Homeoffset, CardNum, Axis);//位置换算
+                double HSpd = PosToVel(this.AxisParm.AxisHomeParam.HomeSpd, CardNum, Axis);
+                double Lspd = PosToVel(this.AxisParm.AxisHomeParam.SearchHomeSpd, CardNum, Axis);
+                this.HomeRtn = Card.API.AxisHome(CardNum, Axis, Offset, HSpd, Lspd, MotionControl.HomeMode, 0, this.AxisParm.AxisHomeParam.HomeDirection, Timeout);
                 action();
                 HomeError(HomeRtn);
 
@@ -387,17 +399,17 @@ namespace LibSDK.Motion
         public void Home(int Timeout)
         {
             HomeState = false;
-            HError=0 ;
+            HError = 0;
             if (IsHomeRun()) return;
             ExecuteHome(() =>
             {
                 HomeStop = false;
-                double Offset = PosToPulse(this.AxisParm.Homeoffset, CardNum, Axis);//位置换算
-                double HSpd = PosToVel(this.AxisParm.HomeSpd, CardNum, Axis);
-                double Lspd = PosToVel(this.AxisParm.SearchHomeSpd, CardNum, Axis);
-                this.HomeRtn = Card.API.AxisHome(CardNum, Axis, Offset, HSpd, Lspd, MotionControl.HomeMode, 0, this.AxisParm.HomeDirection,Timeout);
+                double Offset = PosToPulse(this.AxisParm.AxisHomeParam.Homeoffset, CardNum, Axis);//位置换算
+                double HSpd = PosToVel(this.AxisParm.AxisHomeParam.HomeSpd, CardNum, Axis);
+                double Lspd = PosToVel(this.AxisParm.AxisHomeParam.SearchHomeSpd, CardNum, Axis);
+                this.HomeRtn = Card.API.AxisHome(CardNum, Axis, Offset, HSpd, Lspd, MotionControl.HomeMode, 0, this.AxisParm.AxisHomeParam.HomeDirection, Timeout);
                 HomeError(HomeRtn);
-                if(HomeRtn == 0) { HomeState = true;};
+                if (HomeRtn == 0) { HomeState = true; };
             });
         }
 
@@ -428,7 +440,7 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool GetCapSts(short cn)
         {
-            return Card.API.GetCapSts(CardNum, Axis,cn);
+            return Card.API.GetCapSts(CardNum, Axis, cn);
         }
 
         #region 高速位置比较
@@ -447,5 +459,11 @@ namespace LibSDK.Motion
             return Card.API.ClearHcmpPoint(CardNum, Hcmp);
         }
         #endregion
+    }
+
+    public class AxisError
+    {
+        public bool IsError;
+        public string ErrorMsg;
     }
 }

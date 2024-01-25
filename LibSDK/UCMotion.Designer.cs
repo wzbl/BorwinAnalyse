@@ -32,15 +32,13 @@
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ucOUTIOParam = new LibSDK.UCMotionParamSet();
-            this.ucMotionParamSet1 = new LibSDK.UCMotionParamSet();
-            this.ucINIOParam = new LibSDK.UCMotionParamSet();
+            this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
-            this.kryptonPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonNavigator1
@@ -50,8 +48,9 @@
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2,
-            this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 2;
+            this.kryptonPage3,
+            this.kryptonPage4});
+            this.kryptonNavigator1.SelectedIndex = 3;
             this.kryptonNavigator1.Size = new System.Drawing.Size(1302, 675);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -83,9 +82,6 @@
             // kryptonPage3
             // 
             this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
-            this.kryptonPage3.Controls.Add(this.ucINIOParam);
-            this.kryptonPage3.Controls.Add(this.ucOUTIOParam);
-            this.kryptonPage3.Controls.Add(this.ucMotionParamSet1);
             this.kryptonPage3.Flags = 65534;
             this.kryptonPage3.LastVisibleSet = true;
             this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
@@ -95,32 +91,17 @@
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "F518F4D3553349211DB4F457B1BF534B";
             // 
-            // ucOUTIOParam
+            // kryptonPage4
             // 
-            this.ucOUTIOParam.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ucOUTIOParam.Location = new System.Drawing.Point(426, 0);
-            this.ucOUTIOParam.Name = "ucOUTIOParam";
-            this.ucOUTIOParam.Size = new System.Drawing.Size(426, 648);
-            this.ucOUTIOParam.TabIndex = 1;
-            this.ucOUTIOParam.Tag = "INIO";
-            // 
-            // ucMotionParamSet1
-            // 
-            this.ucMotionParamSet1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ucMotionParamSet1.Location = new System.Drawing.Point(0, 0);
-            this.ucMotionParamSet1.Name = "ucMotionParamSet1";
-            this.ucMotionParamSet1.Size = new System.Drawing.Size(426, 648);
-            this.ucMotionParamSet1.TabIndex = 0;
-            this.ucMotionParamSet1.Tag = "Axis";
-            // 
-            // ucINIOParam
-            // 
-            this.ucINIOParam.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ucINIOParam.Location = new System.Drawing.Point(852, 0);
-            this.ucINIOParam.Name = "ucINIOParam";
-            this.ucINIOParam.Size = new System.Drawing.Size(426, 648);
-            this.ucINIOParam.TabIndex = 2;
-            this.ucINIOParam.Tag = "OUTIO";
+            this.kryptonPage4.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage4.Flags = 65534;
+            this.kryptonPage4.LastVisibleSet = true;
+            this.kryptonPage4.MinimumSize = new System.Drawing.Size(50, 50);
+            this.kryptonPage4.Name = "kryptonPage4";
+            this.kryptonPage4.Size = new System.Drawing.Size(1300, 648);
+            this.kryptonPage4.Text = "基础设置";
+            this.kryptonPage4.ToolTipTitle = "Page ToolTip";
+            this.kryptonPage4.UniqueName = "601DCEB9A5504C49E7B7BB59C78A5C4C";
             // 
             // UCMotion
             // 
@@ -134,7 +115,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
-            this.kryptonPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -145,8 +126,6 @@
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
-        public UCMotionParamSet ucMotionParamSet1;
-        public UCMotionParamSet ucOUTIOParam;
-        public UCMotionParamSet ucINIOParam;
+        private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage4;
     }
 }

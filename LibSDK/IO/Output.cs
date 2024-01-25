@@ -9,7 +9,7 @@ namespace LibSDK.IO
 {
     public class Output
     {
-        private CIOType IOParm;
+        public CIOType IOParm;
 
         private readonly IOAPI IO = new IOAPI();
 

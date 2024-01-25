@@ -1,11 +1,13 @@
 ﻿using LibSDK.Enums;
 using LibSDK.IO;
 using LibSDK.Motion;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static LibSDK.IO.IOParm;
 
 namespace LibSDK
@@ -25,12 +27,116 @@ namespace LibSDK
         public static bool HomeFlag = false;
         public static CardAPI CardAPI = new CardAPI();
 
+        /// <summary>
+        /// 更新轴
+        /// </summary>
+        public static Action UpDateAxis;
+
+        /// <summary>
+        /// 更新输入IO
+        /// </summary>
+        public static Action UpDateINIO;
+
+        /// <summary>
+        /// 更新输出IO
+        /// </summary>
+        public static Action UpDateOUTIO;
+
+
+        public static void AddCard()
+        {
+
+            CardConfig cardConfig = new CardConfig();
+            cardConfig.CardNo = BaseConfig.Instance.cardConfigs.Count;
+            cardConfig.AxisNum = 6;
+            cardConfig.ConigPath = "";
+            BaseConfig.Instance.cardConfigs.Add(cardConfig);
+            BaseConfig.Instance.Write();
+            Init();
+        }
+
+        public static void Init()
+        {
+            BaseConfig.Instance.Read();
+
+            if (BaseConfig.Instance.cardConfigs.Count > 0)
+            {
+                int CardNum = BaseConfig.Instance.cardConfigs.Count;
+                int[] axis = new int[CardNum];
+                string[] ConfigFile = new string[CardNum];
+                for (int i = 0; i < BaseConfig.Instance.cardConfigs.Count; i++)
+                {
+                    axis[i] = BaseConfig.Instance.cardConfigs[i].AxisNum;
+                    ConfigFile[i] = BaseConfig.Instance.cardConfigs[i].ConigPath;
+                }
+                CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile);
+
+                InitAxis();
+                InitINIO();
+                InitOUTIO();
+
+                for (int i = 0; i < CardNum; i++)
+                {
+                    int cardNo = BaseConfig.Instance.cardConfigs[i].CardNo;
+                    int count = AxisParm.AParms.Where(x => x.AxisInfo.CardNo == cardNo).ToList().Count();
+                    BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
+                }
+                BaseConfig.Instance.Write();
+            }
+
+        }
+
+        public static void InitAxis()
+        {
+            Motions.Clear();
+            foreach (CAxisParm cAxisParm in AxisParm.AParms)
+            {
+                if (Motions.ContainsKey(cAxisParm.AxisInfo.AxisName))
+                {
+                    continue;
+                }
+                MotAPI motAPI = new MotAPI(cAxisParm);
+                Motions.Add(cAxisParm.AxisInfo.AxisName, motAPI);
+            }
+            UpDateAxis?.Invoke();
+        }
+
+        public static void InitINIO()
+        {
+            InPort.Clear();
+            foreach (CIOType iOType in IOParmIn.IOParms)
+            {
+                if (InPort.ContainsKey(iOType.IoName))
+                {
+                    continue;
+                }
+                Input input = new Input(iOType);
+                InPort.Add(iOType.IoName, input);
+            }
+            UpDateINIO?.Invoke();
+        }
+
+        public static void InitOUTIO()
+        {
+            Output.Clear();
+            foreach (CIOType iOType in IOParmOut.IOParms)
+            {
+                if (Output.ContainsKey(iOType.IoName))
+                {
+                    continue;
+                }
+                Output ouput = new Output(iOType);
+                Output.Add(iOType.IoName, ouput);
+            }
+            UpDateOUTIO?.Invoke();
+        }
+
         public static MotAPI AddAxis(string AxisName)
         {
             MotAPI motAPI = null;
             foreach (CAxisParm cAxisParm in AxisParm.AParms)
             {
-                if (cAxisParm.AxisName == AxisName)
+                if (cAxisParm.AxisInfo.AxisName == AxisName)
                 {
                     motAPI = new MotAPI(cAxisParm);
                     Motions.Add(AxisName, motAPI);
@@ -39,7 +145,7 @@ namespace LibSDK
             if (motAPI == null)
             {
                 CAxisParm AxisParms = new CAxisParm();
-                AxisParms.AxisName = AxisName;
+                AxisParms.AxisInfo.AxisName = AxisName;
                 AxisParm.AParms.Add(AxisParms);
                 Motions.Add(AxisName, motAPI);
                 motAPI = new MotAPI(AxisParms);
@@ -88,7 +194,6 @@ namespace LibSDK
                 input = new Output(CIOType);
                 Output.Add(Name, input);
             }
-
         }
     }
 }

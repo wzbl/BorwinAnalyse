@@ -1,4 +1,5 @@
-﻿using LibSDK.IO;
+﻿using LibSDK.Enums;
+using LibSDK.IO;
 using LibSDK.Motion;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,15 @@ namespace LibSDK
         }
         private void UCMotion_Load(object sender, EventArgs e)
         {
-            kryptonPage1.Controls.Add(new AxisControl());
+          
+        }
+
+        public void Init()
+        {
+            kryptonPage1.Controls.Add(new UCAxisControl());
             kryptonPage2.Controls.Add(new UCIOControl());
+            kryptonPage3.Controls.Add(new UCMotionParam());
+            kryptonPage4.Controls.Add(new UCBaseConfig());
         }
 
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LibSDK.Motion
 {
@@ -81,7 +82,10 @@ namespace LibSDK.Motion
                         for (int i = 0; i < CardNum; i++)
                         {
                             Rtn = Card.API.CrdIni((short)i, Pfile[i]);
-                            if (!Rtn) { return Rtn; }
+                            if (!Rtn) {
+                                MessageBox.Show(string.Format("初始化卡{0}失败", i));
+                                return Rtn;
+                            }
                         }
                         if (MdlNum > 0)
                         {

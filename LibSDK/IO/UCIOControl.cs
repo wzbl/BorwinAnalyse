@@ -19,46 +19,56 @@ namespace LibSDK.IO
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             this.Load += UCIOControl_Load;
+            UpDateOUTIO();
+            UpDateINIO();
+            MotionControl.UpDateINIO += UpDateINIO;
+            MotionControl.UpDateOUTIO += UpDateOUTIO;
         }
 
+        private void UpDateOUTIO()
+        {
+            int i = 0;
+            foreach (KeyValuePair<string, Output> flowModel in MotionControl.Output)
+            {
+                OutputControl outputControl = new OutputControl();
+                outputControl.BringToFront();
+                outputControl.output = flowModel.Value;
+                outputControl.Left = 10 + (i % 4) * 173;
+                outputControl.Top = 15 + (i / 4) * 56;
+                OutputControls.Add(outputControl);
+                kryptonSplitContainer2.Panel1.Controls.Add(outputControl);
+                outputControl.RefreshUI();
+                i++;
+            }
+        }
+
+        private void UpDateINIO()
+        {
+            int i = 0;
+            foreach (KeyValuePair<string, Input> flowModel in MotionControl.InPort)
+            {
+                InputControl inputControl = new InputControl();
+                kryptonSplitContainer2.Panel2.Controls.Add(inputControl);
+                inputControl.Left = 10 + (i % 4) * 173;
+                inputControl.Top = 15 + (i / 4) * 56;
+                inputControl.Input = flowModel.Value;
+                inputControls.Add(inputControl);
+                inputControl.RefreshUI();
+                i++;
+            }
+
+        }
         private List<InputControl>  inputControls = new List<InputControl>();
         private List<OutputControl> OutputControls = new List<OutputControl>();
 
         private void UCIOControl_Load(object sender, EventArgs e)
         {
-          timer1.Start();
+           timer1.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (inputControls.Count==0&& MotionControl.InPort.Count>0)
-            {
-                int i = 0;
-                foreach (KeyValuePair<string, Input> flowModel in MotionControl.InPort)
-                {
-                    InputControl inputControl = new InputControl();
-                    kryptonSplitContainer2.Panel2.Controls.Add(inputControl);
-                    inputControl.Left = 24 + (i % 4) * 173;
-                    inputControl.Top = 24 + (i / 4) * 56;
-                    inputControl.Input = flowModel.Value;
-                    inputControl.InputIndex = i;
-                    inputControls.Add(inputControl);
-                    i++;
-                }
-                i = 0;
-                foreach (KeyValuePair<string, Output> flowModel in MotionControl.Output)
-                {
-                    OutputControl outputControl = new OutputControl();
-                    outputControl.BringToFront();
-                    outputControl.output = flowModel.Value;
-                    outputControl.Left = 24 + (i % 4) * 173;
-                    outputControl.Top = 24 + (i / 4) * 56;
-                    outputControl.OutputIndex = i;
-                    OutputControls.Add(outputControl);
-                    kryptonSplitContainer2.Panel1.Controls.Add(outputControl);
-                    i++;
-                }
-            }
+
             for (int i = 0; i < OutputControls.Count; i++)
             {
                 if (OutputControls[i].output.State())
@@ -69,6 +79,16 @@ namespace LibSDK.IO
                 {
                     OutputControls[i].Value = 0;
                 }
+                if (RefreshOutIO)
+                {
+                    OutputControls[i].RefreshUI();
+                }
+                
+            }
+
+            if (RefreshOutIO)
+            {
+                RefreshOutIO = false;
             }
 
             for (int i = 0; i < inputControls.Count;i++)
@@ -81,7 +101,19 @@ namespace LibSDK.IO
                 {
                     inputControls[i].Value = 0;
                 }
+                if (RefreshInIO)
+                {
+                    inputControls[i].RefreshUI();
+                }
+
+            }
+            if (RefreshInIO)
+            {
+                RefreshInIO = false;
             }
         }
+
+        public static bool  RefreshInIO = false;
+        public static bool  RefreshOutIO = false;
     }
 }

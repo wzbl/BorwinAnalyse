@@ -419,6 +419,7 @@ namespace LibSDK.Motion
                 }
             } while (true);
         }
+
         /// <summary>
         /// 设置输出IO信号
         /// </summary>
@@ -809,6 +810,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             else return true;
         }
+
         /// <summary>
         /// 下载bin文件
         /// </summary>
@@ -820,6 +822,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             return true;
         }
+
         /// <summary>
         /// 配置自动运行参数
         /// </summary>

@@ -13,6 +13,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VisionModel.UCControls;
 
 namespace BorwinSplicMachine
@@ -71,9 +72,8 @@ namespace BorwinSplicMachine
             CalibrationCCD = new CalibrationCCD();
             UCLCRSearch = new UCLCRSearch();
             UCMes = new UCMes();
-            UCMotion = new UCMotion();
             motControl = new MotControl();
-       
+            UCMotion = new UCMotion();
             this.MainForm = MainForm;
         }
 
@@ -104,14 +104,7 @@ namespace BorwinSplicMachine
 
         internal void Init()
         {
-           UCMotion.ucMotionParamSet1.PPTParam.SelectedObject
-               = AxisParm.AParms.ToArray();
-
-            UCMotion.ucOUTIOParam.PPTParam.SelectedObject
-             = MotionControl.IOParmOut.IOParms.ToArray();
-
-            UCMotion.ucINIOParam.PPTParam.SelectedObject
-            = MotionControl.IOParmIn.IOParms.ToArray();
+           UCMotion.Init();
 
         }
     }

@@ -67,5 +67,11 @@ namespace LibSDK.IO
             }
         }
 
+        public void RefreshUI()
+        {
+            txtOutputIndex.Text = output.IOParm.IoName;
+            txtOutputText.Text = output.IOParm.IONum.ToString();
+        }
+
     }
 }

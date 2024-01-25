@@ -29,41 +29,70 @@
         private void InitializeComponent()
         {
             this.PPTParam = new System.Windows.Forms.PropertyGrid();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PPTParam
             // 
-            this.PPTParam.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PPTParam.Location = new System.Drawing.Point(0, 0);
+            this.PPTParam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PPTParam.Location = new System.Drawing.Point(0, 23);
             this.PPTParam.Name = "PPTParam";
-            this.PPTParam.Size = new System.Drawing.Size(648, 452);
+            this.PPTParam.Size = new System.Drawing.Size(648, 494);
             this.PPTParam.TabIndex = 0;
+            this.PPTParam.Resize += new System.EventHandler(this.PPTParam_Resize);
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.btnSave);
+            this.kryptonPanel1.Controls.Add(this.PPTParam);
+            this.kryptonPanel1.Controls.Add(this.txtName);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(648, 517);
+            this.kryptonPanel1.TabIndex = 2;
+            // 
+            // txtName
+            // 
+            this.txtName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtName.Location = new System.Drawing.Point(0, 0);
+            this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
+            this.txtName.Size = new System.Drawing.Size(648, 23);
+            this.txtName.TabIndex = 0;
+            this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(42, 458);
+            this.btnSave.Location = new System.Drawing.Point(513, 464);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(126, 46);
+            this.btnSave.Size = new System.Drawing.Size(111, 50);
             this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Values.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // UCMotionParamSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.PPTParam);
+            this.Controls.Add(this.kryptonPanel1);
             this.Name = "UCMotionParamSet";
             this.Size = new System.Drawing.Size(648, 517);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            this.kryptonPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnSave;
         public System.Windows.Forms.PropertyGrid PPTParam;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtName;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSave;
     }
 }

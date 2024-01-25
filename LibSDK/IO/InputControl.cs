@@ -30,7 +30,6 @@ namespace LibSDK.IO
             set
             {
                 dSignalLamp.Value = value;
-                txtInputText.Text = value.ToString();
             }
         }
 
@@ -40,7 +39,7 @@ namespace LibSDK.IO
             set
             {
                 inputText = value;
-                txtInputText.Text = inputText;
+            
             }
         }
 
@@ -50,11 +49,16 @@ namespace LibSDK.IO
             set
             {
                 inputIndex = value;
-                txtInputIndex.Text = "IN" + inputIndex;
+                
             }
 
         }
 
+        public void RefreshUI()
+        {
+            txtInputIndex.Text = Input.IOParm.IoName;
+            txtInputText.Text = Input.IOParm.IONum.ToString();
+        }
 
 
     }

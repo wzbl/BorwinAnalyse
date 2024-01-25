@@ -1,5 +1,6 @@
 ﻿using LibSDK.Enums;
 using LibSDK.Motion;
+using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,49 +16,47 @@ namespace LibSDK
     public partial class AxisControl : UserControl
     {
         MotAPI MotAPI = null;
-        MoveType moveType = MoveType.绝对运动模式;
-        public AxisControl()
+        Color Color = Color.White;
+        public AxisControl(MotAPI MotAPI)
         {
             InitializeComponent();
             this.Load += AxisControl_Load;
+            this.MotAPI = MotAPI;
         }
 
         private void AxisControl_Load(object sender, EventArgs e)
         {
-            //MotAPI = MotionControl.AddAxis("A轴");
-            //lbAxisName.Text = MotAPI.Name;
+            lbName.Text = MotAPI.Name;
+            Color = btnPositive.BackColor;
         }
 
-        bool IsServon = false;
+      
         private void btnOpenSero_Click(object sender, EventArgs e)
         {
-            if (IsServon)
+            if (btnOpenSero.BackColor == Color.Green)
             {
                 MotAPI.SetServoff();
-                btnOpenSero.Text = "打开使能";
             }
             else
             {
                 MotAPI.SetServon();
-                btnOpenSero.Text = "关闭使能";
             }
-
         }
 
         private void btnPositive_Click(object sender, EventArgs e)
         {
-            double.TryParse(txtPos.Text, out double spd);
-            switch (moveType)
+            double spd = UCAxisControl.pos;
+            switch (UCAxisControl.moveType)
             {
                 case MoveType.相对运动模式:
-                    MotAPI.PMove(3, 5, spd, 0);
+                    MotAPI.PMove(spd, 0);
                     break;
                 case MoveType.绝对运动模式:
-                    MotAPI.PMove(3, 5, spd, 1);
+                    MotAPI.PMove(spd, 1);
                     break;
                 case MoveType.JOG:
 
-                    MotAPI.JOP(0, spd);
+                    MotAPI.JOP(0);
                     break;
                 default:
                     break;
@@ -77,32 +76,67 @@ namespace LibSDK
 
         private void btnStartGoHome_Click(object sender, EventArgs e)
         {
-            MotAPI.Home(50,10,5,0,0,0,100);
+            MotAPI.Home(1000);
         }
 
-        private void ComMoveType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            moveType = (MoveType)ComMoveType.SelectedIndex;
-        }
 
         private void btnNagetive_Click(object sender, EventArgs e)
         {
-            double.TryParse(txtPos.Text, out double spd);
-            switch (moveType)
+            double spd = UCAxisControl.pos;
+            switch (UCAxisControl.moveType)
             {
                 case MoveType.相对运动模式:
-                    MotAPI.PMove(3, 5, -spd, 0);
+                    MotAPI.PMove(-spd, 0,true);
                     break;
                 case MoveType.绝对运动模式:
-                    MotAPI.PMove(3, 5, -spd, 1);
+                    MotAPI.PMove(-spd, 1, true);
                     break;
                 case MoveType.JOG:
 
-                    MotAPI.JOP(1, 300);
+                    MotAPI.JOP(1);
                     break;
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// 刷新状态
+        /// </summary>
+        public void RefreshUI()
+        {
+            txtPos.Text = MotAPI.GetPrfPos().ToString();
+            txtRel.Text = MotAPI.GetEncPos().ToString();
+
+            btnOpenSero.BackColor = MotAPI.GetSevOn() ? Color.Green : Color;
+            if (MotAPI.axisError.IsError)
+            {
+                errorPanel.Visible = true;
+                lbErrorMsg.Text = MotAPI.Name+":"+ MotAPI.axisError.ErrorMsg;
+            }
+            else
+            {
+                errorPanel.Visible = false;
+            }
+        }
+
+        public void EmgStop()
+        {
+            MotAPI.EmgAxisStop();
+        }
+
+        private void btnAlarmReset_Click(object sender, EventArgs e)
+        {
+            ClearAlarm();
+        }
+
+        /// <summary>
+        /// 清除报警
+        /// </summary>
+        public void ClearAlarm()
+        {
+            MotAPI.axisError.ErrorMsg = "";
+            MotAPI.axisError.IsError = false;
         }
     }
 }

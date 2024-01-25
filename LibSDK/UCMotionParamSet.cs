@@ -1,4 +1,5 @@
-﻿using LibSDK.Motion;
+﻿using LibSDK.IO;
+using LibSDK.Motion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,26 @@ namespace LibSDK
         public UCMotionParamSet()
         {
             InitializeComponent();
+            PPTParam.PropertySort = PropertySort.Alphabetical;
+            PPTParam.ToolbarVisible = false;
+            txtName.Font = new Font("宋体",20);
         }
+
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public  string 标题
+        {
+            get
+            {
+                return txtName.Text;
+            }
+            set
+            {
+                txtName.Text=value;
+            }
+        }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -27,13 +47,30 @@ namespace LibSDK
             else if (this.Tag.ToString().Trim() == "INIO")
             {
                 MotionControl.IOParmIn.Write();
+                if (!UCIOControl.RefreshInIO)
+                {
+                    UCIOControl.RefreshInIO = true;
+                }
             }
             else if (this.Tag.ToString().Trim() == "OUTIO")
             {
                 MotionControl.IOParmOut.Write();
+                if (!UCIOControl.RefreshOutIO)
+                {
+                    UCIOControl.RefreshOutIO = true;
+                }
+            }
+            else
+            {
+                BaseConfig.Instance.Write();
             }
 
 
+        }
+
+        private void PPTParam_Resize(object sender, EventArgs e)
+        {
+            btnSave.Location = new Point(PPTParam.Location.X + PPTParam.Width - btnSave.Width-4, PPTParam.Height - btnSave.Height+20);
         }
     }
 }
