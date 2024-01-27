@@ -40,7 +40,7 @@ namespace BorwinSplicMachine.UCControls.MES
             Dictionary<string, string> datas = new Dictionary<string, string>();
             foreach (var item in mesInValues)
             {
-                if (item.Enable && item != MesControl.Instance.checkInCode1.IsEnable && item != MesControl.Instance.checkInCode1.URL)
+                if (item.Enable && item != MesControl.Instance.upDataIn.IsEnable && item != MesControl.Instance.upDataIn.URL)
                 {
                     datas.Add(item.Key, item.Value);
                 }

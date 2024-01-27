@@ -79,7 +79,6 @@ namespace BorwinSplicMachine
             this.MainForm = MainForm;
         }
 
-
         public async void UpdataLanguage()
         {
             await asyncUpdataLanguage();

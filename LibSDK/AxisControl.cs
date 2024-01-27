@@ -1,4 +1,5 @@
-﻿using LibSDK.Enums;
+﻿using ComponentFactory.Krypton.Toolkit;
+using LibSDK.Enums;
 using LibSDK.Motion;
 using NPOI.SS.UserModel;
 using System;
@@ -20,6 +21,7 @@ namespace LibSDK
         public AxisControl(MotAPI MotAPI)
         {
             InitializeComponent();
+            errorPanel.Dock = DockStyle.Fill;
             this.Load += AxisControl_Load;
             this.MotAPI = MotAPI;
         }
@@ -54,14 +56,9 @@ namespace LibSDK
                 case MoveType.绝对运动模式:
                     MotAPI.PMove(spd, 1);
                     break;
-                case MoveType.JOG:
-
-                    MotAPI.JOP(0);
-                    break;
                 default:
                     break;
             }
-
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -90,10 +87,6 @@ namespace LibSDK
                     break;
                 case MoveType.绝对运动模式:
                     MotAPI.PMove(-spd, 1, true);
-                    break;
-                case MoveType.JOG:
-
-                    MotAPI.JOP(1);
                     break;
                 default:
                     break;
@@ -147,6 +140,23 @@ namespace LibSDK
             MotionControl.CardAPI.ClearSts();
             MotAPI.axisError.ErrorMsg = "";
             MotAPI.axisError.IsError = false;
+        }
+
+        bool IsDown=false;
+        private void btnPositive_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsDown=true;
+            if (UCAxisControl.moveType == MoveType.JOG)
+            MotAPI.JOP(short.Parse(((KryptonButton)sender).Tag.ToString()));
+        }
+
+        private void btnPositive_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (IsDown && UCAxisControl.moveType == MoveType.JOG)
+            {
+                MotAPI.AxisStop();
+                IsDown = false;
+            }
         }
     }
 }

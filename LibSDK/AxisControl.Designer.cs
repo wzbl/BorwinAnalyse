@@ -37,13 +37,13 @@
             this.lbAxisName = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnOpenSero = new System.Windows.Forms.Button();
             this.lbName = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.dSignalLamp2 = new LibSDK.IO.DSignalLamp();
-            this.dSignalLamp1 = new LibSDK.IO.DSignalLamp();
-            this.dSignalLamp3 = new LibSDK.IO.DSignalLamp();
-            this.dSignalLamp4 = new LibSDK.IO.DSignalLamp();
             this.errorPanel = new System.Windows.Forms.Panel();
             this.btnAlarmReset = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lbErrorMsg = new System.Windows.Forms.Label();
+            this.dSignalLamp4 = new LibSDK.IO.DSignalLamp();
+            this.dSignalLamp3 = new LibSDK.IO.DSignalLamp();
+            this.dSignalLamp1 = new LibSDK.IO.DSignalLamp();
+            this.dSignalLamp2 = new LibSDK.IO.DSignalLamp();
             this.errorPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,8 +71,11 @@
             this.btnPositive.Name = "btnPositive";
             this.btnPositive.Size = new System.Drawing.Size(51, 50);
             this.btnPositive.TabIndex = 2;
+            this.btnPositive.Tag = "0";
             this.btnPositive.Values.Text = "正向";
             this.btnPositive.Click += new System.EventHandler(this.btnPositive_Click);
+            this.btnPositive.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPositive_MouseDown);
+            this.btnPositive.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPositive_MouseUp);
             // 
             // btnNagetive
             // 
@@ -80,8 +83,11 @@
             this.btnNagetive.Name = "btnNagetive";
             this.btnNagetive.Size = new System.Drawing.Size(51, 50);
             this.btnNagetive.TabIndex = 3;
+            this.btnNagetive.Tag = "1";
             this.btnNagetive.Values.Text = "反向";
             this.btnNagetive.Click += new System.EventHandler(this.btnNagetive_Click);
+            this.btnNagetive.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPositive_MouseDown);
+            this.btnNagetive.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPositive_MouseUp);
             // 
             // btnStop
             // 
@@ -127,75 +133,14 @@
             this.lbName.Size = new System.Drawing.Size(31, 15);
             this.lbName.Text = "A轴:";
             // 
-            // dSignalLamp2
-            // 
-            this.dSignalLamp2.CanClick = false;
-            this.dSignalLamp2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dSignalLamp2.IsHighlight = true;
-            this.dSignalLamp2.IsShowBorder = false;
-            this.dSignalLamp2.LampColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Red};
-            this.dSignalLamp2.Location = new System.Drawing.Point(71, 1);
-            this.dSignalLamp2.Name = "dSignalLamp2";
-            this.dSignalLamp2.Size = new System.Drawing.Size(35, 35);
-            this.dSignalLamp2.TabIndex = 17;
-            this.dSignalLamp2.TwinkleSpeed = 0;
-            this.dSignalLamp2.Value = 0;
-            // 
-            // dSignalLamp1
-            // 
-            this.dSignalLamp1.CanClick = false;
-            this.dSignalLamp1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dSignalLamp1.IsHighlight = true;
-            this.dSignalLamp1.IsShowBorder = false;
-            this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Red};
-            this.dSignalLamp1.Location = new System.Drawing.Point(254, 1);
-            this.dSignalLamp1.Name = "dSignalLamp1";
-            this.dSignalLamp1.Size = new System.Drawing.Size(35, 35);
-            this.dSignalLamp1.TabIndex = 19;
-            this.dSignalLamp1.TwinkleSpeed = 0;
-            this.dSignalLamp1.Value = 0;
-            // 
-            // dSignalLamp3
-            // 
-            this.dSignalLamp3.CanClick = false;
-            this.dSignalLamp3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dSignalLamp3.IsHighlight = true;
-            this.dSignalLamp3.IsShowBorder = false;
-            this.dSignalLamp3.LampColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Red};
-            this.dSignalLamp3.Location = new System.Drawing.Point(71, 36);
-            this.dSignalLamp3.Name = "dSignalLamp3";
-            this.dSignalLamp3.Size = new System.Drawing.Size(35, 35);
-            this.dSignalLamp3.TabIndex = 20;
-            this.dSignalLamp3.TwinkleSpeed = 0;
-            this.dSignalLamp3.Value = 0;
-            // 
-            // dSignalLamp4
-            // 
-            this.dSignalLamp4.CanClick = false;
-            this.dSignalLamp4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dSignalLamp4.IsHighlight = true;
-            this.dSignalLamp4.IsShowBorder = false;
-            this.dSignalLamp4.LampColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Red};
-            this.dSignalLamp4.Location = new System.Drawing.Point(254, 36);
-            this.dSignalLamp4.Name = "dSignalLamp4";
-            this.dSignalLamp4.Size = new System.Drawing.Size(35, 35);
-            this.dSignalLamp4.TabIndex = 21;
-            this.dSignalLamp4.TwinkleSpeed = 0;
-            this.dSignalLamp4.Value = 0;
-            // 
             // errorPanel
             // 
             this.errorPanel.BackColor = System.Drawing.Color.Red;
             this.errorPanel.Controls.Add(this.btnAlarmReset);
             this.errorPanel.Controls.Add(this.lbErrorMsg);
-            this.errorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.errorPanel.Location = new System.Drawing.Point(0, 0);
+            this.errorPanel.Location = new System.Drawing.Point(150, 3);
             this.errorPanel.Name = "errorPanel";
-            this.errorPanel.Size = new System.Drawing.Size(306, 127);
+            this.errorPanel.Size = new System.Drawing.Size(62, 64);
             this.errorPanel.TabIndex = 22;
             this.errorPanel.Visible = false;
             // 
@@ -219,6 +164,66 @@
             this.lbErrorMsg.Size = new System.Drawing.Size(69, 20);
             this.lbErrorMsg.TabIndex = 0;
             this.lbErrorMsg.Text = "label1";
+            // 
+            // dSignalLamp4
+            // 
+            this.dSignalLamp4.CanClick = false;
+            this.dSignalLamp4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp4.IsHighlight = true;
+            this.dSignalLamp4.IsShowBorder = false;
+            this.dSignalLamp4.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp4.Location = new System.Drawing.Point(254, 36);
+            this.dSignalLamp4.Name = "dSignalLamp4";
+            this.dSignalLamp4.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp4.TabIndex = 21;
+            this.dSignalLamp4.TwinkleSpeed = 0;
+            this.dSignalLamp4.Value = 0;
+            // 
+            // dSignalLamp3
+            // 
+            this.dSignalLamp3.CanClick = false;
+            this.dSignalLamp3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp3.IsHighlight = true;
+            this.dSignalLamp3.IsShowBorder = false;
+            this.dSignalLamp3.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp3.Location = new System.Drawing.Point(71, 36);
+            this.dSignalLamp3.Name = "dSignalLamp3";
+            this.dSignalLamp3.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp3.TabIndex = 20;
+            this.dSignalLamp3.TwinkleSpeed = 0;
+            this.dSignalLamp3.Value = 0;
+            // 
+            // dSignalLamp1
+            // 
+            this.dSignalLamp1.CanClick = false;
+            this.dSignalLamp1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp1.IsHighlight = true;
+            this.dSignalLamp1.IsShowBorder = false;
+            this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp1.Location = new System.Drawing.Point(254, 1);
+            this.dSignalLamp1.Name = "dSignalLamp1";
+            this.dSignalLamp1.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp1.TabIndex = 19;
+            this.dSignalLamp1.TwinkleSpeed = 0;
+            this.dSignalLamp1.Value = 0;
+            // 
+            // dSignalLamp2
+            // 
+            this.dSignalLamp2.CanClick = false;
+            this.dSignalLamp2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp2.IsHighlight = true;
+            this.dSignalLamp2.IsShowBorder = false;
+            this.dSignalLamp2.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp2.Location = new System.Drawing.Point(71, 1);
+            this.dSignalLamp2.Name = "dSignalLamp2";
+            this.dSignalLamp2.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp2.TabIndex = 17;
+            this.dSignalLamp2.TwinkleSpeed = 0;
+            this.dSignalLamp2.Value = 0;
             // 
             // AxisControl
             // 

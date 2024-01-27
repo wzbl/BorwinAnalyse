@@ -155,12 +155,21 @@ namespace LibSDK
             UpDateOUTIO?.Invoke();
         }
 
+        /// <summary>
+        /// 运动控制打印日志
+        /// </summary>
+        /// <param name="message"></param>
         public static void Log(string message)
         {
             LogManager.Instance.WriteLog(new LogModel(LogType.运动控制日志, message));
         }
 
-        public static MotAPI AddAxis(string AxisName)
+        /// <summary>
+        /// 外部逻辑，获取轴控制权
+        /// </summary>
+        /// <param name="AxisName"></param>
+        /// <returns></returns>
+        public static MotAPI GetAxis(string AxisName)
         {
             MotAPI motAPI = null;
             foreach (CAxisParm cAxisParm in AxisParm.AParms)
@@ -168,21 +177,18 @@ namespace LibSDK
                 if (cAxisParm.AxisInfo.AxisName == AxisName)
                 {
                     motAPI = new MotAPI(cAxisParm);
-                    Motions.Add(AxisName, motAPI);
                 }
-            }
-            if (motAPI == null)
-            {
-                CAxisParm AxisParms = new CAxisParm();
-                AxisParms.AxisInfo.AxisName = AxisName;
-                AxisParm.AParms.Add(AxisParms);
-                Motions.Add(AxisName, motAPI);
-                motAPI = new MotAPI(AxisParms);
             }
             return motAPI;
         }
 
-        public static void AddInPutIO(string Name)
+        /// <summary>
+        /// 外部逻辑,获取输入IO控制权
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+
+        public static Input GetInPutIO(string Name)
         {
             Input input = null;
             foreach (CIOType iOType in IOParmIn.IOParms)
@@ -190,39 +196,26 @@ namespace LibSDK
                 if (iOType.IoName == Name)
                 {
                     input = new Input(iOType);
-                    InPort.Add(Name, input);
                 }
             }
-            if (input == null)
-            {
-                CIOType CIOType = new CIOType();
-                CIOType.IoName = Name;
-                CIOType.IONum = (short)(IOParmIn.IOParms.Count);
-                input = new Input(CIOType);
-                IOParmIn.IOParms.Add(CIOType);
-                InPort.Add(Name, input);
-            }
+          return input;
         }
-        public static void AddOutPutIO(string Name)
+
+        /// <summary>
+        /// 外部逻辑,获取输出IO控制权
+        /// </summary>
+
+        public static Output GetOutPutIO(string Name)
         {
-            Output input = null;
+            Output output = null;
             foreach (CIOType iOType in IOParmOut.IOParms)
             {
                 if (iOType.IoName == Name)
                 {
-                    input = new Output(iOType);
-                    Output.Add(Name, input);
+                    output = new Output(iOType);
                 }
             }
-            if (input == null)
-            {
-                CIOType CIOType = new CIOType();
-                CIOType.IoName = Name;
-                CIOType.IONum = (short)(IOParmOut.IOParms.Count);
-                IOParmOut.IOParms.Add(CIOType);
-                input = new Output(CIOType);
-                Output.Add(Name, input);
-            }
+            return output;
         }
     }
 }
