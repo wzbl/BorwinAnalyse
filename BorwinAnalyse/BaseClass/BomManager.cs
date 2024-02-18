@@ -30,7 +30,7 @@ namespace BorwinAnalyse.BaseClass
         }
 
         public string CurrentBomName = "";
-        public List<string> BomNames=new List<string>();
+        public List<string> BomNames = new List<string>();
 
         public void Init()
         {
@@ -113,15 +113,15 @@ namespace BorwinAnalyse.BaseClass
         /// BOM解析完成后保存
         /// </summary>
         /// <param name="dataGrid"></param>
-        public void SaveInAllBomData(string modelName,KryptonDataGridView dataGrid)
+        public void SaveInAllBomData(string modelName, KryptonDataGridView dataGrid)
         {
             for (int i = 0; i < dataGrid.RowCount; i++)
             {
-                if (dataGrid.Rows[i].IsNewRow||string.IsNullOrEmpty(dataGrid.Rows[i].Cells[0].FormattedValue.ToString()))
+                if (dataGrid.Rows[i].IsNewRow || string.IsNullOrEmpty(dataGrid.Rows[i].Cells[0].FormattedValue.ToString()))
                 {
                     continue;
                 }
-                string id =Guid.NewGuid().ToString();
+                string id = Guid.NewGuid().ToString();
                 BomDataModel bomDataModel = new BomDataModel();
                 bomDataModel.id = id;
                 bomDataModel.modelName = modelName;
@@ -187,7 +187,7 @@ namespace BorwinAnalyse.BaseClass
 
         public void DeleteModel(string modelName)
         {
-            string comms1 = modelName=="ALL"? "DELETE FROM CurrentBOM" : string.Format( "DELETE FROM CurrentBOM where modelName = '{0}' ", modelName);
+            string comms1 = modelName == "ALL" ? "DELETE FROM CurrentBOM" : string.Format("DELETE FROM CurrentBOM where modelName = '{0}' ", modelName);
             SqlLiteManager.Instance.DB.Insert(comms1);
 
             string comms2 = modelName == "ALL" ? "DELETE FROM ALLBOM" : string.Format("DELETE FROM ALLBOM where modelName = '{0}' ", modelName);
@@ -209,7 +209,7 @@ namespace BorwinAnalyse.BaseClass
         {
             string cmd = string.Format("UPDATE ALLBOM SET  replaceCode = '{0}' ,exp2 ='{1}',exp3='{2}',exp4='{3}',exp5='{4}' where  modelName = '{5}' and barCode = '{6}'", bomDataModel.replaceCode, bomDataModel.exp2, bomDataModel.exp3, bomDataModel.exp4, bomDataModel.exp5, bomDataModel.modelName, bomDataModel.barCode);
             SqlLiteManager.Instance.DB.Insert(cmd);
-            if (CurrentBomName== bomDataModel.modelName)
+            if (CurrentBomName == bomDataModel.modelName)
             {
                 SetCurrentModel(CurrentBomName);
             }
@@ -230,12 +230,12 @@ namespace BorwinAnalyse.BaseClass
         /// <summary>
         /// 所有Bom数据
         /// </summary>
-        public List<BomDataModel> AllBomData =new List<BomDataModel>();
+        public List<BomDataModel> AllBomData = new List<BomDataModel>();
 
         /// <summary>
         /// 当前的BomData
         /// </summary>
-        public List<BomDataModel> CurrentBomData =new List<BomDataModel>();
+        public List<BomDataModel> CurrentBomData = new List<BomDataModel>();
 
         /// <summary>
         /// 在Bom中查询条码信息
@@ -245,7 +245,13 @@ namespace BorwinAnalyse.BaseClass
         /// <returns></returns>
         public BomDataModel SearchByBarCode(string barCode)
         {
-           return CurrentBomData.Where(x=>x.barCode==barCode).ToList()[0];
+            List<BomDataModel> bomDataModels = new List<BomDataModel>();
+            bomDataModels = CurrentBomData.Where(x => x.barCode == barCode).ToList();
+            if (bomDataModels.Count == 0)
+            {
+                bomDataModels = AllBomData.Where(x => x.barCode == barCode).ToList();
+            }
+            return bomDataModels.Count > 0 ? bomDataModels[0] : null;
         }
 
         /// <summary>
@@ -254,9 +260,9 @@ namespace BorwinAnalyse.BaseClass
         /// <param name="barCode">条码</param>
         /// <param name="modelName">模板名称</param>
         /// <returns></returns>
-        public List<BomDataModel> SearchByBarCode(string barCode,string modelName)
+        public List<BomDataModel> SearchByBarCode(string barCode, string modelName)
         {
-            if (modelName==CurrentBomName)
+            if (modelName == CurrentBomName)
             {
                 return CurrentBomData.Where(x => x.barCode == barCode && x.modelName == modelName).ToList();
             }
@@ -264,7 +270,7 @@ namespace BorwinAnalyse.BaseClass
             {
                 return AllBomData.Where(x => x.barCode == barCode && x.modelName == modelName).ToList();
             }
-           
+
         }
     }
 }

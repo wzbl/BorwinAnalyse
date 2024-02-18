@@ -68,6 +68,10 @@ namespace VisionModel
                         {
                             CameraR.CreatCamera(ref stDevInfo);
                         }
+                        else
+                        {
+                            CameraL.CreatCamera(ref stDevInfo);
+                        }
                     }
                 }
             }

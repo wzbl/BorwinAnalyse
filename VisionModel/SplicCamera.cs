@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing.Drawing2D;
 using static VisionModel.HIKVision;
+using System.IO;
+using VisionDesigner;
 
 namespace VisionModel
 {
@@ -90,7 +92,7 @@ namespace VisionModel
             {
                 Log("开启抓图失败");
             }
-           Log("初始化相机完成");
+            Log("初始化相机完成");
         }
 
         /// <summary>
@@ -123,7 +125,7 @@ namespace VisionModel
 
         /// <summary>
         /// 实时采集
-        /// </summary>
+        /// </summary>   
         public void StartTrigger()
         {
             Log("相机连续采集");
@@ -135,7 +137,7 @@ namespace VisionModel
         /// </summary>
         public void StopTrigger()
         {
-            Log( "相机停止采集");
+            Log("相机停止采集");
             MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
             MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_LINE0);
         }
@@ -157,7 +159,7 @@ namespace VisionModel
                     Bitmap grabmap = KiResizeImage(map, 800, 600, 0);
                     Img = grabmap;
                     try { CCD_GrabImage?.Invoke(); } catch { }
-                   
+
                     DealImg();
                 }
                 else
@@ -242,7 +244,7 @@ namespace VisionModel
 
         }
 
-        
+
         /// <summary>
         /// 产品尺寸,宽高,用于测值补偿
         /// </summary>
