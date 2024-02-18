@@ -347,10 +347,25 @@ namespace BorwinAnalyse.UCControls
 
         public void AnalyseMethod(string barcode, string description, string spec)
         {
-            AnalyseResult analyseResult = CommonAnalyse.Instance.AnalyseMethod_copy(description);
-            analyseResult.BarCode = barcode;
-            analyseResult.Description = description;
-            CommonAnalyse.Instance.AnalyWidth(spec, ref analyseResult);
+            BomDataModel bomData = BomManager.Instance.SearchByBarCode(barcode);
+            AnalyseResult analyseResult=new AnalyseResult();
+            if (bomData != null)
+            {
+                analyseResult.BarCode = bomData.barCode;
+                analyseResult.Description = bomData.description;
+                analyseResult.Value = bomData.value;
+                analyseResult.Type = bomData.type;
+                analyseResult.Unit = bomData.unit;
+                analyseResult.Size = bomData.size;
+                analyseResult.Grade = bomData.grade;
+            }
+            else
+            {
+                analyseResult = CommonAnalyse.Instance.AnalyseMethod_copy(description);
+                analyseResult.BarCode = barcode;
+                analyseResult.Description = description;
+                CommonAnalyse.Instance.AnalyWidth(spec, ref analyseResult);
+            }
             UpdataAnalyseData(analyseResult);
         }
 
