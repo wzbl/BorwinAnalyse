@@ -42,7 +42,7 @@ namespace BorwinSplicMachine.UCControls.MES
             {
                 if (item.Enable && item != MesControl.Instance.checkInCode1.IsEnable && item != MesControl.Instance.checkInCode1.URL)
                 {
-                    if (item.Key==""||string.IsNullOrEmpty(item.Key))
+                    if (item.Key == "" || string.IsNullOrEmpty(item.Key))
                     {
                         return;
                     }
@@ -79,12 +79,12 @@ namespace BorwinSplicMachine.UCControls.MES
         public override void GetDataMesOut()
         {
             base.GetDataMesOut();
-        DataGridViewOutAdd(MesControl.Instance.checkOutCode1.IsLCR);
-        DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MaterialDes);
-        DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MaxValue);
-        DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MinValue);
-        DataGridViewOutAdd(MesControl.Instance.checkOutCode1.Unit);
-        DataGridViewOutAdd(MesControl.Instance.checkOutCode1.IsMatch);
+            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.IsLCR);
+            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MaterialDes);
+            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MaxValue);
+            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MinValue);
+            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.Unit);
+            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.IsMatch);
         }
 
         public override void SaveDataMesIn()

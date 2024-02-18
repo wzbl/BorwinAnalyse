@@ -35,6 +35,7 @@ namespace BorwinSplicMachine
                 int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
                 LanguageManager.Instance.CurrenIndex = lang;
             }
+            //Application.Run(new MotionConfig());
             Application.Run(new Form1());
         }
 

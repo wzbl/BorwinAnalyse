@@ -50,7 +50,7 @@
             // txtRel
             // 
             this.txtRel.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtRel.Location = new System.Drawing.Point(108, 6);
+            this.txtRel.Location = new System.Drawing.Point(108, 11);
             this.txtRel.Name = "txtRel";
             this.txtRel.ReadOnly = true;
             this.txtRel.Size = new System.Drawing.Size(140, 26);
@@ -59,7 +59,7 @@
             // txtPos
             // 
             this.txtPos.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPos.Location = new System.Drawing.Point(108, 38);
+            this.txtPos.Location = new System.Drawing.Point(108, 54);
             this.txtPos.Name = "txtPos";
             this.txtPos.ReadOnly = true;
             this.txtPos.Size = new System.Drawing.Size(140, 26);
@@ -67,7 +67,7 @@
             // 
             // btnPositive
             // 
-            this.btnPositive.Location = new System.Drawing.Point(71, 76);
+            this.btnPositive.Location = new System.Drawing.Point(71, 98);
             this.btnPositive.Name = "btnPositive";
             this.btnPositive.Size = new System.Drawing.Size(51, 50);
             this.btnPositive.TabIndex = 2;
@@ -79,7 +79,7 @@
             // 
             // btnNagetive
             // 
-            this.btnNagetive.Location = new System.Drawing.Point(130, 76);
+            this.btnNagetive.Location = new System.Drawing.Point(130, 98);
             this.btnNagetive.Name = "btnNagetive";
             this.btnNagetive.Size = new System.Drawing.Size(51, 50);
             this.btnNagetive.TabIndex = 3;
@@ -91,7 +91,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(187, 76);
+            this.btnStop.Location = new System.Drawing.Point(187, 98);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(51, 50);
             this.btnStop.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             // btnStartGoHome
             // 
-            this.btnStartGoHome.Location = new System.Drawing.Point(244, 76);
+            this.btnStartGoHome.Location = new System.Drawing.Point(244, 98);
             this.btnStartGoHome.Name = "btnStartGoHome";
             this.btnStartGoHome.Size = new System.Drawing.Size(53, 50);
             this.btnStartGoHome.TabIndex = 9;
@@ -117,7 +117,7 @@
             // 
             // btnOpenSero
             // 
-            this.btnOpenSero.Location = new System.Drawing.Point(9, 76);
+            this.btnOpenSero.Location = new System.Drawing.Point(9, 98);
             this.btnOpenSero.Name = "btnOpenSero";
             this.btnOpenSero.Size = new System.Drawing.Size(53, 50);
             this.btnOpenSero.TabIndex = 14;
@@ -128,7 +128,7 @@
             // 
             this.lbName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.lbName.Location = new System.Drawing.Point(14, 25);
+            this.lbName.Location = new System.Drawing.Point(16, 37);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(31, 15);
             this.lbName.Text = "A轴:";
@@ -138,7 +138,7 @@
             this.errorPanel.BackColor = System.Drawing.Color.Red;
             this.errorPanel.Controls.Add(this.btnAlarmReset);
             this.errorPanel.Controls.Add(this.lbErrorMsg);
-            this.errorPanel.Location = new System.Drawing.Point(150, 3);
+            this.errorPanel.Location = new System.Drawing.Point(150, 19);
             this.errorPanel.Name = "errorPanel";
             this.errorPanel.Size = new System.Drawing.Size(62, 64);
             this.errorPanel.TabIndex = 22;
@@ -173,9 +173,9 @@
             this.dSignalLamp4.IsShowBorder = false;
             this.dSignalLamp4.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp4.Location = new System.Drawing.Point(254, 36);
+            this.dSignalLamp4.Location = new System.Drawing.Point(254, 48);
             this.dSignalLamp4.Name = "dSignalLamp4";
-            this.dSignalLamp4.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp4.Size = new System.Drawing.Size(42, 42);
             this.dSignalLamp4.TabIndex = 21;
             this.dSignalLamp4.TwinkleSpeed = 0;
             this.dSignalLamp4.Value = 0;
@@ -188,9 +188,9 @@
             this.dSignalLamp3.IsShowBorder = false;
             this.dSignalLamp3.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp3.Location = new System.Drawing.Point(71, 36);
+            this.dSignalLamp3.Location = new System.Drawing.Point(63, 49);
             this.dSignalLamp3.Name = "dSignalLamp3";
-            this.dSignalLamp3.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp3.Size = new System.Drawing.Size(42, 42);
             this.dSignalLamp3.TabIndex = 20;
             this.dSignalLamp3.TwinkleSpeed = 0;
             this.dSignalLamp3.Value = 0;
@@ -203,9 +203,9 @@
             this.dSignalLamp1.IsShowBorder = false;
             this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp1.Location = new System.Drawing.Point(254, 1);
+            this.dSignalLamp1.Location = new System.Drawing.Point(254, 2);
             this.dSignalLamp1.Name = "dSignalLamp1";
-            this.dSignalLamp1.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp1.Size = new System.Drawing.Size(42, 42);
             this.dSignalLamp1.TabIndex = 19;
             this.dSignalLamp1.TwinkleSpeed = 0;
             this.dSignalLamp1.Value = 0;
@@ -218,9 +218,9 @@
             this.dSignalLamp2.IsShowBorder = false;
             this.dSignalLamp2.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp2.Location = new System.Drawing.Point(71, 1);
+            this.dSignalLamp2.Location = new System.Drawing.Point(63, 3);
             this.dSignalLamp2.Name = "dSignalLamp2";
-            this.dSignalLamp2.Size = new System.Drawing.Size(35, 35);
+            this.dSignalLamp2.Size = new System.Drawing.Size(42, 42);
             this.dSignalLamp2.TabIndex = 17;
             this.dSignalLamp2.TwinkleSpeed = 0;
             this.dSignalLamp2.Value = 0;
@@ -244,7 +244,7 @@
             this.Controls.Add(this.txtPos);
             this.Controls.Add(this.txtRel);
             this.Name = "AxisControl";
-            this.Size = new System.Drawing.Size(306, 127);
+            this.Size = new System.Drawing.Size(306, 156);
             this.errorPanel.ResumeLayout(false);
             this.errorPanel.PerformLayout();
             this.ResumeLayout(false);
