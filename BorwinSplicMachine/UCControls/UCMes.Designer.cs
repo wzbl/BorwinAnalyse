@@ -38,12 +38,18 @@
             this.chkIsEnableMes = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ucMesLogin1 = new BorwinSplicMachine.UCControls.MES.UCMesLogin();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ucCode1Check1 = new BorwinSplicMachine.UCControls.MES.UCCode1Check();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.ucCode2Check1 = new BorwinSplicMachine.UCControls.MES.UCCode2Check();
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonWrapLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txtMachinCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtLine = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.labLine = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txtWo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.ucMesLogin1 = new BorwinSplicMachine.UCControls.MES.UCMesLogin();
+            this.ucCode1Check1 = new BorwinSplicMachine.UCControls.MES.UCCode1Check();
+            this.ucCode2Check1 = new BorwinSplicMachine.UCControls.MES.UCCode2Check();
             this.ucUpData1 = new BorwinSplicMachine.UCControls.MES.UCUpData();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
@@ -75,6 +81,12 @@
             // 
             // kryptonSplitContainer1.Panel1
             // 
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtWo);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel5);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtLine);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.labLine);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtMachinCode);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel3);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.richLog);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnSave);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.comMesData);
@@ -187,14 +199,6 @@
             this.kryptonPage1.ToolTipTitle = "Page ToolTip";
             this.kryptonPage1.UniqueName = "404A2A72502A4F2FDFB45B546050FE75";
             // 
-            // ucMesLogin1
-            // 
-            this.ucMesLogin1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucMesLogin1.Location = new System.Drawing.Point(0, 0);
-            this.ucMesLogin1.Name = "ucMesLogin1";
-            this.ucMesLogin1.Size = new System.Drawing.Size(1136, 449);
-            this.ucMesLogin1.TabIndex = 0;
-            // 
             // kryptonPage2
             // 
             this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -207,14 +211,6 @@
             this.kryptonPage2.Text = "条码1接口";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "F75DF81903C449C3ECB5E0E0FF8D7CF2";
-            // 
-            // ucCode1Check1
-            // 
-            this.ucCode1Check1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucCode1Check1.Location = new System.Drawing.Point(0, 0);
-            this.ucCode1Check1.Name = "ucCode1Check1";
-            this.ucCode1Check1.Size = new System.Drawing.Size(1136, 449);
-            this.ucCode1Check1.TabIndex = 0;
             // 
             // kryptonPage3
             // 
@@ -229,14 +225,6 @@
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "BB5E40209D6A4C351EB4EBD5E05708A1";
             // 
-            // ucCode2Check1
-            // 
-            this.ucCode2Check1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucCode2Check1.Location = new System.Drawing.Point(0, 0);
-            this.ucCode2Check1.Name = "ucCode2Check1";
-            this.ucCode2Check1.Size = new System.Drawing.Size(1136, 449);
-            this.ucCode2Check1.TabIndex = 0;
-            // 
             // kryptonPage4
             // 
             this.kryptonPage4.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -249,6 +237,78 @@
             this.kryptonPage4.Text = "数据上传接口";
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "6A4D1C4FC2F7455677851C5C0C5F27E4";
+            // 
+            // kryptonWrapLabel3
+            // 
+            this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel3.Location = new System.Drawing.Point(267, 18);
+            this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
+            this.kryptonWrapLabel3.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel3.Text = "设备代码";
+            // 
+            // txtMachinCode
+            // 
+            this.txtMachinCode.Location = new System.Drawing.Point(348, 10);
+            this.txtMachinCode.Name = "txtMachinCode";
+            this.txtMachinCode.Size = new System.Drawing.Size(110, 23);
+            this.txtMachinCode.TabIndex = 12;
+            // 
+            // txtLine
+            // 
+            this.txtLine.Location = new System.Drawing.Point(348, 39);
+            this.txtLine.Name = "txtLine";
+            this.txtLine.Size = new System.Drawing.Size(110, 23);
+            this.txtLine.TabIndex = 14;
+            // 
+            // labLine
+            // 
+            this.labLine.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.labLine.Location = new System.Drawing.Point(267, 47);
+            this.labLine.Name = "labLine";
+            this.labLine.Size = new System.Drawing.Size(33, 15);
+            this.labLine.Text = "线体";
+            // 
+            // txtWo
+            // 
+            this.txtWo.Location = new System.Drawing.Point(348, 68);
+            this.txtWo.Name = "txtWo";
+            this.txtWo.Size = new System.Drawing.Size(110, 23);
+            this.txtWo.TabIndex = 17;
+            // 
+            // kryptonWrapLabel5
+            // 
+            this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel5.Location = new System.Drawing.Point(267, 76);
+            this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
+            this.kryptonWrapLabel5.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel5.Text = "工单单号";
+            // 
+            // ucMesLogin1
+            // 
+            this.ucMesLogin1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucMesLogin1.Location = new System.Drawing.Point(0, 0);
+            this.ucMesLogin1.Name = "ucMesLogin1";
+            this.ucMesLogin1.Size = new System.Drawing.Size(1136, 449);
+            this.ucMesLogin1.TabIndex = 0;
+            // 
+            // ucCode1Check1
+            // 
+            this.ucCode1Check1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCode1Check1.Location = new System.Drawing.Point(0, 0);
+            this.ucCode1Check1.Name = "ucCode1Check1";
+            this.ucCode1Check1.Size = new System.Drawing.Size(1136, 449);
+            this.ucCode1Check1.TabIndex = 0;
+            // 
+            // ucCode2Check1
+            // 
+            this.ucCode2Check1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCode2Check1.Location = new System.Drawing.Point(0, 0);
+            this.ucCode2Check1.Name = "ucCode2Check1";
+            this.ucCode2Check1.Size = new System.Drawing.Size(1136, 449);
+            this.ucCode2Check1.TabIndex = 0;
             // 
             // ucUpData1
             // 
@@ -307,5 +367,11 @@
         private MES.UCCode1Check ucCode1Check1;
         private MES.UCCode2Check ucCode2Check1;
         private MES.UCUpData ucUpData1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtWo;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel5;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtLine;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel labLine;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtMachinCode;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel3;
     }
 }

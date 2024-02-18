@@ -27,6 +27,10 @@ namespace BorwinSplicMachine.UCControls.MES
         {
             DataGridViewIn.Rows.Clear();
             mesInValues.Clear();
+            MesIn.Line.Value = MesControl.Instance.Line;
+            MesIn.Wo.Value = MesControl.Instance.Wo;
+            MesIn.MachineCode.Value = MesControl.Instance.MachineCode;
+            MesIn.UserName.Value = "Admin";
             DataGridViewInAdd(MesIn.IsEnable);
             DataGridViewInAdd(MesIn.URL);
             DataGridViewInAdd(MesIn.Line);

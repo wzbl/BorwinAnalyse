@@ -1,4 +1,5 @@
 ﻿using BorwinAnalyse.BaseClass;
+using BorwinSplicMachine.UCControls.MES;
 using Mes;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,9 @@ namespace BorwinSplicMachine.UCControls
             chkIsEnableMes.Checked = MesControl.Instance.IsOpenMes;
             comMesType.SelectedIndex = (int)MesControl.Instance.MesType;
             comMesData.SelectedIndex = (int)MesControl.Instance.DataType;
-        
+            txtWo.Text = MesControl.Instance.Wo;
+            txtLine.Text = MesControl.Instance.Line;
+            txtMachinCode.Text = MesControl.Instance.MachineCode;
         }
 
 
@@ -48,7 +51,22 @@ namespace BorwinSplicMachine.UCControls
             MesControl.Instance.IsOpenMes = chkIsEnableMes.Checked;
             MesControl.Instance.MesType = (MesType)comMesType.SelectedIndex;
             MesControl.Instance.DataType = (DataType)comMesData.SelectedIndex;
+            MesControl.Instance.Wo=txtWo.Text;
+            MesControl.Instance.Line = txtLine.Text;
+            MesControl.Instance.MachineCode=txtMachinCode.Text;
             MesControl.Instance.Save();
+           
+            ucMesLogin1. GetDataMesIn();
+            ucMesLogin1. GetDataMesOut();
+
+            ucCode1Check1.GetDataMesIn();
+            ucCode1Check1.GetDataMesOut();
+
+            ucCode2Check1.GetDataMesIn();
+            ucCode2Check1.GetDataMesOut();
+
+            ucUpData1.GetDataMesIn();
+            ucUpData1.GetDataMesOut();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

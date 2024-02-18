@@ -42,6 +42,14 @@ namespace BorwinSplicMachine.UCControls.MES
             {
                 if (item.Enable && item != MesControl.Instance.checkInCode1.IsEnable && item != MesControl.Instance.checkInCode1.URL)
                 {
+                    if (item.Key==""||string.IsNullOrEmpty(item.Key))
+                    {
+                        return;
+                    }
+                    if (datas.ContainsKey(item.Key))
+                    {
+                        return;
+                    }
                     datas.Add(item.Key, item.Value);
                 }
             }
@@ -66,7 +74,6 @@ namespace BorwinSplicMachine.UCControls.MES
         {
             base.GetDataMesIn();
             DataGridViewInAdd(MesControl.Instance.checkInCode1.Code);
-
         }
 
         public override void GetDataMesOut()

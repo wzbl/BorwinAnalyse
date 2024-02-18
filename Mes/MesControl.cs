@@ -32,6 +32,11 @@ namespace Mes
         //3.数据类型（json）
         public DataType DataType { get; set; }
 
+        public string Line ="";
+        public string MachineCode = "";
+        public string Wo = "";
+        public string UserName = "";
+
         public LoginIn loginIn = new LoginIn();
         public LoginOut loginOut = new LoginOut();
         public CheckInCode1 checkInCode1 = new CheckInCode1();

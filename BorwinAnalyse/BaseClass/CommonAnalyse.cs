@@ -755,14 +755,6 @@ namespace BorwinAnalyse.BaseClass
             return analyseResult;
         }
 
-        private void GetValueAndUnit(ref AnalyseResult analyseResult, string value, List<string> unitList)
-        {
-            List<string> units = unitList.Where(x => value.Contains(x)).ToList();
-            if (units.Count > 0)
-            {
-
-            }
-        }
 
         /// <summary>
         /// 获取类型
