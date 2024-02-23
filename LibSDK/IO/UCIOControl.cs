@@ -23,6 +23,7 @@ namespace LibSDK.IO
             UpDateINIO();
             MotionControl.UpDateINIO += UpDateINIO;
             MotionControl.UpDateOUTIO += UpDateOUTIO;
+            
         }
 
         private void UpDateOUTIO()
@@ -64,6 +65,7 @@ namespace LibSDK.IO
         private void UCIOControl_Load(object sender, EventArgs e)
         {
            timer1.Start();
+            MotionControl.IsEnable?.Invoke(chkChange.Checked);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -115,5 +117,15 @@ namespace LibSDK.IO
 
         public static bool  RefreshInIO = false;
         public static bool  RefreshOutIO = false;
+
+        private void chkChange_CheckedChanged(object sender, EventArgs e)
+        {
+            MotionControl.IsEnable?.Invoke(chkChange.Checked);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MotionControl.IOParmIn.Write();
+        }
     }
 }

@@ -30,25 +30,23 @@
         {
             this.txtInputText = new System.Windows.Forms.TextBox();
             this.txtInputIndex = new System.Windows.Forms.TextBox();
- 
             this.SuspendLayout();
             // 
             // txtInputText
             // 
             this.txtInputText.Location = new System.Drawing.Point(59, 27);
             this.txtInputText.Name = "txtInputText";
-            this.txtInputText.ReadOnly = true;
             this.txtInputText.Size = new System.Drawing.Size(100, 21);
             this.txtInputText.TabIndex = 1;
+            this.txtInputText.TextChanged += new System.EventHandler(this.txtInputText_TextChanged);
             // 
             // txtInputIndex
             // 
             this.txtInputIndex.Location = new System.Drawing.Point(59, 3);
             this.txtInputIndex.Name = "txtInputIndex";
-            this.txtInputIndex.ReadOnly = true;
             this.txtInputIndex.Size = new System.Drawing.Size(100, 21);
             this.txtInputIndex.TabIndex = 2;
-           
+            this.txtInputIndex.TextChanged += new System.EventHandler(this.txtInputIndex_TextChanged);
             // 
             // InputControl
             // 

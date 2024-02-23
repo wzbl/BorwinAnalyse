@@ -23,6 +23,13 @@ namespace LibSDK.IO
             dSignalLamp = new DSignalLamp();
             this.Controls.Add(dSignalLamp);
             dSignalLamp.Click += DSignalLamp_Click;
+            MotionControl.IsEnable += IsEnable;
+        }
+
+        private void IsEnable(bool obj)
+        {
+            txtOutputIndex.ReadOnly = !obj;
+            txtOutputText.ReadOnly = !obj;
         }
 
         private void DSignalLamp_Click(object sender, EventArgs e)
@@ -58,35 +65,38 @@ namespace LibSDK.IO
             set
             {
                 dSignalLamp.Value = value;
-                txtOutputText.Text = value.ToString();
-            }
-        }
-
-        public string OutputText
-        {
-            get => outputText;
-            set
-            {
-                outputText = value;
-                txtOutputText.Text = outputText;
-            }
-        }
-
-        public int OutputIndex
-        {
-            get => outputIndex;
-            set
-            {
-                outputIndex = value;
-                txtOutputIndex.Text = "OUT" + outputIndex;
             }
         }
 
         public void RefreshUI()
         {
-            txtOutputIndex.Text = output.IOParm.IoName;
-            txtOutputText.Text = output.IOParm.IONum.ToString();
+            txtOutputText.Text = output.IOParm.IoName;
+            txtOutputIndex.Text = output.IOParm.CardNo+"-"+output.IOParm.IONum;
         }
 
+        private void txtOutputIndex_TextChanged(object sender, EventArgs e)
+        {
+            if (!txtOutputIndex.Text.Contains("-"))
+            {
+                return;
+            }
+
+            string[] s = txtOutputIndex.Text.Split('-');
+            if (s.Length != 2)
+            {
+                return;
+            }
+
+            if (short.TryParse(s[0], out short cardNo) && short.TryParse(s[1], out short IoNo))
+            {
+                output.IOParm.CardNo = cardNo;
+                output.IOParm.IONum = IoNo;
+            }
+        }
+
+        private void txtOutputText_TextChanged(object sender, EventArgs e)
+        {
+            output.IOParm.IoName = txtOutputText.Text;
+        }
     }
 }

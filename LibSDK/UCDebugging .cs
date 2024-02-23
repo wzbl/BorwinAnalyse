@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibSDK.IO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,12 @@ namespace LibSDK
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
+            this.Load += UCDebugging_Load;
+        }
+
+        private void UCDebugging_Load(object sender, EventArgs e)
+        {
+          kryptonSplitContainer1.Panel2.Controls.Add(new UCIOControl());
         }
     }
 }

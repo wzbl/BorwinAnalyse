@@ -108,6 +108,10 @@ namespace LibSDK
 
         #region 输入IO
         /// <summary>
+        /// 是否可以修改
+        /// </summary>
+        public static Action<bool> IsEnable;
+        /// <summary>
         /// 更新输入IO
         /// </summary>
         public static Action UpDateINIO;

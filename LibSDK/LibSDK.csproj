@@ -195,6 +195,9 @@
     <EmbeddedResource Include="FormAddAxis.resx">
       <DependentUpon>FormAddAxis.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IO\InputControl.resx">
+      <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IO\OutputControl.resx">
       <DependentUpon>OutputControl.cs</DependentUpon>
     </EmbeddedResource>

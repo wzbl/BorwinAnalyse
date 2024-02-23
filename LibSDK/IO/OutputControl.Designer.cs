@@ -38,6 +38,7 @@
             this.txtOutputText.Name = "txtOutputText";
             this.txtOutputText.Size = new System.Drawing.Size(100, 21);
             this.txtOutputText.TabIndex = 1;
+            this.txtOutputText.TextChanged += new System.EventHandler(this.txtOutputText_TextChanged);
             // 
             // txtOutputIndex
             // 
@@ -45,6 +46,7 @@
             this.txtOutputIndex.Name = "txtOutputIndex";
             this.txtOutputIndex.Size = new System.Drawing.Size(100, 21);
             this.txtOutputIndex.TabIndex = 2;
+            this.txtOutputIndex.TextChanged += new System.EventHandler(this.txtOutputIndex_TextChanged);
             // 
             // OutputControl
             // 

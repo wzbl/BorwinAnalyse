@@ -32,10 +32,13 @@
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.chkChange = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
+            this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).BeginInit();
@@ -54,6 +57,11 @@
             // kryptonSplitContainer1.Panel1
             // 
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonSplitContainer2);
+            // 
+            // kryptonSplitContainer1.Panel2
+            // 
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.chkChange);
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.btnSave);
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1063, 715);
             this.kryptonSplitContainer1.SplitterDistance = 656;
             this.kryptonSplitContainer1.TabIndex = 0;
@@ -64,6 +72,10 @@
             this.kryptonSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer2.Location = new System.Drawing.Point(0, 0);
             this.kryptonSplitContainer2.Name = "kryptonSplitContainer2";
+            // 
+            // kryptonSplitContainer2.Panel2
+            // 
+            this.kryptonSplitContainer2.Panel2.AutoScroll = true;
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1063, 656);
             this.kryptonSplitContainer2.SplitterDistance = 516;
             this.kryptonSplitContainer2.TabIndex = 0;
@@ -71,6 +83,24 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(752, -1);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(90, 25);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Values.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // chkChange
+            // 
+            this.chkChange.Location = new System.Drawing.Point(167, 0);
+            this.chkChange.Name = "chkChange";
+            this.chkChange.Size = new System.Drawing.Size(49, 20);
+            this.chkChange.TabIndex = 2;
+            this.chkChange.Values.Text = "修改";
+            this.chkChange.CheckedChanged += new System.EventHandler(this.chkChange_CheckedChanged);
             // 
             // UCIOControl
             // 
@@ -82,6 +112,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
+            this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
+            this.kryptonSplitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
@@ -97,5 +129,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
         private System.Windows.Forms.Timer timer1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSave;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkChange;
     }
 }

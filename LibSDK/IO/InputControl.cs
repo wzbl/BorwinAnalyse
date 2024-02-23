@@ -22,6 +22,13 @@ namespace LibSDK.IO
             InitializeComponent();
             dSignalLamp = new DSignalLamp();
             this.Controls.Add(dSignalLamp);
+            MotionControl.IsEnable += IsEnable;
+        }
+
+        private void IsEnable(bool obj)
+        {
+            txtInputIndex.ReadOnly = !obj;
+            txtInputText.ReadOnly = !obj;
         }
 
         public int Value
@@ -33,33 +40,35 @@ namespace LibSDK.IO
             }
         }
 
-        public string InputText
-        {
-            get => inputText;
-            set
-            {
-                inputText = value;
-            
-            }
-        }
-
-        public int InputIndex
-        {
-            get => inputIndex;
-            set
-            {
-                inputIndex = value;
-                
-            }
-
-        }
-
         public void RefreshUI()
         {
-            txtInputIndex.Text = Input.IOParm.IoName;
-            txtInputText.Text = Input.IOParm.IONum.ToString();
+            txtInputText.Text = Input.IOParm.IoName;
+            txtInputIndex.Text = Input.IOParm.CardNo + "-" + Input.IOParm.IONum;
         }
 
+        private void txtInputIndex_TextChanged(object sender, EventArgs e)
+        {
+            if (!txtInputIndex.Text.Contains("-"))
+            {
+                return;
+            }
 
+            string[] s = txtInputIndex.Text.Split('-');
+            if (s.Length != 2)
+            {
+                return;
+            }
+
+            if (short.TryParse(s[0],out short cardNo)&& short.TryParse(s[1], out short IoNo))
+            {
+                Input.IOParm.CardNo = cardNo;
+                Input.IOParm.IONum= IoNo;
+            }
+        }
+
+        private void txtInputText_TextChanged(object sender, EventArgs e)
+        {
+            Input.IOParm.IoName = txtInputText.Text;
+        }
     }
 }
