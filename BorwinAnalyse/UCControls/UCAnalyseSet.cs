@@ -59,7 +59,6 @@ namespace BorwinAnalyse.UCControls
                    separator.Illustrate
                    );
             }
-
             for (int i = 0; i < CommonAnalyse.Instance.GradeChanges.Count; i++)
             {
                 GradeChange GradeChange = CommonAnalyse.Instance.GradeChanges[i];

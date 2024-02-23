@@ -21,7 +21,6 @@ namespace BorwinSplicMachine.UCControls
             Dock = DockStyle.Fill;
             this.Load += UCBaseSet_Load;
             this.components = new System.ComponentModel.Container();
-
         }
 
         private void UCBaseSet_Load(object sender, EventArgs e)

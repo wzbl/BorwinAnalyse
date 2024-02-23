@@ -43,7 +43,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UCCode1Check";
-            this.Size = new System.Drawing.Size(1588, 696);
+            this.Size = new System.Drawing.Size(1535, 698);
             this.ResumeLayout(false);
 
         }

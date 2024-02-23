@@ -439,22 +439,29 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool GetDo(short CardNum, short IoNum)
         {
-            //short bitValue = 0;
-            //rtn = CNMCLib20.NMC_GetDOBit(devhandle[CardNum], IoNum, ref bitValue);
-
-            CNMCLib20.NMC_GetDOGroup(devhandle[CardNum], out Int32 value, 0);
-
-            int val = (int)Math.Pow(2, IoNum);
-
-            int va = val & (Math.Abs(value) - 1);
-            if (val == va)
+            try
             {
-                return true;
+                CNMCLib20.NMC_GetDOGroup(devhandle[CardNum], out Int32 value, 0);
+
+                int val = (int)Math.Pow(2, IoNum);
+
+                int va = val & (Math.Abs(value) - 1);
+                if (val == va)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception)
             {
+
                 return false;
             }
+
+        
         }
         /// <summary>
         /// 读取输入信号
@@ -464,9 +471,17 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool GetDi(short CardNum, short IoNum)
         {
-            short bitValue = 0;
-            rtn = CNMCLib20.NMC_GetDIBit(devhandle[CardNum], IoNum, ref bitValue);
-            return bitValue == 0;
+            try
+            {
+                short bitValue = 0;
+                rtn = CNMCLib20.NMC_GetDIBit(devhandle[CardNum], IoNum, ref bitValue);
+                return bitValue == 0;
+            }
+            catch (Exception )
+            {
+                return false;
+            }
+          
         }
         /// <summary>
         /// 设置扩展模块输出

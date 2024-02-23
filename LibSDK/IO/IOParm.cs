@@ -99,7 +99,7 @@ namespace LibSDK.IO
         [ReadOnly(true)]
         public string IOType { get; set; } = "IN";
         [DisplayName("控制卡号"), Description("控制卡号")]
-        public short CardNum { get; set; }
+        public short CardNo { get; set; }
         [DisplayName("模块号从0开始"), Description("模块号从0开始")]
         public short Extmdl { get; set; }
   

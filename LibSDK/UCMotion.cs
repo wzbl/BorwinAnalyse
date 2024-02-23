@@ -29,10 +29,8 @@ namespace LibSDK
 
         public void Init()
         {
-            kryptonPage1.Controls.Add(new UCAxisControl());
-            kryptonPage2.Controls.Add(new UCIOControl());
+            kryptonPage1.Controls.Add(new UCDebugging());
             kryptonPage3.Controls.Add(new UCMotionParam());
-            kryptonPage4.Controls.Add(new UCBaseConfig());
         }
 
     }

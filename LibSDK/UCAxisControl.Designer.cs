@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCAxisControl));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.btnEmgStop = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtPos = new System.Windows.Forms.TextBox();
@@ -72,6 +73,7 @@
             this.btnEmgStop.Name = "btnEmgStop";
             this.btnEmgStop.Size = new System.Drawing.Size(92, 66);
             this.btnEmgStop.TabIndex = 6;
+            this.btnEmgStop.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnEmgStop.Values.Image")));
             this.btnEmgStop.Values.Text = "急停";
             this.btnEmgStop.Click += new System.EventHandler(this.btnEmgStop_Click);
             // 

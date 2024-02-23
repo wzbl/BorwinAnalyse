@@ -156,7 +156,7 @@ namespace LibSDK
             short cardID = short.Parse(comCardNo.Text);
             CIOType cIOType = new CIOType();
             cIOType.IoName = txtIOName.Text.Trim();
-            cIOType.CardNum = cardID;
+            cIOType.CardNo = cardID;
             int.TryParse(txtSMode.Text,out int SMode);
             cIOType.SMode = SMode;
             int.TryParse(txtDelay.Text, out int Delay);

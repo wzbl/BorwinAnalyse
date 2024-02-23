@@ -30,22 +30,13 @@ namespace LibSDK
         public static bool HomeFlag = false;
         public static CardAPI CardAPI = new CardAPI();
 
-        /// <summary>
-        /// 更新轴
-        /// </summary>
-        public static Action UpDateAxis;
+
+        #region 卡控制
 
         /// <summary>
-        /// 更新输入IO
+        /// 更新卡
         /// </summary>
-        public static Action UpDateINIO;
-
-        /// <summary>
-        /// 更新输出IO
-        /// </summary>
-        public static Action UpDateOUTIO;
-
-
+        public static Action UpDateCard;
         public static void AddCard()
         {
             CardConfig cardConfig = new CardConfig();
@@ -55,59 +46,48 @@ namespace LibSDK
             BaseConfig.Instance.cardConfigs.Add(cardConfig);
             BaseConfig.Instance.Write();
             Log("添加卡:" + cardConfig.CardNo);
+            UpDateCard?.Invoke();
         }
 
+        public static void DeleteCard(CardConfig cardConfig)
+        {
+            List<CAxisParm> cAxisParms = AxisParm.AParms.Where(x => x.AxisInfo.CardNo == cardConfig.CardNo).ToList();
+            foreach (var cAxisParm in cAxisParms)
+                DeleteAxis(cAxisParm);
+
+            List<CIOType> ins = IOParmIn.IOParms.Where(x => x.CardNo == cardConfig.CardNo).ToList();
+            foreach (var inIO in ins)
+                DeleteInIO(inIO);
+
+            List<CIOType> outs = IOParmOut.IOParms.Where(x => x.CardNo == cardConfig.CardNo).ToList();
+            foreach (var outIO in outs)
+                DeleteOutIO(outIO);
+         
+            BaseConfig.Instance.cardConfigs.Remove(cardConfig);
+            BaseConfig.Instance.Write();
+            UpDateCard?.Invoke();
+        }
+        #endregion
+
+        #region 轴控制
+        /// <summary>
+        /// 更新轴
+        /// </summary>
+        public static Action UpDateAxis;
         public static void AddAxis(CAxisParm cAxisParm)
         {
+            AxisParm.AParms.Add(cAxisParm);
             AxisParm.Write();
             InitAxis();
             Log("添加轴:" + cAxisParm.AxisInfo.AxisName);
         }
 
-        public static void AddInIO(CIOType cIOType)
+        public static void DeleteAxis(CAxisParm cAxisParm)
         {
-            cIOType.IOType = "IN";
-            IOParmIn.IOParms.Add(cIOType);
-        }
-
-        public static void AddOutIO(CIOType cIOType)
-        {
-            cIOType.IOType = "OUT";
-            IOParmOut.IOParms.Add(cIOType);
-        }
-
-        public static void Init()
-        {
-            BaseConfig.Instance.Read();
-
-            if (BaseConfig.Instance.cardConfigs.Count > 0)
-            {
-                int CardNum = BaseConfig.Instance.cardConfigs.Count;
-                int[] axis = new int[CardNum];
-                string[] ConfigFile = new string[CardNum];
-                for (int i = 0; i < BaseConfig.Instance.cardConfigs.Count; i++)
-                {
-                    axis[i] = BaseConfig.Instance.cardConfigs[i].AxisNum;
-                    ConfigFile[i] = BaseConfig.Instance.cardConfigs[i].ConigPath;
-                }
-                CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile);
-                Log("开始加载轴");
-                InitAxis();
-                Log("开始加载IO");
-                InitINIO();
-                InitOUTIO();
-                for (int i = 0; i < CardNum; i++)
-                {
-                    int cardNo = BaseConfig.Instance.cardConfigs[i].CardNo;
-                    int count = AxisParm.AParms.Where(x => x.AxisInfo.CardNo == cardNo).ToList().Count();
-                    BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
-                }
-                BaseConfig.Instance.Write();
-            }
-            else
-            {
-                Log("未配置运动控制卡");
-            }
+            AxisParm.AParms.Remove(cAxisParm);
+            AxisParm.Write();
+            InitAxis();
+            Log("删除轴:" + cAxisParm.AxisInfo.AxisName);
         }
 
         public static void InitAxis()
@@ -124,6 +104,27 @@ namespace LibSDK
             }
             UpDateAxis?.Invoke();
         }
+        #endregion
+
+        #region 输入IO
+        /// <summary>
+        /// 更新输入IO
+        /// </summary>
+        public static Action UpDateINIO;
+        public static void AddInIO(CIOType cIOType)
+        {
+            cIOType.IOType = "IN";
+            IOParmIn.IOParms.Add(cIOType);
+            IOParmIn.Write();
+            InitINIO();
+        }
+
+        public static void DeleteInIO(CIOType cIOType)
+        {
+            IOParmIn.IOParms.Remove(cIOType);
+            IOParmIn.Write();
+            InitINIO();
+        }
 
         public static void InitINIO()
         {
@@ -138,6 +139,28 @@ namespace LibSDK
                 InPort.Add(iOType.IoName, input);
             }
             UpDateINIO?.Invoke();
+        }
+        #endregion
+
+        #region 输出IO
+
+        /// <summary>
+        /// 更新输出IO
+        /// </summary>
+        public static Action UpDateOUTIO;
+        public static void AddOutIO(CIOType cIOType)
+        {
+            cIOType.IOType = "OUT";
+            IOParmOut.IOParms.Add(cIOType);
+            IOParmOut.Write();
+            InitOUTIO();
+        }
+
+        public static void DeleteOutIO(CIOType cIOType)
+        {
+            IOParmOut.IOParms.Remove(cIOType);
+            IOParmOut.Write();
+            InitOUTIO();
         }
 
         public static void InitOUTIO()
@@ -154,7 +177,43 @@ namespace LibSDK
             }
             UpDateOUTIO?.Invoke();
         }
+        #endregion
 
+        public static void Init()
+        {
+            BaseConfig.Instance.Read();
+
+            if (BaseConfig.Instance.cardConfigs.Count > 0)
+            {
+                int CardNum = BaseConfig.Instance.cardConfigs.Count;
+                int[] axis = new int[CardNum];
+                string[] ConfigFile = new string[CardNum];
+                for (int i = 0; i < BaseConfig.Instance.cardConfigs.Count; i++)
+                {
+                    axis[i] = BaseConfig.Instance.cardConfigs[i].AxisNum;
+                    ConfigFile[i] = BaseConfig.Instance.cardConfigs[i].ConigPath;
+                }
+                CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile);
+                Log("开始加载轴".tr());
+                InitAxis();
+                Log("开始加载IO".tr());
+                InitINIO();
+                InitOUTIO();
+                for (int i = 0; i < CardNum; i++)
+                {
+                    int cardNo = BaseConfig.Instance.cardConfigs[i].CardNo;
+                    int count = AxisParm.AParms.Where(x => x.AxisInfo.CardNo == cardNo).ToList().Count();
+                    BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
+                }
+                BaseConfig.Instance.Write();
+            }
+            else
+            {
+                Log("未配置运动控制卡".tr());
+            }
+        }
+
+  
         /// <summary>
         /// 运动控制打印日志
         /// </summary>
