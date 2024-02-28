@@ -56,7 +56,7 @@
             // txtRel
             // 
             this.txtRel.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtRel.Location = new System.Drawing.Point(169, 19);
+            this.txtRel.Location = new System.Drawing.Point(161, 19);
             this.txtRel.Name = "txtRel";
             this.txtRel.ReadOnly = true;
             this.txtRel.Size = new System.Drawing.Size(140, 26);
@@ -65,7 +65,7 @@
             // txtPos
             // 
             this.txtPos.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPos.Location = new System.Drawing.Point(169, 66);
+            this.txtPos.Location = new System.Drawing.Point(161, 66);
             this.txtPos.Name = "txtPos";
             this.txtPos.ReadOnly = true;
             this.txtPos.Size = new System.Drawing.Size(140, 26);
@@ -73,7 +73,7 @@
             // 
             // btnPositive
             // 
-            this.btnPositive.Location = new System.Drawing.Point(31, 199);
+            this.btnPositive.Location = new System.Drawing.Point(8, 199);
             this.btnPositive.Name = "btnPositive";
             this.btnPositive.Size = new System.Drawing.Size(70, 70);
             this.btnPositive.TabIndex = 2;
@@ -85,7 +85,7 @@
             // 
             // btnNagetive
             // 
-            this.btnNagetive.Location = new System.Drawing.Point(133, 199);
+            this.btnNagetive.Location = new System.Drawing.Point(101, 199);
             this.btnNagetive.Name = "btnNagetive";
             this.btnNagetive.Size = new System.Drawing.Size(70, 70);
             this.btnNagetive.TabIndex = 3;
@@ -97,7 +97,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(242, 199);
+            this.btnStop.Location = new System.Drawing.Point(197, 199);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(70, 70);
             this.btnStop.TabIndex = 4;
@@ -106,7 +106,7 @@
             // 
             // btnStartGoHome
             // 
-            this.btnStartGoHome.Location = new System.Drawing.Point(133, 112);
+            this.btnStartGoHome.Location = new System.Drawing.Point(103, 112);
             this.btnStartGoHome.Name = "btnStartGoHome";
             this.btnStartGoHome.Size = new System.Drawing.Size(70, 70);
             this.btnStartGoHome.TabIndex = 9;
@@ -123,7 +123,7 @@
             // 
             // btnOpenSero
             // 
-            this.btnOpenSero.Location = new System.Drawing.Point(28, 112);
+            this.btnOpenSero.Location = new System.Drawing.Point(11, 112);
             this.btnOpenSero.Name = "btnOpenSero";
             this.btnOpenSero.Size = new System.Drawing.Size(70, 70);
             this.btnOpenSero.TabIndex = 14;
@@ -134,7 +134,7 @@
             // 
             this.lbName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.lbName.Location = new System.Drawing.Point(25, 34);
+            this.lbName.Location = new System.Drawing.Point(8, 34);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(31, 15);
             this.lbName.Text = "A轴:";
@@ -144,7 +144,7 @@
             this.errorPanel.BackColor = System.Drawing.Color.Red;
             this.errorPanel.Controls.Add(this.btnAlarmReset);
             this.errorPanel.Controls.Add(this.lbErrorMsg);
-            this.errorPanel.Location = new System.Drawing.Point(382, 4);
+            this.errorPanel.Location = new System.Drawing.Point(189, 5);
             this.errorPanel.Name = "errorPanel";
             this.errorPanel.Size = new System.Drawing.Size(86, 92);
             this.errorPanel.TabIndex = 22;
@@ -173,7 +173,7 @@
             // 
             // btnEmgStop
             // 
-            this.btnEmgStop.Location = new System.Drawing.Point(351, 199);
+            this.btnEmgStop.Location = new System.Drawing.Point(292, 199);
             this.btnEmgStop.Name = "btnEmgStop";
             this.btnEmgStop.Size = new System.Drawing.Size(70, 70);
             this.btnEmgStop.TabIndex = 25;
@@ -182,16 +182,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(300, 151);
+            this.textBox1.Location = new System.Drawing.Point(266, 151);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 21);
+            this.textBox1.Size = new System.Drawing.Size(96, 21);
             this.textBox1.TabIndex = 29;
             // 
             // kryptonWrapLabel2
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(232, 154);
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(198, 154);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(59, 15);
             this.kryptonWrapLabel2.Text = "目标位置";
@@ -200,7 +200,7 @@
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(233, 122);
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(199, 122);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
             this.kryptonWrapLabel1.Text = "运动模式";
@@ -210,12 +210,12 @@
             this.comMotionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comMotionType.DropDownWidth = 121;
             this.comMotionType.Items.AddRange(new object[] {
-            " 相对运动模式",
-            " 绝对运动模式",
+            " 相对",
+            " 绝对",
             " JOG"});
-            this.comMotionType.Location = new System.Drawing.Point(300, 116);
+            this.comMotionType.Location = new System.Drawing.Point(266, 116);
             this.comMotionType.Name = "comMotionType";
-            this.comMotionType.Size = new System.Drawing.Size(121, 21);
+            this.comMotionType.Size = new System.Drawing.Size(96, 21);
             this.comMotionType.TabIndex = 28;
             this.comMotionType.SelectedIndexChanged += new System.EventHandler(this.comMotionType_SelectedIndexChanged);
             // 
@@ -227,7 +227,7 @@
             this.dSignalLamp4.IsShowBorder = false;
             this.dSignalLamp4.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp4.Location = new System.Drawing.Point(316, 54);
+            this.dSignalLamp4.Location = new System.Drawing.Point(308, 54);
             this.dSignalLamp4.Name = "dSignalLamp4";
             this.dSignalLamp4.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp4.TabIndex = 21;
@@ -242,7 +242,7 @@
             this.dSignalLamp3.IsShowBorder = false;
             this.dSignalLamp3.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp3.Location = new System.Drawing.Point(112, 55);
+            this.dSignalLamp3.Location = new System.Drawing.Point(104, 55);
             this.dSignalLamp3.Name = "dSignalLamp3";
             this.dSignalLamp3.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp3.TabIndex = 20;
@@ -257,7 +257,7 @@
             this.dSignalLamp1.IsShowBorder = false;
             this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp1.Location = new System.Drawing.Point(316, 4);
+            this.dSignalLamp1.Location = new System.Drawing.Point(308, 4);
             this.dSignalLamp1.Name = "dSignalLamp1";
             this.dSignalLamp1.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp1.TabIndex = 19;
@@ -272,7 +272,7 @@
             this.dSignalLamp2.IsShowBorder = false;
             this.dSignalLamp2.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp2.Location = new System.Drawing.Point(113, 5);
+            this.dSignalLamp2.Location = new System.Drawing.Point(105, 5);
             this.dSignalLamp2.Name = "dSignalLamp2";
             this.dSignalLamp2.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp2.TabIndex = 17;
@@ -304,7 +304,7 @@
             this.Controls.Add(this.txtPos);
             this.Controls.Add(this.txtRel);
             this.Name = "AxisControl";
-            this.Size = new System.Drawing.Size(471, 283);
+            this.Size = new System.Drawing.Size(378, 283);
             this.errorPanel.ResumeLayout(false);
             this.errorPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comMotionType)).EndInit();

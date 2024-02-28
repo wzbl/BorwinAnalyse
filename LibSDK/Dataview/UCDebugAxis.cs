@@ -1,4 +1,5 @@
-﻿using LibSDK.Enums;
+﻿using LibSDK.AxisParamDebuger;
+using LibSDK.Enums;
 using LibSDK.Motion;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace LibSDK.Dataview
         public UCDebugAxis()
         {
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
             this.Load += UCDebugAxis_Load;
             UpDataAxis();
             MotionControl.UpDateAxis += UpDataAxis;
@@ -24,6 +26,7 @@ namespace LibSDK.Dataview
         AxisControl axisControl = null;
         private void UCDebugAxis_Load(object sender, EventArgs e)
         {
+            propertyGrid1.SelectedObject = DebugerAxisParam.Instance;
             timer1.Start();
         }
 
@@ -52,13 +55,13 @@ namespace LibSDK.Dataview
             int index = e.RowIndex;
             if (index < 0)
                 return;
-            kryptonSplitContainer1.Panel2.Controls.Clear();
+            kryptonSplitContainer2.Panel1.Controls.Clear();
             axisControl = null;
             string AxisName = kryptonDataGridView1.Rows[index].Cells["AxisName"].FormattedValue.ToString();
             if (MotionControl.Motions.TryGetValue(AxisName, out var motions))
             {
                 axisControl = new AxisControl(motions);
-                kryptonSplitContainer1.Panel2.Controls.Add (axisControl);
+                kryptonSplitContainer2.Panel1.Controls.Add (axisControl);
             } 
 
         }

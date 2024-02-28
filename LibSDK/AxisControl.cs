@@ -18,11 +18,12 @@ namespace LibSDK
     {
         MotAPI MotAPI = null;
         Color Color = Color.White;
-        public  MoveType moveType = MoveType.绝对运动模式;
-        public  double pos;
+        public MoveType moveType = MoveType.绝对运动模式;
+        public double pos;
         public AxisControl(MotAPI MotAPI)
         {
             InitializeComponent();
+            this.Dock = DockStyle.Fill;
             errorPanel.Dock = DockStyle.Fill;
             this.Load += AxisControl_Load;
             this.MotAPI = MotAPI;
@@ -144,12 +145,12 @@ namespace LibSDK
             MotAPI.axisError.IsError = false;
         }
 
-        bool IsDown=false;
+        bool IsDown = false;
         private void btnPositive_MouseDown(object sender, MouseEventArgs e)
         {
-            IsDown=true;
+            IsDown = true;
             if (moveType == MoveType.JOG)
-            MotAPI.JOP(short.Parse(((KryptonButton)sender).Tag.ToString()));
+                MotAPI.JOP(short.Parse(((KryptonButton)sender).Tag.ToString()));
         }
 
         private void btnPositive_MouseUp(object sender, MouseEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
+using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
 using LibSDK.IO;
 using LibSDK.Motion;
@@ -186,7 +187,7 @@ namespace LibSDK
         public static void Init()
         {
             BaseConfig.Instance.Read();
-
+            DebugerAxisParam.Instance.Load();
             if (BaseConfig.Instance.cardConfigs.Count > 0)
             {
                 int CardNum = BaseConfig.Instance.cardConfigs.Count;

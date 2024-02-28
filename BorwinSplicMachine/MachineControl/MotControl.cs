@@ -22,5 +22,29 @@ namespace BorwinSplicMachine
            
         }
 
+        public virtual void Run()
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// 主流程
+    /// </summary>
+    public enum MainFlow
+    {
+        None, //判断复位OK
+        扫码,
+        扫码完成,
+        进料,
+        感应料带到光源位置,
+        找空料,
+        找空料完成,
+        切空料,
+        切空料完成,
+        请求测值,
+        测值完成,
+        贴膜,
+        贴膜完成
     }
 }
