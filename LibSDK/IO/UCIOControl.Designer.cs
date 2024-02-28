@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chkChange = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
+            this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -62,6 +62,7 @@
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.chkChange);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.btnSave);
+            this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighInternalProfile;
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1063, 715);
             this.kryptonSplitContainer1.SplitterDistance = 656;
             this.kryptonSplitContainer1.TabIndex = 0;
@@ -73,34 +74,39 @@
             this.kryptonSplitContainer2.Location = new System.Drawing.Point(0, 0);
             this.kryptonSplitContainer2.Name = "kryptonSplitContainer2";
             // 
+            // kryptonSplitContainer2.Panel1
+            // 
+            this.kryptonSplitContainer2.Panel1.AutoScroll = true;
+            // 
             // kryptonSplitContainer2.Panel2
             // 
             this.kryptonSplitContainer2.Panel2.AutoScroll = true;
+            this.kryptonSplitContainer2.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighInternalProfile;
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(1063, 656);
             this.kryptonSplitContainer2.SplitterDistance = 516;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(752, -1);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(90, 25);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Values.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // chkChange
             // 
-            this.chkChange.Location = new System.Drawing.Point(167, 0);
+            this.chkChange.Location = new System.Drawing.Point(167, 8);
             this.chkChange.Name = "chkChange";
             this.chkChange.Size = new System.Drawing.Size(49, 20);
             this.chkChange.TabIndex = 2;
             this.chkChange.Values.Text = "修改";
             this.chkChange.CheckedChanged += new System.EventHandler(this.chkChange_CheckedChanged);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(521, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(90, 35);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Values.Text = "保存";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // UCIOControl
             // 

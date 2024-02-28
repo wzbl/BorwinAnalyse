@@ -1,4 +1,5 @@
-﻿using LibSDK.IO;
+﻿using LibSDK.Dataview;
+using LibSDK.IO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace LibSDK
 
         private void UCDebugging_Load(object sender, EventArgs e)
         {
+          kryptonSplitContainer1.Panel1.Controls.Add(new UCDebugAxis());
           kryptonSplitContainer1.Panel2.Controls.Add(new UCIOControl());
         }
     }

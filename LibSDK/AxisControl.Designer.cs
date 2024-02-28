@@ -40,17 +40,23 @@
             this.errorPanel = new System.Windows.Forms.Panel();
             this.btnAlarmReset = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lbErrorMsg = new System.Windows.Forms.Label();
+            this.btnEmgStop = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.comMotionType = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dSignalLamp4 = new LibSDK.IO.DSignalLamp();
             this.dSignalLamp3 = new LibSDK.IO.DSignalLamp();
             this.dSignalLamp1 = new LibSDK.IO.DSignalLamp();
             this.dSignalLamp2 = new LibSDK.IO.DSignalLamp();
             this.errorPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comMotionType)).BeginInit();
             this.SuspendLayout();
             // 
             // txtRel
             // 
             this.txtRel.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtRel.Location = new System.Drawing.Point(108, 11);
+            this.txtRel.Location = new System.Drawing.Point(169, 19);
             this.txtRel.Name = "txtRel";
             this.txtRel.ReadOnly = true;
             this.txtRel.Size = new System.Drawing.Size(140, 26);
@@ -59,7 +65,7 @@
             // txtPos
             // 
             this.txtPos.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPos.Location = new System.Drawing.Point(108, 54);
+            this.txtPos.Location = new System.Drawing.Point(169, 66);
             this.txtPos.Name = "txtPos";
             this.txtPos.ReadOnly = true;
             this.txtPos.Size = new System.Drawing.Size(140, 26);
@@ -67,9 +73,9 @@
             // 
             // btnPositive
             // 
-            this.btnPositive.Location = new System.Drawing.Point(71, 98);
+            this.btnPositive.Location = new System.Drawing.Point(31, 199);
             this.btnPositive.Name = "btnPositive";
-            this.btnPositive.Size = new System.Drawing.Size(51, 50);
+            this.btnPositive.Size = new System.Drawing.Size(70, 70);
             this.btnPositive.TabIndex = 2;
             this.btnPositive.Tag = "0";
             this.btnPositive.Values.Text = "正向";
@@ -79,9 +85,9 @@
             // 
             // btnNagetive
             // 
-            this.btnNagetive.Location = new System.Drawing.Point(130, 98);
+            this.btnNagetive.Location = new System.Drawing.Point(133, 199);
             this.btnNagetive.Name = "btnNagetive";
-            this.btnNagetive.Size = new System.Drawing.Size(51, 50);
+            this.btnNagetive.Size = new System.Drawing.Size(70, 70);
             this.btnNagetive.TabIndex = 3;
             this.btnNagetive.Tag = "1";
             this.btnNagetive.Values.Text = "反向";
@@ -91,18 +97,18 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(187, 98);
+            this.btnStop.Location = new System.Drawing.Point(242, 199);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(51, 50);
+            this.btnStop.Size = new System.Drawing.Size(70, 70);
             this.btnStop.TabIndex = 4;
             this.btnStop.Values.Text = "停止";
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnStartGoHome
             // 
-            this.btnStartGoHome.Location = new System.Drawing.Point(244, 98);
+            this.btnStartGoHome.Location = new System.Drawing.Point(133, 112);
             this.btnStartGoHome.Name = "btnStartGoHome";
-            this.btnStartGoHome.Size = new System.Drawing.Size(53, 50);
+            this.btnStartGoHome.Size = new System.Drawing.Size(70, 70);
             this.btnStartGoHome.TabIndex = 9;
             this.btnStartGoHome.Values.Text = "回零";
             this.btnStartGoHome.Click += new System.EventHandler(this.btnStartGoHome_Click);
@@ -117,9 +123,9 @@
             // 
             // btnOpenSero
             // 
-            this.btnOpenSero.Location = new System.Drawing.Point(9, 98);
+            this.btnOpenSero.Location = new System.Drawing.Point(28, 112);
             this.btnOpenSero.Name = "btnOpenSero";
-            this.btnOpenSero.Size = new System.Drawing.Size(53, 50);
+            this.btnOpenSero.Size = new System.Drawing.Size(70, 70);
             this.btnOpenSero.TabIndex = 14;
             this.btnOpenSero.Text = "使能";
             this.btnOpenSero.Click += new System.EventHandler(this.btnOpenSero_Click);
@@ -128,7 +134,7 @@
             // 
             this.lbName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.lbName.Location = new System.Drawing.Point(16, 37);
+            this.lbName.Location = new System.Drawing.Point(25, 34);
             this.lbName.Name = "lbName";
             this.lbName.Size = new System.Drawing.Size(31, 15);
             this.lbName.Text = "A轴:";
@@ -138,9 +144,9 @@
             this.errorPanel.BackColor = System.Drawing.Color.Red;
             this.errorPanel.Controls.Add(this.btnAlarmReset);
             this.errorPanel.Controls.Add(this.lbErrorMsg);
-            this.errorPanel.Location = new System.Drawing.Point(150, 19);
+            this.errorPanel.Location = new System.Drawing.Point(382, 4);
             this.errorPanel.Name = "errorPanel";
-            this.errorPanel.Size = new System.Drawing.Size(62, 64);
+            this.errorPanel.Size = new System.Drawing.Size(86, 92);
             this.errorPanel.TabIndex = 22;
             this.errorPanel.Visible = false;
             // 
@@ -165,6 +171,54 @@
             this.lbErrorMsg.TabIndex = 0;
             this.lbErrorMsg.Text = "label1";
             // 
+            // btnEmgStop
+            // 
+            this.btnEmgStop.Location = new System.Drawing.Point(351, 199);
+            this.btnEmgStop.Name = "btnEmgStop";
+            this.btnEmgStop.Size = new System.Drawing.Size(70, 70);
+            this.btnEmgStop.TabIndex = 25;
+            this.btnEmgStop.Values.Text = "急停";
+            this.btnEmgStop.Click += new System.EventHandler(this.btnEmgStop_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(300, 151);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(121, 21);
+            this.textBox1.TabIndex = 29;
+            // 
+            // kryptonWrapLabel2
+            // 
+            this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(232, 154);
+            this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
+            this.kryptonWrapLabel2.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel2.Text = "目标位置";
+            // 
+            // kryptonWrapLabel1
+            // 
+            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(233, 122);
+            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
+            this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel1.Text = "运动模式";
+            // 
+            // comMotionType
+            // 
+            this.comMotionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comMotionType.DropDownWidth = 121;
+            this.comMotionType.Items.AddRange(new object[] {
+            " 相对运动模式",
+            " 绝对运动模式",
+            " JOG"});
+            this.comMotionType.Location = new System.Drawing.Point(300, 116);
+            this.comMotionType.Name = "comMotionType";
+            this.comMotionType.Size = new System.Drawing.Size(121, 21);
+            this.comMotionType.TabIndex = 28;
+            this.comMotionType.SelectedIndexChanged += new System.EventHandler(this.comMotionType_SelectedIndexChanged);
+            // 
             // dSignalLamp4
             // 
             this.dSignalLamp4.CanClick = false;
@@ -173,9 +227,9 @@
             this.dSignalLamp4.IsShowBorder = false;
             this.dSignalLamp4.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp4.Location = new System.Drawing.Point(254, 48);
+            this.dSignalLamp4.Location = new System.Drawing.Point(316, 54);
             this.dSignalLamp4.Name = "dSignalLamp4";
-            this.dSignalLamp4.Size = new System.Drawing.Size(42, 42);
+            this.dSignalLamp4.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp4.TabIndex = 21;
             this.dSignalLamp4.TwinkleSpeed = 0;
             this.dSignalLamp4.Value = 0;
@@ -188,9 +242,9 @@
             this.dSignalLamp3.IsShowBorder = false;
             this.dSignalLamp3.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp3.Location = new System.Drawing.Point(63, 49);
+            this.dSignalLamp3.Location = new System.Drawing.Point(112, 55);
             this.dSignalLamp3.Name = "dSignalLamp3";
-            this.dSignalLamp3.Size = new System.Drawing.Size(42, 42);
+            this.dSignalLamp3.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp3.TabIndex = 20;
             this.dSignalLamp3.TwinkleSpeed = 0;
             this.dSignalLamp3.Value = 0;
@@ -203,9 +257,9 @@
             this.dSignalLamp1.IsShowBorder = false;
             this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp1.Location = new System.Drawing.Point(254, 2);
+            this.dSignalLamp1.Location = new System.Drawing.Point(316, 4);
             this.dSignalLamp1.Name = "dSignalLamp1";
-            this.dSignalLamp1.Size = new System.Drawing.Size(42, 42);
+            this.dSignalLamp1.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp1.TabIndex = 19;
             this.dSignalLamp1.TwinkleSpeed = 0;
             this.dSignalLamp1.Value = 0;
@@ -218,9 +272,9 @@
             this.dSignalLamp2.IsShowBorder = false;
             this.dSignalLamp2.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.Red};
-            this.dSignalLamp2.Location = new System.Drawing.Point(63, 3);
+            this.dSignalLamp2.Location = new System.Drawing.Point(113, 5);
             this.dSignalLamp2.Name = "dSignalLamp2";
-            this.dSignalLamp2.Size = new System.Drawing.Size(42, 42);
+            this.dSignalLamp2.Size = new System.Drawing.Size(50, 50);
             this.dSignalLamp2.TabIndex = 17;
             this.dSignalLamp2.TwinkleSpeed = 0;
             this.dSignalLamp2.Value = 0;
@@ -229,7 +283,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.errorPanel);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.kryptonWrapLabel2);
+            this.Controls.Add(this.kryptonWrapLabel1);
+            this.Controls.Add(this.comMotionType);
+            this.Controls.Add(this.btnEmgStop);
             this.Controls.Add(this.dSignalLamp4);
             this.Controls.Add(this.dSignalLamp3);
             this.Controls.Add(this.dSignalLamp1);
@@ -244,9 +304,10 @@
             this.Controls.Add(this.txtPos);
             this.Controls.Add(this.txtRel);
             this.Name = "AxisControl";
-            this.Size = new System.Drawing.Size(306, 156);
+            this.Size = new System.Drawing.Size(471, 283);
             this.errorPanel.ResumeLayout(false);
             this.errorPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comMotionType)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,5 +331,10 @@
         private System.Windows.Forms.Panel errorPanel;
         private System.Windows.Forms.Label lbErrorMsg;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAlarmReset;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnEmgStop;
+        private System.Windows.Forms.TextBox textBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox comMotionType;
     }
 }

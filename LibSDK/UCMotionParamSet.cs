@@ -43,6 +43,7 @@ namespace LibSDK
             if (this.Tag.ToString().Trim() == "Axis")
             {
                 MotionControl.AxisParm.Write();
+                MotionControl.InitAxis();
             }
             else if (this.Tag.ToString().Trim() == "INIO")
             {

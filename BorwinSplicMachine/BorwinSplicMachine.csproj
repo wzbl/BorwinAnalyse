@@ -173,7 +173,7 @@
       <DependentUpon>UCLCRSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="MainControl.cs" />
-    <Compile Include="MotControl.cs" />
+    <Compile Include="MachineControl\MotControl.cs" />
     <Compile Include="MotionConfig.cs">
       <SubType>Form</SubType>
     </Compile>

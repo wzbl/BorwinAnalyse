@@ -71,8 +71,20 @@
     <Compile Include="AxisControl.Designer.cs">
       <DependentUpon>AxisControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dataview\AxisParam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dataview\AxisParam.Designer.cs">
+      <DependentUpon>AxisParam.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dataview\DataGridViewBtn.cs" />
     <Compile Include="Dataview\DataGridViewEventHandlers.cs" />
+    <Compile Include="Dataview\UCDebugAxis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dataview\UCDebugAxis.Designer.cs">
+      <DependentUpon>UCDebugAxis.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dataview\UIDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -188,6 +200,12 @@
   <ItemGroup>
     <EmbeddedResource Include="AxisControl.resx">
       <DependentUpon>AxisControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dataview\AxisParam.resx">
+      <DependentUpon>AxisParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dataview\UCDebugAxis.resx">
+      <DependentUpon>UCDebugAxis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Enums\UCMotionParam.resx">
       <DependentUpon>UCMotionParam.cs</DependentUpon>

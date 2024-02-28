@@ -153,13 +153,13 @@ namespace LibSDK.Motion
     [TypeConverter(typeof(NullConverter))]
     public class AxisInfo
     {
-        [Category("基础信息"), ReadOnly(false), Description("控制卡ID"), DisplayName("控制卡ID")]
+        [Category("基础信息"), ReadOnly(true), Description("控制卡ID"), DisplayName("控制卡ID")]
         public short CardNo { get; set; } = 0;
 
         /// <summary>
         /// 轴编号（从1开始）
         /// </summary>
-        [Category("基础信息"), ReadOnly(false), Description("轴编号（从1开始）"), DisplayName("轴编号")]
+        [Category("基础信息"), ReadOnly(true), Description("轴编号（从1开始）"), DisplayName("轴编号")]
         public short AxisNo { get; set; } = 1;
 
         /// <summary>

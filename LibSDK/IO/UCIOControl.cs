@@ -23,19 +23,19 @@ namespace LibSDK.IO
             UpDateINIO();
             MotionControl.UpDateINIO += UpDateINIO;
             MotionControl.UpDateOUTIO += UpDateOUTIO;
-            
         }
 
         private void UpDateOUTIO()
         {
             int i = 0;
+            kryptonSplitContainer2.Panel1.Controls.Clear();
             foreach (KeyValuePair<string, Output> flowModel in MotionControl.Output)
             {
                 OutputControl outputControl = new OutputControl();
                 outputControl.BringToFront();
                 outputControl.output = flowModel.Value;
-                outputControl.Left = 10 + (i % 4) * 173;
-                outputControl.Top = 15 + (i / 4) * 56;
+                outputControl.Left = 10 + (i % 2) * 173;
+                outputControl.Top = 15 + (i / 2) * 56;
                 OutputControls.Add(outputControl);
                 kryptonSplitContainer2.Panel1.Controls.Add(outputControl);
                 outputControl.RefreshUI();
@@ -46,12 +46,13 @@ namespace LibSDK.IO
         private void UpDateINIO()
         {
             int i = 0;
+            kryptonSplitContainer2.Panel2.Controls.Clear();
             foreach (KeyValuePair<string, Input> flowModel in MotionControl.InPort)
             {
                 InputControl inputControl = new InputControl();
                 kryptonSplitContainer2.Panel2.Controls.Add(inputControl);
-                inputControl.Left = 10 + (i % 4) * 173;
-                inputControl.Top = 15 + (i / 4) * 56;
+                inputControl.Left = 10 + (i % 2) * 173;
+                inputControl.Top = 15 + (i / 2) * 56;
                 inputControl.Input = flowModel.Value;
                 inputControls.Add(inputControl);
                 inputControl.RefreshUI();
@@ -70,7 +71,6 @@ namespace LibSDK.IO
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
             for (int i = 0; i < OutputControls.Count; i++)
             {
                 if (OutputControls[i].output.State())

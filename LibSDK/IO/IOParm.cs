@@ -98,7 +98,7 @@ namespace LibSDK.IO
         [DisplayName("IO类型"), Description("IO类型")]
         [ReadOnly(true)]
         public string IOType { get; set; } = "IN";
-        [DisplayName("控制卡号"), Description("控制卡号")]
+        [DisplayName("控制卡号"),ReadOnly(true), Description("控制卡号")]
         public short CardNo { get; set; }
         [DisplayName("模块号从0开始"), Description("模块号从0开始")]
         public short Extmdl { get; set; }

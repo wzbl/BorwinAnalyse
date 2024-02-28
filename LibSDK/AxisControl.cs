@@ -18,6 +18,8 @@ namespace LibSDK
     {
         MotAPI MotAPI = null;
         Color Color = Color.White;
+        public  MoveType moveType = MoveType.绝对运动模式;
+        public  double pos;
         public AxisControl(MotAPI MotAPI)
         {
             InitializeComponent();
@@ -47,8 +49,8 @@ namespace LibSDK
 
         private void btnPositive_Click(object sender, EventArgs e)
         {
-            double spd = UCAxisControl.pos;
-            switch (UCAxisControl.moveType)
+            double spd = pos;
+            switch (moveType)
             {
                 case MoveType.相对运动模式:
                     MotAPI.PMove(spd, 0);
@@ -79,8 +81,8 @@ namespace LibSDK
 
         private void btnNagetive_Click(object sender, EventArgs e)
         {
-            double spd = UCAxisControl.pos;
-            switch (UCAxisControl.moveType)
+            double spd = pos;
+            switch (moveType)
             {
                 case MoveType.相对运动模式:
                     MotAPI.PMove(-spd, 0, true);
@@ -105,7 +107,7 @@ namespace LibSDK
             if (MotAPI.axisError.IsError)
             {
                 errorPanel.Visible = true;
-                lbErrorMsg.Text = MotAPI.Name + ":" + MotAPI.axisError.ErrorMsg;
+                lbErrorMsg.Text = MotAPI.axisError.ErrorMsg;
             }
             else
             {
@@ -146,17 +148,27 @@ namespace LibSDK
         private void btnPositive_MouseDown(object sender, MouseEventArgs e)
         {
             IsDown=true;
-            if (UCAxisControl.moveType == MoveType.JOG)
+            if (moveType == MoveType.JOG)
             MotAPI.JOP(short.Parse(((KryptonButton)sender).Tag.ToString()));
         }
 
         private void btnPositive_MouseUp(object sender, MouseEventArgs e)
         {
-            if (IsDown && UCAxisControl.moveType == MoveType.JOG)
+            if (IsDown && moveType == MoveType.JOG)
             {
                 MotAPI.AxisStop();
                 IsDown = false;
             }
+        }
+
+        private void btnEmgStop_Click(object sender, EventArgs e)
+        {
+            MotionControl.CardAPI.StopEmgAxis();
+        }
+
+        private void comMotionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moveType = (MoveType)comMotionType.SelectedIndex;
         }
     }
 }

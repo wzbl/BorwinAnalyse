@@ -41,9 +41,9 @@
             this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
-            this.kryptonSplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1288, 728);
-            this.kryptonSplitContainer1.SplitterDistance = 416;
+            this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighInternalProfile;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1408, 740);
+            this.kryptonSplitContainer1.SplitterDistance = 644;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
             // UCDebugging
@@ -52,7 +52,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Name = "UCDebugging";
-            this.Size = new System.Drawing.Size(1288, 728);
+            this.Size = new System.Drawing.Size(1408, 740);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();

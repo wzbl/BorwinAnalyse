@@ -68,11 +68,11 @@ namespace LibSDK.Motion
     [TypeConverter(typeof(NullConverter))]
     public class CardConfig
     {
-        [Category("卡配置"), Description("卡号"),DisplayName("卡号")]
+        [Category("卡配置"), ReadOnly(true), Description("卡号"),DisplayName("卡号")]
         public int CardNo{get; set;}
         [Category("卡配置"), Description("轴数量"), DisplayName("轴数量")]
         public int AxisNum { get; set; }
-        [Category("卡配置"), Description("当前轴数量"), DisplayName("当前轴数量")]
+        [Category("卡配置"), ReadOnly(true), Description("当前轴数量"), DisplayName("当前轴数量")]
         public int AxisCurrentNum { get; set; }
         [Category("卡配置"), Description("配置文件"), DisplayName("配置文件")]
         public string ConigPath { get; set; }
