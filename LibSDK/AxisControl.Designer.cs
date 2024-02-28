@@ -144,15 +144,15 @@
             this.errorPanel.BackColor = System.Drawing.Color.Red;
             this.errorPanel.Controls.Add(this.btnAlarmReset);
             this.errorPanel.Controls.Add(this.lbErrorMsg);
-            this.errorPanel.Location = new System.Drawing.Point(189, 5);
+            this.errorPanel.Location = new System.Drawing.Point(17, 63);
             this.errorPanel.Name = "errorPanel";
-            this.errorPanel.Size = new System.Drawing.Size(86, 92);
+            this.errorPanel.Size = new System.Drawing.Size(35, 41);
             this.errorPanel.TabIndex = 22;
             this.errorPanel.Visible = false;
             // 
             // btnAlarmReset
             // 
-            this.btnAlarmReset.Location = new System.Drawing.Point(203, 76);
+            this.btnAlarmReset.Location = new System.Drawing.Point(192, 130);
             this.btnAlarmReset.Name = "btnAlarmReset";
             this.btnAlarmReset.Size = new System.Drawing.Size(86, 47);
             this.btnAlarmReset.TabIndex = 1;
@@ -163,11 +163,11 @@
             // 
             this.lbErrorMsg.AutoSize = true;
             this.lbErrorMsg.BackColor = System.Drawing.Color.Red;
-            this.lbErrorMsg.Font = new System.Drawing.Font("宋体", 15F);
+            this.lbErrorMsg.Font = new System.Drawing.Font("宋体", 12F);
             this.lbErrorMsg.ForeColor = System.Drawing.Color.Yellow;
-            this.lbErrorMsg.Location = new System.Drawing.Point(5, 25);
+            this.lbErrorMsg.Location = new System.Drawing.Point(3, 61);
             this.lbErrorMsg.Name = "lbErrorMsg";
-            this.lbErrorMsg.Size = new System.Drawing.Size(69, 20);
+            this.lbErrorMsg.Size = new System.Drawing.Size(55, 16);
             this.lbErrorMsg.TabIndex = 0;
             this.lbErrorMsg.Text = "label1";
             // 
