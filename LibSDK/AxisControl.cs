@@ -1,5 +1,8 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using BorwinAnalyse.BaseClass;
+using ComponentFactory.Krypton.Toolkit;
+using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
+using LibSDK.IO;
 using LibSDK.Motion;
 using NPOI.SS.UserModel;
 using System;
@@ -17,24 +20,70 @@ namespace LibSDK
     public partial class AxisControl : UserControl
     {
         MotAPI MotAPI = null;
+        CAxisParm CAxisParm= null;
         Color Color = Color.White;
         public MoveType moveType = MoveType.绝对运动模式;
         public double pos;
-        public AxisControl(MotAPI MotAPI)
+
+
+        public AxisControl()
         {
             InitializeComponent();
-            this.Dock = DockStyle.Fill;
+        }
+
+        public AxisControl(MotAPI MotAPI) : this()
+        {
+            this.Dock = DockStyle.Top;
             errorPanel.Dock = DockStyle.Fill;
             this.Load += AxisControl_Load;
             this.MotAPI = MotAPI;
+            CAxisParm = MotionControl.AxisParm.GetAxisParm(MotAPI.CardNum, MotAPI.Axis);
+            txtVel.Text = CAxisParm.AxisMotionPara.MotionSped.ToString();
+            comMotionType.SelectedIndex = 1;
+            RefreshDebugUI();
+            MotionControl.AddPos += RefreshDebugUI;
+        }
+
+
+        private void RefreshDebugUI()
+        {
+            kryptonSplitContainer1.Panel2.Controls.Clear();
+            if (DebugerAxisParam.Instance.BaseAxisParams==null)
+            {
+                return;
+            }
+            List<BaseAxisParam> baseAxisParams = DebugerAxisParam.Instance.BaseAxisParams.Where(x => x.CardNo == MotAPI.CardNum && x.AxisNo == MotAPI.Axis).ToList();
+
+            if (baseAxisParams.Count>0)
+            {
+                BaseAxisParam baseAxisParam = baseAxisParams[0];
+                for (int i = 0; i < baseAxisParam.posParams.Count; i++)
+                {
+                    KryptonButton kryptonButton = new KryptonButton();
+                    kryptonButton.Text = baseAxisParam.posParams[i].Name;
+                    kryptonSplitContainer1.Panel2.Controls.Add(kryptonButton);
+                    kryptonButton.Left = 10 + (i % 4) * 120;
+                    kryptonButton.Top = 15 + (i / 4) * 50;
+                    kryptonButton.Tag = baseAxisParam.posParams[i].Pos;
+                    kryptonButton.Click += KryptonButton_Click;
+                }
+            }
+        }
+
+        private void KryptonButton_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(((KryptonButton)sender).Tag.ToString(), out double pos))
+            {
+                MotAPI.PMove(pos, 1);
+            }
         }
 
         private void AxisControl_Load(object sender, EventArgs e)
         {
             lbName.Text = MotAPI.Name;
             Color = btnPositive.BackColor;
-        }
 
+        }
 
         private void btnOpenSero_Click(object sender, EventArgs e)
         {
@@ -50,6 +99,13 @@ namespace LibSDK
 
         private void btnPositive_Click(object sender, EventArgs e)
         {
+
+            if (!double.TryParse(txtPos.Text, out pos))
+            {
+                txtPos.BackColor = Color.Red;
+                return;
+            }
+            txtPos.BackColor = Color.White;
             double spd = pos;
             switch (moveType)
             {
@@ -79,9 +135,14 @@ namespace LibSDK
             MotAPI.Home(1000);
         }
 
-
         private void btnNagetive_Click(object sender, EventArgs e)
         {
+            if (!double.TryParse(txtPos.Text, out pos)) 
+            {
+                txtPos.BackColor = Color.Red;
+                return;
+            }
+            txtPos.BackColor = Color.White;
             double spd = pos;
             switch (moveType)
             {
@@ -101,7 +162,6 @@ namespace LibSDK
         /// </summary>
         public void RefreshUI()
         {
-            txtPos.Text = MotAPI.GetPrfPos().ToString();
             txtRel.Text = MotAPI.GetEncPos().ToString();
 
             btnOpenSero.BackColor = MotAPI.GetSevOn() ? Color.Green : Color;
@@ -114,15 +174,7 @@ namespace LibSDK
             {
                 errorPanel.Visible = false;
             }
-            if (MotAPI.GetHomeDirection() == 0)
-            {
-                dSignalLamp1.Value = MotAPI.HomeState ? 1 : 0;
-            }
-            else
-            {
-                dSignalLamp2.Value = MotAPI.HomeState ? 1 : 0;
-            }
-
+            dSignalLamp1.Value = MotAPI.HomeState ? 1 : 0;
         }
 
         public void EmgStop()
@@ -170,6 +222,20 @@ namespace LibSDK
         private void comMotionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             moveType = (MoveType)comMotionType.SelectedIndex;
+        }
+
+        private void btnSetVel_Click(object sender, EventArgs e)
+        {
+            if (float.TryParse(txtVel.Text,out float vel))
+            {
+                CAxisParm.AxisMotionPara.MotionSped = vel;
+                MotionControl.AxisParm.Write();
+                txtVel.BackColor = Color.White;
+            }
+            else
+            {
+                txtVel.BackColor = Color.Red;
+            }
         }
     }
 }

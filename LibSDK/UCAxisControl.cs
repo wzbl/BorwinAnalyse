@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
 using LibSDK.IO;
 using LibSDK.Motion;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static GC.Frame.Motion.Privt.CNMCLib20;
 
 namespace LibSDK
 {
@@ -24,22 +26,21 @@ namespace LibSDK
             this.Load += UCAxisControl_Load;
             MotionControl.UpDateAxis += UpDateAxis;
             UpDateAxis();
+            propertyGrid1.SelectedObject = DebugerAxisParam.Instance;
         }
+
 
         private void UpDateAxis()
         {
             timer1.Stop();
             Thread.Sleep(100);
             axisControls.Clear();
-            int i = 0;
+            kryptonSplitContainer1.Panel1.Controls.Clear();
             foreach (KeyValuePair<string, MotAPI> flowModel in MotionControl.Motions)
             {
                 AxisControl axisControl = new AxisControl(flowModel.Value);
                 kryptonSplitContainer1.Panel1.Controls.Add(axisControl);
-                axisControl.Left = 10 + (i % 3) * 320;
-                axisControl.Top = 15 + (i / 3) * 130;
                 axisControls.Add(axisControl);
-                i++;
             }
             timer1.Start();
         }
@@ -49,8 +50,6 @@ namespace LibSDK
         public static double pos;
         private void UCAxisControl_Load(object sender, EventArgs e)
         {
-            comMotionType.SelectedIndex = 0;
-            txtPos.Text = "10";  
             timer1.Start();
         }
    
@@ -62,19 +61,15 @@ namespace LibSDK
             }
         }
 
-        private void kryptonComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void propertyGrid1_Resize(object sender, EventArgs e)
         {
-            moveType =(MoveType) comMotionType.SelectedIndex;
+            btnSave.Location = new Point(propertyGrid1.Location.X + propertyGrid1.Width - btnSave.Width - 4, propertyGrid1.Height - btnSave.Height-4);
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            double.TryParse(txtPos.Text, out  pos);
-        }
-
-        private void btnEmgStop_Click(object sender, EventArgs e)
-        {
-            MotionControl.CardAPI.StopEmgAxis();
+            DebugerAxisParam.Instance.Save();
+            MotionControl.AddPos?.Invoke();
         }
     }
 }

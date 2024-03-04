@@ -63,11 +63,7 @@ namespace LibSDK.Motion
         }
 
         #region 读写轴参数、及对应配置 Xml
-        public void Write(string Path)
-        {
-            LibSDK.Rwfile.CDataXml XML = new Rwfile.CDataXml();
-            XML.Serializer<List<CAxisParm>>(Path, AParms);
-        }
+
         public void Write()
         {
             LibSDK.Rwfile.CDataXml XML = new Rwfile.CDataXml();
@@ -137,15 +133,16 @@ namespace LibSDK.Motion
             AxisInfo = new AxisInfo();
             AxisHomeParam = new AxisHomeParam();
             AxisMotionPara = new AxisMotionPara();
+           
         }
 
-        [Category("基础参数")]
+        [Category("基础参数"),DisplayName("基础参数")]
         public AxisInfo AxisInfo { get; set; }
 
-        [Category("回零参数")]
+        [Category("回零参数"), DisplayName("回零参数")]
         public AxisHomeParam AxisHomeParam { get; set; }
 
-        [Category("运动参数")]
+        [Category("运动参数"), DisplayName("运动参数")]
         public AxisMotionPara AxisMotionPara { get; set; }
 
     }
@@ -300,6 +297,7 @@ namespace LibSDK.Motion
         [Category("运动"), Description("负向限位"), DisplayName("负向限位")]
         public float NegLimit { get; set; }
     }
+
 
     public class NullConverter : ExpandableObjectConverter
     {

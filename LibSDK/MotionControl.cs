@@ -71,6 +71,12 @@ namespace LibSDK
         #endregion
 
         #region 轴控制
+
+        /// <summary>
+        /// 添加点位
+        /// </summary>
+        public static Action AddPos;
+
         /// <summary>
         /// 更新轴
         /// </summary>

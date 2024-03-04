@@ -30,38 +30,27 @@ namespace LibSDK.AxisParamDebuger
                 return instance;
             }
         }
-
-        private Runners runners = new Runners();
-        //流道宽8-24mm
-        //夹紧宽8-24mm
-        [Browsable(true),Category("流道参数"),DisplayName("流道")]
-        public Runners Runners{ get => runners; set => runners = value; }
-        [Browsable(true), Category("凸轮参数"), DisplayName("凸轮")]
-        public Cam cam { get; set; }=new Cam();
-        [Browsable(true), Category("拨刀参数"), DisplayName("拨刀")]
-        public DialKnives dialKnives  { get; set; }=new DialKnives();
-        [Browsable(true), Category("吸头参数"), DisplayName("吸头")]
-        public Tips tips  { get; set; }=new Tips();
-        [Browsable(true), Category("热熔头参数"), DisplayName("热熔头")]
-        public HotMeltHead hotMeltHead  { get; set; }=new HotMeltHead(); 
-        [Browsable(true), Category("吸嘴平移参数"), DisplayName("吸嘴平移")]
-        public Nozzle Nozzle { get; set; }=new Nozzle();
+        [Category("Debugging parameters|调试参数"), Description("Debugging parameters|调试参数"), DisplayName("Debugging parameters|调试参数")]
+        public List<BaseAxisParam> BaseAxisParams {  get; set; }=new List<BaseAxisParam>();
 
         /// <summary>
         /// 加载参数
         /// </summary>
         public void Load()
         {
-            string savePath = @"Ini/DebugerAxisParam.json";
+            string savePath = @"Ini/DebugerAxisParam.xml";
             if (!File.Exists(savePath))
             {
-                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
-                fs1.Close();
+                return;
             }
-            else
+            Rwfile.CDataXml XML = new Rwfile.CDataXml();
+            DebugerAxisParam baseConfig = XML.DeserializeFile<DebugerAxisParam>(savePath);
+            if (baseConfig != null)
             {
-                instance = JsonConvert.DeserializeObject<DebugerAxisParam>(File.ReadAllText(savePath));
+                instance = baseConfig;
             }
+
+         
         }
 
         /// <summary>
@@ -69,15 +58,37 @@ namespace LibSDK.AxisParamDebuger
         /// </summary>
         public void Save()
         {
-            string savePath = @"Ini/DebugerAxisParam.json";
-            if (!File.Exists(savePath))
-            {
-                FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
-                fs1.Close();
-            }
-            File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
+            string savePath = @"Ini/DebugerAxisParam.xml";
+            LibSDK.Rwfile.CDataXml XML = new Rwfile.CDataXml();
+            XML.Serializer<DebugerAxisParam>(savePath, instance);
         }
     }
+
+    [TypeConverter(typeof(NullConverter))]
+    public class BaseAxisParam
+    {
+        [Category("基础信息"), Description("控制卡ID"), DisplayName("CardNo")]
+        public short CardNo { get; set; } = 0;
+
+        /// <summary>
+        /// 轴编号（从1开始）
+        /// </summary>
+        [Category("基础信息"), Description("轴编号(从1开始)"), DisplayName("AxisNo")]
+        public short AxisNo { get; set; } = 1;
+
+        [Category("位置信息"), DisplayName("Positions")]
+        public List<PosParam> posParams { get; set; } = new List<PosParam>();
+    }
+
+    [TypeConverter(typeof(NullConverter))]
+    public class PosParam
+    {
+        [Category("位置信息"), DisplayName("Name")]
+        public string Name { get; set; }
+        [Category("位置信息"), DisplayName("Position")]
+        public double Pos { get; set; } = 0;
+    }
+
 
     #region 流道
     /// <summary>
@@ -86,13 +97,10 @@ namespace LibSDK.AxisParamDebuger
     [TypeConverter(typeof(NullConverter))]
     public class Runners
     {
-
-        //流道宽8-24mm
-        //夹紧宽8-24mm
-        [Browsable(true), Category("流道"), Description("流道参数"), DisplayName("流道")]
+        [Browsable(true), Category("流道|Runners"), Description("流道|Runners"), DisplayName("流道|Runners")]
         public RunnersParam runners { get; set; } = new RunnersParam();
 
-        [Browsable(true), Category("夹紧"), Description("夹紧参数"), DisplayName("夹紧")]
+        [Browsable(true), Category("夹紧|Clamping"), Description("夹紧|Clamping"), DisplayName("夹紧|Clamping")]
         public RunnersParam clamping { get; set; } = new RunnersParam();
 
     }
@@ -100,13 +108,13 @@ namespace LibSDK.AxisParamDebuger
     [TypeConverter(typeof(NullConverter))]
     public class RunnersParam
     {
-        [Browsable(true), Category("8"), Description("8mm参数"), DisplayName("8mm")]
+        [Browsable(true), Category("8"), Description("8mm"), DisplayName("8mm")]
         public double _8 { get; set; }
-        [Browsable(true), Category("12"), Description("12mm参数"), DisplayName("12mm")]
+        [Browsable(true), Category("12"), Description("12mm"), DisplayName("12mm")]
         public double _12 { get; set; }
-        [Browsable(true), Category("16"), Description("16mm参数"), DisplayName("16mm")]
+        [Browsable(true), Category("16"), Description("16mm"), DisplayName("16mm")]
         public double _16 { get; set; }
-        [Browsable(true), Category("24"), Description("24mm参数"), DisplayName("24mm")]
+        [Browsable(true), Category("24"), Description("24mm"), DisplayName("24mm")]
         public double _24 { get; set; }
     }
     #endregion
@@ -119,11 +127,11 @@ namespace LibSDK.AxisParamDebuger
         public double Reclaiming_Pos { get; set; }
 
         [Browsable(true), Category("切刀位"), Description("至切刀位"), DisplayName("切刀位")]
-        public double Cutter_Pos { get; set; }  
+        public double Cutter_Pos { get; set; }
 
         [Browsable(true), Category("热容位"), Description("至热容位"), DisplayName("热容位")]
-        public double Hot_Melt_Pos { get; set; } 
-        
+        public double Hot_Melt_Pos { get; set; }
+
         [Browsable(true), Category("包胶位"), Description("至包胶位"), DisplayName("包胶位")]
         public double Lagging_Pos { get; set; }
     }

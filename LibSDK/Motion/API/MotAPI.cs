@@ -15,7 +15,6 @@ namespace LibSDK.Motion
         private readonly BoardSwitchCs Card = new BoardSwitchCs();
 
         public int HomeRtn;
-
         public int HError;
         private bool homeStop;
 

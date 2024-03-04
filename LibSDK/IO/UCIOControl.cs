@@ -34,8 +34,8 @@ namespace LibSDK.IO
                 OutputControl outputControl = new OutputControl();
                 outputControl.BringToFront();
                 outputControl.output = flowModel.Value;
-                outputControl.Left = 10 + (i % 2) * 173;
-                outputControl.Top = 15 + (i / 2) * 56;
+                outputControl.Left = 10 + (i % 4) * 173;
+                outputControl.Top = 15 + (i / 4) * 56;
                 OutputControls.Add(outputControl);
                 kryptonSplitContainer2.Panel1.Controls.Add(outputControl);
                 outputControl.RefreshUI();
@@ -51,8 +51,8 @@ namespace LibSDK.IO
             {
                 InputControl inputControl = new InputControl();
                 kryptonSplitContainer2.Panel2.Controls.Add(inputControl);
-                inputControl.Left = 10 + (i % 2) * 173;
-                inputControl.Top = 15 + (i / 2) * 56;
+                inputControl.Left = 10 + (i % 4) * 173;
+                inputControl.Top = 15 + (i / 4) * 56;
                 inputControl.Input = flowModel.Value;
                 inputControls.Add(inputControl);
                 inputControl.RefreshUI();

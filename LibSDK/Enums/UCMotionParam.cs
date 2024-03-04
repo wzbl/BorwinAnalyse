@@ -82,7 +82,8 @@ namespace LibSDK.Enums
                 if (cardConfig.AxisNum > cardConfig.AxisCurrentNum)
                 {
                     CAxisParm cAxisParm = new CAxisParm();
-                    cAxisParm.AxisInfo.AxisNo = (short)(AxisParm.AParms.Count + 1);
+                    cAxisParm.AxisInfo.CardNo = cardID;
+                    cAxisParm.AxisInfo.AxisNo = (short)(BaseConfig.Instance.cardConfigs.Where(x => x.CardNo == cAxisParm.AxisInfo.CardNo).ToList()[0].AxisCurrentNum + 1);
                     cAxisParm.AxisInfo.AxisName = "Axis"+ cAxisParm.AxisInfo.AxisNo;
                     BaseConfig.Instance.cardConfigs.Where(x => x.CardNo == cAxisParm.AxisInfo.CardNo).ToList()[0].AxisCurrentNum++;
                     BaseConfig.Instance.Write();
@@ -108,7 +109,7 @@ namespace LibSDK.Enums
             string axisName = "";
             for (int i = 0; i < o.GridItems.Count; i++)
             {
-                if (o.GridItems[i].PropertyDescriptor.DisplayName == "AxisInfo")
+                if (o.GridItems[i].PropertyDescriptor.DisplayName == "基础参数")
                 {
                     for (int j = 0; j < o.GridItems[i].GridItems.Count; j++)
                     {
