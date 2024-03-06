@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -337,7 +338,17 @@ namespace BorwinSplicMachine.LCR
                             break;
                         case LCR.LCRFlow.Finish:
                             //测值完成
+                            if (LCRHelper.Side == WhichSide.Left)
+                            {
+                                Form1.MainControl.motControl.FlowLeft = MainFlow.测值完成;
+                            }
+                            else if (LCRHelper.Side == WhichSide.Right)
+                            {
+                                Form1.MainControl.motControl.FlowRight = MainFlow.测值完成;
+                            }
+                            LCRHelper.LCRFlow=LCR.LCRFlow.None;
                             break;
+
                     }
                 }
             });

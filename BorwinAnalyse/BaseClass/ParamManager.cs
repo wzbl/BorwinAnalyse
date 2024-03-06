@@ -28,7 +28,10 @@ namespace BorwinAnalyse.BaseClass
         }
 
         #region System
-        public ParamData paramData1 = new ParamData(ParamType.System, "系统", "2", "test", "1");
+        public ParamData System_条码 = new ParamData(ParamType.System, "条码", "0", "0不启用,1启用", "1");
+        public ParamData System_测值 = new ParamData(ParamType.System, "测值", "0", "0不启用,1启用", "1");
+        public ParamData System_找空料 = new ParamData(ParamType.System, "找空料", "0", "0不启用,1启用", "1");
+        public ParamData System_丝印 = new ParamData(ParamType.System, "丝印", "0", "0不启用,1启用", "1");
         #endregion
 
         #region LCR

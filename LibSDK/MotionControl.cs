@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
+using ComponentFactory.Krypton.Toolkit;
 using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
 using LibSDK.IO;
@@ -63,7 +64,7 @@ namespace LibSDK
             List<CIOType> outs = IOParmOut.IOParms.Where(x => x.CardNo == cardConfig.CardNo).ToList();
             foreach (var outIO in outs)
                 DeleteOutIO(outIO);
-         
+
             BaseConfig.Instance.cardConfigs.Remove(cardConfig);
             BaseConfig.Instance.Write();
             UpDateCard?.Invoke();
@@ -224,7 +225,7 @@ namespace LibSDK
             }
         }
 
-  
+
         /// <summary>
         /// 运动控制打印日志
         /// </summary>
@@ -234,6 +235,7 @@ namespace LibSDK
             LogManager.Instance.WriteLog(new LogModel(LogType.运动控制日志, message));
         }
 
+        #region 外部获取轴/IO
         /// <summary>
         /// 外部逻辑，获取轴控制权
         /// </summary>
@@ -242,12 +244,21 @@ namespace LibSDK
         public static MotAPI GetAxis(string AxisName)
         {
             MotAPI motAPI = null;
-            foreach (CAxisParm cAxisParm in AxisParm.AParms)
+            foreach (KeyValuePair<string, MotAPI> flowModel in Motions)
             {
-                if (cAxisParm.AxisInfo.AxisName == AxisName)
+                if (flowModel.Value.Name == AxisName)
                 {
-                    motAPI = new MotAPI(cAxisParm);
+                    motAPI = flowModel.Value;
+                    break;
                 }
+            }
+            if (motAPI == null)
+            {
+                Log("初始化轴"+ AxisName + "失败");
+            }
+            else
+            {
+                Log("初始化轴" + AxisName + "成功");
             }
             return motAPI;
         }
@@ -261,14 +272,16 @@ namespace LibSDK
         public static Input GetInPutIO(string Name)
         {
             Input input = null;
-            foreach (CIOType iOType in IOParmIn.IOParms)
+            foreach (KeyValuePair<string, Input> flowModel in InPort)
             {
-                if (iOType.IoName == Name)
+                if (flowModel.Value.IOParm.IoName == Name)
                 {
-                    input = new Input(iOType);
+                    input = flowModel.Value;
+                    break;
                 }
             }
-          return input;
+
+            return input;
         }
 
         /// <summary>
@@ -278,14 +291,19 @@ namespace LibSDK
         public static Output GetOutPutIO(string Name)
         {
             Output output = null;
-            foreach (CIOType iOType in IOParmOut.IOParms)
+            foreach (KeyValuePair<string, Output> flowModel in Output)
             {
-                if (iOType.IoName == Name)
+                if (flowModel.Value.IOParm.IoName == Name)
                 {
-                    output = new Output(iOType);
+                    output = flowModel.Value;
+                    break;
                 }
             }
             return output;
         }
+
+        #endregion
+
+
     }
 }
