@@ -172,7 +172,7 @@ namespace BorwinSplicMachine.LCR
             {
                 SendTypeCommand();
             }
-            SendPLCCommand();
+            ParamManager.Instance.System_测值.B = true;
         }
 
 
@@ -204,6 +204,7 @@ namespace BorwinSplicMachine.LCR
             Value = 0;
             Unit = Unit.Error;
             Grade = 0;
+            ParamManager.Instance.System_测值.B = false;
         }
 
         /// <summary>
@@ -285,8 +286,7 @@ namespace BorwinSplicMachine.LCR
                                "李小龙" + "," +                                          //操作员
                                "" + "," + "\r\n",                                        //备注
                                Encoding.UTF8);
-
-
+            Clear();
         }
         #endregion
 
@@ -334,14 +334,6 @@ namespace BorwinSplicMachine.LCR
             }
         }
 
-
-        /// <summary>
-        /// 测值信息发送给PLC
-        /// </summary>
-        private void SendPLCCommand()
-        {
-
-        }
 
         /// <summary>
         /// 给电表写指令类型，电压、电流

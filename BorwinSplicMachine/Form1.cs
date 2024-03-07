@@ -36,7 +36,6 @@ namespace BorwinSplicMachine
                 this.components= new System.ComponentModel.Container();
             }
             UpdataLanguage();
-            
         }
         public void UpdataLanguage()
         {
