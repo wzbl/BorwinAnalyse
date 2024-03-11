@@ -185,6 +185,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="UCALLAxis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCALLAxis.Designer.cs">
+      <DependentUpon>UCALLAxis.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCAxisControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCALLAxis.resx">
+      <DependentUpon>UCALLAxis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCAxisControl.resx">
       <DependentUpon>UCAxisControl.cs</DependentUpon>

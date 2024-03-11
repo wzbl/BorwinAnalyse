@@ -24,7 +24,10 @@ namespace LibSDK
         Color Color = Color.White;
         public MoveType moveType = MoveType.绝对运动模式;
         public double pos;
-
+        /// <summary>
+        /// 位置列表
+        /// </summary>
+        BaseAxisParam baseAxisParam;
 
         public AxisControl()
         {
@@ -33,21 +36,49 @@ namespace LibSDK
 
         public AxisControl(MotAPI MotAPI) : this()
         {
-            this.Dock = DockStyle.Top;
+            //this.Dock = DockStyle.Top;
             errorPanel.Dock = DockStyle.Fill;
             this.Load += AxisControl_Load;
             this.MotAPI = MotAPI;
             CAxisParm = MotionControl.AxisParm.GetAxisParm(MotAPI.CardNum, MotAPI.Axis);
             txtVel.Text = CAxisParm.AxisMotionPara.MotionSped.ToString();
+            txtAcc.Text = CAxisParm.AxisMotionPara.MotionAcc.ToString();
             comMotionType.SelectedIndex = 1;
+            txtPos.Text = "10";
             RefreshDebugUI();
             MotionControl.AddPos += RefreshDebugUI;
+            dgvAxis.CellContentClick += DgvAxis_CellContentClick;
         }
 
+        private void DgvAxis_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int row = e.RowIndex;
+            if (row < 0) return;
+            int column = e.ColumnIndex;
+            switch (column)
+            {
+                case 2:
+                    dgvAxis.Rows[row].Cells[1].Value = txtRel.Text;
+                    break;
+                case 3:
+                    if (baseAxisParam!=null&&double.TryParse(dgvAxis.Rows[row].Cells[1].Value.ToString(), out double pv))
+                    {
+                        baseAxisParam.posParams[row].Pos = pv;
+                        DebugerAxisParam.Instance.Save();
+                    } 
+                    break;
+                case 4:
+                    if (double.TryParse(dgvAxis.Rows[row].Cells[1].Value.ToString(), out double p))
+                        MotAPI.PMove(p, 1);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void RefreshDebugUI()
         {
-            kryptonSplitContainer1.Panel2.Controls.Clear();
+            dgvAxis.Rows.Clear();
             if (DebugerAxisParam.Instance.BaseAxisParams==null)
             {
                 return;
@@ -56,27 +87,17 @@ namespace LibSDK
 
             if (baseAxisParams.Count>0)
             {
-                BaseAxisParam baseAxisParam = baseAxisParams[0];
+                baseAxisParam = baseAxisParams[0];
                 for (int i = 0; i < baseAxisParam.posParams.Count; i++)
                 {
-                    KryptonButton kryptonButton = new KryptonButton();
-                    kryptonButton.Text = baseAxisParam.posParams[i].Name;
-                    kryptonSplitContainer1.Panel2.Controls.Add(kryptonButton);
-                    kryptonButton.Left = 10 + (i % 4) * 120;
-                    kryptonButton.Top = 15 + (i / 4) * 50;
-                    kryptonButton.Tag = baseAxisParam.posParams[i].Pos;
-                    kryptonButton.Click += KryptonButton_Click;
+                    dgvAxis.Rows.Add(
+                        baseAxisParam.posParams[i].Name.tr(),
+                        baseAxisParam.posParams[i].Pos
+                        );
                 }
             }
         }
 
-        private void KryptonButton_Click(object sender, EventArgs e)
-        {
-            if (double.TryParse(((KryptonButton)sender).Tag.ToString(), out double pos))
-            {
-                MotAPI.PMove(pos, 1);
-            }
-        }
 
         private void AxisControl_Load(object sender, EventArgs e)
         {
@@ -224,17 +245,32 @@ namespace LibSDK
             moveType = (MoveType)comMotionType.SelectedIndex;
         }
 
-        private void btnSetVel_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// 设置速度
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtVel_TextChanged(object sender, EventArgs e)
         {
-            if (float.TryParse(txtVel.Text,out float vel))
+            if (float.TryParse(txtVel.Text, out float vel))
             {
                 CAxisParm.AxisMotionPara.MotionSped = vel;
                 MotionControl.AxisParm.Write();
-                txtVel.BackColor = Color.White;
             }
-            else
+        }
+
+        /// <summary>
+        /// 设置加速度
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtAcc_TextChanged(object sender, EventArgs e)
+        {
+            if (float.TryParse(txtAcc.Text, out float acc))
             {
-                txtVel.BackColor = Color.Red;
+                CAxisParm.AxisMotionPara.MotionAcc = acc;
+                MotionControl.AxisParm.Write();
             }
         }
     }

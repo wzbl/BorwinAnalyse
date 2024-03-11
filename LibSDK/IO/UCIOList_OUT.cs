@@ -1,4 +1,5 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using BorwinAnalyse.BaseClass;
+using ComponentFactory.Krypton.Toolkit;
 using LibSDK.Dataview;
 using NPOI.SS.Formula.Functions;
 using NPOI.Util;
@@ -42,11 +43,11 @@ namespace LibSDK.IO
             {
                 if (outputs[row].State())
                 {
-                    outputs[row].On();
+                    outputs[row].Off();
                 }
                 else
                 {
-                    outputs[row].Off();
+                    outputs[row].On();
                 }
               
             }
@@ -67,7 +68,7 @@ namespace LibSDK.IO
                 OutIO outIO = new OutIO();
                 outIO.CardNo = output.IOParm.CardNo.ToString();
                 outIO.IONo = output.IOParm.IONum.ToString();
-                outIO.Name = output.IOParm.IoName;
+                outIO.Name = output.IOParm.IoName.tr();
                 OutIOs.Add(outIO);
             }
             dgvIO.DataSource = new BindingList<OutIO>(OutIOs);
@@ -84,7 +85,7 @@ namespace LibSDK.IO
                 }
                 else
                 {
-                    OutIOs[i].Status = Properties.Resources.G_45;
+                    OutIOs[i].Status = Properties.Resources.R_45;
                     OutIOs[i].Switch = Properties.Resources.switch4_a;
                 }
 

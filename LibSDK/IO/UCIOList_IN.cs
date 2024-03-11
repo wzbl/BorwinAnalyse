@@ -1,4 +1,5 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using BorwinAnalyse.BaseClass;
+using ComponentFactory.Krypton.Toolkit;
 using NPOI.Util.Collections;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace LibSDK.IO
                 INIO iNIO = new INIO();
                 iNIO.CardNo=input.IOParm.CardNo.ToString();
                 iNIO.IONo=input.IOParm.IONum.ToString();
-                iNIO.Name=input.IOParm.IoName;
+                iNIO.Name=input.IOParm.IoName.tr();
                 INIOs.Add(iNIO);
             }
             dgvIO.DataSource = new BindingList<INIO>(INIOs);
@@ -54,16 +55,17 @@ namespace LibSDK.IO
         {
             for (int i = 0; i < inputs.Count; i++)
             {
-                if (inputs[i].IsOn())
+                if (inputs[i].State())
                 {
                     INIOs[i].Status = Properties.Resources.G_45;
                 }
                 else
                 {
-                    INIOs[i].Status = Properties.Resources.G_45;
+                    INIOs[i].Status = Properties.Resources.R_45;
                 }
                 
             }
+            dgvIO.Refresh();
         }
     }
 

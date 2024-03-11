@@ -35,8 +35,9 @@ namespace BorwinSplicMachine
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-            Form1.MainControl.UCRichLog.Dock = DockStyle.Top;
-            kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
+            //Form1.MainControl.UCRichLog.Dock = DockStyle.Top;
+            //kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
+            kryptonSplitContainer2.Panel1.Controls.Add(new UCFlowLight());
             Form1.MainControl.UCCCD.Dock = DockStyle.Fill;
             kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCCCD);
             kryptonSplitContainer1.Panel1.Controls.Add(Form1.MainControl.UCFlowControl);

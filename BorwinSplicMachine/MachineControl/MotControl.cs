@@ -22,63 +22,63 @@ namespace BorwinSplicMachine
     public class MotControl
     {
         #region 轴
-        MotAPI 流道调宽 = null;
-        MotAPI 凸轮 = null;
-        MotAPI 左进入 = null;
-        MotAPI 右进入 = null;
-        MotAPI 吸头平移 = null;
-        MotAPI 吸头上下 = null;
-        MotAPI 热熔上下 = null;
-        MotAPI 拨刀 = null;
-        MotAPI 卷料 = null;
+        public static MotAPI 流道调宽 = null;
+        public static MotAPI 凸轮 = null;
+        public static MotAPI 左进入 = null;
+        public static MotAPI 右进入 = null;
+        public static MotAPI 吸头平移 = null;
+        public static MotAPI 吸头上下 = null;
+        public static MotAPI 热熔上下 = null;
+        public static MotAPI 拨刀 = null;
+        public static MotAPI 卷料 = null;
 
-        MotAPI 探针A = null;
-        MotAPI 测值整体上下 = null;
-        MotAPI 探针B = null;
-        MotAPI 下针 = null;
+        public static MotAPI 探针A = null;
+        public static MotAPI 测值整体上下 = null;
+        public static MotAPI 探针B = null;
+        public static MotAPI 下针 = null;
         #endregion
 
         #region 输入IO
-        Input 探针A原点 = null;
-        Input 测值整体上下原点 = null;
-        Input 探针B原点 = null;
-        Input 下针原点 = null;
-        Input 屏蔽按钮 = null;
-        Input 安全门开关 = null;
-        Input 真空表 = null;
-        Input 左收料按钮 = null;
-        Input 右收料按钮 = null;
-        Input 左料盘感应 = null;
-        Input 右料盘感应 = null;
-        Input 左轮光栅 = null;
-        Input 右轮光栅 = null;
-        Input 左物料光栅 = null;
-        Input 右物料光栅 = null;
-        Input 左入料光栅 = null;
-        Input 右入料光栅 = null;
-        Input 卷料原点 = null;
-        Input 切料光纤感应 = null;
-        Input 切料电机接近感应 = null;
-        Input 贴膜定位针上位 = null;
-        Input 贴膜定位针下位 = null;
-        Input 料尾感应光电 = null;
-        Input 胶膜1到位 = null;
+        public static Input 探针A原点 = null;
+        public static Input 测值整体上下原点 = null;
+        public static Input 探针B原点 = null;
+        public static Input 下针原点 = null;
+        public static Input 屏蔽按钮 = null;
+        public static Input 安全门开关 = null;
+        public static Input 真空表 = null;
+        public static Input 左收料按钮 = null;
+        public static Input 右收料按钮 = null;
+        public static Input 左料盘感应 = null;
+        public static Input 右料盘感应 = null;
+        public static Input 左轮光栅 = null;
+        public static Input 右轮光栅 = null;
+        public static Input 左物料光栅 = null;
+        public static Input 右物料光栅 = null;
+        public static Input 左入料光栅 = null;
+        public static Input 右入料光栅 = null;
+        public static Input 卷料原点 = null;
+        public static Input 切料光纤感应 = null;
+        public static Input 切料电机接近感应 = null;
+        public static Input 贴膜定位针上位 = null;
+        public static Input 贴膜定位针下位 = null;
+        public static Input 料尾感应光电 = null;
+        public static Input 胶膜1到位 = null;
         #endregion
 
         #region 输出IO
-        Output 真空电磁阀1 = null;
-        Output 真空电磁阀2 = null;
-        Output 真空泵 = null;
-        Output 贴膜定位针上下 = null;
-        Output 蜂鸣器 = null;
-        Output 卷料压膜电池铁 = null;
-        Output 测值支撑电磁铁 = null;
-        Output 测值压料带电磁铁 = null;
-        Output 测值垫高电磁铁 = null;
-        Output 测值下针电磁铁 = null;
-        Output 探针旋转 = null;
-        Output 左收料 = null;
-        Output 右收料 = null;
+        public static Output 真空电磁阀1 = null;
+        public static Output 真空电磁阀2 = null;
+        public static Output 真空泵 = null;
+        public static Output 贴膜定位针上下 = null;
+        public static Output 蜂鸣器 = null;
+        public static Output 卷料压膜电池铁 = null;
+        public static Output 测值支撑电磁铁 = null;
+        public static Output 测值压料带电磁铁 = null;
+        public static Output 测值垫高电磁铁 = null;
+        public static Output 测值下针电磁铁 = null;
+        public static Output 探针旋转 = null;
+        public static Output 左收料 = null;
+        public static Output 右收料 = null;
         #endregion
 
         private Task[] tasks = new Task[5];
@@ -102,6 +102,13 @@ namespace BorwinSplicMachine
         /// 复位流程
         /// </summary>
         public ResetFlow resetFlow = ResetFlow.None;
+
+        /// <summary>
+        /// 流程灯
+        /// </summary>
+        public static FlowLight flowLight = new FlowLight();
+
+        public static RunnersWidth runnersWidth = RunnersWidth._8mm;
 
         public MotControl()
         {
@@ -159,6 +166,7 @@ namespace BorwinSplicMachine
             探针旋转 = MotionControl.GetOutPutIO("探针旋转");
             左收料 = MotionControl.GetOutPutIO("左收料");
             右收料 = MotionControl.GetOutPutIO("右收料");
+            //Run();
         }
 
         public void Run()
@@ -173,18 +181,25 @@ namespace BorwinSplicMachine
                         switch (FlowLeft)
                         {
                             case MainFlow.None:
-                                if (!ParamManager.Instance.System_条码.B && 左入料光栅.IsOn())
+                                flowLight.左进入.status = 0;
+                                if (!ParamManager.Instance.System_条码.B && 左入料光栅.State())
                                 {
                                     FlowLeft = MainFlow.进料;
+                                    flowLight.左进入.status = 1;
                                 }
                                 break;
                             case MainFlow.进料:
                                 //左轮开始转动
                                 左进入.PMove(1, 0);
-                                if (左物料光栅.IsOn())
+                                if (左物料光栅.State()&& 左入料光栅.State())
                                 {
+                                    flowLight.左进入.status = 2;
                                     FlowLeft = MainFlow.感应料带到光源位置;
                                     //左轮停止转动
+                                }
+                                else if (!左入料光栅.State())
+                                {
+                                    FlowLeft = MainFlow.None;
                                 }
                                 break;
                             case MainFlow.感应料带到光源位置:
@@ -192,13 +207,16 @@ namespace BorwinSplicMachine
                                 if (ParamManager.Instance.System_找空料.B)
                                 {
                                     FlowLeft = MainFlow.找空料;
+                                    flowLight.左找空料.status = 1;
                                 }
                                 else if (ParamManager.Instance.System_测值.B)
                                 {
                                     FlowLeft = MainFlow.请求测值;
+                                    flowLight.左测值.status = 1;
                                 }
                                 else if (ParamManager.Instance.System_丝印.B)
                                 {
+                                    flowLight.左丝印.status = 1;
                                     FlowLeft = MainFlow.丝印;
                                 }
                                 else
@@ -209,11 +227,9 @@ namespace BorwinSplicMachine
                             case MainFlow.找空料:
 
                                 break;
-
                             case MainFlow.找空料完成:
-
+                                flowLight.左找空料.status = 2;
                                 break;
-
                             case MainFlow.请求测值:
                                 if (Form1.MainControl.UCLCR.LCRHelper.LCRFlow == LCR.LCRFlow.None && Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.None)
                                 {
@@ -226,6 +242,7 @@ namespace BorwinSplicMachine
 
                                 break;
                             case MainFlow.测值完成:
+                                flowLight.左测值.status = 2;
                                 if (!ParamManager.Instance.System_找空料.B)
                                 {
                                     FlowLeft = MainFlow.丝印;
@@ -242,6 +259,7 @@ namespace BorwinSplicMachine
                             case MainFlow.丝印:
                                 break;
                             case MainFlow.丝印完成:
+                                flowLight.左丝印.status = 2;
                                 break;
                             case MainFlow.完成:
                                 if (filmFlow == FilmFlow.完成)
@@ -252,7 +270,6 @@ namespace BorwinSplicMachine
                             default:
                                 break;
                         }
-
                         Thread.Sleep(20);
                     }
                 }));
@@ -269,20 +286,57 @@ namespace BorwinSplicMachine
                         switch (FlowRight)
                         {
                             case MainFlow.None:
-
+                                flowLight.右进入.status = 0;
+                                if (!ParamManager.Instance.System_条码.B && 右入料光栅.State())
+                                {
+                                    //流道调宽.GetPosByName("8mm流道");
+                                    //流道调宽.PMove(流道调宽.GetPosByName("8mm流道"),0);
+                                    FlowRight = MainFlow.进料;
+                                    flowLight.右进入.status = 1;
+                                }
                                 break;
                             case MainFlow.进料:
-
+                                //右轮开始转动
+                                右进入.PMove(1, 0);
+                                if (右物料光栅.State() && 右入料光栅.State())
+                                {
+                                    flowLight.右进入.status = 2;
+                                    FlowRight = MainFlow.感应料带到光源位置;
+                                    //右轮停止转动
+                                }
+                                else if (!右入料光栅.State())
+                                {
+                                    FlowRight = MainFlow.None;
+                                }
                                 break;
                             case MainFlow.感应料带到光源位置:
-
+                                FlowRight = MainFlow.找空料;
+                                if (ParamManager.Instance.System_找空料.B)
+                                {
+                                    FlowRight = MainFlow.找空料;
+                                    flowLight.右找空料.status = 1;
+                                }
+                                else if (ParamManager.Instance.System_测值.B)
+                                {
+                                    FlowRight = MainFlow.请求测值;
+                                    flowLight.右测值.status = 1;
+                                }
+                                else if (ParamManager.Instance.System_丝印.B)
+                                {
+                                    flowLight.右丝印.status = 1;
+                                    FlowRight = MainFlow.丝印;
+                                }
+                                else
+                                {
+                                    FlowRight = MainFlow.完成;
+                                }
                                 break;
                             case MainFlow.找空料:
 
                                 break;
                             case MainFlow.找空料完成:
+                                flowLight.右找空料.status = 2;
                                 break;
-
                             case MainFlow.请求测值:
                                 if (Form1.MainControl.UCLCR.LCRHelper.LCRFlow == LCR.LCRFlow.None && Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.None)
                                 {
@@ -291,7 +345,19 @@ namespace BorwinSplicMachine
                                     FlowRight = MainFlow.测值中;
                                 }
                                 break;
+                            case MainFlow.测值中:
+
+                                break;
                             case MainFlow.测值完成:
+                                flowLight.右测值.status = 2;
+                                if (!ParamManager.Instance.System_找空料.B)
+                                {
+                                    FlowRight = MainFlow.丝印;
+                                }
+                                if (!ParamManager.Instance.System_丝印.B)
+                                {
+                                    FlowRight = MainFlow.完成;
+                                }
                                 break;
                             case MainFlow.切空料:
                                 break;
@@ -300,8 +366,13 @@ namespace BorwinSplicMachine
                             case MainFlow.丝印:
                                 break;
                             case MainFlow.丝印完成:
+                                flowLight.右丝印.status = 2;
                                 break;
                             case MainFlow.完成:
+                                if (filmFlow == FilmFlow.完成)
+                                {
+                                    FlowRight = MainFlow.None;
+                                }
                                 break;
                             default:
                                 break;
@@ -324,17 +395,24 @@ namespace BorwinSplicMachine
                             case FilmFlow.None:
                                 if (FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
                                 {
-
+                                    //1.左右去接料位
+                                    //2.吸膜平移到吸膜位
+                                    //3.拨刀拨料位
                                 }
                                 break;
                             case FilmFlow.到位:
-
+                                //如果平移到吸膜位
+                                //吸头上下轴下降到吸膜位
                                 break;
                             case FilmFlow.卷料送一个膜:
+                                //卷料轴走一点距离
                                 break;
                             case FilmFlow.吸头上下吸膜:
+                                
+                                //开真空
                                 break;
                             case FilmFlow.判断真空表:
+                                //
                                 break;
                             case FilmFlow.吸头上下到待机位:
                                 break;
@@ -346,6 +424,7 @@ namespace BorwinSplicMachine
                                 break;
                             case FilmFlow.完成:
                                 Form1.MainControl.UCLCR.LCRHelper.SaveData();
+                                flowLight.Reset();
                                 break;
                             default:
                                 break;
@@ -373,7 +452,7 @@ namespace BorwinSplicMachine
                                 resetFlow = ResetFlow.吸嘴_测值上下回零完成;
                                 break;
                             case ResetFlow.吸嘴_测值上下回零完成:
-                                if (吸头上下.HomeState&& 测值整体上下.HomeState)
+                                if (吸头上下.HomeState && 测值整体上下.HomeState)
                                 {
                                     resetFlow = ResetFlow.探针回零;
                                 }
@@ -385,7 +464,7 @@ namespace BorwinSplicMachine
                                 resetFlow = ResetFlow.探针回零完成;
                                 break;
                             case ResetFlow.探针回零完成:
-                                if (探针A.HomeState && 探针B.HomeState&& 热熔上下.HomeState)
+                                if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState)
                                 {
                                     resetFlow = ResetFlow.初始化;
                                 }
@@ -394,6 +473,7 @@ namespace BorwinSplicMachine
                                 FlowLeft = MainFlow.None;
                                 FlowRight = MainFlow.None;
                                 Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCR.LCRFlow.None;
+                                flowLight.Reset();
                                 凸轮.Home(3000);
                                 流道调宽.Home(3000);
                                 吸头平移.Home(3000);
@@ -413,6 +493,68 @@ namespace BorwinSplicMachine
 
         }
 
+    }
+
+    /// <summary>
+    /// 流道宽
+    /// </summary>
+    public enum RunnersWidth
+    {
+        _8mm,
+        _12mm,
+        _16mm,
+        _24mm
+    }
+
+    public class FlowLight
+    {
+        public Light 左进入=new Light(1);
+        public Light 左找空料 = new Light(1);
+        public Light 左测值 = new Light(1);
+        public Light 左丝印 = new Light(1);
+        public Light 右进入 = new Light(1);
+        public Light 右找空料 = new Light(1);
+        public Light 右测值 = new Light(1);
+        public Light 右丝印 = new Light(1);
+        public Light 开始贴膜 = new Light(1);
+        public Light 吸膜 = new Light(1);
+        public Light 贴膜 = new Light(1);
+        public Light 接料完成 = new Light(1);
+        /// <summary>
+        /// 信号复位
+        /// </summary>
+        public void Reset()
+        {
+            左进入.status = 1;
+            左找空料.status = 1;
+            左测值.status = 1;
+            左丝印.status = 1;
+            右进入.status = 1;
+            右找空料.status = 1;
+            右测值.status = 1;
+            右丝印.status = 1;
+            开始贴膜.status = 1;
+            吸膜.status = 1;
+            贴膜.status = 1;
+            接料完成.status = 1;
+        }
+
+    }
+
+    public struct Light
+    {
+        
+        public Light(int status)
+        {
+            this.status = status;
+        }
+        /// <summary>
+        /// 0:未执行:灰色
+        /// 1:执行中:黄色
+        /// 2:成功  :绿色
+        /// 3:失败  :红色
+        /// </summary>
+        public int status;
     }
 
     /// <summary>
@@ -475,6 +617,6 @@ namespace BorwinSplicMachine
         /// 初始化软件
         /// </summary>
         初始化,
-        初始化完成 
+        初始化完成
     }
 }

@@ -1,4 +1,5 @@
-﻿using LibSDK.Enums;
+﻿using LibSDK.AxisParamDebuger;
+using LibSDK.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,25 @@ namespace LibSDK.Motion
     {
         private readonly BoardSwitchCs Card = new BoardSwitchCs();
 
+        public List<PosParam> posParams=new List<PosParam>();
+
         public int HomeRtn;
         public int HError;
         private bool homeStop;
 
         private static string CategoryName = "";
         public AxisError axisError = new AxisError();
+
+        public double GetPosByName(string name)
+        {
+            double pos = 0;
+            List<PosParam> ps = posParams.Where(x=>x.Name==name).ToList();
+            if (ps.Count>0)
+            {
+                pos = ps[0].Pos;
+            }
+            return pos;
+        }
 
         /// <summary>
         /// 回零停止
@@ -98,6 +112,7 @@ namespace LibSDK.Motion
             double Vel = this.PosToVel(AxisParm.AxisMotionPara.MotionSped, CardNum, Axis);//速度换算
             return Card.API.JogMove(CardNum, Axis, directon, Vel);
         }
+
         /// <summary>
         /// 点位运动
         /// </summary>

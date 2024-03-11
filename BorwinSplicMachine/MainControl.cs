@@ -57,6 +57,8 @@ namespace BorwinSplicMachine
 
         public MotControl motControl { get; set; }
 
+        public UCALLAxis UCAxis { get; set; }
+
         Form1 MainForm;
         public MainControl(Form1 MainForm)
         {
@@ -76,6 +78,7 @@ namespace BorwinSplicMachine
             UCLCRSearch = new UCLCRSearch();
             UCMes = new UCMes();
             motControl = new MotControl();
+            UCAxis = new UCALLAxis();
             this.MainForm = MainForm;
         }
 

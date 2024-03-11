@@ -1,4 +1,5 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using BorwinAnalyse.DataBase.Model;
+using ComponentFactory.Krypton.Toolkit;
 using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
 using LibSDK.IO;
@@ -23,53 +24,35 @@ namespace LibSDK
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-            this.Load += UCAxisControl_Load;
-            MotionControl.UpDateAxis += UpDateAxis;
-            UpDateAxis();
             propertyGrid1.SelectedObject = DebugerAxisParam.Instance;
-        }
-
-
-        private void UpDateAxis()
-        {
-            timer1.Stop();
-            Thread.Sleep(100);
-            axisControls.Clear();
-            kryptonSplitContainer1.Panel1.Controls.Clear();
-            foreach (KeyValuePair<string, MotAPI> flowModel in MotionControl.Motions)
-            {
-                AxisControl axisControl = new AxisControl(flowModel.Value);
-                kryptonSplitContainer1.Panel1.Controls.Add(axisControl);
-                axisControls.Add(axisControl);
-            }
-            timer1.Start();
-        }
-
-        private List<AxisControl> axisControls = new List<AxisControl>();
-        public static   MoveType moveType = MoveType.绝对运动模式;
-        public static double pos;
-        private void UCAxisControl_Load(object sender, EventArgs e)
-        {
-            timer1.Start();
-        }
-   
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            for (int i = 0; i < axisControls.Count; i++)
-            {
-                axisControls[i].RefreshUI();
-            }
+            kryptonPanel1.Controls.Add(new UCALLAxis());
+            kryptonPanel2.Visible = false;
+            btnShowParam.Text = "<";
         }
 
         private void propertyGrid1_Resize(object sender, EventArgs e)
         {
-            btnSave.Location = new Point(propertyGrid1.Location.X + propertyGrid1.Width - btnSave.Width - 4, propertyGrid1.Height - btnSave.Height-4);
+            btnSave.Location = new Point(propertyGrid1.Location.X + propertyGrid1.Width - btnSave.Width - 4, propertyGrid1.Height - btnSave.Height - 4);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             DebugerAxisParam.Instance.Save();
             MotionControl.AddPos?.Invoke();
+        }
+
+        private void btnShowParam_Click(object sender, EventArgs e)
+        {
+            if (kryptonPanel2.Visible)
+            {
+                kryptonPanel2.Visible = false;
+                btnShowParam.Text = "<";
+            }
+            else
+            {
+                kryptonPanel2.Visible = true;
+                btnShowParam.Text = ">";
+            }
         }
     }
 }

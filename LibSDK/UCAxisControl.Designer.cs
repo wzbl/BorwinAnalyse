@@ -28,80 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
-            this.kryptonSplitContainer1.Panel2.SuspendLayout();
-            this.kryptonSplitContainer1.SuspendLayout();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnShowParam = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            this.kryptonPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
+            this.kryptonPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // kryptonSplitContainer1
-            // 
-            this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
-            // 
-            // kryptonSplitContainer1.Panel1
-            // 
-            this.kryptonSplitContainer1.Panel1.AutoScroll = true;
-            // 
-            // kryptonSplitContainer1.Panel2
-            // 
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.btnSave);
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.propertyGrid1);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1076, 621);
-            this.kryptonSplitContainer1.SplitterDistance = 835;
-            this.kryptonSplitContainer1.TabIndex = 0;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(236, 621);
-            this.propertyGrid1.TabIndex = 35;
-            this.propertyGrid1.Resize += new System.EventHandler(this.propertyGrid1_Resize);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(162, 579);
+            this.btnSave.Location = new System.Drawing.Point(218, 567);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(71, 39);
             this.btnSave.TabIndex = 36;
             this.btnSave.Values.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.kryptonPanel3);
+            this.kryptonPanel1.Controls.Add(this.kryptonPanel2);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.Size = new System.Drawing.Size(1076, 621);
+            this.kryptonPanel1.TabIndex = 37;
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.Controls.Add(this.btnSave);
+            this.kryptonPanel2.Controls.Add(this.propertyGrid1);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonPanel2.Location = new System.Drawing.Point(774, 0);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.Size = new System.Drawing.Size(302, 621);
+            this.kryptonPanel2.TabIndex = 37;
+            // 
+            // btnShowParam
+            // 
+            this.btnShowParam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnShowParam.Location = new System.Drawing.Point(0, 0);
+            this.btnShowParam.Name = "btnShowParam";
+            this.btnShowParam.Size = new System.Drawing.Size(30, 621);
+            this.btnShowParam.TabIndex = 0;
+            this.btnShowParam.Values.Text = "<";
+            this.btnShowParam.Click += new System.EventHandler(this.btnShowParam_Click);
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(302, 621);
+            this.propertyGrid1.TabIndex = 1;
+            this.propertyGrid1.Resize += new System.EventHandler(this.propertyGrid1_Resize);
+            // 
+            // kryptonPanel3
+            // 
+            this.kryptonPanel3.Controls.Add(this.btnShowParam);
+            this.kryptonPanel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.kryptonPanel3.Location = new System.Drawing.Point(744, 0);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.Size = new System.Drawing.Size(30, 621);
+            this.kryptonPanel3.TabIndex = 38;
+            // 
             // UCAxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.kryptonSplitContainer1);
+            this.Controls.Add(this.kryptonPanel1);
             this.Name = "UCAxisControl";
             this.Size = new System.Drawing.Size(1076, 621);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
-            this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
-            this.kryptonSplitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            this.kryptonPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
+            this.kryptonPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSave;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnShowParam;
+        private System.Windows.Forms.PropertyGrid propertyGrid1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
     }
 }

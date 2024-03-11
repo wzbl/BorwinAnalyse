@@ -49,7 +49,7 @@ namespace LibSDK.Motion
                     return false;
                 }
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 8; i++)
             {
               rtn = CNMCLib20.NMC_MtOpen(devhandle[cardNum], (short)i, ref axishandle[cardNum, i]);
               rtn = CNMCLib20.NMC_MtSetAxisArrivalPara(axishandle[cardNum, i], 10, 5);

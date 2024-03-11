@@ -67,25 +67,31 @@ namespace LibSDK.AxisParamDebuger
     [TypeConverter(typeof(NullConverter))]
     public class BaseAxisParam
     {
-        [Category("基础信息"), Description("控制卡ID"), DisplayName("CardNo")]
+        [Category("基础信息"), Description("控制卡ID"), DisplayName("控制卡ID")]
         public short CardNo { get; set; } = 0;
 
         /// <summary>
         /// 轴编号（从1开始）
         /// </summary>
-        [Category("基础信息"), Description("轴编号(从1开始)"), DisplayName("AxisNo")]
+        [Category("基础信息"), Description("轴编号(从1开始)"), DisplayName("轴编号")]
         public short AxisNo { get; set; } = 1;
 
-        [Category("位置信息"), DisplayName("Positions")]
+        /// <summary>
+        /// 轴编号（从1开始）
+        /// </summary>
+        [Category("基础信息"), Description("轴名称"), DisplayName("轴名称")]
+        public string AxisName { get; set; }
+
+        [Category("位置信息"), DisplayName("位置列表")]
         public List<PosParam> posParams { get; set; } = new List<PosParam>();
     }
 
     [TypeConverter(typeof(NullConverter))]
     public class PosParam
     {
-        [Category("位置信息"), DisplayName("Name")]
+        [Category("位置信息"), DisplayName("名称")]
         public string Name { get; set; }
-        [Category("位置信息"), DisplayName("Position")]
+        [Category("位置信息"), DisplayName("位置")]
         public double Pos { get; set; } = 0;
     }
 

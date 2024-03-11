@@ -25,15 +25,31 @@ namespace BorwinSplicMachine
         public Form1()
         {
             InitializeComponent();
-            MainControl=new MainControl(this);
+            MainControl = new MainControl(this);
             MainControl.Init();
         }
-     
+
+        #region 快捷键
+        protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    FormIO FormIO = new FormIO();
+                    FormIO.Show();
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (this.components==null)
+            if (this.components == null)
             {
-                this.components= new System.ComponentModel.Container();
+                this.components = new System.ComponentModel.Container();
             }
             UpdataLanguage();
         }
@@ -41,7 +57,7 @@ namespace BorwinSplicMachine
         {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-     
+
         private void ShowUCBom_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();
@@ -97,7 +113,7 @@ namespace BorwinSplicMachine
         /// <param name="e"></param>
         private void kryptonRibbonGroupButton12_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void kryptonRibbonGroupButton10_Click(object sender, EventArgs e)
@@ -123,7 +139,8 @@ namespace BorwinSplicMachine
         /// <param name="e"></param>
         private void kryptonRibbonGroupButton11_Click(object sender, EventArgs e)
         {
-            
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCAxis);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

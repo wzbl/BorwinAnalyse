@@ -151,11 +151,23 @@
     <Compile Include="FlowModel\UCFlowControl.Designer.cs">
       <DependentUpon>UCFlowControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlowModel\UCFlowLight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowModel\UCFlowLight.Designer.cs">
+      <DependentUpon>UCFlowLight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormIO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIO.Designer.cs">
+      <DependentUpon>FormIO.cs</DependentUpon>
     </Compile>
     <Compile Include="LCR\BoundGridView.cs" />
     <Compile Include="LCR\LCRHelper.cs" />
@@ -245,11 +257,17 @@
     <EmbeddedResource Include="FlowModel\UCFlowControl.resx">
       <DependentUpon>UCFlowControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FlowModel\UCFlowLight.resx">
+      <DependentUpon>UCFlowLight.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.ar-EG.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormIO.resx">
+      <DependentUpon>FormIO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LCR\UCLCR.resx">
       <DependentUpon>UCLCR.cs</DependentUpon>

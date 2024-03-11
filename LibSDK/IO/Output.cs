@@ -19,17 +19,21 @@ namespace LibSDK.IO
         }
         public void On()
         {
-         IO.IoWrite(IOParm.IoName,0);
+            IO.IoWrite(IOParm.IoName, 0);
+
         }
         public void Off()
         {
-         IO.IoWrite(IOParm.IoName, 1);
+            IO.IoWrite(IOParm.IoName, 1);
         }
         public bool State()
         {
           return IO.IoRadOut(IOParm);
         }
-        public void Refresh() { }
+        public void Refresh() 
+        {
+        
+        }
         
     }
 }
