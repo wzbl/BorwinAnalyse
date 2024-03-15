@@ -81,7 +81,7 @@
             this.btnPositive.Name = "btnPositive";
             this.btnPositive.Size = new System.Drawing.Size(45, 45);
             this.btnPositive.TabIndex = 2;
-            this.btnPositive.Tag = "0";
+            this.btnPositive.Tag = "1";
             this.btnPositive.Values.Text = "+";
             this.btnPositive.Click += new System.EventHandler(this.btnPositive_Click);
             this.btnPositive.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPositive_MouseDown);
@@ -93,7 +93,7 @@
             this.btnNagetive.Name = "btnNagetive";
             this.btnNagetive.Size = new System.Drawing.Size(45, 45);
             this.btnNagetive.TabIndex = 3;
-            this.btnNagetive.Tag = "1";
+            this.btnNagetive.Tag = "0";
             this.btnNagetive.Values.Text = "-";
             this.btnNagetive.Click += new System.EventHandler(this.btnNagetive_Click);
             this.btnNagetive.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPositive_MouseDown);

@@ -48,6 +48,9 @@ namespace LibSDK
             RefreshDebugUI();
             MotionControl.AddPos += RefreshDebugUI;
             dgvAxis.CellContentClick += DgvAxis_CellContentClick;
+            MotAPI.SetLimit(false);
+            MotAPI.SetServoff();
+            btnOpenSero.Enabled = false;
         }
 
         private void DgvAxis_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -90,6 +93,7 @@ namespace LibSDK
                 baseAxisParam = baseAxisParams[0];
                 for (int i = 0; i < baseAxisParam.posParams.Count; i++)
                 {
+                    MotAPI.posParams.Add(baseAxisParam.posParams[i]);
                     dgvAxis.Rows.Add(
                         baseAxisParam.posParams[i].Name.tr(),
                         baseAxisParam.posParams[i].Pos
@@ -185,7 +189,7 @@ namespace LibSDK
         {
             txtRel.Text = MotAPI.GetEncPos().ToString();
 
-            btnOpenSero.BackColor = MotAPI.GetSevOn() ? Color.Green : Color;
+            btnOpenSero.BackColor = MotAPI.GetSevOn() ? Color : Color.Green;
             if (MotAPI.axisError.IsError)
             {
                 errorPanel.Visible = true;
@@ -244,7 +248,6 @@ namespace LibSDK
         {
             moveType = (MoveType)comMotionType.SelectedIndex;
         }
-
 
         /// <summary>
         /// 设置速度

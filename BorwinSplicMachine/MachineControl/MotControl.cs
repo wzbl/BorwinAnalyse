@@ -166,7 +166,7 @@ namespace BorwinSplicMachine
             探针旋转 = MotionControl.GetOutPutIO("探针旋转");
             左收料 = MotionControl.GetOutPutIO("左收料");
             右收料 = MotionControl.GetOutPutIO("右收料");
-            //Run();
+            Run();
         }
 
         public void Run()
@@ -297,7 +297,7 @@ namespace BorwinSplicMachine
                                 break;
                             case MainFlow.进料:
                                 //右轮开始转动
-                                右进入.PMove(1, 0);
+                                右进入.PMove(-10, 0,true);
                                 if (右物料光栅.State() && 右入料光栅.State())
                                 {
                                     flowLight.右进入.status = 2;
@@ -377,7 +377,7 @@ namespace BorwinSplicMachine
                             default:
                                 break;
                         }
-                        Thread.Sleep(20);
+                        Thread.Sleep(0);
                     }
                 }));
                 tasks[1].Start();
