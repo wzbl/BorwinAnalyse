@@ -41,8 +41,8 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         /// <param name="objects"></param>
         public void BindData() 
-        { 
-           //名称绑定值
+        {
+            //名称绑定值
             for (int i = 0; i < keyValuePairs.Count; i++)
             {
                 btFormat.SetNamedSubStringValue(keyValuePairs[i].Keys.ToString(), keyValuePairs[i].Values.ToString());
@@ -57,10 +57,10 @@ namespace BorwinAnalyse.BaseClass
             //打印机名称
             btFormat.PrintSetup.Printer = Name;
             //第二个false设置打印时是否跳出打印属性
-            btFormat.PrintOut(false, false); 
-            btFormat.Print(Path,true,1000,out BarTender.Messages Messages);
+            btFormat.PrintOut(false, false);
+            btFormat.Print(Path, true, 1000, out BarTender.Messages Messages);
             //退出时是否保存标签
-            btFormat.Close(BarTender.BtSaveOptions.btSaveChanges); 
+            btFormat.Close(BarTender.BtSaveOptions.btSaveChanges);
         }
     }
 }

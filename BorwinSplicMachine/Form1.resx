@@ -117,11 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="stop.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAAdhJREFUOE+NUUsrRGEY/lxyzYrJSC4L10kuo5lkMUqJhZWtyy+wMEVTFrMhs7Bi
+        YSFloU6ajNwyG4lcwmA2kgUlJClEiuE4j/c9zuEwY3jq6fu+93me9zvv+cS+x4PRlBTcO+qBAQ8Unw/K
+        2Bjk/n68uFwIOZ0IdXfj1e2GPDQERZKgjI8DrW24qbZBjFD4qaERck8PQl1O3DY14aq2FhdWaxgv7XZc
+        19Xhsb2dmvfipaMD4s5eg+eWFlU4yM3FRnKyytPKyjCelJV96VVVuGtuhnh2OHBmrcZ+Tg6Wk5Kgg/fH
+        5eWfPCotjaiL84oKHFFnv0HUwbVDiyWqLthwQJxJTNTKGt7e1IXrrEcCayJYXAyd3oQETfobk+TljAgU
+        FiJQVIQ9mjFIM/lSUzXL75Do03dLStSc2CwowBYddmjOXfrTQZsN3rQ0zRoOiZ49QBdt01hb3GA1Px9G
+        ruTlYTg+XrOHgzWjXyzR2+tczM7GYJSwIsvqyh49I/wUYs6azeiLi1MN/wF7OScWsrIwT3THxmrSd3A9
+        mib8FJ7OzISLDq8PD5r0Aa6xpus/wTWxZqYGJhMm0tPhNJh476W6kZF0sZ6RgWW6YYpWiZp0xsSo5H0k
+        GvU5kwnvbii/cVDeGr4AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="reset.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAAMNJREFUOE9j+E8hoNyAW//u/j/69+T/Z/+eQ4VIAwxSvzT/w7D6L7P/nr9C/3f+
+        nfj//r+HUCX4AYoByFj1p9H/6r8t/6/9uwFVigBpvwugLDwGwLD+L+v/q/9uhCoHav5T8D/4dzyUBzRg
+        9d8N4DBY+nf1/5a/3f/jf2dhNajnz2SwZhAbxQAojQIu/rvyv+x3PYoBDr+84WyCBsAAyCDH3z4omkky
+        AASifqeiaCbJAJifyTIAl2YQJskLhMCQN+D/fwAeJ4YSgmePbAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <assembly alias="ComponentFactory.Krypton.Ribbon" name="ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e" />
   <data name="kryptonRibbon1.QATLocation" type="ComponentFactory.Krypton.Ribbon.QATLocation, ComponentFactory.Krypton.Ribbon">
     <value>Below</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="kryptonRibbon1.RibbonAppButton.AppButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -378,6 +401,18 @@
   </data>
   <data name="&gt;&gt;kryptonRibbonGroupButton4.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;stop.Name" xml:space="preserve">
+    <value>stop</value>
+  </data>
+  <data name="&gt;&gt;stop.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;reset.Name" xml:space="preserve">
+    <value>reset</value>
+  </data>
+  <data name="&gt;&gt;reset.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>

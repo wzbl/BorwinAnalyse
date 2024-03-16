@@ -62,7 +62,7 @@ namespace BorwinSplicMachine
         Form1 MainForm;
         public MainControl(Form1 MainForm)
         {
-            VisionModel.HIKVision.Instance.initCam();
+            //VisionModel.HIKVision.Instance.initCam();
             UCBOM = new UCBOM();
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
@@ -77,8 +77,8 @@ namespace BorwinSplicMachine
             UCFlowControl = new UCFlowControl();
             UCLCRSearch = new UCLCRSearch();
             UCMes = new UCMes();
-            motControl = new MotControl();
             UCAxis = new UCALLAxis();
+            motControl = new MotControl();
             this.MainForm = MainForm;
         }
 

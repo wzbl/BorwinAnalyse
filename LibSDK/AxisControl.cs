@@ -20,7 +20,7 @@ namespace LibSDK
     public partial class AxisControl : UserControl
     {
         MotAPI MotAPI = null;
-        CAxisParm CAxisParm= null;
+        CAxisParm CAxisParm = null;
         Color Color = Color.White;
         public MoveType moveType = MoveType.绝对运动模式;
         public double pos;
@@ -45,13 +45,26 @@ namespace LibSDK
             txtAcc.Text = CAxisParm.AxisMotionPara.MotionAcc.ToString();
             comMotionType.SelectedIndex = 1;
             txtPos.Text = "10";
-            RefreshDebugUI();
-            MotionControl.AddPos += RefreshDebugUI;
-            dgvAxis.CellContentClick += DgvAxis_CellContentClick;
+            if (MotAPI.Name == "卷料" || MotAPI.Name == "拨刀")
+            {
+                c.Visible = false;
+            }
+            else
+            {
+                c.Columns[2].DefaultCellStyle.NullValue = c.Columns[2].HeaderText.tr();
+                c.Columns[3].DefaultCellStyle.NullValue = c.Columns[3].HeaderText.tr();
+                c.Columns[4].DefaultCellStyle.NullValue = c.Columns[4].HeaderText.tr();
+                RefreshDebugUI();
+                MotionControl.AddPos += RefreshDebugUI;
+                c.CellContentClick += DgvAxis_CellContentClick;
+            }
+
             MotAPI.SetLimit(false);
             MotAPI.SetServoff();
             btnOpenSero.Enabled = false;
         }
+
+
 
         private void DgvAxis_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -61,17 +74,17 @@ namespace LibSDK
             switch (column)
             {
                 case 2:
-                    dgvAxis.Rows[row].Cells[1].Value = txtRel.Text;
+                    c.Rows[row].Cells[1].Value = txtRel.Text;
                     break;
                 case 3:
-                    if (baseAxisParam!=null&&double.TryParse(dgvAxis.Rows[row].Cells[1].Value.ToString(), out double pv))
+                    if (baseAxisParam != null && double.TryParse(c.Rows[row].Cells[1].Value.ToString(), out double pv))
                     {
                         baseAxisParam.posParams[row].Pos = pv;
                         DebugerAxisParam.Instance.Save();
-                    } 
+                    }
                     break;
                 case 4:
-                    if (double.TryParse(dgvAxis.Rows[row].Cells[1].Value.ToString(), out double p))
+                    if (double.TryParse(c.Rows[row].Cells[1].Value.ToString(), out double p))
                         MotAPI.PMove(p, 1);
                     break;
                 default:
@@ -81,20 +94,20 @@ namespace LibSDK
 
         private void RefreshDebugUI()
         {
-            dgvAxis.Rows.Clear();
-            if (DebugerAxisParam.Instance.BaseAxisParams==null)
+            c.Rows.Clear();
+            if (DebugerAxisParam.Instance.BaseAxisParams == null)
             {
                 return;
             }
             List<BaseAxisParam> baseAxisParams = DebugerAxisParam.Instance.BaseAxisParams.Where(x => x.CardNo == MotAPI.CardNum && x.AxisNo == MotAPI.Axis).ToList();
 
-            if (baseAxisParams.Count>0)
+            if (baseAxisParams.Count > 0)
             {
                 baseAxisParam = baseAxisParams[0];
                 for (int i = 0; i < baseAxisParam.posParams.Count; i++)
                 {
                     MotAPI.posParams.Add(baseAxisParam.posParams[i]);
-                    dgvAxis.Rows.Add(
+                    c.Rows.Add(
                         baseAxisParam.posParams[i].Name.tr(),
                         baseAxisParam.posParams[i].Pos
                         );
@@ -162,7 +175,7 @@ namespace LibSDK
 
         private void btnNagetive_Click(object sender, EventArgs e)
         {
-            if (!double.TryParse(txtPos.Text, out pos)) 
+            if (!double.TryParse(txtPos.Text, out pos))
             {
                 txtPos.BackColor = Color.Red;
                 return;

@@ -147,6 +147,16 @@ namespace BorwinSplicMachine
         {
             MainControl.Log("程序关闭");
         }
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            MainControl.motControl.resetFlow = ResetFlow.吸嘴_测值上下回零;
+        }
+
+        private void stop_Click(object sender, EventArgs e)
+        {
+            MainControl.motControl.Stop();
+        }
     }
 
 

@@ -1,5 +1,6 @@
 ﻿using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace LibSDK.Motion
     {
         private readonly BoardSwitchCs Card = new BoardSwitchCs();
 
-        public List<PosParam> posParams=new List<PosParam>();
+        public List<PosParam> posParams = new List<PosParam>();
 
         public int HomeRtn;
         public int HError;
@@ -24,16 +25,56 @@ namespace LibSDK.Motion
         private static string CategoryName = "";
         public AxisError axisError = new AxisError();
 
+        /// <summary>
+        /// 移动到指定位置
+        /// </summary>
+        /// <param name="name">位置名称</param>
+        /// <param name="mode">0.相对运动模式，1.绝对运动模式</param>
+        public void MovePosByName(string name,int mode)
+        {
+            List<PosParam> ps = posParams.Where(x => x.Name == name).ToList();
+            if (ps.Count > 0)
+            {
+                double pos = ps[0].Pos;
+                PMove(pos, mode);
+            }
+        }
+
+        /// <summary>
+        /// 获取位置
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public double GetPosByName(string name)
         {
             double pos = 0;
-            List<PosParam> ps = posParams.Where(x=>x.Name==name).ToList();
-            if (ps.Count>0)
+            List<PosParam> ps = posParams.Where(x => x.Name == name).ToList();
+            if (ps.Count > 0)
             {
                 pos = ps[0].Pos;
             }
             return pos;
         }
+
+        /// <summary>
+        /// 判断是否到位
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool InPos(string name)
+        {
+            List<PosParam> ps = posParams.Where(x => x.Name == name).ToList();
+            if (ps.Count > 0)
+            {
+                double pos = ps[0].Pos;
+                if (pos== GetEncPos())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// 回零停止
@@ -226,8 +267,8 @@ namespace LibSDK.Motion
         /// <returns></returns>
         public bool ALM()
         {
-            axisError.IsError= true;
-            axisError.ErrorMsg= "伺服报警";
+            axisError.IsError = true;
+            axisError.ErrorMsg = "伺服报警";
             return Card.API.Mot_ALM(CardNum, Axis);
         }
         /// <summary>

@@ -33,6 +33,7 @@ namespace LibSDK.AxisParamDebuger
         [Category("Debugging parameters|调试参数"), Description("Debugging parameters|调试参数"), DisplayName("Debugging parameters|调试参数")]
         public List<BaseAxisParam> BaseAxisParams {  get; set; }=new List<BaseAxisParam>();
 
+
         /// <summary>
         /// 加载参数
         /// </summary>
@@ -63,6 +64,7 @@ namespace LibSDK.AxisParamDebuger
             XML.Serializer<DebugerAxisParam>(savePath, instance);
         }
     }
+
 
     [TypeConverter(typeof(NullConverter))]
     public class BaseAxisParam

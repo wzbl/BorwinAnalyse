@@ -26,7 +26,7 @@ namespace VisionModel.UCControls
             ()
         {
             this.myCamera = myCamera;
-            myCamera.CCD_GrabImage += CCD_GrabImage;
+            //myCamera.CCD_GrabImage += CCD_GrabImage;
         }
 
         private void CCD_GrabImage()
