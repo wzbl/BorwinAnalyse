@@ -117,7 +117,6 @@ namespace BorwinSplicMachine.LCR
             get { return SerialPort.IsOpen; }
         }
 
-        public ReadStatus ReadStatus = ReadStatus.None;
         public LCRFlow LCRFlow = LCRFlow.None;
         public double ReadData = -1;
 
@@ -160,6 +159,7 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void StartLCR(LCR_Type Type, LCR_Size Size, double Value, Unit Unit, double Grade)
         {
+            SetPinWidth();
             this.Type = Type;
             this.Size = Size;
             this.Value = Value;
@@ -173,6 +173,46 @@ namespace BorwinSplicMachine.LCR
                 SendTypeCommand();
             }
             ParamManager.Instance.System_测值.B = true;
+        }
+
+        /// <summary>
+        /// 调节AB针的间距
+        /// </summary>
+        public void SetPinWidth()
+        {
+            switch (Size)
+            {
+                case LCR_Size._01005:
+                    MotControl.探针A.MovePosByName("01005", 1);
+                    MotControl.探针B.MovePosByName("01005", 1);
+                    break;
+                case LCR_Size._0201:
+                    MotControl.探针A.MovePosByName("0201", 1);
+                    MotControl.探针B.MovePosByName("0201", 1);
+                    break;
+                case LCR_Size._0402:
+                    MotControl.探针A.MovePosByName("0402", 1);
+                    MotControl.探针B.MovePosByName("0402", 1);
+                    break;
+                case LCR_Size._0603:
+                    MotControl.探针A.MovePosByName("0603", 1);
+                    MotControl.探针B.MovePosByName("0603", 1);
+                    break;
+                case LCR_Size._0805:
+                    MotControl.探针A.MovePosByName("0805", 1);
+                    MotControl.探针B.MovePosByName("0805", 1);
+                    break;
+                case LCR_Size._1206:
+                    MotControl.探针A.MovePosByName("1206", 1);
+                    MotControl.探针B.MovePosByName("1206", 1);
+                    break;
+                case LCR_Size._1210:
+                    MotControl.探针A.MovePosByName("1210", 1);
+                    MotControl.探针B.MovePosByName("1210", 1);
+                    break;
+                default:
+                    break;
+            }
         }
 
 
@@ -302,35 +342,20 @@ namespace BorwinSplicMachine.LCR
         /// <param name="e"></param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Thread.Sleep(200);
-            byte[] recvData = new byte[SerialPort.BytesToRead];
-            SerialPort.Read(recvData, 0, recvData.Length);
-            string Recv = Encoding.Default.GetString(recvData);
-            Log("接收到电表数据" + ":" + Recv);
+            Thread.Sleep(100);
             try
             {
-                ReadStatus = ReadStatus.None;
-                ReadData = -1;
+                byte[] recvData = new byte[SerialPort.BytesToRead];
+                SerialPort.Read(recvData, 0, recvData.Length);
+                string Recv = Encoding.Default.GetString(recvData);
+                Log("接收到电表数据".tr() + ":" + Recv);
                 string[] datels = Recv.Trim().Split(',');
-                if ((datels.Length != 5) & (datels.Length != 4) & (datels.Length != 3) & (datels.Length != 2))
-                {
-                    ReadData = -0.00000000000001;
-                    ReadStatus = ReadStatus.Fail;
-                    return;
-                }
                 double.TryParse(datels[0], out ReadData);
-                if (ReadData < 0)
-                {
-                    ReadStatus = ReadStatus.Fail;
-                }
-                else
-                {
-                    ReadStatus = ReadStatus.Success;
-                }
+                LCRFlow = LCRFlow.增加补偿值;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ReadStatus = ReadStatus.Fail;
+                Log(ex.Message);
             }
         }
 
@@ -557,15 +582,6 @@ namespace BorwinSplicMachine.LCR
         }
     }
 
-    /// <summary>
-    /// 读表状态
-    /// </summary>
-    public enum ReadStatus
-    {
-        None,
-        Success,
-        Fail
-    }
 
     /// <summary>
     /// LCR测值流程
@@ -574,8 +590,14 @@ namespace BorwinSplicMachine.LCR
     {
         None,
         Start,//开始
-        ValueIsSuccess,//电表读值是否OK
-        Judgement,//判断值是否在范围
+        走一格,//到测值位置
+        测值整体平移,
+        测值定位,//相机拍照定位
+        AB探针到位,
+        下针,
+        发送电表指令,
+        增加补偿值,
+        判断值是否在范围,//判断值是否在范围
         Finish//完成
     }
 

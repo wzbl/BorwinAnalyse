@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
 using BorwinAnalyse.UCControls;
+using BorwinSplicMachine.BarCode;
 using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using ComponentFactory.Krypton.Toolkit;
@@ -29,7 +30,6 @@ namespace BorwinSplicMachine
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
-           
         }
        
         private void UCMain_Load(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace BorwinSplicMachine
             //kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
             kryptonSplitContainer2.Panel1.Controls.Add(new UCFlowLight());
             Form1.MainControl.UCCCD.Dock = DockStyle.Fill;
-            kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCCCD);
+            kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCLCR);
             kryptonSplitContainer1.Panel1.Controls.Add(Form1.MainControl.UCFlowControl);
         }
         public void UpdataLanguage()
@@ -102,6 +102,22 @@ namespace BorwinSplicMachine
         {
             FlowMatchModel FlowMatch = new FlowModel.FlowMatchModel();
             Form1.MainControl.UCFlowControl.AddFlowControl(FlowMatch);
+        }
+        BarCodeCheck barCode = new BarCodeCheck();
+
+        /// <summary>
+        /// 测试检验条码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            Form1.MainControl.CheckCode(txtBarcode1.Text);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            txtBarcode1.Focus();
         }
     }
 }

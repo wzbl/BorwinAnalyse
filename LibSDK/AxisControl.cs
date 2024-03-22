@@ -12,6 +12,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,6 +25,14 @@ namespace LibSDK
         Color Color = Color.White;
         public MoveType moveType = MoveType.绝对运动模式;
         public double pos;
+        Input 胶膜1到位 = null;
+        double sped = 0;
+        double Acc = 0;
+
+        /// <summary>
+        /// 卷料按钮
+        /// </summary>
+        KryptonButton kryptonButton = null;
         /// <summary>
         /// 位置列表
         /// </summary>
@@ -36,7 +45,6 @@ namespace LibSDK
 
         public AxisControl(MotAPI MotAPI) : this()
         {
-            //this.Dock = DockStyle.Top;
             errorPanel.Dock = DockStyle.Fill;
             this.Load += AxisControl_Load;
             this.MotAPI = MotAPI;
@@ -45,9 +53,16 @@ namespace LibSDK
             txtAcc.Text = CAxisParm.AxisMotionPara.MotionAcc.ToString();
             comMotionType.SelectedIndex = 1;
             txtPos.Text = "10";
-            if (MotAPI.Name == "卷料" || MotAPI.Name == "拨刀")
+
+            if (MotAPI.Name == "卷料")
             {
                 c.Visible = false;
+                kryptonButton = new KryptonButton();
+                kryptonButton.Text = "卷一个料";
+                kryptonButton.Click += KryptonButton_Click;
+                kryptonButton.Dock = DockStyle.Fill;
+                kryptonSplitContainer1.Panel2.Controls.Add(kryptonButton);
+                胶膜1到位 = MotionControl.GetInPutIO("胶膜1到位");
             }
             else
             {
@@ -58,18 +73,25 @@ namespace LibSDK
                 MotionControl.AddPos += RefreshDebugUI;
                 c.CellContentClick += DgvAxis_CellContentClick;
             }
-
             MotAPI.SetLimit(false);
             MotAPI.SetServoff();
             btnOpenSero.Enabled = false;
         }
 
-
+        private void KryptonButton_Click(object sender, EventArgs e)
+        {
+            if (胶膜1到位.IsOn())
+            {
+                MotAPI.PMove(6,0, sped, Acc);
+            }
+            Thread.Sleep(2000);
+            kryptonButton.Enabled = false;
+        }
 
         private void DgvAxis_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
-            if (row < 0) return;
+            if (row < 0|| c.Rows[row].Cells[1].Value==null) return;
             int column = e.ColumnIndex;
             switch (column)
             {
@@ -85,7 +107,14 @@ namespace LibSDK
                     break;
                 case 4:
                     if (double.TryParse(c.Rows[row].Cells[1].Value.ToString(), out double p))
-                        MotAPI.PMove(p, 1);
+                    {
+                        if (MotAPI.Name == "左进入" || MotAPI.Name == "右进入")
+                        {
+                            MotAPI.PMove(-p, 0, sped, Acc);
+                        }
+                        MotAPI.PMove(p, 1, sped, Acc);
+                    }
+
                     break;
                 default:
                     break;
@@ -120,7 +149,6 @@ namespace LibSDK
         {
             lbName.Text = MotAPI.Name;
             Color = btnPositive.BackColor;
-
         }
 
         private void btnOpenSero_Click(object sender, EventArgs e)
@@ -144,14 +172,13 @@ namespace LibSDK
                 return;
             }
             txtPos.BackColor = Color.White;
-            double spd = pos;
             switch (moveType)
             {
                 case MoveType.相对运动模式:
-                    MotAPI.PMove(spd, 0);
+                    MotAPI.PMove(pos, 0, sped, Acc);
                     break;
                 case MoveType.绝对运动模式:
-                    MotAPI.PMove(spd, 1);
+                    MotAPI.PMove(pos, 1, sped, Acc);
                     break;
                 default:
                     break;
@@ -163,14 +190,12 @@ namespace LibSDK
             MotAPI.AxisStop();
         }
 
-        private void btnStopGoHome_Click(object sender, EventArgs e)
-        {
-            MotAPI.AxisStop();
-        }
+      
 
         private void btnStartGoHome_Click(object sender, EventArgs e)
         {
             MotAPI.Home(1000);
+            btnStartGoHome.Enabled = false;
         }
 
         private void btnNagetive_Click(object sender, EventArgs e)
@@ -181,14 +206,13 @@ namespace LibSDK
                 return;
             }
             txtPos.BackColor = Color.White;
-            double spd = pos;
             switch (moveType)
             {
                 case MoveType.相对运动模式:
-                    MotAPI.PMove(-spd, 0, true);
+                    MotAPI.PMove(-pos, 0,sped,Acc, true);
                     break;
                 case MoveType.绝对运动模式:
-                    MotAPI.PMove(-spd, 1, true);
+                    MotAPI.PMove(-pos, 1,sped, Acc, true);
                     break;
                 default:
                     break;
@@ -213,6 +237,24 @@ namespace LibSDK
                 errorPanel.Visible = false;
             }
             dSignalLamp1.Value = MotAPI.HomeState ? 1 : 0;
+
+
+            if (kryptonButton!=null&&!kryptonButton.Enabled)
+            {
+                if (胶膜1到位.IsOn())
+                {
+                    kryptonButton.Enabled = true;
+                }
+                else
+                {
+                    MotAPI.PMove(2,0, sped, Acc);
+                }
+            }
+
+            if (MotAPI.HomeState)
+            {
+                btnStartGoHome.Enabled = true;
+            }
         }
 
         public void EmgStop()
@@ -269,11 +311,7 @@ namespace LibSDK
         /// <param name="e"></param>
         private void txtVel_TextChanged(object sender, EventArgs e)
         {
-            if (float.TryParse(txtVel.Text, out float vel))
-            {
-                CAxisParm.AxisMotionPara.MotionSped = vel;
-                MotionControl.AxisParm.Write();
-            }
+            double.TryParse(txtVel.Text, out sped);
         }
 
         /// <summary>
@@ -283,11 +321,7 @@ namespace LibSDK
         /// <param name="e"></param>
         private void txtAcc_TextChanged(object sender, EventArgs e)
         {
-            if (float.TryParse(txtAcc.Text, out float acc))
-            {
-                CAxisParm.AxisMotionPara.MotionAcc = acc;
-                MotionControl.AxisParm.Write();
-            }
+            double.TryParse(txtAcc.Text, out Acc);
         }
     }
 }

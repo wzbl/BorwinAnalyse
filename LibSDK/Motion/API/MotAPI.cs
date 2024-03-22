@@ -67,7 +67,7 @@ namespace LibSDK.Motion
             if (ps.Count > 0)
             {
                 double pos = ps[0].Pos;
-                if (pos== GetEncPos())
+                if (Math.Abs(pos - GetEncPos())<0.01)
                 {
                     return true;
                 }
@@ -162,6 +162,33 @@ namespace LibSDK.Motion
         /// <param name="Pos"></param>
         /// <param name="Mode">0.相对运动模式，1.绝对运动模式</param>
         /// <returns></returns>
+        public bool PMove(double Pos, int Mode,double sped,double Acc, bool IsLimt = false)
+        {
+            IsLimt = AxisParm.AxisMotionPara.IsEnableSoftLimit;
+            double _Pos = PosToPulse(Pos, CardNum, Axis);//位置换算
+            double _Spd = PosToVel(sped, CardNum, Axis);//速度换算
+            double _Acc = PosToVcc(Acc, CardNum, Axis);//加速度换算
+            if (IsLimt)
+            {
+                if (Pos < AxisParm.AxisMotionPara.PosLimit && Pos > AxisParm.AxisMotionPara.NegLimit)
+                {
+                    return Card.API.PMove(CardNum, Axis, _Pos, _Spd, _Acc, Mode);
+                }
+                else
+                {
+                    //SDK.Log.AddLog(AxisParm.AxisName + "目标位置超过软极限", 2);
+                    //SDK.Alarm.Show("System Error", "S0002", AxisParm.AxisName + "目标位置超过软极限", "I");
+                    axisError.IsError = true;
+                    axisError.ErrorMsg = "目标位置超过软极限";
+                    return false;
+                }
+            }
+            else
+            {
+                return Card.API.PMove(CardNum, Axis, _Pos, _Spd, _Acc, Mode);
+            }
+        }
+
         public bool PMove(double Pos, int Mode, bool IsLimt = false)
         {
             IsLimt = AxisParm.AxisMotionPara.IsEnableSoftLimit;
@@ -188,7 +215,6 @@ namespace LibSDK.Motion
                 return Card.API.PMove(CardNum, Axis, _Pos, _Spd, _Acc, Mode);
             }
         }
-
         public bool S_PMove(double hightPos, double LowPos, double MinVel, double MaxVel, double Acc, int Mode)
         {
             double _hightPos = PosToPulse(hightPos, CardNum, Axis);//位置换算

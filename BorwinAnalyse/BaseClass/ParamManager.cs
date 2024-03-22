@@ -28,14 +28,29 @@ namespace BorwinAnalyse.BaseClass
         }
 
         #region System
+        public ParamData System_机型 = new ParamData(ParamType.System, "条码", "1", "1:接料机,2:合盘机,3:CR机", "1");
         public ParamData System_条码 = new ParamData(ParamType.System, "条码", "0", "0不启用,1启用", "1");
         public ParamData System_测值 = new ParamData(ParamType.System, "测值", "0", "0不启用,1启用", "1");
         public ParamData System_找空料 = new ParamData(ParamType.System, "找空料", "0", "0不启用,1启用", "1");
         public ParamData System_丝印 = new ParamData(ParamType.System, "丝印", "0", "0不启用,1启用", "1");
+        public ParamData System_BOM = new ParamData(ParamType.System, "BOM", "0", "0不启用,1启用", "1");
+        #endregion
+
+        #region 条码校验
+        public ParamData 条码校验_是否二维码分割 = new ParamData(ParamType.CheckCode, "是否二维码分割", "0", "0不启用,1启用", "1");
+        public ParamData 条码校验_分割符 = new ParamData(ParamType.CheckCode, "分割符", "-", "分割字符符号", "1");
+        public ParamData 条码校验_索引位置 = new ParamData(ParamType.CheckCode, "索引位置", "0", "从0开始", "1");
+        public ParamData 条码校验_是否删除前缀 = new ParamData(ParamType.CheckCode, "是否删除前缀", "0", "0不启用,1启用", "1");
+        public ParamData 条码校验_删除前缀长度 = new ParamData(ParamType.CheckCode, "删除前缀长度", "0", "从1开始", "1");
+        public ParamData 条码校验_是否删除后缀 = new ParamData(ParamType.CheckCode, "是否删除后缀", "0", "0不启用,1启用", "1");
+        public ParamData 条码校验_删除后缀长度 = new ParamData(ParamType.CheckCode, "删除后缀长度", "0", "从1开始", "1");
+        public ParamData 条码校验_是否字符替换 = new ParamData(ParamType.CheckCode, "是否字符替换", "0", "0不启用,1启用", "1");
+        public ParamData 条码校验_原始字符 = new ParamData(ParamType.CheckCode, "原始字符", "A", "", "1");
+        public ParamData 条码校验_替换为 = new ParamData(ParamType.CheckCode, "替换为", "B", "", "1");
+        public ParamData 条码校验_是否字符大写 = new ParamData(ParamType.CheckCode, "是否字符大写", "0", "0不启用,1启用", "1");
         #endregion
 
         #region LCR
-        public  ParamData LCR测试 = new ParamData(ParamType.LCR, "LCR测试", "1", "0不启用,1启用", "1");
         public  ParamData LCR自动校准 = new ParamData(ParamType.LCR, "LCR自动校准", "0", "0不启用,1启用", "1");
         public  ParamData LCR校准_只启动两线 = new ParamData(ParamType.LCR, "LCR自动校准只启用两线", "0", "0不启用,1启用", "1");
 
@@ -109,11 +124,6 @@ namespace BorwinAnalyse.BaseClass
         public ParamData paramData8 = new ParamData(ParamType.Barcode_Scanner, "扫码枪", "2", "test", "1");
         #endregion
 
-        #region PLC
-        public ParamData paramData9 = new ParamData(ParamType.PLC, "PLC", "2", "test", "1");
-        #endregion
-
-
         public List<ParamData> SearchData(ParamType paramType)
         {
             List<ParamData> paramDatas = new List<ParamData>();
@@ -157,7 +167,7 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public void LoadParam()
         {
-            string savePath = @"SqlLiteData/ParamManager.json";
+            string savePath = @"Ini/ParamManager.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -174,7 +184,7 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public void SaveParam()
         {
-            string savePath = @"SqlLiteData/ParamManager.json";
+            string savePath = @"Ini/ParamManager.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -281,6 +291,7 @@ namespace BorwinAnalyse.BaseClass
     public enum ParamType
     {
         System,
+        CheckCode,
         LCR,
         Left_LCR,
         Right_LCR,

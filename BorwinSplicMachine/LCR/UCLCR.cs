@@ -9,6 +9,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace BorwinSplicMachine.LCR
         private void Init()
         {
             LCRHelper = new LCRHelper();
+            LCRFlow();
         }
 
         private void UCLCR_Load(object sender, EventArgs e)
@@ -160,6 +162,23 @@ namespace BorwinSplicMachine.LCR
             CheckMaterialMsg();
         }
 
+        public void CheckMaterial(string type, string size, string value, string unit, string grade)
+        {
+            if (type == "电阻")
+            {
+                comType.SelectedIndex = 0;
+            }
+            else if (type == "电容")
+            {
+                comType.SelectedIndex = 1;
+            }
+            comSize.Text= size;
+            comUnit.Text = unit;
+            txtValue.Text = value;
+            txtGrade.Text = grade;
+            CheckMaterialMsg();
+        }
+
         private void CheckMaterialMsg()
         {
             if (string.IsNullOrEmpty(comType.Text))
@@ -267,6 +286,7 @@ namespace BorwinSplicMachine.LCR
 
             txtMax.Text = LCRHelper.Max_Value.ToString();
             txtMin.Text = LCRHelper.Min_Value.ToString();
+            ParamManager.Instance.System_测值.B = true;
         }
 
         public void LoadSplic(string type, string size, string value, string unit, string grade)
@@ -299,7 +319,9 @@ namespace BorwinSplicMachine.LCR
             }
 
         }
-        
+
+        int testCount = 0;
+
         /// <summary>
         /// LCR测值线程
         /// </summary>
@@ -307,49 +329,119 @@ namespace BorwinSplicMachine.LCR
         {
             Task.Run(() =>
             {
-                while (true)
+                while (Form1.MainControl.motControl!=null)
                 {
                     switch (LCRHelper.LCRFlow)
                     {
                         case LCR.LCRFlow.None:
-                            //判断有无开始测值信号
-
+                            if (Form1.MainControl.motControl.FlowLeft == MainFlow.请求测值)
+                            {
+                                LCRHelper.LCRFlow = LCR.LCRFlow.Start;
+                                LCRHelper.Side = LCR.WhichSide.Left;
+                                MotControl.凸轮.MovePosByName("进料位", 1);
+                            }
+                            else if (Form1.MainControl.motControl.FlowRight == MainFlow.请求测值)
+                            {
+                                LCRHelper.LCRFlow = LCR.LCRFlow.Start;
+                                LCRHelper.Side = LCR.WhichSide.Right;
+                                MotControl.凸轮.MovePosByName("进料位", 1);
+                            }
                             break;
                         case LCR.LCRFlow.Start:
-                            //开启超时定时器，给电表发指令
-                            break;
-                        case LCR.LCRFlow.ValueIsSuccess:
-                            switch (LCRHelper.ReadStatus)
+                            if (MotControl.凸轮.InPos("进料位"))
                             {
-                                case ReadStatus.None:
-                                    //判断是否超时
-                                    break;
-                                case ReadStatus.Success:
-
-                                    break;
-                                case ReadStatus.Fail:
-
-                                    break;
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0);
+                                }
+                                else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                {
+                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0);
+                                }
+                                Thread.Sleep(3000);
+                                LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
                             break;
-                        case LCR.LCRFlow.Judgement:
-                            //判断值是否在范围
+                        case LCR.LCRFlow.走一格:
+                            if (MotControl.测值整体上下.HomeState)
+                            {
+                                testCount++;
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    MotControl.左进入.PMove(-1, 0);
+                                }
+                                else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                {
+                                    MotControl.右进入.PMove(-1, 0);
+                                }
+                                LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
+                            }
 
+                            break;
+                        case LCR.LCRFlow.测值整体平移:
+                            Thread.Sleep(1000);
+                            LCRHelper.LCRFlow = LCR.LCRFlow.测值定位;
+                            break;
+                        case LCR.LCRFlow.测值定位:
+                            LCRHelper.LCRFlow = LCR.LCRFlow.AB探针到位;
+                            MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("探测位"), 1);
+                            break;
+                        case LCR.LCRFlow.AB探针到位:
+                            if (MotControl.测值整体上下.InPos("探测位"))
+                            {
+                                MotControl.测值支撑电磁铁.On();
+                                LCRHelper.LCRFlow = LCR.LCRFlow.下针;
+                                MotControl.下针.PMove(MotControl.下针.GetPosByName("探测位"), 1);
+                            }
+                            Thread.Sleep(1000);
+                            break;
+                        case LCR.LCRFlow.下针:
+                            if (MotControl.下针.InPos("探测位"))
+                            {
+                                LCRHelper.SendReadCommand();
+                                LCRHelper.LCRFlow = LCR.LCRFlow.发送电表指令;
+                            }
+                            break;
+                        case LCR.LCRFlow.发送电表指令:
+                            Thread.Sleep(1000);
+                            LCRHelper.LCRFlow = LCR.LCRFlow.增加补偿值;
+                            break;
+                        case LCR.LCRFlow.增加补偿值:
+                            LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
+                            break;
+                        case LCR.LCRFlow.判断值是否在范围:
+                            MotControl.测值整体上下.Home(1000);
+                            MotControl.下针.Home(1000);
+
+                            MotControl.测值支撑电磁铁.Off();
+                            if (testCount > 3)
+                            {
+                                Thread.Sleep(2000);
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
+                                    MotControl.左进入.PMove(pos, 0);
+                                }
+                                else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                {
+                                    double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
+                                    MotControl.右进入.PMove(pos, 0);
+                                }
+
+                                LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                            }
+                            else
+                            {
+                                LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
+                            }
                             break;
                         case LCR.LCRFlow.Finish:
-                            //测值完成
-                            if (LCRHelper.Side == WhichSide.Left)
-                            {
-                                Form1.MainControl.motControl.FlowLeft = MainFlow.测值完成;
-                            }
-                            else if (LCRHelper.Side == WhichSide.Right)
-                            {
-                                Form1.MainControl.motControl.FlowRight = MainFlow.测值完成;
-                            }
-                            LCRHelper.LCRFlow=LCR.LCRFlow.None;
+                            testCount = 0;
                             break;
-
+                        default:
+                            break;
                     }
+                    Thread.Sleep(100);
                 }
             });
         }

@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
 using BorwinAnalyse.UCControls;
+using BorwinSplicMachine.BarCode;
 using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using BorwinSplicMachine.UCControls;
@@ -59,7 +60,11 @@ namespace BorwinSplicMachine
 
         public UCALLAxis UCAxis { get; set; }
 
+        public UCPrint UCPrint { get; set; }
+
         Form1 MainForm;
+
+        BarCodeCheck barCode = new BarCodeCheck();
         public MainControl(Form1 MainForm)
         {
             //VisionModel.HIKVision.Instance.initCam();
@@ -71,7 +76,7 @@ namespace BorwinSplicMachine
             UCMain = new UCMain();
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
-            UCLCR = new UCLCR();
+        
             UCRichLog = new UCRichLog();
             UCCCD = new UCCCD();
             UCFlowControl = new UCFlowControl();
@@ -79,6 +84,8 @@ namespace BorwinSplicMachine
             UCMes = new UCMes();
             UCAxis = new UCALLAxis();
             motControl = new MotControl();
+            UCPrint = new UCPrint();
+            UCLCR = new UCLCR();
             this.MainForm = MainForm;
         }
 
@@ -108,6 +115,13 @@ namespace BorwinSplicMachine
         internal void Init()
         {
          
+        }
+
+        public void CheckCode(string code) 
+        {
+            barCode.CheckCode(ref code);
+            BomDataModel bomData = BomManager.Instance.SearchByBarCode(code);
+            UCLCR.CheckMaterial(bomData.type, bomData.size, bomData.value, bomData.unit, bomData.grade);
         }
     }
 }

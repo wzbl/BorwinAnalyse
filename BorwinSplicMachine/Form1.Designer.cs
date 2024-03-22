@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
+            this.stop = new ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton();
+            this.reset = new ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton();
             this.kryptonRibbonTab1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -53,9 +55,9 @@
             this.kryptonRibbonGroupSeparator4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator();
             this.kryptonRibbonGroupTriple2 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
             this.kryptonRibbonGroupButton4 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton5 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
+            this.kryptonRibbonGroupButton6 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.stop = new ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton();
-            this.reset = new ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonRibbon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.SuspendLayout();
@@ -79,8 +81,17 @@
             this.kryptonRibbon1.RibbonAppButton.AppButtonMaxRecentSize = new System.Drawing.Size(500, 500);
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
-            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
+            // 
+            // stop
+            // 
+            resources.ApplyResources(this.stop, "stop");
+            this.stop.Click += new System.EventHandler(this.stop_Click);
+            // 
+            // reset
+            // 
+            resources.ApplyResources(this.reset, "reset");
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // kryptonRibbonTab1
             // 
@@ -187,27 +198,29 @@
             // kryptonRibbonGroupTriple2
             // 
             this.kryptonRibbonGroupTriple2.Items.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupItem[] {
-            this.kryptonRibbonGroupButton4});
+            this.kryptonRibbonGroupButton4,
+            this.kryptonRibbonGroupButton5,
+            this.kryptonRibbonGroupButton6});
             // 
             // kryptonRibbonGroupButton4
             // 
             resources.ApplyResources(this.kryptonRibbonGroupButton4, "kryptonRibbonGroupButton4");
             this.kryptonRibbonGroupButton4.Click += new System.EventHandler(this.kryptonRibbonGroupButton4_Click);
             // 
+            // kryptonRibbonGroupButton5
+            // 
+            resources.ApplyResources(this.kryptonRibbonGroupButton5, "kryptonRibbonGroupButton5");
+            this.kryptonRibbonGroupButton5.Click += new System.EventHandler(this.kryptonRibbonGroupButton5_Click);
+            // 
+            // kryptonRibbonGroupButton6
+            // 
+            resources.ApplyResources(this.kryptonRibbonGroupButton6, "kryptonRibbonGroupButton6");
+            this.kryptonRibbonGroupButton6.Click += new System.EventHandler(this.kryptonRibbonGroupButton6_Click);
+            // 
             // kryptonPanel1
             // 
             resources.ApplyResources(this.kryptonPanel1, "kryptonPanel1");
             this.kryptonPanel1.Name = "kryptonPanel1";
-            // 
-            // stop
-            // 
-            resources.ApplyResources(this.stop, "stop");
-            this.stop.Click += new System.EventHandler(this.stop_Click);
-            // 
-            // reset
-            // 
-            resources.ApplyResources(this.reset, "reset");
-            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // Form1
             // 
@@ -256,5 +269,7 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton4;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton stop;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton reset;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton5;
+        private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton6;
     }
 }

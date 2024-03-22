@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCMain));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -35,10 +36,17 @@
             this.找空料 = new System.Windows.Forms.ToolStripButton();
             this.丝印 = new System.Windows.Forms.ToolStripButton();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.txtBarcode1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.txtbarCode2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
+            this.kryptonSplitContainer1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
@@ -120,6 +128,14 @@
             this.kryptonSplitContainer1.Location = new System.Drawing.Point(57, 0);
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
             // 
+            // kryptonSplitContainer1.Panel1
+            // 
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.button1);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtbarCode2);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel2);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtBarcode1);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel1);
+            // 
             // kryptonSplitContainer1.Panel2
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonSplitContainer2);
@@ -127,6 +143,22 @@
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1326, 720);
             this.kryptonSplitContainer1.SplitterDistance = 286;
             this.kryptonSplitContainer1.TabIndex = 3;
+            // 
+            // txtBarcode1
+            // 
+            this.txtBarcode1.Location = new System.Drawing.Point(59, 177);
+            this.txtBarcode1.Name = "txtBarcode1";
+            this.txtBarcode1.Size = new System.Drawing.Size(110, 23);
+            this.txtBarcode1.TabIndex = 1;
+            // 
+            // kryptonWrapLabel1
+            // 
+            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(20, 185);
+            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
+            this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel1.Text = "条码";
             // 
             // kryptonSplitContainer2
             // 
@@ -139,6 +171,36 @@
             this.kryptonSplitContainer2.SplitterDistance = 117;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
+            // txtbarCode2
+            // 
+            this.txtbarCode2.Location = new System.Drawing.Point(59, 226);
+            this.txtbarCode2.Name = "txtbarCode2";
+            this.txtbarCode2.Size = new System.Drawing.Size(110, 23);
+            this.txtbarCode2.TabIndex = 5;
+            // 
+            // kryptonWrapLabel2
+            // 
+            this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(20, 234);
+            this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
+            this.kryptonWrapLabel2.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel2.Text = "条码";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(196, 185);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 48);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "清空条码";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // UCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -150,6 +212,8 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
+            this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
+            this.kryptonSplitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
             this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
@@ -170,5 +234,11 @@
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
         private System.Windows.Forms.ToolStripButton 丝印;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtBarcode1;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbarCode2;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

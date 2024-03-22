@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarCode\BarCodeCheck.cs" />
     <Compile Include="FlowModel\FlowBarCode.cs" />
     <Compile Include="FlowModel\FlowBarCodeModel.cs">
       <SubType>UserControl</SubType>
@@ -354,9 +355,7 @@
   <ItemGroup>
     <None Include="Resources\btn_mini_normal.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BarCode\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>

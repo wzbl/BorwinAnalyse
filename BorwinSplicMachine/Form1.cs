@@ -157,6 +157,18 @@ namespace BorwinSplicMachine
         {
             MainControl.motControl.Stop();
         }
+
+        private void kryptonRibbonGroupButton5_Click(object sender, EventArgs e)
+        {
+            FormIO FormIO = new FormIO();
+            FormIO.Show();
+        }
+
+        private void kryptonRibbonGroupButton6_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCPrint);
+        }
     }
 
 

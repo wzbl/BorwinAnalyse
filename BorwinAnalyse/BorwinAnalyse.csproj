@@ -201,6 +201,12 @@
     <Compile Include="UCControls\UCParam.Designer.cs">
       <DependentUpon>UCParam.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCControls\UCPrint.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCPrint.Designer.cs">
+      <DependentUpon>UCPrint.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCControls\UCRichLog.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCParam.resx">
       <DependentUpon>UCParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\UCPrint.resx">
+      <DependentUpon>UCPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCRichLog.resx">
       <DependentUpon>UCRichLog.cs</DependentUpon>

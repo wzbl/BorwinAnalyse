@@ -262,7 +262,6 @@ namespace LibSDK.Motion
     [TypeConverter(typeof(NullConverter))]
     public class AxisMotionPara
     {
-
         [Category("运动"), ReadOnly(false), Description("最大加速度"), DisplayName("最大加速度")]
         public float MaxAcc { get; set; } = 100;
 
@@ -297,7 +296,6 @@ namespace LibSDK.Motion
         [Category("运动"), Description("负向限位"), DisplayName("负向限位")]
         public float NegLimit { get; set; }
     }
-
 
     public class NullConverter : ExpandableObjectConverter
     {
