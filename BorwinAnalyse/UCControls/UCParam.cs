@@ -37,7 +37,7 @@ namespace BorwinAnalyse.UCControls
         /// </summary>
         private void InitType()
         {
-            for (int i = (int)ParamType.PLC; i >= 0; i--)
+            for (int i = (int)ParamType.Barcode_Scanner; i >= 0; i--)
             {
                 KryptonButton btn = new KryptonButton();
                 btn.Text = ((ParamType)i).ToString();
@@ -76,7 +76,7 @@ namespace BorwinAnalyse.UCControls
         /// </summary>
         private void InitParam()
         {
-            ParamManager.Instance.LoadParam();
+            ParamManager.Instance.Load();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -91,7 +91,7 @@ namespace BorwinAnalyse.UCControls
                 }
                
             }
-            ParamManager.Instance.SaveParam();
+            ParamManager.Instance.Save();
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {

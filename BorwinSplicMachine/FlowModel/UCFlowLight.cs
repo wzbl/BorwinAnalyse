@@ -22,7 +22,9 @@ namespace BorwinSplicMachine.FlowModel
             InitializeComponent();
             this.Load += UCFlowLight_Load;
             this.Dock = DockStyle.Fill;
+            Graphics = kryptonPanel1.CreateGraphics();
         }
+        Graphics Graphics= null;
         private void UCFlowLight_Load(object sender, EventArgs e)
         {
             timer1.Start();
@@ -32,7 +34,9 @@ namespace BorwinSplicMachine.FlowModel
         {
             Refresh();
         }
+
         Pen Pen = new Pen(Color.Green);
+
         protected override void OnPaint(PaintEventArgs e)
         {
             int distence = 100;
@@ -41,19 +45,19 @@ namespace BorwinSplicMachine.FlowModel
             int startPos = 100;
             int des = 2;
 
-            GraphicCricle(MotControl.flowLight.左进入, new Point(startPos, height), e.Graphics, radiu, "左进入", new Point(startPos + radiu, height + radiu / 2), new Point(distence + startPos, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.左进入, new Point(startPos, height),Graphics, radiu, "左进入", new Point(startPos + radiu, height + radiu / 2), new Point(distence + startPos, height + radiu / 2));
 
-            GraphicCricle(MotControl.flowLight.左找空料, new Point(distence + startPos, height), e.Graphics, radiu, "左找空料", new Point(distence + startPos + radiu, height + radiu / 2), new Point(distence * 2 + startPos, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.左找空料, new Point(distence + startPos, height),Graphics, radiu, "左找空料", new Point(distence + startPos + radiu, height + radiu / 2), new Point(distence * 2 + startPos, height + radiu / 2));
 
-            GraphicCricle(MotControl.flowLight.左测值, new Point(distence * 2 + startPos, height), e.Graphics, radiu, "左测值", new Point(2 * distence + startPos + radiu, height + radiu / 2), new Point(distence * 3 + startPos, height + radiu / 2));
-            GraphicCricle(MotControl.flowLight.左丝印, new Point(distence * 3 + startPos, height), e.Graphics, radiu, "左丝印", new Point(3 * distence + startPos + radiu, height + radiu / 2), new Point(distence * 4 + startPos, height + radiu / 2));
-            GraphicCricle(MotControl.flowLight.贴膜, new Point(distence * 4 + startPos, height), e.Graphics, radiu, "贴膜", new Point(distence * 4 + startPos + radiu / 2, height), new Point(distence * 4 + startPos + radiu / 2, height - 40 + radiu));
-            GraphicCricle(MotControl.flowLight.接料完成, new Point(distence * 4 + startPos, height - 40), e.Graphics, radiu, "接料完成");
+            GraphicCricle(MotControl.flowLight.左测值, new Point(distence * 2 + startPos, height),Graphics, radiu, "左测值", new Point(2 * distence + startPos + radiu, height + radiu / 2), new Point(distence * 3 + startPos, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.左丝印, new Point(distence * 3 + startPos, height),Graphics, radiu, "左丝印", new Point(3 * distence + startPos + radiu, height + radiu / 2), new Point(distence * 4 + startPos, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.贴膜, new Point(distence * 4 + startPos, height),Graphics, radiu, "贴膜", new Point(distence * 4 + startPos + radiu / 2, height), new Point(distence * 4 + startPos + radiu / 2, height - 40 + radiu));
+            GraphicCricle(MotControl.flowLight.接料完成, new Point(distence * 4 + startPos, height - 40),Graphics, radiu, "接料完成");
 
-            GraphicCricle(MotControl.flowLight.右丝印, new Point(distence * 5 + startPos, height), e.Graphics, radiu, "右丝印", new Point(distence * 5 + startPos, height + radiu / 2), new Point(distence * 4 + startPos + radiu, height + radiu / 2));
-            GraphicCricle(MotControl.flowLight.右测值, new Point(distence * 6 + startPos, height), e.Graphics, radiu, "右测值", new Point(distence * 6 + startPos, height + radiu / 2), new Point(distence * 5 + startPos + radiu, height + radiu / 2));
-            GraphicCricle(MotControl.flowLight.右找空料, new Point(distence * 7 + startPos, height), e.Graphics, radiu, "右找空料", new Point(distence * 7 + startPos, height + radiu / 2), new Point(distence * 6 + startPos + radiu, height + radiu / 2));
-            GraphicCricle(MotControl.flowLight.右进入, new Point(distence * 8 + startPos, height), e.Graphics, radiu, "右进入", new Point(distence * 8 + startPos, height + radiu / 2), new Point(distence * 7 + startPos + radiu, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.右丝印, new Point(distence * 5 + startPos, height),Graphics, radiu, "右丝印", new Point(distence * 5 + startPos, height + radiu / 2), new Point(distence * 4 + startPos + radiu, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.右测值, new Point(distence * 6 + startPos, height),Graphics, radiu, "右测值", new Point(distence * 6 + startPos, height + radiu / 2), new Point(distence * 5 + startPos + radiu, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.右找空料, new Point(distence * 7 + startPos, height),Graphics, radiu, "右找空料", new Point(distence * 7 + startPos, height + radiu / 2), new Point(distence * 6 + startPos + radiu, height + radiu / 2));
+            GraphicCricle(MotControl.flowLight.右进入, new Point(distence * 8 + startPos, height),Graphics, radiu, "右进入", new Point(distence * 8 + startPos, height + radiu / 2), new Point(distence * 7 + startPos + radiu, height + radiu / 2));
         }
 
         private void GraphicCricle(Light light, Point point, Graphics graphics, int radiu, string name, Point start = new Point(), Point end = new Point())

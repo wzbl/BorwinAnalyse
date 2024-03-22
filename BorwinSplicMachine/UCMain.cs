@@ -35,12 +35,11 @@ namespace BorwinSplicMachine
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-            //Form1.MainControl.UCRichLog.Dock = DockStyle.Top;
             //kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
-            kryptonSplitContainer2.Panel1.Controls.Add(new UCFlowLight());
+            //kryptonSplitContainer2.Panel1.Controls.Add(new UCFlowLight());
             Form1.MainControl.UCCCD.Dock = DockStyle.Fill;
             kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCLCR);
-            kryptonSplitContainer1.Panel1.Controls.Add(Form1.MainControl.UCFlowControl);
+            timer1.Start();
         }
         public void UpdataLanguage()
         {
@@ -60,15 +59,6 @@ namespace BorwinSplicMachine
             //}
         }
 
-        /// <summary>
-        /// 添加测值到界面
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddLCR(object sender, EventArgs e)
-        {
-            
-        }
 
         private void toolStripButton1_MouseDown(object sender, MouseEventArgs e)
         {

@@ -48,7 +48,7 @@ namespace Mes
 
         public void Load()
         {
-            string savePath = @"SqlLiteData/MesControl.json";
+            string savePath = @"Ini/MesControl.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -65,7 +65,7 @@ namespace Mes
         /// </summary>
         public void Save()
         {
-            string savePath = @"SqlLiteData/MesControl.json";
+            string savePath = @"Ini/MesControl.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -239,7 +239,7 @@ namespace Mes
                     return reader.ReadToEnd();
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }

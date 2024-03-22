@@ -129,12 +129,9 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public string ResDefaultUnit = "Ω";
 
-
-
-
         public void Load()
         {
-            string savePath = @"SqlLiteData/CommonAnalyse.json";
+            string savePath = @"Ini/CommonAnalyse.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -147,7 +144,7 @@ namespace BorwinAnalyse.BaseClass
         }
         public void Save()
         {
-            string savePath = @"SqlLiteData/CommonAnalyse.json";
+            string savePath = @"Ini/CommonAnalyse.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -498,6 +495,7 @@ namespace BorwinAnalyse.BaseClass
                 analyseResult.Space = "4";
             }
         }
+
         /// <summary>
         /// 解析入口
         /// </summary>
@@ -885,8 +883,7 @@ namespace BorwinAnalyse.BaseClass
 
         private bool IsNumeric(string s)
         {
-            double v;
-            if (double.TryParse(s, out v))
+            if (double.TryParse(s, out double v))
             {
                 return true;
             }
@@ -899,7 +896,6 @@ namespace BorwinAnalyse.BaseClass
         private string TheGrade(string str)
         {
             string r = @"[0-9.]+%";
-            List<string> list = new List<string>();
             Regex reg = new Regex(r, RegexOptions.IgnoreCase | RegexOptions.Singleline);
             MatchCollection mc = reg.Matches(str);
             foreach (System.Text.RegularExpressions.Match m in mc)

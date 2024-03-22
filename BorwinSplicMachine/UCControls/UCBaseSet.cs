@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,11 +22,12 @@ namespace BorwinSplicMachine.UCControls
             this.Dock = DockStyle.Fill;
             this.Load += UCBaseSet_Load;
             this.components = new System.ComponentModel.Container();
-           
+            kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
         }
 
         private void UCBaseSet_Load(object sender, EventArgs e)
         {
+            
             UpdataLanguage();
         }
         public void UpdataLanguage()

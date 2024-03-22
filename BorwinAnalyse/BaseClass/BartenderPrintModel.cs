@@ -44,15 +44,30 @@ namespace BorwinAnalyse.BaseClass
         /// 打印机名称
         /// </summary>
         public string Name;
-        BarTender.Application btApp;
+        private readonly BarTender.Application btApp = new BarTender.Application();
         BarTender.Format btFormat;
         public List<PrintValue> PrintValues = new List<PrintValue>();
 
-        public void Init()
-        {
+        private void Init()
+        { 
             btFormat = btApp.Formats.Open(Path, false, "");
             btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
             btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
+        }
+        /// <summary>
+        /// 绑定数据
+        /// </summary>
+        /// <param name="objects"></param>
+        private void BindData()
+        {
+            //名称绑定值
+            for (int i = 0; i < PrintValues.Count; i++)
+            {
+                if (PrintValues[i].Enable)
+                {
+                    btFormat.SetNamedSubStringValue(PrintValues[i].Key, PrintValues[i].Value);
+                }
+            }
         }
 
         /// <summary>
@@ -71,15 +86,15 @@ namespace BorwinAnalyse.BaseClass
                         //属性
                         PropertyInfo info = type.GetProperty(pv.Name);
                         //字段
-                        FieldInfo fieldInfo =  type.GetField(pv.Name);
+                        FieldInfo fieldInfo = type.GetField(pv.Name);
                         if (fieldInfo != null)
                         {
-                            if (fieldInfo.GetValue(o)!=null)
+                            if (fieldInfo.GetValue(o) != null)
                             {
                                 pv.Value = fieldInfo.GetValue(o).ToString();
                             }
                         }
-                        else if (info!=null)
+                        else if (info != null)
                         {
                             if (info.GetValue(o, null) != null)
                             {
@@ -92,26 +107,9 @@ namespace BorwinAnalyse.BaseClass
                         //}
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// 绑定数据
-        /// </summary>
-        /// <param name="objects"></param>
-        public void BindData()
-        {
-            //名称绑定值
-            for (int i = 0; i < PrintValues.Count; i++)
-            {
-                if (PrintValues[i].Enable)
-                {
-                    btFormat.SetNamedSubStringValue(PrintValues[i].Key, PrintValues[i].Value);
                 }
             }
         }
@@ -121,6 +119,7 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public void Print()
         {
+            Init();
             BindData();
             //打印机名称
             btFormat.PrintSetup.Printer = Name;
@@ -131,21 +130,21 @@ namespace BorwinAnalyse.BaseClass
             btFormat.Close(BarTender.BtSaveOptions.btSaveChanges);
         }
 
-
         public void Save()
         {
-            string savePath = @"Ini/ParamManager.json";
+            string savePath = @"Ini/BartenderPrint.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
                 fs1.Close();
             }
             File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
+
         }
 
         public void Load()
         {
-            string savePath = @"Ini/ParamManager.json";
+            string savePath = @"Ini/BartenderPrint.json";
             if (!File.Exists(savePath))
             {
                 FileStream fs1 = new FileStream(savePath, FileMode.Create, FileAccess.ReadWrite);
@@ -180,17 +179,5 @@ namespace BorwinAnalyse.BaseClass
         public string Key { get; set; }
         public string Value { get; set; }
         public bool Enable;
-    }
-
-    public class p
-    {
-        public p() { }
-        private string wo = "121232";
-        private string line = "L1";
-        public int qty = 100;
-        public string com = "china";
-
-        public string Wo { get => wo; set => wo = value; }
-        public string Line { get => line; set => line = value; }
     }
 }

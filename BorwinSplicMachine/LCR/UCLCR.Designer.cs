@@ -298,6 +298,7 @@
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
             this.kryptonWrapLabel1.StateCommon.TextColor = System.Drawing.Color.White;
+            this.kryptonWrapLabel1.StateNormal.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel1.Text = "类型";
             // 
             // UCLCR

@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.kryptonRibbon1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbon();
-            this.stop = new ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton();
-            this.reset = new ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton();
             this.kryptonRibbonTab1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab();
             this.kryptonRibbonGroup1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroup();
             this.kryptonRibbonGroupTriple1 = new ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple();
@@ -73,25 +71,13 @@
             this.kryptonRibbon1.OverrideFocus.RibbonTab.BackColor5 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.kryptonRibbon1.OverrideFocus.RibbonTab.TextColor = System.Drawing.Color.Yellow;
             this.kryptonRibbon1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.kryptonRibbon1.QATButtons.AddRange(new System.ComponentModel.Component[] {
-            this.stop,
-            this.reset});
             resources.ApplyResources(this.kryptonRibbon1, "kryptonRibbon1");
             this.kryptonRibbon1.RibbonAppButton.AppButtonImage = ((System.Drawing.Image)(resources.GetObject("kryptonRibbon1.RibbonAppButton.AppButtonImage")));
             this.kryptonRibbon1.RibbonAppButton.AppButtonMaxRecentSize = new System.Drawing.Size(500, 500);
             this.kryptonRibbon1.RibbonTabs.AddRange(new ComponentFactory.Krypton.Ribbon.KryptonRibbonTab[] {
             this.kryptonRibbonTab1});
+            this.kryptonRibbon1.SelectedContext = null;
             this.kryptonRibbon1.SelectedTab = this.kryptonRibbonTab1;
-            // 
-            // stop
-            // 
-            resources.ApplyResources(this.stop, "stop");
-            this.stop.Click += new System.EventHandler(this.stop_Click);
-            // 
-            // reset
-            // 
-            resources.ApplyResources(this.reset, "reset");
-            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // kryptonRibbonTab1
             // 
@@ -267,8 +253,6 @@
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator kryptonRibbonGroupSeparator4;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple kryptonRibbonGroupTriple2;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton4;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton stop;
-        private ComponentFactory.Krypton.Ribbon.KryptonRibbonQATButton reset;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton5;
         private ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton kryptonRibbonGroupButton6;
     }

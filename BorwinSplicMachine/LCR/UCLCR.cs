@@ -27,6 +27,7 @@ namespace BorwinSplicMachine.LCR
             this.Load += UCLCR_Load;
             Init();
             this.components = new System.ComponentModel.Container();
+            Dock = DockStyle.Fill;
         }
 
         private void Init()
@@ -172,7 +173,7 @@ namespace BorwinSplicMachine.LCR
             {
                 comType.SelectedIndex = 1;
             }
-            comSize.Text= size;
+            comSize.Text = size;
             comUnit.Text = unit;
             txtValue.Text = value;
             txtGrade.Text = grade;
@@ -329,7 +330,7 @@ namespace BorwinSplicMachine.LCR
         {
             Task.Run(() =>
             {
-                while (Form1.MainControl.motControl!=null)
+                while (Form1.MainControl.motControl != null)
                 {
                     switch (LCRHelper.LCRFlow)
                     {

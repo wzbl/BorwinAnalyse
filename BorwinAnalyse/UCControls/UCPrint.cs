@@ -44,7 +44,8 @@ namespace BorwinAnalyse.UCControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            kryptonDataGridView1.Rows.RemoveAt(kryptonDataGridView1.SelectedRows[0].Index);
+            if (kryptonDataGridView1.SelectedRows.Count > 0)
+                kryptonDataGridView1.Rows.RemoveAt(kryptonDataGridView1.SelectedRows[0].Index);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace BorwinAnalyse.UCControls
             BartenderPrintModel.Instance.PrintValues.Clear();
             for (int i = 0; i < kryptonDataGridView1.Rows.Count; i++)
             {
-                if (kryptonDataGridView1.Rows[i].Cells[0].Value!=null)
+                if (kryptonDataGridView1.Rows[i].Cells[0].Value != null)
                 {
                     string name = kryptonDataGridView1.Rows[i].Cells[0].Value == null ? "" : kryptonDataGridView1.Rows[i].Cells[0].Value.ToString();
                     string key = kryptonDataGridView1.Rows[i].Cells[1].Value == null ? "" : kryptonDataGridView1.Rows[i].Cells[1].Value.ToString();

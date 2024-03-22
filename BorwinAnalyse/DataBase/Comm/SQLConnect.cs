@@ -82,7 +82,7 @@ namespace BorwinAnalyse.DataBase.Comm
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -99,7 +99,7 @@ namespace BorwinAnalyse.DataBase.Comm
                 adapter.Fill(ds, table);
                 return ds.Tables[0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
