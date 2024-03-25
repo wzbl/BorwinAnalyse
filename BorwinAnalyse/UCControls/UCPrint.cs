@@ -23,9 +23,23 @@ namespace BorwinAnalyse.UCControls
 
         private void UCPrint_Load(object sender, EventArgs e)
         {
-            txtName.Text = BartenderPrintModel.Instance.Name;
+            comPrintName.Text = BartenderPrintModel.Instance.Name;
             txtPath.Text = BartenderPrintModel.Instance.Path;
             RefreshData();
+            GetPrinter();
+        }
+
+        /// <summary>
+        /// 获取本地已安装的打印机
+        /// </summary>
+        /// <returns></returns>
+        public void GetPrinter()
+        {
+            System.Drawing.Printing.PrinterSettings.StringCollection PrinterList = System.Drawing.Printing.PrinterSettings.InstalledPrinters;
+            foreach (var item in PrinterList)
+            {
+                comPrintName.Items.Add(item);
+            }
         }
 
         private void RefreshData()
@@ -42,15 +56,15 @@ namespace BorwinAnalyse.UCControls
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (kryptonDataGridView1.SelectedRows.Count > 0)
                 kryptonDataGridView1.Rows.RemoveAt(kryptonDataGridView1.SelectedRows[0].Index);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
-            BartenderPrintModel.Instance.Name = txtName.Text;
+            BartenderPrintModel.Instance.Name = comPrintName.Text;
             BartenderPrintModel.Instance.Path = txtPath.Text;
             RefreshRow();
             BartenderPrintModel.Instance.Save();
@@ -78,7 +92,7 @@ namespace BorwinAnalyse.UCControls
             }
         }
 
-        private void btnPrint_Click(object sender, EventArgs e)
+        private void BtnPrint_Click(object sender, EventArgs e)
         {
             BartenderPrintModel.Instance.Print();
         }

@@ -90,11 +90,10 @@ namespace BorwinAnalyse.UCControls
             IsIdentifyingDigits.Checked = CommonAnalyse.Instance.IsIdentifyingDigits;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
         }
-
 
         private void Save()
         {
@@ -162,16 +161,14 @@ namespace BorwinAnalyse.UCControls
             MessageBox.Show("保存成功".tr());
         }
 
-
-        bool isEnterDataGridView1 = false;
         private void kryptonDataGridView1_MouseEnter(object sender, EventArgs e)
         {
-            isEnterDataGridView1 = true;
+           
         }
 
         private void kryptonDataGridView1_MouseLeave(object sender, EventArgs e)
         {
-            isEnterDataGridView1 = false;
+            
         }
 
         private void ShowMenu(Control c, KryptonContextMenu kcm)
@@ -259,7 +256,5 @@ namespace BorwinAnalyse.UCControls
         {
             DeleteSeparator();
         }
-
-      
     }
 }

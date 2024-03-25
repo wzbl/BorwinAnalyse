@@ -64,7 +64,7 @@ namespace BorwinSplicMachine
 
         Form1 MainForm;
 
-        BarCodeCheck barCode = new BarCodeCheck();
+        public BarCodeCheck CodeControl = new BarCodeCheck();
         public MainControl(Form1 MainForm)
         {
             //VisionModel.HIKVision.Instance.initCam();
@@ -76,7 +76,7 @@ namespace BorwinSplicMachine
             UCMain = new UCMain();
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
-        
+
             UCRichLog = new UCRichLog();
             UCCCD = new UCCCD();
             UCFlowControl = new UCFlowControl();
@@ -114,14 +114,48 @@ namespace BorwinSplicMachine
 
         internal void Init()
         {
-         
+
         }
 
-        public void CheckCode(string code) 
+        public void CheckCode(string code)
         {
-            barCode.CheckCode(ref code);
-            BomDataModel bomData = BomManager.Instance.SearchByBarCode(code);
-            UCLCR.CheckMaterial(bomData.type, bomData.size, bomData.value, bomData.unit, bomData.grade);
+            if (string.IsNullOrEmpty(code))
+            {
+                return;
+            }
+            CodeControl.CheckCode(ref code);
+            
+            if (!CodeControl.Code1.IsSuccess)
+            {
+                BomDataModel bomData = BomManager.Instance.SearchByBarCode(code);
+                if (bomData != null)
+                {
+                    if (bomData.result == "True")
+                    {
+                        UCLCR.CheckMaterial(bomData.type, bomData.size, bomData.value, bomData.unit, bomData.grade);
+                        ParamManager.Instance.System_测值.paramValue = "1";
+                    }
+                    else
+                    {
+                        ParamManager.Instance.System_测值.paramValue="0";
+                    }
+                    CodeControl.Code1.Code = code;
+                    CodeControl.Code1.IsSuccess = true;
+                }
+            }
+            else
+            {
+                if (CodeControl.Code1.Code == code)
+                {
+                    CodeControl.Code2.Code = code;
+                    CodeControl.Code2.IsSuccess = true;
+                }
+            }
+        }
+
+        public void ClearCode()
+        {
+            CodeControl.Clear();
         }
     }
 }

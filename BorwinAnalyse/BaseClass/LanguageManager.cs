@@ -210,8 +210,6 @@ namespace BorwinAnalyse.BaseClass
             }
         }
 
-        private int iQty = 0;
-
         public void MethodA(Control fatherControl)
         {
             Control.ControlCollection sonControls = fatherControl.Controls;
@@ -336,7 +334,6 @@ namespace BorwinAnalyse.BaseClass
                 }));
                 if (control.Controls != null)
                 {
-                    iQty++;
                     //if (iQty % 20 == 0)
                     //{
                     //    //这里加多一个判断，每当循环十次后，就使用新线程的方式来调用方法，主要是为了释放之前的内存，避免内存溢出。

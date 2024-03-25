@@ -47,7 +47,7 @@ namespace LibSDK
             cardConfig.ConigPath = "";
             BaseConfig.Instance.cardConfigs.Add(cardConfig);
             BaseConfig.Instance.Write();
-            Log("添加卡:" + cardConfig.CardNo);
+            //Log("添加卡:" + cardConfig.CardNo);
             UpDateCard?.Invoke();
         }
 
@@ -87,7 +87,7 @@ namespace LibSDK
             AxisParm.AParms.Add(cAxisParm);
             AxisParm.Write();
             InitAxis();
-            Log("添加轴:" + cAxisParm.AxisInfo.AxisName);
+            //Log("添加轴:" + cAxisParm.AxisInfo.AxisName);
         }
 
         public static void DeleteAxis(CAxisParm cAxisParm)
@@ -95,7 +95,7 @@ namespace LibSDK
             AxisParm.AParms.Remove(cAxisParm);
             AxisParm.Write();
             InitAxis();
-            Log("删除轴:" + cAxisParm.AxisInfo.AxisName);
+            //Log("删除轴:" + cAxisParm.AxisInfo.AxisName);
         }
 
         public static void InitAxis()
@@ -254,11 +254,11 @@ namespace LibSDK
             }
             if (motAPI == null)
             {
-                Log("初始化轴"+ AxisName + "失败");
+                //Log("初始化轴" + AxisName + "失败");
             }
             else
             {
-                Log("初始化轴" + AxisName + "成功");
+                //Log("初始化轴" + AxisName + "成功");
             }
             return motAPI;
         }

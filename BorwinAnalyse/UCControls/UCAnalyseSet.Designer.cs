@@ -326,7 +326,7 @@
             this.btnSave.Size = new System.Drawing.Size(240, 53);
             this.btnSave.TabIndex = 13;
             this.btnSave.Values.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // txtResUnit
             // 
@@ -622,7 +622,7 @@
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
             this.保存ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.保存ToolStripMenuItem.Text = "保存";
-            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.btnSave_Click);
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // contextMenuStrip2
             // 

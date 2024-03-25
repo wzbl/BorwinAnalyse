@@ -172,7 +172,7 @@ namespace BorwinSplicMachine.LCR
             {
                 SendTypeCommand();
             }
-            ParamManager.Instance.System_测值.B = true;
+           
         }
 
         /// <summary>
@@ -244,7 +244,6 @@ namespace BorwinSplicMachine.LCR
             Value = 0;
             Unit = Unit.Error;
             Grade = 0;
-            ParamManager.Instance.System_测值.B = false;
         }
 
         /// <summary>

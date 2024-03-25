@@ -29,6 +29,7 @@ namespace BorwinSplicMachine
             MesControl.Instance.Load();
             MotionControl.Init();
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
+            ParamManager.Instance.Load();
             if (dataTable == null) { return; }
             if (dataTable.Rows.Count > 0)
             {

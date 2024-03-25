@@ -28,7 +28,7 @@ namespace BorwinAnalyse.BaseClass
         }
 
         #region System
-        public ParamData System_机型 = new ParamData(ParamType.System, "条码", "1", "1:接料机,2:合盘机,3:CR机", "1");
+        public ParamData System_机型 = new ParamData(ParamType.System, "机型", "1", "1:接料机,2:合盘机,3:CR机", "1");
         public ParamData System_条码 = new ParamData(ParamType.System, "条码", "0", "0不启用,1启用", "1");
         public ParamData System_测值 = new ParamData(ParamType.System, "测值", "0", "0不启用,1启用", "1");
         public ParamData System_找空料 = new ParamData(ParamType.System, "找空料", "0", "0不启用,1启用", "1");
@@ -156,15 +156,7 @@ namespace BorwinAnalyse.BaseClass
 
                     if (paramData.paramName.tr() == paramName)
                     {
-
-                        if (bool.TryParse(paramValue, out bool v))
-                        {
-                            paramData.paramValue = v ? "1" : "0";
-                        }
-                        else
-                        {
-                            paramData.paramValue = paramValue;
-                        }
+                        paramData.paramValue = paramValue;
                     }
                 }
             }
@@ -239,16 +231,13 @@ namespace BorwinAnalyse.BaseClass
             this.paramLevel = paramLevel;
         }
 
+
         public double D
         {
             get
             {
                 double.TryParse(paramValue, out double d);
                 return d;
-            }
-            set
-            {
-                paramValue = value.ToString();
             }
         }
 
@@ -259,10 +248,6 @@ namespace BorwinAnalyse.BaseClass
 
                 return paramValue;
             }
-            set
-            {
-                paramValue = value;
-            }
         }
 
         public int I
@@ -272,10 +257,6 @@ namespace BorwinAnalyse.BaseClass
                 int.TryParse(paramValue, out int i);
                 return i;
             }
-            set
-            {
-                paramValue = value.ToString();
-            }
         }
 
         public bool B
@@ -283,11 +264,11 @@ namespace BorwinAnalyse.BaseClass
             get
             {
                 bool.TryParse(paramValue, out bool b);
+                if (int.TryParse(paramValue, out int i))
+                {
+                    b = i == 1 ? true : false;
+                }
                 return b;
-            }
-            set
-            {
-                paramValue = value.ToString();
             }
         }
 

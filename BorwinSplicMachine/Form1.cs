@@ -52,6 +52,7 @@ namespace BorwinSplicMachine
                 this.components = new System.ComponentModel.Container();
             }
             UpdataLanguage();
+            kryptonPanel1.Controls.Add(MainControl.UCMain);
         }
         public void UpdataLanguage()
         {
@@ -170,6 +171,4 @@ namespace BorwinSplicMachine
             kryptonPanel1.Controls.Add(MainControl.UCPrint);
         }
     }
-
-
 }

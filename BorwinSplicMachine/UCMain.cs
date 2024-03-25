@@ -31,7 +31,7 @@ namespace BorwinSplicMachine
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
         }
-       
+
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
@@ -107,7 +107,47 @@ namespace BorwinSplicMachine
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            txtBarcode1.Focus();
+            if (Form1.MainControl.CodeControl.Code1.IsSuccess)
+            {
+                txtBarcode1.Enabled = false;
+                txtBarcode1.Text = Form1.MainControl.CodeControl.Code1.Code;
+                if (!Form1.MainControl.CodeControl.Code2.IsSuccess)
+                {
+                    txtbarCode2.Focus();
+                    txtbarCode2.Enabled = true;
+                    txtbarCode2.Text = "";
+                }
+                else
+                {
+                    txtbarCode2.Enabled = false;
+                    txtbarCode2.Text = Form1.MainControl.CodeControl.Code2.Code;
+                }
+            }
+            else
+            {
+                txtBarcode1.Enabled = true;
+                txtbarCode2.Enabled = false;
+                txtBarcode1.Text = "";
+                txtBarcode1.Focus();
+            }
+
+        }
+
+        private void txtBarcode1_TextChanged(object sender, EventArgs e)
+        {
+            Form1.MainControl.CheckCode(txtBarcode1.Text);
+        }
+
+        private void txtbarCode2_TextChanged(object sender, EventArgs e)
+        {
+            Form1.MainControl.CheckCode(txtbarCode2.Text);
+        }
+
+        private void btnClearCode_Click(object sender, EventArgs e)
+        {
+            Form1.MainControl.ClearCode();
+            txtBarcode1.Text = "";
+            txtbarCode2.Text = "";
         }
     }
 }

@@ -287,7 +287,6 @@ namespace BorwinSplicMachine.LCR
 
             txtMax.Text = LCRHelper.Max_Value.ToString();
             txtMin.Text = LCRHelper.Min_Value.ToString();
-            ParamManager.Instance.System_测值.B = true;
         }
 
         public void LoadSplic(string type, string size, string value, string unit, string grade)

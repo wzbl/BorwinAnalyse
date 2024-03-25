@@ -24,7 +24,6 @@ namespace BorwinAnalyse.UCControls
 
         private void UCParam_Load(object sender, EventArgs e)
         {
-            InitParam();
             InitType();
             UpdataLanguage();
         }
@@ -71,26 +70,21 @@ namespace BorwinAnalyse.UCControls
             }
         }
 
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        private void InitParam()
-        {
-            ParamManager.Instance.Load();
-        }
-
+        
         private void btnSave_Click(object sender, EventArgs e)
         {
-            for (int i = 0;i< kryptonDataGridView1.SelectedRows.Count;i++)
+            for (int i = 0;i< kryptonDataGridView1.Rows.Count;i++)
             {
-                if (kryptonDataGridView1.SelectedRows[i].Cells[0].Value!=null)
+                if (kryptonDataGridView1.Rows[i].Cells[0].Value!=null)
                 {
-                    string paramName = kryptonDataGridView1.SelectedRows[i].Cells[0].FormattedValue.ToString();
-                    string paramValue = kryptonDataGridView1.SelectedRows[i].Cells[1].FormattedValue.ToString();
+                    string paramName = kryptonDataGridView1.Rows[i].Cells[0].FormattedValue.ToString();
+                    string paramValue = kryptonDataGridView1.Rows[i].Cells[1].FormattedValue.ToString();
                     ParamManager.Instance.UpData(paramName, paramValue);
                 }
                
             }
+            //string v = kryptonDataGridView1.SelectedCells[0].Value.ToString();
+
             ParamManager.Instance.Save();
         }
         private void btnSearch_Click(object sender, EventArgs e)
