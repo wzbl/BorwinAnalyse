@@ -1,4 +1,5 @@
 ﻿using BorwinAnalyse.BaseClass;
+using LibSDK;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,7 @@ namespace BorwinSplicMachine.LCR
             this.components = new System.ComponentModel.Container();
             Dock = DockStyle.Fill;
         }
-
+        public  KTimer KTimer = new KTimer();
         private void Init()
         {
             LCRHelper = new LCRHelper();
@@ -376,7 +377,6 @@ namespace BorwinSplicMachine.LCR
                                 }
                                 LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
-
                             break;
                         case LCR.LCRFlow.测值整体平移:
                             Thread.Sleep(1000);
@@ -398,13 +398,16 @@ namespace BorwinSplicMachine.LCR
                         case LCR.LCRFlow.下针:
                             if (MotControl.下针.InPos("探测位"))
                             {
-                                LCRHelper.SendReadCommand();
                                 LCRHelper.LCRFlow = LCR.LCRFlow.发送电表指令;
+                                KTimer.Restart();
+                                LCRHelper.SendReadCommand();
                             }
                             break;
                         case LCR.LCRFlow.发送电表指令:
-                            Thread.Sleep(1000);
-                            LCRHelper.LCRFlow = LCR.LCRFlow.增加补偿值;
+                            if (KTimer.IsOn(ParamManager.Instance.TimerOut.I))
+                            {
+                                LCRHelper.LCRFlow = LCR.LCRFlow.None;
+                            }
                             break;
                         case LCR.LCRFlow.增加补偿值:
                             LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
@@ -412,7 +415,6 @@ namespace BorwinSplicMachine.LCR
                         case LCR.LCRFlow.判断值是否在范围:
                             MotControl.测值整体上下.Home(1000);
                             MotControl.下针.Home(1000);
-
                             MotControl.测值支撑电磁铁.Off();
                             if (testCount > 3)
                             {
@@ -434,6 +436,7 @@ namespace BorwinSplicMachine.LCR
                             {
                                 LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
                             }
+                            GridAddData();
                             break;
                         case LCR.LCRFlow.Finish:
                             testCount = 0;
@@ -455,7 +458,7 @@ namespace BorwinSplicMachine.LCR
                 kryptonDataGridView1.RowCount,
                 LCRHelper.Side.ToString(),
                 LCRHelper.LineNo.ToString(),
-                "Code",
+                Form1.MainControl.CodeControl.Code1.Code,
                 LCRHelper.Max_Value,
                 LCRHelper.Min_Value,
                 LCRHelper.RealValue,

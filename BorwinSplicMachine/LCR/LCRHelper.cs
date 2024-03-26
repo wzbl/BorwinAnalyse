@@ -341,6 +341,10 @@ namespace BorwinSplicMachine.LCR
         /// <param name="e"></param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            if (LCRFlow!= LCRFlow.发送电表指令)
+            {
+                return;
+            }
             Thread.Sleep(100);
             try
             {

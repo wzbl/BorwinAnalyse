@@ -1,4 +1,5 @@
-﻿using BorwinAnalyse.BaseClass;
+﻿using Alarm;
+using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
 using BorwinAnalyse.UCControls;
 using BorwinSplicMachine.BarCode;
@@ -11,7 +12,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -131,6 +134,37 @@ namespace BorwinSplicMachine
                 txtBarcode1.Focus();
             }
 
+            if (rad8mm.Checked)
+            {
+                MotControl.runnersWidth = RunnersWidth._8mm;
+            }
+            else if (rad12mm.Checked)
+            {
+                MotControl.runnersWidth = RunnersWidth._12mm;
+            }
+            else if (rad16mm.Checked)
+            {
+                MotControl.runnersWidth = RunnersWidth._16mm;
+            }
+            else if (rad24mm.Checked)
+            {
+                MotControl.runnersWidth = RunnersWidth._24mm;
+            }
+            else
+            {
+                MotControl.runnersWidth = RunnersWidth._8mm;
+            }
+
+            if (Alarm.AlarmControl.alarmList!=Alarm.AlarmList.None)
+            {
+                timer1.Stop();
+                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.alarmList.ToString(),"admin");
+                if (formAlarm.ShowDialog()==DialogResult.OK)
+                {
+                    timer1.Start();
+                }
+               
+            }
         }
 
         private void txtBarcode1_TextChanged(object sender, EventArgs e)

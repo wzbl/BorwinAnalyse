@@ -586,7 +586,6 @@ namespace BorwinSplicMachine
                         switch (resetFlow)
                         {
                             case ResetFlow.None:
-
                                 break;
                             case ResetFlow.吸嘴_测值上下回零:
                                 吸头上下.Home(1000);
@@ -606,12 +605,12 @@ namespace BorwinSplicMachine
                                 }
                                 break;
                             case ResetFlow.探针回零:
-                                //探针A.Home(2000);
-                                //探针B.Home(2000);
+                                探针A.Home(1000);
+                                探针B.Home(1000);
                                 resetFlow = ResetFlow.探针回零完成;
                                 break;
                             case ResetFlow.探针回零完成:
-                                //if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState)
+                                if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState)
                                 {
                                     resetFlow = ResetFlow.初始化;
                                 }
@@ -631,8 +630,11 @@ namespace BorwinSplicMachine
                                 if (凸轮.HomeState && 流道调宽.HomeState && 吸头平移.HomeState)
                                 {
                                     resetFlow = ResetFlow.None;
+                                  
                                     左进入.SetServoff();
                                     右进入.SetServoff();
+                                    左进入.Home(1000);
+                                    右进入.Home(1000);
                                 }
                                 break;
                             default:

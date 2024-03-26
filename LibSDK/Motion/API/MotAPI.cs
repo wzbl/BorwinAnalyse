@@ -1,4 +1,5 @@
-﻿using LibSDK.AxisParamDebuger;
+﻿using Alarm;
+using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
 using NPOI.SS.Formula.Functions;
 using System;
@@ -435,7 +436,7 @@ namespace LibSDK.Motion
             {
                 MotionControl.HomeFlag = true;
                 new CardAPI().StopAxis();//回零失败紧急停止所有轴
-                                         //new Alarm.Alarm().MesShow(0, "Home Error", Error, "Yes/确定");
+                new FormAlarm(DateTime.Now.ToString(),Error,"admin").ShowDialog();
                 axisError.IsError = true;
                 axisError.ErrorMsg = Error;
                 return false;

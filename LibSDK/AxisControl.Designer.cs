@@ -49,12 +49,14 @@
             this.txtVel = new System.Windows.Forms.TextBox();
             this.kryptonWrapLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.c = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.dSignalLamp1 = new LibSDK.IO.DSignalLamp();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn();
             this.Column4 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn();
             this.Column5 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn();
+            this.dSignalLamp1 = new LibSDK.IO.DSignalLamp();
+            this.kryptonTrackBar1 = new ComponentFactory.Krypton.Toolkit.KryptonTrackBar();
+            this.kryptonTrackBar2 = new ComponentFactory.Krypton.Toolkit.KryptonTrackBar();
             this.errorPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comMotionType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
@@ -70,7 +72,7 @@
             // 
             this.txtRel.Font = new System.Drawing.Font("宋体", 9F);
             this.txtRel.Location = new System.Drawing.Point(5, 49);
-            this.txtRel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRel.Margin = new System.Windows.Forms.Padding(4);
             this.txtRel.Name = "txtRel";
             this.txtRel.ReadOnly = true;
             this.txtRel.Size = new System.Drawing.Size(119, 25);
@@ -79,7 +81,7 @@
             // btnPositive
             // 
             this.btnPositive.Location = new System.Drawing.Point(131, 108);
-            this.btnPositive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPositive.Margin = new System.Windows.Forms.Padding(4);
             this.btnPositive.Name = "btnPositive";
             this.btnPositive.Size = new System.Drawing.Size(60, 56);
             this.btnPositive.TabIndex = 2;
@@ -92,7 +94,7 @@
             // btnNagetive
             // 
             this.btnNagetive.Location = new System.Drawing.Point(253, 108);
-            this.btnNagetive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNagetive.Margin = new System.Windows.Forms.Padding(4);
             this.btnNagetive.Name = "btnNagetive";
             this.btnNagetive.Size = new System.Drawing.Size(60, 56);
             this.btnNagetive.TabIndex = 3;
@@ -105,7 +107,7 @@
             // btnStop
             // 
             this.btnStop.Location = new System.Drawing.Point(192, 108);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(4);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(60, 56);
             this.btnStop.TabIndex = 4;
@@ -115,7 +117,7 @@
             // btnStartGoHome
             // 
             this.btnStartGoHome.Location = new System.Drawing.Point(139, 56);
-            this.btnStartGoHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStartGoHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnStartGoHome.Name = "btnStartGoHome";
             this.btnStartGoHome.Size = new System.Drawing.Size(81, 50);
             this.btnStartGoHome.TabIndex = 9;
@@ -125,7 +127,7 @@
             // btnOpenSero
             // 
             this.btnOpenSero.Location = new System.Drawing.Point(207, 0);
-            this.btnOpenSero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOpenSero.Margin = new System.Windows.Forms.Padding(4);
             this.btnOpenSero.Name = "btnOpenSero";
             this.btnOpenSero.Size = new System.Drawing.Size(109, 50);
             this.btnOpenSero.TabIndex = 14;
@@ -150,7 +152,7 @@
             this.errorPanel.Controls.Add(this.btnAlarmReset);
             this.errorPanel.Controls.Add(this.lbErrorMsg);
             this.errorPanel.Location = new System.Drawing.Point(151, 25);
-            this.errorPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.errorPanel.Margin = new System.Windows.Forms.Padding(4);
             this.errorPanel.Name = "errorPanel";
             this.errorPanel.Size = new System.Drawing.Size(13, 12);
             this.errorPanel.TabIndex = 22;
@@ -159,7 +161,7 @@
             // btnAlarmReset
             // 
             this.btnAlarmReset.Location = new System.Drawing.Point(145, 90);
-            this.btnAlarmReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAlarmReset.Margin = new System.Windows.Forms.Padding(4);
             this.btnAlarmReset.Name = "btnAlarmReset";
             this.btnAlarmReset.Size = new System.Drawing.Size(123, 59);
             this.btnAlarmReset.TabIndex = 1;
@@ -182,7 +184,7 @@
             // txtPos
             // 
             this.txtPos.Location = new System.Drawing.Point(5, 95);
-            this.txtPos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPos.Margin = new System.Windows.Forms.Padding(4);
             this.txtPos.Name = "txtPos";
             this.txtPos.Size = new System.Drawing.Size(119, 25);
             this.txtPos.TabIndex = 29;
@@ -216,7 +218,7 @@
             " 绝对",
             " JOG"});
             this.comMotionType.Location = new System.Drawing.Point(5, 141);
-            this.comMotionType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comMotionType.Margin = new System.Windows.Forms.Padding(4);
             this.comMotionType.Name = "comMotionType";
             this.comMotionType.Size = new System.Drawing.Size(120, 25);
             this.comMotionType.TabIndex = 28;
@@ -237,12 +239,14 @@
             this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
             // 
             // kryptonSplitContainer1.Panel1
             // 
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonTrackBar2);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.errorPanel);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonTrackBar1);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtAcc);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel4);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.lbName);
@@ -270,10 +274,11 @@
             // 
             // txtAcc
             // 
-            this.txtAcc.Location = new System.Drawing.Point(152, 186);
-            this.txtAcc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAcc.Location = new System.Drawing.Point(241, 191);
+            this.txtAcc.Margin = new System.Windows.Forms.Padding(4);
             this.txtAcc.Name = "txtAcc";
-            this.txtAcc.Size = new System.Drawing.Size(119, 25);
+            this.txtAcc.ReadOnly = true;
+            this.txtAcc.Size = new System.Drawing.Size(70, 25);
             this.txtAcc.TabIndex = 45;
             this.txtAcc.TextChanged += new System.EventHandler(this.txtAcc_TextChanged);
             // 
@@ -281,7 +286,7 @@
             // 
             this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel4.Location = new System.Drawing.Point(181, 168);
+            this.kryptonWrapLabel4.Location = new System.Drawing.Point(6, 193);
             this.kryptonWrapLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
             this.kryptonWrapLabel4.Size = new System.Drawing.Size(57, 20);
@@ -289,10 +294,11 @@
             // 
             // txtVel
             // 
-            this.txtVel.Location = new System.Drawing.Point(5, 186);
-            this.txtVel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtVel.Location = new System.Drawing.Point(241, 165);
+            this.txtVel.Margin = new System.Windows.Forms.Padding(4);
             this.txtVel.Name = "txtVel";
-            this.txtVel.Size = new System.Drawing.Size(119, 25);
+            this.txtVel.ReadOnly = true;
+            this.txtVel.Size = new System.Drawing.Size(70, 25);
             this.txtVel.TabIndex = 36;
             this.txtVel.TextChanged += new System.EventHandler(this.txtVel_TextChanged);
             // 
@@ -300,7 +306,7 @@
             // 
             this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel5.Location = new System.Drawing.Point(44, 168);
+            this.kryptonWrapLabel5.Location = new System.Drawing.Point(15, 168);
             this.kryptonWrapLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
             this.kryptonWrapLabel5.Size = new System.Drawing.Size(41, 20);
@@ -318,28 +324,12 @@
             this.Column5});
             this.c.Dock = System.Windows.Forms.DockStyle.Fill;
             this.c.Location = new System.Drawing.Point(0, 0);
-            this.c.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.c.Margin = new System.Windows.Forms.Padding(4);
             this.c.Name = "c";
             this.c.RowHeadersWidth = 4;
             this.c.RowTemplate.Height = 50;
             this.c.Size = new System.Drawing.Size(438, 216);
             this.c.TabIndex = 5;
-            // 
-            // dSignalLamp1
-            // 
-            this.dSignalLamp1.CanClick = false;
-            this.dSignalLamp1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dSignalLamp1.IsHighlight = true;
-            this.dSignalLamp1.IsShowBorder = false;
-            this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
-        System.Drawing.Color.Red};
-            this.dSignalLamp1.Location = new System.Drawing.Point(236, 54);
-            this.dSignalLamp1.Margin = new System.Windows.Forms.Padding(4);
-            this.dSignalLamp1.Name = "dSignalLamp1";
-            this.dSignalLamp1.Size = new System.Drawing.Size(50, 50);
-            this.dSignalLamp1.TabIndex = 19;
-            this.dSignalLamp1.TwinkleSpeed = 0;
-            this.dSignalLamp1.Value = 0;
             // 
             // Column1
             // 
@@ -378,13 +368,52 @@
             this.Column5.Name = "Column5";
             this.Column5.Text = "";
             // 
+            // dSignalLamp1
+            // 
+            this.dSignalLamp1.CanClick = false;
+            this.dSignalLamp1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dSignalLamp1.IsHighlight = true;
+            this.dSignalLamp1.IsShowBorder = false;
+            this.dSignalLamp1.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.Red};
+            this.dSignalLamp1.Location = new System.Drawing.Point(236, 54);
+            this.dSignalLamp1.Margin = new System.Windows.Forms.Padding(4);
+            this.dSignalLamp1.Name = "dSignalLamp1";
+            this.dSignalLamp1.Size = new System.Drawing.Size(50, 50);
+            this.dSignalLamp1.TabIndex = 19;
+            this.dSignalLamp1.TwinkleSpeed = 0;
+            this.dSignalLamp1.Value = 0;
+            // 
+            // kryptonTrackBar1
+            // 
+            this.kryptonTrackBar1.DrawBackground = true;
+            this.kryptonTrackBar1.Location = new System.Drawing.Point(63, 171);
+            this.kryptonTrackBar1.Maximum = 100;
+            this.kryptonTrackBar1.Name = "kryptonTrackBar1";
+            this.kryptonTrackBar1.Size = new System.Drawing.Size(177, 15);
+            this.kryptonTrackBar1.TabIndex = 6;
+            this.kryptonTrackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.kryptonTrackBar1.TrackBarSize = ComponentFactory.Krypton.Toolkit.PaletteTrackBarSize.Small;
+            this.kryptonTrackBar1.ValueChanged += new System.EventHandler(this.kryptonTrackBar1_ValueChanged);
+            // 
+            // kryptonTrackBar2
+            // 
+            this.kryptonTrackBar2.DrawBackground = true;
+            this.kryptonTrackBar2.Location = new System.Drawing.Point(63, 198);
+            this.kryptonTrackBar2.Name = "kryptonTrackBar2";
+            this.kryptonTrackBar2.Size = new System.Drawing.Size(177, 15);
+            this.kryptonTrackBar2.TabIndex = 52;
+            this.kryptonTrackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.kryptonTrackBar2.TrackBarSize = ComponentFactory.Krypton.Toolkit.PaletteTrackBarSize.Small;
+            this.kryptonTrackBar2.ValueChanged += new System.EventHandler(this.kryptonTrackBar2_ValueChanged);
+            // 
             // AxisControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Controls.Add(this.kryptonSplitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AxisControl";
             this.Size = new System.Drawing.Size(760, 216);
             this.errorPanel.ResumeLayout(false);
@@ -431,5 +460,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn Column3;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn Column4;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewButtonColumn Column5;
+        private ComponentFactory.Krypton.Toolkit.KryptonTrackBar kryptonTrackBar2;
+        private ComponentFactory.Krypton.Toolkit.KryptonTrackBar kryptonTrackBar1;
     }
 }

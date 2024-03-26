@@ -56,8 +56,8 @@ namespace BorwinAnalyse.BaseClass
 
         public ParamData LCR偏差 = new ParamData(ParamType.LCR, "LCR差值", "2", "%");
         public ParamData 小电阻先测4线 = new ParamData(ParamType.LCR, "判断是否为小电阻", "10", "低于此值判断为小电阻,单位Ω");
-
-
+        public ParamData Reel = new ParamData(ParamType.LCR, "料盘感应", "0", "1或者0");
+        public ParamData TimerOut = new ParamData(ParamType.LCR, "测值超时", "2000", "电表反馈超时");
         public ParamData R_Set_value = new ParamData(ParamType.LCR, "电阻标准设置", "200", "电阻单位Ω,K,M");
         public ParamData R_Set_Grade = new ParamData(ParamType.LCR, "电阻偏差设置", "F", "C%0.25,D%0.5,F%1,G%2,J%5,K%10,M%20,N%30");
         public ParamData C_Set_value = new ParamData(ParamType.LCR, "电容标准设置", "3", "电容单位pF,nF,uF,mF");
@@ -96,8 +96,6 @@ namespace BorwinAnalyse.BaseClass
         public ParamData testint_Count = new ParamData(ParamType.LCR, "测试次数", "6", "次数");
         public ParamData ReWriteV_Min = new ParamData(ParamType.LCR, "转换测试电压电容最小值uf", "1", "1_uF");
         public ParamData ReWriteV_Max = new ParamData(ParamType.LCR, "转换测试电压电容最大值uf", "1000", "1000_uF");
-        public ParamData Reel = new ParamData(ParamType.LCR, "料盘感应", "0", "1或者0");
-
         #endregion
 
         #region 左LCR

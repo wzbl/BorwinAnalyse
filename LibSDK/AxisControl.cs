@@ -49,8 +49,8 @@ namespace LibSDK
             this.Load += AxisControl_Load;
             this.MotAPI = MotAPI;
             CAxisParm = MotionControl.AxisParm.GetAxisParm(MotAPI.CardNum, MotAPI.Axis);
-            txtVel.Text = CAxisParm.AxisMotionPara.MotionSped.ToString();
-            txtAcc.Text = CAxisParm.AxisMotionPara.MotionAcc.ToString();
+            kryptonTrackBar1.Maximum = (int)CAxisParm.AxisMotionPara.MaxManualMoveSpd;
+            kryptonTrackBar2.Maximum = (int)CAxisParm.AxisMotionPara.MaxAcc;
             comMotionType.SelectedIndex = 1;
             txtPos.Text = "10";
 
@@ -63,6 +63,8 @@ namespace LibSDK
                 kryptonButton.Dock = DockStyle.Fill;
                 kryptonSplitContainer1.Panel2.Controls.Add(kryptonButton);
                 胶膜1到位 = MotionControl.GetInPutIO("胶膜1到位");
+                btnStartGoHome.Visible = false;
+                dSignalLamp1.Visible = false;
             }
             else
             {
@@ -322,6 +324,16 @@ namespace LibSDK
         private void txtAcc_TextChanged(object sender, EventArgs e)
         {
             double.TryParse(txtAcc.Text, out Acc);
+        }
+
+        private void kryptonTrackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            txtVel.Text = kryptonTrackBar1.Value.ToString();
+        }
+
+        private void kryptonTrackBar2_ValueChanged(object sender, EventArgs e)
+        {
+            txtAcc.Text = kryptonTrackBar2.Value.ToString();
         }
     }
 }

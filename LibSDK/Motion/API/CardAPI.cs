@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -83,6 +84,7 @@ namespace LibSDK.Motion
                         {
                             Rtn = Card.API.CrdIni((short)i, Pfile[i]);
                             if (!Rtn) {
+                                Alarm.AlarmControl.alarmList = Alarm.AlarmList.控制卡打开异常;
                                 MotionControl.Log(string.Format("初始化卡{0}失败",i));
                                 return Rtn;
                             }

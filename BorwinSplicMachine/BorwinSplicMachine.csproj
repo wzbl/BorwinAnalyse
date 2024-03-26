@@ -332,6 +332,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alarm\Alarm.csproj">
+      <Project>{a267c9ce-d296-4d05-bb35-8b1eeb8420d6}</Project>
+      <Name>Alarm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BorwinAnalyse\BorwinAnalyse.csproj">
       <Project>{e24f3998-ff55-4a8f-a7b5-b2dcc34eb3c2}</Project>
       <Name>BorwinAnalyse</Name>

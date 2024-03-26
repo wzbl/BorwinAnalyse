@@ -35,12 +35,16 @@
             this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.btnClearCode = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnClearCode = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.rad8mm = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rad12mm = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rad24mm = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
+            this.rad16mm = new ComponentFactory.Krypton.Toolkit.KryptonRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -60,9 +64,10 @@
             // 
             // txtbarCode2
             // 
-            this.txtbarCode2.Location = new System.Drawing.Point(393, 13);
+            this.txtbarCode2.Location = new System.Drawing.Point(464, 16);
+            this.txtbarCode2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtbarCode2.Name = "txtbarCode2";
-            this.txtbarCode2.Size = new System.Drawing.Size(239, 23);
+            this.txtbarCode2.Size = new System.Drawing.Size(319, 27);
             this.txtbarCode2.TabIndex = 5;
             this.txtbarCode2.TextChanged += new System.EventHandler(this.txtbarCode2_TextChanged);
             // 
@@ -70,16 +75,18 @@
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(354, 21);
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(412, 26);
+            this.kryptonWrapLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
-            this.kryptonWrapLabel2.Size = new System.Drawing.Size(39, 15);
+            this.kryptonWrapLabel2.Size = new System.Drawing.Size(49, 20);
             this.kryptonWrapLabel2.Text = "条码2";
             // 
             // txtBarcode1
             // 
-            this.txtBarcode1.Location = new System.Drawing.Point(57, 13);
+            this.txtBarcode1.Location = new System.Drawing.Point(76, 16);
+            this.txtBarcode1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtBarcode1.Name = "txtBarcode1";
-            this.txtBarcode1.Size = new System.Drawing.Size(239, 23);
+            this.txtBarcode1.Size = new System.Drawing.Size(319, 27);
             this.txtBarcode1.TabIndex = 1;
             this.txtBarcode1.TextChanged += new System.EventHandler(this.txtBarcode1_TextChanged);
             // 
@@ -87,9 +94,10 @@
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(18, 21);
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(24, 26);
+            this.kryptonWrapLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
-            this.kryptonWrapLabel1.Size = new System.Drawing.Size(39, 15);
+            this.kryptonWrapLabel1.Size = new System.Drawing.Size(49, 20);
             this.kryptonWrapLabel1.Text = "条码1";
             // 
             // timer1
@@ -102,11 +110,16 @@
             this.kryptonSplitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonSplitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
             this.kryptonSplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // kryptonSplitContainer1.Panel1
             // 
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.rad24mm);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.rad16mm);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.rad12mm);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.rad8mm);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnClearCode);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtBarcode1);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel1);
@@ -116,23 +129,34 @@
             // kryptonSplitContainer1.Panel2
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonSplitContainer2);
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(980, 609);
-            this.kryptonSplitContainer1.SplitterDistance = 54;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(1307, 761);
+            this.kryptonSplitContainer1.SplitterDistance = 67;
             this.kryptonSplitContainer1.TabIndex = 10;
+            // 
+            // btnClearCode
+            // 
+            this.btnClearCode.Location = new System.Drawing.Point(791, 5);
+            this.btnClearCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearCode.Name = "btnClearCode";
+            this.btnClearCode.Size = new System.Drawing.Size(120, 50);
+            this.btnClearCode.TabIndex = 7;
+            this.btnClearCode.Values.Text = "清除条码";
+            this.btnClearCode.Click += new System.EventHandler(this.btnClearCode_Click);
             // 
             // kryptonSplitContainer2
             // 
             this.kryptonSplitContainer2.Cursor = System.Windows.Forms.Cursors.Default;
             this.kryptonSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonSplitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.kryptonSplitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.kryptonSplitContainer2.Name = "kryptonSplitContainer2";
             this.kryptonSplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // kryptonSplitContainer2.Panel1
             // 
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.tableLayoutPanel1);
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(980, 550);
-            this.kryptonSplitContainer2.SplitterDistance = 184;
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(1307, 689);
+            this.kryptonSplitContainer2.SplitterDistance = 230;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -146,19 +170,21 @@
             this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(980, 184);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1307, 230);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(655, 3);
+            this.pictureBox3.Location = new System.Drawing.Point(874, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(322, 178);
+            this.pictureBox3.Size = new System.Drawing.Size(429, 222);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
@@ -166,9 +192,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(320, 178);
+            this.pictureBox1.Size = new System.Drawing.Size(427, 222);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -176,29 +203,54 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(329, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(439, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(320, 178);
+            this.pictureBox2.Size = new System.Drawing.Size(427, 222);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
-            // btnClearCode
+            // rad8mm
             // 
-            this.btnClearCode.Location = new System.Drawing.Point(674, 5);
-            this.btnClearCode.Name = "btnClearCode";
-            this.btnClearCode.Size = new System.Drawing.Size(90, 40);
-            this.btnClearCode.TabIndex = 7;
-            this.btnClearCode.Values.Text = "清除条码";
-            this.btnClearCode.Click += new System.EventHandler(this.btnClearCode_Click);
+            this.rad8mm.Location = new System.Drawing.Point(933, 26);
+            this.rad8mm.Name = "rad8mm";
+            this.rad8mm.Size = new System.Drawing.Size(58, 24);
+            this.rad8mm.TabIndex = 10;
+            this.rad8mm.Values.Text = "8mm";
+            // 
+            // rad12mm
+            // 
+            this.rad12mm.Location = new System.Drawing.Point(997, 26);
+            this.rad12mm.Name = "rad12mm";
+            this.rad12mm.Size = new System.Drawing.Size(67, 24);
+            this.rad12mm.TabIndex = 11;
+            this.rad12mm.Values.Text = "12mm";
+            // 
+            // rad24mm
+            // 
+            this.rad24mm.Location = new System.Drawing.Point(1133, 26);
+            this.rad24mm.Name = "rad24mm";
+            this.rad24mm.Size = new System.Drawing.Size(67, 24);
+            this.rad24mm.TabIndex = 13;
+            this.rad24mm.Values.Text = "24mm";
+            // 
+            // rad16mm
+            // 
+            this.rad16mm.Location = new System.Drawing.Point(1069, 26);
+            this.rad16mm.Name = "rad16mm";
+            this.rad16mm.Size = new System.Drawing.Size(67, 24);
+            this.rad16mm.TabIndex = 12;
+            this.rad16mm.Values.Text = "16mm";
             // 
             // UCMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonSplitContainer1);
             this.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UCMain";
-            this.Size = new System.Drawing.Size(980, 609);
+            this.Size = new System.Drawing.Size(1307, 761);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
             this.kryptonSplitContainer1.Panel1.PerformLayout();
@@ -232,5 +284,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnClearCode;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad24mm;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad16mm;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad12mm;
+        private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad8mm;
     }
 }
