@@ -1,4 +1,5 @@
-﻿using BorwinAnalyse.BaseClass;
+﻿using Alarm;
+using BorwinAnalyse.BaseClass;
 using BorwinSplicMachine.LCR;
 using LibSDK;
 using LibSDK.IO;
@@ -126,7 +127,6 @@ namespace BorwinSplicMachine
             探针B = MotionControl.GetAxis("探针B");
             下针 = MotionControl.GetAxis("下针");
 
-
             探针A原点 = MotionControl.GetInPutIO("探针A原点");
             测值整体上下原点 = MotionControl.GetInPutIO("测值整体上下原点");
             探针B原点 = MotionControl.GetInPutIO("探针B原点");
@@ -152,7 +152,6 @@ namespace BorwinSplicMachine
             料尾感应光电 = MotionControl.GetInPutIO("料尾感应光电");
             胶膜1到位 = MotionControl.GetInPutIO("胶膜1到位");
 
-
             真空电磁阀1 = MotionControl.GetOutPutIO("真空电磁阀1");
             真空电磁阀2 = MotionControl.GetOutPutIO("真空电磁阀2");
             真空泵 = MotionControl.GetOutPutIO("真空泵");
@@ -166,8 +165,8 @@ namespace BorwinSplicMachine
             探针旋转 = MotionControl.GetOutPutIO("探针旋转");
             左收料 = MotionControl.GetOutPutIO("左收料");
             右收料 = MotionControl.GetOutPutIO("右收料");
-
-            resetFlow = ResetFlow.吸嘴_测值上下回零;
+            AlarmControl.ReSet += Reset;
+            Reset();
             Run();
         }
 
@@ -240,7 +239,6 @@ namespace BorwinSplicMachine
                                     {
                                         //没找到空料的情况
                                         左进入.PMove(-4, 0, true);//走4格
-
                                     }
                                     else
                                     {
@@ -279,7 +277,7 @@ namespace BorwinSplicMachine
                                     }
                                     break;
                                 case MainFlow.测值完成:
-                                    Thread.Sleep(3000);
+                                    Thread.Sleep(2000);
                                     flowLight.左测值.status = 2;
                                     FlowLeft = MainFlow.完成;
                                     break;
@@ -652,6 +650,11 @@ namespace BorwinSplicMachine
         public void Stop()
         {
             MotionControl.CardAPI.StopEmgAxis();
+        }
+
+        public void Reset()
+        {
+            resetFlow = ResetFlow.吸嘴_测值上下回零;
         }
 
         /// <summary>

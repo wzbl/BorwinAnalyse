@@ -40,6 +40,7 @@
             this.BtnClose = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lbemp = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonWrapLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.btnReset = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -132,7 +133,7 @@
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(627, 322);
+            this.BtnClose.Location = new System.Drawing.Point(511, 322);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(134, 59);
             this.BtnClose.TabIndex = 10;
@@ -161,12 +162,22 @@
             this.kryptonWrapLabel7.StateNormal.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel7.Text = "操作员:";
             // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(151, 322);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(134, 59);
+            this.btnReset.TabIndex = 15;
+            this.btnReset.Values.Text = "复位";
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
+            // 
             // FormAlarm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(49)))), ((int)(((byte)(87)))));
             this.ClientSize = new System.Drawing.Size(801, 386);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lbemp);
             this.Controls.Add(this.kryptonWrapLabel7);
             this.Controls.Add(this.BtnClose);
@@ -202,5 +213,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton BtnClose;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbemp;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel7;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnReset;
     }
 }

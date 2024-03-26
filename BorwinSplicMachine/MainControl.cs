@@ -32,14 +32,11 @@ namespace BorwinSplicMachine
             get;
             set;
         }
-        public UCBOM UCBOM { get; set; }
-        public UCParam UCParam { get; set; }
 
-        public UCSearchBom UCSearchBom { get; set; }
+        public UCParam UCParam { get; set; }
 
         public UCSearchLanguage UCSearchLanguage { get; set; }
 
-        public UCAnalyseSet UCAnalyseSet { get; set; }
         public UCControls.UCBaseSet UCBaseSet { get; set; }
         public UCLog UCLog { get; set; }
 
@@ -67,12 +64,9 @@ namespace BorwinSplicMachine
         public BarCodeCheck CodeControl = new BarCodeCheck();
         public MainControl(Form1 MainForm)
         {
-            //VisionModel.HIKVision.Instance.initCam();
-            UCBOM = new UCBOM();
+       
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
-            UCSearchBom = new UCSearchBom();
-            UCAnalyseSet = new UCAnalyseSet();
             UCMain = new UCMain();
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
@@ -98,11 +92,8 @@ namespace BorwinSplicMachine
         {
             await Task.Run(() =>
             {
-                UCBOM.UpdataLanguage();
                 UCParam.UpdataLanguage();
                 UCSearchLanguage.UpdataLanguage();
-                UCSearchBom.UpdataLanguage();
-                UCAnalyseSet.UpdataLanguage();
                 UCMain.UpdataLanguage();
                 UCBaseSet.UpdataLanguage();
                 MainForm.UpdataLanguage();

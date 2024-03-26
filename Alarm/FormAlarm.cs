@@ -26,8 +26,14 @@ namespace Alarm
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            AlarmControl.Alarm = AlarmList.None;
+            AlarmControl.ReSet?.Invoke();
+            DialogResult = DialogResult.OK;
         }
     }
 }

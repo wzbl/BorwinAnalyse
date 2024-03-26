@@ -1,4 +1,5 @@
-﻿using BorwinAnalyse.BaseClass;
+﻿using Alarm;
+using BorwinAnalyse.BaseClass;
 using LibSDK;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace BorwinSplicMachine.LCR
             this.components = new System.ComponentModel.Container();
             Dock = DockStyle.Fill;
         }
-        public  KTimer KTimer = new KTimer();
+        public KTimer KTimer = new KTimer();
         private void Init()
         {
             LCRHelper = new LCRHelper();
@@ -406,36 +407,48 @@ namespace BorwinSplicMachine.LCR
                         case LCR.LCRFlow.发送电表指令:
                             if (KTimer.IsOn(ParamManager.Instance.TimerOut.I))
                             {
+                                AlarmControl.Alarm = AlarmList.测值超时;
                                 LCRHelper.LCRFlow = LCR.LCRFlow.None;
                             }
                             break;
                         case LCR.LCRFlow.增加补偿值:
+                            LCRHelper.SetUnitReadData(ref LCRHelper.ReadData);
+                            LCRHelper.RealValue = LCRHelper.ReadData;
                             LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
                             break;
                         case LCR.LCRFlow.判断值是否在范围:
                             MotControl.测值整体上下.Home(1000);
                             MotControl.下针.Home(1000);
                             MotControl.测值支撑电磁铁.Off();
-                            if (testCount > 3)
+                            if (LCRHelper.RealValue >= LCRHelper.Min_Value&& LCRHelper.RealValue <= LCRHelper.Max_Value)
                             {
-                                Thread.Sleep(2000);
                                 if (LCRHelper.Side == LCR.WhichSide.Left)
                                 {
                                     double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
-                                    MotControl.左进入.PMove(pos, 0);
+                                    MotControl.左进入.PMove(pos, 0,1000,100);
+                                    LCRHelper.LRealValue = LCRHelper.RealValue;
+                                    LCRHelper.LResult = "Pass";
                                 }
                                 else if (LCRHelper.Side == LCR.WhichSide.Right)
                                 {
                                     double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
-                                    MotControl.右进入.PMove(pos, 0);
+                                    MotControl.右进入.PMove(pos, 0,1000,100);
+                                    LCRHelper.RRealValue = LCRHelper.RealValue;
+                                    LCRHelper.LResult = "Pass";
                                 }
-
+                                LCRHelper.Result = LCRResult.Pass;
                                 LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                            }
+                            else if (testCount < ParamManager.Instance.testint_Count.I)
+                            {
+                                LCRHelper.Result = LCRResult.Fail;
+                                LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
                             }
                             else
                             {
-                                LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
+                              
                             }
+
                             GridAddData();
                             break;
                         case LCR.LCRFlow.Finish:

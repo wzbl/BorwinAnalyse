@@ -172,7 +172,7 @@ namespace BorwinSplicMachine.LCR
             {
                 SendTypeCommand();
             }
-           
+
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void SaveLCRData()
         {
-            string dic = "D:\\HistoryData" + "\\LCR"+"\\" + DateTime.Now.ToString("yyyy-MM");
+            string dic = "D:\\HistoryData" + "\\LCR" + "\\" + DateTime.Now.ToString("yyyy-MM");
             if (!Directory.Exists(dic))
             {
                 Directory.CreateDirectory(dic);
@@ -341,7 +341,7 @@ namespace BorwinSplicMachine.LCR
         /// <param name="e"></param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (LCRFlow!= LCRFlow.发送电表指令)
+            if (LCRFlow != LCRFlow.发送电表指令)
             {
                 return;
             }
@@ -444,6 +444,7 @@ namespace BorwinSplicMachine.LCR
             {
                 case LCR_Type.Error:
                     break;
+
                 case LCR_Type.电感:
                     break;
                 case LCR_Type.电容:
@@ -492,6 +493,7 @@ namespace BorwinSplicMachine.LCR
                         LCR = ParamManager.Instance.Clock_1.S;
                     }
                     break;
+
                 case LCR_Type.电阻:
                     if (UnitValue > (basic * Math.Pow(10, 5)))
                     {
@@ -510,12 +512,13 @@ namespace BorwinSplicMachine.LCR
                         LCR = ParamManager.Instance.Rlock_470.S;
                     }
                     break;
+
                 case LCR_Type.其他:
                     break;
+
                 default:
                     break;
             }
-
             return LCR;
 
         }
@@ -527,6 +530,7 @@ namespace BorwinSplicMachine.LCR
         {
             Max_Value = Value + Value * Grade / 100;
         }
+
         /// <summary>
         /// 获取最小值
         /// </summary>
@@ -535,6 +539,9 @@ namespace BorwinSplicMachine.LCR
             Min_Value = Value - Value * Grade / 100;
         }
 
+        /// <summary>
+        /// 转化单位Ω、F
+        /// </summary>
         private void SetUnitValue()
         {
             double sta = Value;
@@ -543,40 +550,95 @@ namespace BorwinSplicMachine.LCR
                 case Unit.mΩ:
                     sta = sta / 1000;
                     break;
+
                 case Unit.Ω:
                     break;
+
                 case Unit.KΩ:
                     sta = sta * 1000;
                     break;
+
                 case Unit.MΩ:
                     sta = sta * 1000 * 1000;
                     break;
+
                 case Unit.PF:
                     sta = sta / (1000000000000);
                     break;
+
                 case Unit.NF:
                     sta = sta / (1000 * 1000 * 1000);
                     break;
+
                 case Unit.UF:
                     sta = sta / (1000 * 1000);
                     break;
+
                 case Unit.MF:
                     sta = sta / (1000);
                     break;
+
                 case Unit.F:
                     break;
+
                 default:
                     break;
             }
             UnitValue = sta;
         }
 
+        /// <summary>
+        /// 电表读值单位化
+        /// </summary>
+        public void SetUnitReadData(ref double data)
+        {
+            switch (Unit)
+            {
+                case Unit.mΩ:
+                    data = data * 1000;
+                    break;
+
+                case Unit.Ω:
+                    break;
+
+                case Unit.KΩ:
+                    data = data / 1000;
+                    break;
+
+                case Unit.MΩ:
+                    data = data / 1000 / 1000;
+                    break;
+
+                case Unit.PF:
+                    data = data * 1000000000000;
+                    break;
+
+                case Unit.NF:
+                    data = data * 1000000000;
+                    break;
+
+                case Unit.UF:
+                    data = data * 1000000;
+                    break;
+
+                case Unit.MF:
+                    data = data * 1000;
+                    break;
+
+                case Unit.F:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         public string GetMaterial()
         {
             string size = Size.ToString();
-            size = size.Replace("_","").Trim();
-            string  grade = Grade + "%";
-            return string.Format("{0}-{1}-{2}{3}-{4}",Type.ToString(), size, RealValue,Unit.ToString(),grade);
+            size = size.Replace("_", "").Trim();
+            string grade = Grade + "%";
+            return string.Format("{0}-{1}-{2}{3}-{4}", Type.ToString(), size, RealValue, Unit.ToString(), grade);
         }
 
         public void Log(string message)

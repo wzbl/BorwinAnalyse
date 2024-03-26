@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Comm;
+using BorwinAnalyse.Forms;
 using LibSDK;
 using LibSDK.Motion;
 using Mes;
@@ -38,6 +39,7 @@ namespace BorwinSplicMachine
             }
             //Application.Run(new MotionConfig());
             Application.Run(new Form1());
+            //Application.Run(new AnalyseMainForm());
         }
 
     }

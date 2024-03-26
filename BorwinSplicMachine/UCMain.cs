@@ -155,12 +155,14 @@ namespace BorwinSplicMachine
                 MotControl.runnersWidth = RunnersWidth._8mm;
             }
 
-            if (Alarm.AlarmControl.alarmList!=Alarm.AlarmList.None)
+            if (Alarm.AlarmControl.Alarm!=Alarm.AlarmList.None)
             {
                 timer1.Stop();
-                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.alarmList.ToString(),"admin");
+                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.Alarm.ToString(),"admin");
+                MotControl.蜂鸣器.On();
                 if (formAlarm.ShowDialog()==DialogResult.OK)
                 {
+                    MotControl.蜂鸣器.Off();
                     timer1.Start();
                 }
                

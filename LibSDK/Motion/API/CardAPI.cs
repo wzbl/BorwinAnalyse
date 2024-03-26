@@ -84,7 +84,7 @@ namespace LibSDK.Motion
                         {
                             Rtn = Card.API.CrdIni((short)i, Pfile[i]);
                             if (!Rtn) {
-                                Alarm.AlarmControl.alarmList = Alarm.AlarmList.控制卡打开异常;
+                                Alarm.AlarmControl.Alarm = Alarm.AlarmList.控制卡打开异常;
                                 MotionControl.Log(string.Format("初始化卡{0}失败",i));
                                 return Rtn;
                             }

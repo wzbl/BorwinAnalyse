@@ -16,6 +16,7 @@ using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.Forms;
 using LibSDK.Motion;
 using LibSDK;
+using Alarm;
 
 namespace BorwinSplicMachine
 {
@@ -29,22 +30,6 @@ namespace BorwinSplicMachine
             MainControl.Init();
         }
 
-        #region 快捷键
-        protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.F1:
-                    FormIO FormIO = new FormIO();
-                    FormIO.Show();
-                    break;
-                default:
-                    break;
-            }
-        }
-        #endregion
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             if (this.components == null)
@@ -53,28 +38,12 @@ namespace BorwinSplicMachine
             }
             UpdataLanguage();
             kryptonPanel1.Controls.Add(MainControl.UCMain);
+           
         }
+
         public void UpdataLanguage()
         {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
-        }
-
-        private void ShowUCBom_Click(object sender, EventArgs e)
-        {
-            kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(MainControl.UCBOM);
-        }
-
-        private void ShowUCBomSearch_Click(object sender, EventArgs e)
-        {
-            kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(MainControl.UCSearchBom);
-        }
-
-        private void ShowUCBomSet_Click(object sender, EventArgs e)
-        {
-            kryptonPanel1.Controls.Clear();
-            kryptonPanel1.Controls.Add(MainControl.UCAnalyseSet);
         }
 
         private void ShowLanguageSearch_Click(object sender, EventArgs e)
@@ -147,16 +116,6 @@ namespace BorwinSplicMachine
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             MainControl.Log("程序关闭");
-        }
-
-        private void reset_Click(object sender, EventArgs e)
-        {
-            MainControl.motControl.resetFlow = ResetFlow.吸嘴_测值上下回零;
-        }
-
-        private void stop_Click(object sender, EventArgs e)
-        {
-            MainControl.motControl.Stop();
         }
 
         private void kryptonRibbonGroupButton5_Click(object sender, EventArgs e)

@@ -45,6 +45,10 @@ namespace BorwinAnalyse.Forms
         private void AnalyseMainForm_Load(object sender, EventArgs e)
         {
             InitUI();
+            if (this.components == null)
+            {
+                this.components = new System.ComponentModel.Container();
+            }
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
 
         }
@@ -87,8 +91,6 @@ namespace BorwinAnalyse.Forms
                         kryptonSplitContainer2.Panel2.Controls.Add(uCBOM);
                     }
                     uCBOM.BringToFront();
-                    break;
-                case "上料表":
                     break;
                 case "查询":
                     if (uCSearch==null)
