@@ -111,63 +111,69 @@ namespace BorwinSplicMachine
 
         public static RunnersWidth runnersWidth = RunnersWidth._8mm;
 
+        private KTimer timer = new KTimer();
+
         public MotControl()
         {
-            流道调宽 = MotionControl.GetAxis("流道调宽");
-            凸轮 = MotionControl.GetAxis("凸轮");
-            左进入 = MotionControl.GetAxis("左进入");
-            右进入 = MotionControl.GetAxis("右进入");
-            吸头平移 = MotionControl.GetAxis("吸头平移");
-            吸头上下 = MotionControl.GetAxis("吸头上下");
-            热熔上下 = MotionControl.GetAxis("热熔上下");
-            拨刀 = MotionControl.GetAxis("拨刀");
-            卷料 = MotionControl.GetAxis("卷料");
-            探针A = MotionControl.GetAxis("探针A");
-            测值整体上下 = MotionControl.GetAxis("测值整体上下");
-            探针B = MotionControl.GetAxis("探针B");
-            下针 = MotionControl.GetAxis("下针");
+            if (MotionControl.CardAPI.IsInitCardOK)
+            {
+                流道调宽 = MotionControl.GetAxis("流道调宽");
+                凸轮 = MotionControl.GetAxis("凸轮");
+                左进入 = MotionControl.GetAxis("左进入");
+                右进入 = MotionControl.GetAxis("右进入");
+                吸头平移 = MotionControl.GetAxis("吸头平移");
+                吸头上下 = MotionControl.GetAxis("吸头上下");
+                热熔上下 = MotionControl.GetAxis("热熔上下");
+                拨刀 = MotionControl.GetAxis("拨刀");
+                卷料 = MotionControl.GetAxis("卷料");
+                探针A = MotionControl.GetAxis("探针A");
+                测值整体上下 = MotionControl.GetAxis("测值整体上下");
+                探针B = MotionControl.GetAxis("探针B");
+                下针 = MotionControl.GetAxis("下针");
 
-            探针A原点 = MotionControl.GetInPutIO("探针A原点");
-            测值整体上下原点 = MotionControl.GetInPutIO("测值整体上下原点");
-            探针B原点 = MotionControl.GetInPutIO("探针B原点");
-            下针原点 = MotionControl.GetInPutIO("下针原点");
-            屏蔽按钮 = MotionControl.GetInPutIO("屏蔽按钮");
-            安全门开关 = MotionControl.GetInPutIO("安全门开关");
-            真空表 = MotionControl.GetInPutIO("真空表");
-            左收料按钮 = MotionControl.GetInPutIO("左收料按钮");
-            右收料按钮 = MotionControl.GetInPutIO("右收料按钮");
-            左料盘感应 = MotionControl.GetInPutIO("左料盘感应");
-            右料盘感应 = MotionControl.GetInPutIO("右料盘感应");
-            左轮光栅 = MotionControl.GetInPutIO("左轮光栅");
-            右轮光栅 = MotionControl.GetInPutIO("右轮光栅");
-            左物料光栅 = MotionControl.GetInPutIO("左物料光栅");
-            右物料光栅 = MotionControl.GetInPutIO("右物料光栅");
-            左入料光栅 = MotionControl.GetInPutIO("左入料光栅");
-            右入料光栅 = MotionControl.GetInPutIO("右入料光栅");
-            卷料原点 = MotionControl.GetInPutIO("卷料原点");
-            切料光纤感应 = MotionControl.GetInPutIO("切料光纤感应");
-            切料电机接近感应 = MotionControl.GetInPutIO("切料电机接近感应");
-            贴膜定位针上位 = MotionControl.GetInPutIO("贴膜定位针上位");
-            贴膜定位针下位 = MotionControl.GetInPutIO("贴膜定位针下位");
-            料尾感应光电 = MotionControl.GetInPutIO("料尾感应光电");
-            胶膜1到位 = MotionControl.GetInPutIO("胶膜1到位");
+                探针A原点 = MotionControl.GetInPutIO("探针A原点");
+                测值整体上下原点 = MotionControl.GetInPutIO("测值整体上下原点");
+                探针B原点 = MotionControl.GetInPutIO("探针B原点");
+                下针原点 = MotionControl.GetInPutIO("下针原点");
+                屏蔽按钮 = MotionControl.GetInPutIO("屏蔽按钮");
+                安全门开关 = MotionControl.GetInPutIO("安全门开关");
+                真空表 = MotionControl.GetInPutIO("真空表");
+                左收料按钮 = MotionControl.GetInPutIO("左收料按钮");
+                右收料按钮 = MotionControl.GetInPutIO("右收料按钮");
+                左料盘感应 = MotionControl.GetInPutIO("左料盘感应");
+                右料盘感应 = MotionControl.GetInPutIO("右料盘感应");
+                左轮光栅 = MotionControl.GetInPutIO("左轮光栅");
+                右轮光栅 = MotionControl.GetInPutIO("右轮光栅");
+                左物料光栅 = MotionControl.GetInPutIO("左物料光栅");
+                右物料光栅 = MotionControl.GetInPutIO("右物料光栅");
+                左入料光栅 = MotionControl.GetInPutIO("左入料光栅");
+                右入料光栅 = MotionControl.GetInPutIO("右入料光栅");
+                卷料原点 = MotionControl.GetInPutIO("卷料原点");
+                切料光纤感应 = MotionControl.GetInPutIO("切料光纤感应");
+                切料电机接近感应 = MotionControl.GetInPutIO("切料电机接近感应");
+                贴膜定位针上位 = MotionControl.GetInPutIO("贴膜定位针上位");
+                贴膜定位针下位 = MotionControl.GetInPutIO("贴膜定位针下位");
+                料尾感应光电 = MotionControl.GetInPutIO("料尾感应光电");
+                胶膜1到位 = MotionControl.GetInPutIO("胶膜1到位");
 
-            真空电磁阀1 = MotionControl.GetOutPutIO("真空电磁阀1");
-            真空电磁阀2 = MotionControl.GetOutPutIO("真空电磁阀2");
-            真空泵 = MotionControl.GetOutPutIO("真空泵");
-            贴膜定位针上下 = MotionControl.GetOutPutIO("贴膜定位针上下");
-            蜂鸣器 = MotionControl.GetOutPutIO("蜂鸣器");
-            卷料压膜电池铁 = MotionControl.GetOutPutIO("卷料压膜电池铁");
-            测值支撑电磁铁 = MotionControl.GetOutPutIO("测值支撑电磁铁");
-            测值压料带电磁铁 = MotionControl.GetOutPutIO("测值压料带电磁铁");
-            测值垫高电磁铁 = MotionControl.GetOutPutIO("测值垫高电磁铁");
-            测值下针电磁铁 = MotionControl.GetOutPutIO("测值下针电磁铁");
-            探针旋转 = MotionControl.GetOutPutIO("探针旋转");
-            左收料 = MotionControl.GetOutPutIO("左收料");
-            右收料 = MotionControl.GetOutPutIO("右收料");
-            AlarmControl.ReSet += Reset;
-            Reset();
-            Run();
+                真空电磁阀1 = MotionControl.GetOutPutIO("真空电磁阀1");
+                真空电磁阀2 = MotionControl.GetOutPutIO("真空电磁阀2");
+                真空泵 = MotionControl.GetOutPutIO("真空泵");
+                贴膜定位针上下 = MotionControl.GetOutPutIO("贴膜定位针上下");
+                蜂鸣器 = MotionControl.GetOutPutIO("蜂鸣器");
+                卷料压膜电池铁 = MotionControl.GetOutPutIO("卷料压膜电池铁");
+                测值支撑电磁铁 = MotionControl.GetOutPutIO("测值支撑电磁铁");
+                测值压料带电磁铁 = MotionControl.GetOutPutIO("测值压料带电磁铁");
+                测值垫高电磁铁 = MotionControl.GetOutPutIO("测值垫高电磁铁");
+                测值下针电磁铁 = MotionControl.GetOutPutIO("测值下针电磁铁");
+                探针旋转 = MotionControl.GetOutPutIO("探针旋转");
+                左收料 = MotionControl.GetOutPutIO("左收料");
+                右收料 = MotionControl.GetOutPutIO("右收料");
+                AlarmControl.ReSet += Reset;
+
+                Reset();
+                Run();
+            }
         }
 
         private int filmCount = 0;
@@ -177,9 +183,12 @@ namespace BorwinSplicMachine
 
             if (tasks[0] == null || tasks[0].IsCompleted)
             {
+
                 tasks[0] = new Task(new Action(() =>
+            {
+                while (true)
                 {
-                    while (true)
+                    if (Alarm.AlarmControl.Alarm == Alarm.AlarmList.None)
                     {
                         //左
                         if (resetFlow == ResetFlow.None)
@@ -188,8 +197,7 @@ namespace BorwinSplicMachine
                             {
                                 case MainFlow.None:
                                     flowLight.左进入.status = 0;
-                                    SetRunnersWidth();
-                                    if (!ParamManager.Instance.System_条码.B && 左入料光栅.State())
+                                    if ((!ParamManager.Instance.System_条码.B||Form1.MainControl.CodeControl.IsSuccess()) && 左入料光栅.State())
                                     {
                                         FlowLeft = MainFlow.进料;
                                         flowLight.左进入.status = 1;
@@ -315,8 +323,7 @@ namespace BorwinSplicMachine
                             {
                                 case MainFlow.None:
                                     flowLight.右进入.status = 0;
-                                    SetRunnersWidth();
-                                    if (!ParamManager.Instance.System_条码.B && 右入料光栅.State())
+                                    if ((!ParamManager.Instance.System_条码.B || Form1.MainControl.CodeControl.IsSuccess()) && 右入料光栅.State())
                                     {
                                         FlowRight = MainFlow.进料;
                                         flowLight.右进入.status = 1;
@@ -435,9 +442,10 @@ namespace BorwinSplicMachine
                                     break;
                             }
                         }
-                        Thread.Sleep(50);
                     }
-                }));
+                    Thread.Sleep(50);
+                }
+            }));
                 tasks[0].Start();
             }
 
@@ -447,138 +455,153 @@ namespace BorwinSplicMachine
                 {
                     while (true)
                     {
-                        //贴膜
-                        switch (filmFlow)
+                        if (Alarm.AlarmControl.Alarm == Alarm.AlarmList.None)
                         {
-                            case FilmFlow.None:
-                                if (右物料光栅.State() || 左物料光栅.State())
-                                {
-                                    filmFlow = FilmFlow.轴到吸膜位;
-                                    filmCount = 0;
-                                }
-                                break;
-                            case FilmFlow.轴到吸膜位:
-                                吸头上下.MovePosByName("吸膜位置上", 1);
-                                热熔上下.MovePosByName("热熔上", 1);
-                                吸头平移.MovePosByName("吸膜位置", 1);
-                                filmFlow = FilmFlow.轴到位;
-                                break;
-
-                            case FilmFlow.轴到位:
-
-                                if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上") && 吸头平移.InPos("吸膜位置"))
-                                {
-                                    filmFlow = FilmFlow.拨刀伸出位;
-                                }
-                                break;
-
-
-                            case FilmFlow.拨刀伸出位:
-                                拨刀.MovePosByName("伸出位", 1);
-                                filmFlow = FilmFlow.拨刀到伸出位;
-                                break;
-
-                            case FilmFlow.拨刀到伸出位:
-                                if (拨刀.InPos("伸出位") && FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
-                                {
-                                    filmFlow = FilmFlow.卷料送一个膜;
-                                    左进入.PMove(-左进入.GetPosByName("接料位"), 0);
-                                    右进入.PMove(-右进入.GetPosByName("接料位"), 0);
-                                }
-                                break;
-
-                            case FilmFlow.卷料送一个膜:
-                                if (胶膜1到位.IsOn())
-                                {
-                                    filmFlow = FilmFlow.吸头上下吸膜;
-                                    吸头上下.MovePosByName("吸膜位置下", 1);
-                                    filmCount++;
-                                }
-                                else
-                                {
-                                    卷料.PMove(0.5, 0);
-                                }
-                                break;
-
-
-
-                            case FilmFlow.吸头上下吸膜:
-                                if (吸头上下.InPos("吸膜位置下"))
-                                {
-                                    真空电磁阀1.On();
-                                    真空电磁阀2.On();
-                                    真空泵.On();
-                                    filmFlow = FilmFlow.大膜退刀位;
-                                }
-
-                                break;
-                            case FilmFlow.大膜退刀位:
-                                拨刀.MovePosByName("大膜退刀位", 1);
-                                break;
-                            case FilmFlow.小膜退刀位:
-                                拨刀.MovePosByName("小膜退刀位", 1);
-                                break;
-                            case FilmFlow.判断真空表:
-                                if (拨刀.InPos("大膜退刀位"))
-                                {
-                                    Thread.Sleep(1000);//吸膜延时
-                                    if (真空表.State())
+                            //贴膜
+                            switch (filmFlow)
+                            {
+                                case FilmFlow.None:
+                                    if (右物料光栅.State() || 左物料光栅.State())
                                     {
-                                        filmFlow = FilmFlow.吸头上下到待机位;
+                                        filmFlow = FilmFlow.轴到吸膜位;
+                                        filmCount = 0;
                                     }
-                                    else if (filmCount > 2)
+                                    break;
+                                case FilmFlow.轴到吸膜位:
+                                    吸头上下.MovePosByName("吸膜位置上", 1);
+                                    热熔上下.MovePosByName("热熔上", 1);
+                                    吸头平移.MovePosByName("吸膜位置", 1);
+                                    filmFlow = FilmFlow.轴到位;
+                                    break;
+
+                                case FilmFlow.轴到位:
+
+                                    if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上") && 吸头平移.InPos("吸膜位置"))
                                     {
-                                        //报警吸膜异常
+                                        filmFlow = FilmFlow.拨刀伸出位;
+                                    }
+                                    break;
+
+
+                                case FilmFlow.拨刀伸出位:
+                                    拨刀.MovePosByName("伸出位", 1);
+                                    filmFlow = FilmFlow.拨刀到伸出位;
+                                    break;
+
+                                case FilmFlow.拨刀到伸出位:
+                                    if (拨刀.InPos("伸出位") && FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
+                                    {
+                                        filmFlow = FilmFlow.卷料送一个膜;
+                                        if (胶膜1到位.IsOn())
+                                        {
+                                            卷料.PMove(6, 0);
+                                        }
+                                        if (filmCount==0)
+                                        {
+                                            左进入.PMove(-左进入.GetPosByName("接料位"), 0);
+                                            右进入.PMove(-右进入.GetPosByName("接料位"), 0);
+                                        }
+                                    }
+                                    break;
+
+                                case FilmFlow.卷料送一个膜:
+                                    if (胶膜1到位.IsOn())
+                                    {
+                                        filmFlow = FilmFlow.吸头上下吸膜;
+                                        吸头上下.MovePosByName("吸膜位置下", 1);
+                                        filmCount++;
                                     }
                                     else
+                                    {
+                                        卷料.PMove(2, 0);
+                                    }
+                                    break;
+
+
+
+                                case FilmFlow.吸头上下吸膜:
+                                    if (吸头上下.InPos("吸膜位置下"))
+                                    {
+                                        真空电磁阀1.On();
+                                        真空电磁阀2.On();
+                                        真空泵.On();
+                                        filmFlow = FilmFlow.大膜退刀位;
+                                    }
+
+                                    break;
+                                case FilmFlow.大膜退刀位:
+                                    拨刀.MovePosByName("大膜退刀位", 1);
+                                    filmFlow = FilmFlow.判断真空表;
+                                    break;
+                                case FilmFlow.小膜退刀位:
+                                    拨刀.MovePosByName("小膜退刀位", 1);
+                                    filmFlow = FilmFlow.判断真空表;
+                                    break;
+                                case FilmFlow.判断真空表:
+                                    if (拨刀.InPos("大膜退刀位"))
+                                    {
+                                        Thread.Sleep(2000);//吸膜延时
+                                        if (真空表.State())
+                                        {
+                                            filmFlow = FilmFlow.吸头上下到待机位;
+                                        }
+                                        else if (filmCount > 2)
+                                        {
+                                            //报警吸膜异常
+                                            AlarmControl.Alarm = AlarmList.吸膜超时;
+                                        }
+                                        else
+                                        {
+                                            真空电磁阀1.Off();
+                                            真空电磁阀2.Off();
+                                            真空泵.Off();
+                                            filmFlow = FilmFlow.轴到吸膜位;
+                                        }
+                                    }
+
+                                    break;
+                                case FilmFlow.吸头上下到待机位:
+                                    吸头上下.MovePosByName("吸膜位置上", 1);
+                                    吸头平移.MovePosByName("贴膜位置1", 1);
+                                    filmFlow = FilmFlow.平移到对应贴膜位;
+                                    break;
+                                case FilmFlow.平移到对应贴膜位:
+                                    if (吸头平移.InPos("贴膜位置1"))
+                                    {
+                                        filmFlow = FilmFlow.贴膜动作;
+                                        吸头上下.MovePosByName("贴膜位置下", 1);
+                                    }
+                                    break;
+                                case FilmFlow.贴膜动作:
+                                    if (吸头上下.InPos("贴膜位置下"))
                                     {
                                         真空电磁阀1.Off();
                                         真空电磁阀2.Off();
                                         真空泵.Off();
-                                        filmFlow = FilmFlow.轴到吸膜位;
+                                        凸轮.MovePosByName("至包胶位", 1);
+                                        Thread.Sleep(100);//贴膜延时
+                                        吸头上下.MovePosByName("热熔位置", 1);
+                                        热熔上下.MovePosByName("热熔下", 1);
+                                        filmFlow = FilmFlow.热熔动作;
                                     }
-                                }
+                                    break;
+                                case FilmFlow.热熔动作:
+                                    if (热熔上下.InPos("热熔下"))
+                                    {
+                                        热熔上下.MovePosByName("热熔上", 1);
+                                        filmFlow = FilmFlow.完成;
+                                    }
+                                    break;
+                                case FilmFlow.完成:
+                                    flowLight.贴膜.status = 2;
+                                    Form1.MainControl.UCLCR.LCRHelper.SaveData();
+                                    break;
+                                default:
+                                    break;
+                            }
 
-                                break;
-                            case FilmFlow.吸头上下到待机位:
-                                吸头上下.MovePosByName("吸膜位置上", 1);
-                                吸头平移.MovePosByName("贴膜位置1", 1);
-                                filmFlow = FilmFlow.平移到对应贴膜位;
-                                break;
-                            case FilmFlow.平移到对应贴膜位:
-                                if (吸头平移.InPos("贴膜位置1"))
-                                {
-                                    filmFlow = FilmFlow.贴膜动作;
-                                    吸头上下.MovePosByName("贴膜位置下", 1);
-                                }
-                                break;
-                            case FilmFlow.贴膜动作:
-                                if (吸头上下.InPos("贴膜位置下"))
-                                {
-                                    真空电磁阀1.Off();
-                                    真空电磁阀2.Off();
-                                    真空泵.Off();
-                                    凸轮.MovePosByName("至包胶位", 1);
-                                    Thread.Sleep(100);//贴膜延时
-                                    吸头上下.MovePosByName("热熔位置", 1);
-                                    热熔上下.MovePosByName("热熔下", 1);
-                                    filmFlow = FilmFlow.热熔动作;
-                                }
-                                break;
-                            case FilmFlow.热熔动作:
-                                if (热熔上下.InPos("热熔下"))
-                                {
-                                    热熔上下.MovePosByName("热熔上", 1);
-                                    filmFlow = FilmFlow.完成;
-                                }
-                                break;
-                            case FilmFlow.完成:
-                                flowLight.贴膜.status = 2;
-                                Form1.MainControl.UCLCR.LCRHelper.SaveData();
-                                break;
-                            default:
-                                break;
                         }
+
 
                         //复位
                         switch (resetFlow)
@@ -608,7 +631,7 @@ namespace BorwinSplicMachine
                                 resetFlow = ResetFlow.探针回零完成;
                                 break;
                             case ResetFlow.探针回零完成:
-                                if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState)
+                                if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState&& 测值整体上下.HomeState)
                                 {
                                     resetFlow = ResetFlow.初始化;
                                 }
@@ -628,17 +651,17 @@ namespace BorwinSplicMachine
                                 if (凸轮.HomeState && 流道调宽.HomeState && 吸头平移.HomeState)
                                 {
                                     resetFlow = ResetFlow.None;
-                                  
+                                    filmCount = 0;
                                     左进入.SetServoff();
                                     右进入.SetServoff();
                                     左进入.Home(1000);
                                     右进入.Home(1000);
+                                    SetRunnersWidth();
                                 }
                                 break;
                             default:
                                 break;
                         }
-                    
                         Thread.Sleep(50);
                     }
                 }));

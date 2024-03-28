@@ -6,6 +6,7 @@ using BorwinSplicMachine.BarCode;
 using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using ComponentFactory.Krypton.Toolkit;
+using LibSDK;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -155,17 +156,19 @@ namespace BorwinSplicMachine
                 MotControl.runnersWidth = RunnersWidth._8mm;
             }
 
-            if (Alarm.AlarmControl.Alarm!=Alarm.AlarmList.None)
+            if (Alarm.AlarmControl.Alarm != Alarm.AlarmList.None)
             {
                 timer1.Stop();
-                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.Alarm.ToString(),"admin");
-                MotControl.蜂鸣器.On();
-                if (formAlarm.ShowDialog()==DialogResult.OK)
+                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.Alarm.ToString(), "admin");
+                if (MotionControl.CardAPI.IsInitCardOK)
+                    MotControl.蜂鸣器.On();
+                if (formAlarm.ShowDialog() == DialogResult.Yes)
                 {
-                    MotControl.蜂鸣器.Off();
+                    if (MotionControl.CardAPI.IsInitCardOK)
+                        MotControl.蜂鸣器.Off();
                     timer1.Start();
                 }
-               
+
             }
         }
 
@@ -185,5 +188,6 @@ namespace BorwinSplicMachine
             txtBarcode1.Text = "";
             txtbarCode2.Text = "";
         }
+         
     }
 }

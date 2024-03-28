@@ -165,6 +165,7 @@ namespace BorwinSplicMachine.LCR
             this.Value = Value;
             this.Unit = Unit;
             this.Grade = Grade;
+            SetABWidth();
             SetMaxValue();
             SetMinValue();
             SetUnitValue();
@@ -173,6 +174,51 @@ namespace BorwinSplicMachine.LCR
                 SendTypeCommand();
             }
 
+        }
+
+        /// <summary>
+        /// 设置AB探针宽度
+        /// </summary>
+        public void SetABWidth()
+        {
+            double a = 0;
+            double b = 0;
+            switch (Size)
+            {
+                case LCR_Size.Error:
+                case LCR_Size._01005:
+                    a = MotControl.探针A.GetPosByName("01005");
+                    b = MotControl.探针B.GetPosByName("01005");
+                    break;
+                case LCR_Size._0201:
+                    a = MotControl.探针A.GetPosByName("0201");
+                    b = MotControl.探针B.GetPosByName("0201");
+                    break;
+                case LCR_Size._0402:
+                    a = MotControl.探针A.GetPosByName("0402");
+                    b = MotControl.探针B.GetPosByName("0402");
+                    break;
+                case LCR_Size._0603:
+                    a = MotControl.探针A.GetPosByName("0603");
+                    b = MotControl.探针B.GetPosByName("0603");
+                    break;
+                case LCR_Size._0805:
+                    a = MotControl.探针A.GetPosByName("0805");
+                    b = MotControl.探针B.GetPosByName("0805");
+                    break;
+                case LCR_Size._1206:
+                    a = MotControl.探针A.GetPosByName("1206");
+                    b = MotControl.探针B.GetPosByName("1206");
+                    break;
+                case LCR_Size._1210:
+                    a = MotControl.探针A.GetPosByName("1210");
+                    b = MotControl.探针B.GetPosByName("1210");
+                    break;
+                default:
+                    a = MotControl.探针A.GetPosByName("01005");
+                    b = MotControl.探针B.GetPosByName("01005");
+                    break;
+            }
         }
 
         /// <summary>

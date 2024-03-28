@@ -205,19 +205,22 @@ namespace LibSDK
                     axis[i] = BaseConfig.Instance.cardConfigs[i].AxisNum;
                     ConfigFile[i] = BaseConfig.Instance.cardConfigs[i].ConigPath;
                 }
-                CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile);
-                Log("开始加载轴".tr());
-                InitAxis();
-                Log("开始加载IO".tr());
-                InitINIO();
-                InitOUTIO();
-                for (int i = 0; i < CardNum; i++)
+                if (CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile))
                 {
-                    int cardNo = BaseConfig.Instance.cardConfigs[i].CardNo;
-                    int count = AxisParm.AParms.Where(x => x.AxisInfo.CardNo == cardNo).ToList().Count();
-                    BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
-                }
-                BaseConfig.Instance.Write();
+                    Log("开始加载轴".tr());
+                    InitAxis();
+                    Log("开始加载IO".tr());
+                    InitINIO();
+                    InitOUTIO();
+                    for (int i = 0; i < CardNum; i++)
+                    {
+                        int cardNo = BaseConfig.Instance.cardConfigs[i].CardNo;
+                        int count = AxisParm.AParms.Where(x => x.AxisInfo.CardNo == cardNo).ToList().Count();
+                        BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
+                    }
+                    BaseConfig.Instance.Write();
+                } ;
+              
             }
             else
             {

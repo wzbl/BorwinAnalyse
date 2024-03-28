@@ -348,19 +348,25 @@ namespace BorwinSplicMachine.LCR
                                 LCRHelper.Side = LCR.WhichSide.Right;
                                 MotControl.凸轮.MovePosByName("进料位", 1);
                             }
+                            else if (Form1.MainControl.CodeControl.IsSuccess()&& Form1.MainControl.motControl.FlowLeft==MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None&& MotControl.测值整体上下.HomeState)
+                            {
+                                if (!MotControl.测值整体上下.InPos("待探测位"))
+                                {
+                                    MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
+                                }
+                            }
                             break;
                         case LCR.LCRFlow.Start:
                             if (MotControl.凸轮.InPos("进料位"))
                             {
                                 if (LCRHelper.Side == LCR.WhichSide.Left)
                                 {
-                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0);
+                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0,1000,50);
                                 }
                                 else if (LCRHelper.Side == LCR.WhichSide.Right)
                                 {
-                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0);
+                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0,1000,50);
                                 }
-                                Thread.Sleep(3000);
                                 LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
                             break;
@@ -380,7 +386,6 @@ namespace BorwinSplicMachine.LCR
                             }
                             break;
                         case LCR.LCRFlow.测值整体平移:
-                            Thread.Sleep(1000);
                             LCRHelper.LCRFlow = LCR.LCRFlow.测值定位;
                             break;
                         case LCR.LCRFlow.测值定位:
@@ -405,6 +410,8 @@ namespace BorwinSplicMachine.LCR
                             }
                             break;
                         case LCR.LCRFlow.发送电表指令:
+                            LCRHelper.LCRFlow = LCR.LCRFlow.增加补偿值;
+                            LCRHelper.RealValue = (LCRHelper.Min_Value + LCRHelper.Max_Value) / 2;
                             if (KTimer.IsOn(ParamManager.Instance.TimerOut.I))
                             {
                                 AlarmControl.Alarm = AlarmList.测值超时;
@@ -417,7 +424,7 @@ namespace BorwinSplicMachine.LCR
                             LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
                             break;
                         case LCR.LCRFlow.判断值是否在范围:
-                            MotControl.测值整体上下.Home(1000);
+                            MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
                             MotControl.下针.Home(1000);
                             MotControl.测值支撑电磁铁.Off();
                             if (LCRHelper.RealValue >= LCRHelper.Min_Value&& LCRHelper.RealValue <= LCRHelper.Max_Value)
@@ -434,30 +441,78 @@ namespace BorwinSplicMachine.LCR
                                     double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
                                     MotControl.右进入.PMove(pos, 0,1000,100);
                                     LCRHelper.RRealValue = LCRHelper.RealValue;
-                                    LCRHelper.LResult = "Pass";
+                                    LCRHelper.RResult = "Pass";
                                 }
                                 LCRHelper.Result = LCRResult.Pass;
-                                LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                                if (ParamManager.Instance.ContinuousTest.B)
+                                {
+
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
+                                }
+                                else
+                                {
+                                    testCount = 0;
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                                }
                             }
-                            else if (testCount < ParamManager.Instance.testint_Count.I)
+                            else if (ParamManager.Instance.ContinuousTest.B|| testCount < ParamManager.Instance.testint_Count.I-1)
                             {
                                 LCRHelper.Result = LCRResult.Fail;
                                 LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
                             }
                             else
                             {
-                              
+                                MotControl.蜂鸣器.On();
+                                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(),"测值失败","admin",1);
+                                DialogResult dialogResult = formAlarm.ShowDialog();    
+                                if (dialogResult == DialogResult.OK)
+                                {
+                                    if (LCRHelper.Side == LCR.WhichSide.Left)
+                                    {
+                                        LCRHelper.LResult = "人工Pass".tr();
+                                    }
+                                    else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                    {
+                                        LCRHelper.RResult = "人工Pass".tr();
+                                    }
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                                }
+                                else
+                                {
+                                    if (LCRHelper.Side == LCR.WhichSide.Left)
+                                    {
+                                        LCRHelper.LResult = "Fail";
+                                    }
+                                    else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                    {
+                                        LCRHelper.RResult = "Fail";
+                                    }
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.None;
+                                }
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    LCRHelper.LRealValue = LCRHelper.RealValue;
+                                    double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
+                                    MotControl.左进入.PMove(pos, 0, 1200, 100);
+                                }
+                                else
+                                {
+                                    double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
+                                    MotControl.右进入.PMove(pos, 0, 1200, 100);
+                                    LCRHelper.RRealValue = LCRHelper.RealValue;
+                                }
+                                testCount = 0;
+                                MotControl.蜂鸣器.Off();
                             }
-
                             GridAddData();
                             break;
                         case LCR.LCRFlow.Finish:
-                            testCount = 0;
+                            MotControl.测值整体上下.Home(1000);
                             break;
                         default:
                             break;
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(20);
                 }
             });
         }
@@ -467,21 +522,24 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void GridAddData()
         {
-            kryptonDataGridView1.Rows.Add(
-                kryptonDataGridView1.RowCount,
-                LCRHelper.Side.ToString(),
-                LCRHelper.LineNo.ToString(),
-                Form1.MainControl.CodeControl.Code1.Code,
-                LCRHelper.Max_Value,
-                LCRHelper.Min_Value,
-                LCRHelper.RealValue,
-                LCRHelper.Type,
-                LCRHelper.Size.ToString(),
-                LCRHelper.Value,
-                LCRHelper.Unit,
-                LCRHelper.Grade,
-                LCRHelper.Result
-            );
+            this.Invoke(new Action(() =>
+            {
+                kryptonDataGridView1.Rows.Add(
+                    kryptonDataGridView1.RowCount,
+                    LCRHelper.Side.ToString(),
+                    LCRHelper.LineNo.ToString(),
+                    Form1.MainControl.CodeControl.Code1.Code,
+                    LCRHelper.Max_Value,
+                    LCRHelper.Min_Value,
+                    LCRHelper.RealValue,
+                    LCRHelper.Type,
+                    LCRHelper.Size.ToString(),
+                    LCRHelper.Value,
+                    LCRHelper.Unit,
+                    LCRHelper.Grade,
+                    LCRHelper.Result
+                );
+            }));
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)

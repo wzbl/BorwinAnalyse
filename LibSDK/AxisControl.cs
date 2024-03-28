@@ -51,6 +51,16 @@ namespace LibSDK
             CAxisParm = MotionControl.AxisParm.GetAxisParm(MotAPI.CardNum, MotAPI.Axis);
             kryptonTrackBar1.Maximum = (int)CAxisParm.AxisMotionPara.MaxManualMoveSpd;
             kryptonTrackBar2.Maximum = (int)CAxisParm.AxisMotionPara.MaxAcc;
+            if (CAxisParm.AxisMotionPara.MotionSped <= CAxisParm.AxisMotionPara.MaxManualMoveSpd)
+            {
+                kryptonTrackBar1.Value = (int)CAxisParm.AxisMotionPara.MotionSped;
+                txtVel.Text = kryptonTrackBar1.Value.ToString();
+            }
+            if (CAxisParm.AxisMotionPara.MotionAcc <= CAxisParm.AxisMotionPara.MaxAcc)
+            {
+                kryptonTrackBar2.Value = (int)CAxisParm.AxisMotionPara.MotionAcc;
+                txtAcc.Text = kryptonTrackBar2.Value.ToString();
+            }
             comMotionType.SelectedIndex = 1;
             txtPos.Text = "10";
 
@@ -84,7 +94,7 @@ namespace LibSDK
         {
             if (胶膜1到位.IsOn())
             {
-                MotAPI.PMove(6,0, sped, Acc);
+                MotAPI.PMove(6, 0, sped, Acc);
             }
             Thread.Sleep(2000);
             kryptonButton.Enabled = false;
@@ -93,7 +103,7 @@ namespace LibSDK
         private void DgvAxis_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
-            if (row < 0|| c.Rows[row].Cells[1].Value==null) return;
+            if (row < 0 || c.Rows[row].Cells[1].Value == null) return;
             int column = e.ColumnIndex;
             switch (column)
             {
@@ -190,9 +200,10 @@ namespace LibSDK
         private void btnStop_Click(object sender, EventArgs e)
         {
             MotAPI.AxisStop();
+            btnStartGoHome.Enabled = true;
         }
 
-      
+
 
         private void btnStartGoHome_Click(object sender, EventArgs e)
         {
@@ -211,10 +222,10 @@ namespace LibSDK
             switch (moveType)
             {
                 case MoveType.相对运动模式:
-                    MotAPI.PMove(-pos, 0,sped,Acc, true);
+                    MotAPI.PMove(-pos, 0, sped, Acc, true);
                     break;
                 case MoveType.绝对运动模式:
-                    MotAPI.PMove(-pos, 1,sped, Acc, true);
+                    MotAPI.PMove(-pos, 1, sped, Acc, true);
                     break;
                 default:
                     break;
@@ -241,7 +252,7 @@ namespace LibSDK
             dSignalLamp1.Value = MotAPI.HomeState ? 1 : 0;
 
 
-            if (kryptonButton!=null&&!kryptonButton.Enabled)
+            if (kryptonButton != null && !kryptonButton.Enabled)
             {
                 if (胶膜1到位.IsOn())
                 {
@@ -249,7 +260,7 @@ namespace LibSDK
                 }
                 else
                 {
-                    MotAPI.PMove(2,0, sped, Acc);
+                    MotAPI.PMove(2, 0, sped, Acc);
                 }
             }
 

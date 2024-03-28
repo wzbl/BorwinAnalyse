@@ -55,6 +55,11 @@ namespace BorwinSplicMachine.BarCode
             Code1.Clear();
             Code2.Clear();
         }
+
+        public bool IsSuccess()
+        {
+            return Code1.IsSuccess && Code2.IsSuccess;
+        }
     }
 
 
