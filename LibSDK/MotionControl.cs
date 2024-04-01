@@ -32,6 +32,11 @@ namespace LibSDK
         public static bool HomeFlag = false;
         public static CardAPI CardAPI = new CardAPI();
 
+        /// <summary>
+        /// true自动模式,false手动模式
+        /// </summary>
+        public static bool IsAuto = true;
+
 
         #region 卡控制
 
@@ -219,8 +224,8 @@ namespace LibSDK
                         BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
                     }
                     BaseConfig.Instance.Write();
-                } ;
-              
+                };
+
             }
             else
             {

@@ -31,10 +31,10 @@ namespace LibSDK.Motion
         /// </summary>
         /// <param name="name">位置名称</param>
         /// <param name="mode">0.相对运动模式，1.绝对运动模式</param>
-        public void MovePosByName(string name,int mode)
+        public void MovePosByName(string name, int mode)
         {
             List<PosParam> ps = posParams.Where(x => x.Name == name).ToList();
-            if (ps.Count > 0)
+            if (ps.Count > 0 && Runing())
             {
                 double pos = ps[0].Pos;
                 PMove(pos, mode);
@@ -68,14 +68,13 @@ namespace LibSDK.Motion
             if (ps.Count > 0)
             {
                 double pos = ps[0].Pos;
-                if (Math.Abs(pos - GetEncPos())<0.01)
+                if (Math.Abs(pos - GetEncPos()) < 0.01)
                 {
                     return true;
                 }
             }
             return false;
         }
-
 
         /// <summary>
         /// 回零停止
@@ -163,7 +162,7 @@ namespace LibSDK.Motion
         /// <param name="Pos"></param>
         /// <param name="Mode">0.相对运动模式，1.绝对运动模式</param>
         /// <returns></returns>
-        public bool PMove(double Pos, int Mode,double sped,double Acc, bool IsLimt = false)
+        public bool PMove(double Pos, int Mode, double sped, double Acc, bool IsLimt = false)
         {
             IsLimt = AxisParm.AxisMotionPara.IsEnableSoftLimit;
             double _Pos = PosToPulse(Pos, CardNum, Axis);//位置换算
@@ -436,7 +435,7 @@ namespace LibSDK.Motion
             {
                 MotionControl.HomeFlag = true;
                 new CardAPI().StopAxis();//回零失败紧急停止所有轴
-                new FormAlarm(DateTime.Now.ToString(),Error,"admin").ShowDialog();
+                new FormAlarm(DateTime.Now.ToString(), Error, "admin").ShowDialog();
                 axisError.IsError = true;
                 axisError.ErrorMsg = Error;
                 return false;

@@ -35,6 +35,10 @@ namespace BorwinSplicMachine.LCR
         private void Init()
         {
             LCRHelper = new LCRHelper();
+        }
+
+        public void Start()
+        {
             LCRFlow();
         }
 
@@ -327,7 +331,7 @@ namespace BorwinSplicMachine.LCR
         /// <summary>
         /// LCR测值线程
         /// </summary>
-        public void LCRFlow()
+        private void LCRFlow()
         {
             Task.Run(() =>
             {

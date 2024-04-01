@@ -92,12 +92,16 @@ namespace LibSDK
 
         private void KryptonButton_Click(object sender, EventArgs e)
         {
-            if (胶膜1到位.IsOn())
+            if (!MotionControl.IsAuto)
             {
-                MotAPI.PMove(6, 0, sped, Acc);
+                if (胶膜1到位.IsOn())
+                {
+                    MotAPI.PMove(6, 0, sped, Acc);
+                }
+                Thread.Sleep(2000);
+                kryptonButton.Enabled = false;
             }
-            Thread.Sleep(2000);
-            kryptonButton.Enabled = false;
+           
         }
 
         private void DgvAxis_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -177,7 +181,6 @@ namespace LibSDK
 
         private void btnPositive_Click(object sender, EventArgs e)
         {
-
             if (!double.TryParse(txtPos.Text, out pos))
             {
                 txtPos.BackColor = Color.Red;
@@ -237,6 +240,23 @@ namespace LibSDK
         /// </summary>
         public void RefreshUI()
         {
+            if (MotionControl.IsAuto)
+            {
+                btnNagetive.Enabled = false;
+                btnStartGoHome.Enabled = false;
+                btnPositive.Enabled = false;
+                btnStartGoHome.Enabled = false;
+                btnStop.Enabled = false;
+            }
+            else
+            {
+                btnNagetive.Enabled = true;
+                btnStartGoHome.Enabled = true;
+                btnPositive.Enabled = true;
+                btnStartGoHome.Enabled = true;
+                btnStop.Enabled = true;
+            }
+
             txtRel.Text = MotAPI.GetEncPos().ToString();
 
             btnOpenSero.BackColor = MotAPI.GetSevOn() ? Color : Color.Green;
@@ -264,10 +284,11 @@ namespace LibSDK
                 }
             }
 
-            if (MotAPI.HomeState)
+            if (!MotionControl.IsAuto&&MotAPI.HomeState)
             {
                 btnStartGoHome.Enabled = true;
             }
+
         }
 
         public void EmgStop()

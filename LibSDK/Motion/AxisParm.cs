@@ -127,7 +127,6 @@ namespace LibSDK.Motion
     [TypeConverter(typeof(NullConverter))]
     public class CAxisParm
     {
-
         public CAxisParm()
         {
             AxisInfo = new AxisInfo();

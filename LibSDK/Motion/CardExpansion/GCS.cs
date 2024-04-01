@@ -70,6 +70,7 @@ namespace LibSDK.Motion
             rtn = CNMCLib20.NMC_DevClose(ref devhandle[CardNum]);
             return true;
         }
+
         /// <summary>
         /// 初始化扩展模块
         /// </summary>
@@ -88,6 +89,7 @@ namespace LibSDK.Motion
             }
             return true;
         }
+
         /// <summary>
         /// 使能开
         /// </summary>
@@ -102,6 +104,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             return true;
         }
+
         /// <summary>
         /// 设置轴的软限位
         /// </summary>
@@ -152,6 +155,7 @@ namespace LibSDK.Motion
             rtn = CNMCLib20.NMC_MtSetSvOff(axishandle[CardNum, Axis - 1]);
             return true;
         }
+
         /// <summary>
         ///  读取使能信号
         /// </summary>
@@ -184,6 +188,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             return true;
         }
+
         /// <summary>
         /// 连续运动
         /// </summary>
@@ -203,6 +208,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             return true;
         }
+
         /// <summary>
         /// 点位运动
         /// </summary>
@@ -229,6 +235,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             return true;
         }
+
         /// <summary>
         /// 软着陆运动
         /// </summary>
@@ -279,6 +286,7 @@ namespace LibSDK.Motion
             if (rtn != 0) return false;
             return true;
         }
+
         /// <summary>
         /// 在线变速
         /// </summary>
@@ -290,6 +298,7 @@ namespace LibSDK.Motion
             rtn += CNMCLib20.NMC_MtSetVel(axishandle[CardNum, Axis - 1], Vel);
             rtn += CNMCLib20.NMC_MtUpdate(axishandle[CardNum, Axis - 1]);
         }
+
         /// <summary>
         /// 读取规划位置
         /// </summary>
@@ -329,6 +338,7 @@ namespace LibSDK.Motion
             rtn = CNMCLib20.NMC_MtHomeStop(axishandle[CardNum, Axis - 1]);
             return true;
         }
+
         /// <summary>
         /// 紧急停止所有轴
         /// </summary>
@@ -431,6 +441,7 @@ namespace LibSDK.Motion
             rtn = CNMCLib20.NMC_SetDOBit(devhandle[CardNum], IoNum, value);
             return rtn == 0;
         }
+
         /// <summary>
         /// 读取输出IO信号
         /// </summary>
@@ -463,6 +474,7 @@ namespace LibSDK.Motion
 
         
         }
+
         /// <summary>
         /// 读取输入信号
         /// </summary>
@@ -483,6 +495,7 @@ namespace LibSDK.Motion
             }
           
         }
+
         /// <summary>
         /// 设置扩展模块输出
         /// </summary>
@@ -495,6 +508,7 @@ namespace LibSDK.Motion
             rtn = CNMCLib20.NMC_SetDOBit(devhandle[CardNum], (short)((mdl) * 64 + IoNum-1), (short)value);
             return rtn == 0;
         }
+
         /// <summary>
         /// 读取扩展模块输出
         /// </summary>
@@ -522,6 +536,7 @@ namespace LibSDK.Motion
             rtn = CNMCLib20.NMC_GetDIBit(devhandle[CardNum], (short)((mdl)*64 + IoNum-1), ref bitValue);
             return bitValue == 0;
         }
+
         /// <summary>
         /// 轴报警
         /// </summary>
@@ -541,6 +556,7 @@ namespace LibSDK.Motion
                 return false;
             }
         }
+
         /// <summary>
         /// 正限位
         /// </summary>
@@ -580,6 +596,7 @@ namespace LibSDK.Motion
                 return false;
             }
         }
+
         /// <summary>
         /// 原点信号
         /// </summary>
@@ -599,6 +616,7 @@ namespace LibSDK.Motion
                 return false;
             }
         }
+
         /// <summary>
         /// 软负限位信号
         /// </summary>
@@ -618,6 +636,7 @@ namespace LibSDK.Motion
                 return false;
             }
         }
+
         /// <summary>
         /// 软正限位信号
         /// </summary>
@@ -637,6 +656,7 @@ namespace LibSDK.Motion
                 return false;
             }
         }
+
         /// <summary>
         /// 电机运行状态
         /// </summary>
@@ -656,6 +676,7 @@ namespace LibSDK.Motion
                 return false;
             }
         }
+
         /// <summary>
         ///伺服到位信号
         /// </summary>

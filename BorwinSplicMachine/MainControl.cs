@@ -64,7 +64,7 @@ namespace BorwinSplicMachine
         public BarCodeCheck CodeControl = new BarCodeCheck();
         public MainControl(Form1 MainForm)
         {
-       
+
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
             UCMain = new UCMain();
@@ -81,6 +81,13 @@ namespace BorwinSplicMachine
             UCPrint = new UCPrint();
             UCLCR = new UCLCR();
             this.MainForm = MainForm;
+        }
+
+
+        public void Start()
+        {
+            motControl.Start();
+            UCLCR.Start();
         }
 
         public async void UpdataLanguage()
@@ -115,7 +122,7 @@ namespace BorwinSplicMachine
                 return;
             }
             CodeControl.CheckCode(ref code);
-            
+
             if (!CodeControl.Code1.IsSuccess)
             {
                 BomDataModel bomData = BomManager.Instance.SearchByBarCode(code);
@@ -128,7 +135,8 @@ namespace BorwinSplicMachine
                     }
                     else
                     {
-                        ParamManager.Instance.System_测值.paramValue="0";
+                        ParamManager.Instance.System_测值.paramValue = "0";
+                        ParamManager.Instance.System_丝印.paramValue = "1";
                     }
                     CodeControl.Code1.Code = code;
                     CodeControl.Code1.IsSuccess = true;

@@ -28,6 +28,7 @@ namespace BorwinSplicMachine
             InitializeComponent();
             MainControl = new MainControl(this);
             MainControl.Init();
+            MainControl.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)

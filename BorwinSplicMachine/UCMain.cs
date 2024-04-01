@@ -64,18 +64,6 @@ namespace BorwinSplicMachine
         }
 
 
-        private void toolStripButton1_MouseDown(object sender, MouseEventArgs e)
-        {
-            FlowBarCodeModel flowBarCodeModel = new FlowModel.FlowBarCodeModel();
-            Form1.MainControl.UCFlowControl.AddFlowControl(flowBarCodeModel);
-        }
-
-        private void btnLCR_Click(object sender, EventArgs e)
-        {
-            FlowLCRModel flowLCRModel = new FlowModel.FlowLCRModel();
-            Form1.MainControl.UCFlowControl.AddFlowControl(flowLCRModel);
-        }
-
         protected override CreateParams CreateParams
         {
             get
@@ -86,17 +74,7 @@ namespace BorwinSplicMachine
             }
         }
 
-        private void 找空料_Click(object sender, EventArgs e)
-        {
-            FlowFindEmptyStrips FindEmptyStrips = new FlowModel.FlowFindEmptyStrips();
-            Form1.MainControl.UCFlowControl.AddFlowControl(FindEmptyStrips);
-        }
 
-        private void 丝印_Click(object sender, EventArgs e)
-        {
-            FlowMatchModel FlowMatch = new FlowModel.FlowMatchModel();
-            Form1.MainControl.UCFlowControl.AddFlowControl(FlowMatch);
-        }
         BarCodeCheck barCode = new BarCodeCheck();
 
         /// <summary>
@@ -170,6 +148,16 @@ namespace BorwinSplicMachine
                 }
 
             }
+
+            bool IsStart = Form1.MainControl.CodeControl.Code1.IsSuccess;
+            if (!ParamManager.Instance.System_条码.B)
+            {
+                IsStart = (Form1.MainControl.motControl.FlowLeft != MainFlow.None || Form1.MainControl.motControl.FlowRight != MainFlow.None);
+            }
+            rad8mm.Enabled = IsStart ? false : true;
+            rad12mm.Enabled = IsStart ? false : true;
+            rad16mm.Enabled = IsStart ? false : true;
+            rad24mm.Enabled = IsStart ? false : true;
         }
 
         private void txtBarcode1_TextChanged(object sender, EventArgs e)

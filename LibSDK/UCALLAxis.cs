@@ -1,4 +1,5 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using BorwinAnalyse.BaseClass;
+using ComponentFactory.Krypton.Toolkit;
 using LibSDK.Motion;
 using System;
 using System.Collections.Generic;
@@ -36,12 +37,12 @@ namespace LibSDK
             timer1.Stop();
             Thread.Sleep(10);
             axisControls.Clear();
-            this.kryptonPanel1.Controls.Clear();
+            this.kryptonSplitContainer1.Panel2.Controls.Clear();
             int i = 0;
             foreach (KeyValuePair<string, MotAPI> flowModel in MotionControl.Motions)
             {
                 AxisControl axisControl = new AxisControl(flowModel.Value);
-                this.kryptonPanel1.Controls.Add(axisControl);
+                this.kryptonSplitContainer1.Panel2.Controls.Add(axisControl);
                 axisControl.Left = 2 + (i % 2) * 600;
                 axisControl.Top = 5 + (i / 2) * 180;
                 axisControls.Add(axisControl);
@@ -55,6 +56,20 @@ namespace LibSDK
             for (int i = 0; i < axisControls.Count; i++)
             {
                 axisControls[i].RefreshUI();
+            }
+        }
+
+        private void btnAutoMode_Click(object sender, EventArgs e)
+        {
+            if (MotionControl.IsAuto)
+            {
+                MotionControl.IsAuto = false;
+                btnAutoMode.Text = "手动".tr();
+            }
+            else
+            {
+                MotionControl.IsAuto = true;
+                btnAutoMode.Text = "自动".tr();
             }
         }
     }
