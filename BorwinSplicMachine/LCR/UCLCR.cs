@@ -352,7 +352,7 @@ namespace BorwinSplicMachine.LCR
                                 LCRHelper.Side = LCR.WhichSide.Right;
                                 MotControl.凸轮.MovePosByName("进料位", 1);
                             }
-                            else if (Form1.MainControl.CodeControl.IsSuccess()&& Form1.MainControl.motControl.FlowLeft==MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None&& MotControl.测值整体上下.HomeState)
+                            else if (Form1.MainControl.CodeControl.IsSuccess() && Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None && MotControl.测值整体上下.HomeState)
                             {
                                 if (!MotControl.测值整体上下.InPos("待探测位"))
                                 {
@@ -365,14 +365,15 @@ namespace BorwinSplicMachine.LCR
                             {
                                 if (LCRHelper.Side == LCR.WhichSide.Left)
                                 {
-                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0,1000,50);
+                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0, 1500, 100);
                                 }
                                 else if (LCRHelper.Side == LCR.WhichSide.Right)
                                 {
-                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0,1000,50);
+                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0, 1500, 100);
                                 }
                                 LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
+                            Thread.Sleep(1000);
                             break;
                         case LCR.LCRFlow.走一格:
                             if (MotControl.测值整体上下.HomeState)
@@ -412,6 +413,10 @@ namespace BorwinSplicMachine.LCR
                                 KTimer.Restart();
                                 LCRHelper.SendReadCommand();
                             }
+                            else
+                            {
+                                LCRHelper.LCRFlow = LCR.LCRFlow.AB探针到位;
+                            }
                             break;
                         case LCR.LCRFlow.发送电表指令:
                             LCRHelper.LCRFlow = LCR.LCRFlow.增加补偿值;
@@ -431,19 +436,19 @@ namespace BorwinSplicMachine.LCR
                             MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
                             MotControl.下针.Home(1000);
                             MotControl.测值支撑电磁铁.Off();
-                            if (LCRHelper.RealValue >= LCRHelper.Min_Value&& LCRHelper.RealValue <= LCRHelper.Max_Value)
+                            if (LCRHelper.RealValue >= LCRHelper.Min_Value && LCRHelper.RealValue <= LCRHelper.Max_Value)
                             {
                                 if (LCRHelper.Side == LCR.WhichSide.Left)
                                 {
                                     double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
-                                    MotControl.左进入.PMove(pos, 0,1000,100);
+                                    MotControl.左进入.PMove(pos, 0, 1000, 100);
                                     LCRHelper.LRealValue = LCRHelper.RealValue;
                                     LCRHelper.LResult = "Pass";
                                 }
                                 else if (LCRHelper.Side == LCR.WhichSide.Right)
                                 {
                                     double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
-                                    MotControl.右进入.PMove(pos, 0,1000,100);
+                                    MotControl.右进入.PMove(pos, 0, 1000, 100);
                                     LCRHelper.RRealValue = LCRHelper.RealValue;
                                     LCRHelper.RResult = "Pass";
                                 }
@@ -459,7 +464,7 @@ namespace BorwinSplicMachine.LCR
                                     LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
                                 }
                             }
-                            else if (ParamManager.Instance.ContinuousTest.B|| testCount < ParamManager.Instance.testint_Count.I-1)
+                            else if (ParamManager.Instance.ContinuousTest.B || testCount < ParamManager.Instance.testint_Count.I - 1)
                             {
                                 LCRHelper.Result = LCRResult.Fail;
                                 LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
@@ -467,8 +472,8 @@ namespace BorwinSplicMachine.LCR
                             else
                             {
                                 MotControl.蜂鸣器.On();
-                                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(),"测值失败","admin",1);
-                                DialogResult dialogResult = formAlarm.ShowDialog();    
+                                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), "测值失败", "admin", 1);
+                                DialogResult dialogResult = formAlarm.ShowDialog();
                                 if (dialogResult == DialogResult.OK)
                                 {
                                     if (LCRHelper.Side == LCR.WhichSide.Left)
@@ -497,12 +502,12 @@ namespace BorwinSplicMachine.LCR
                                 {
                                     LCRHelper.LRealValue = LCRHelper.RealValue;
                                     double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
-                                    MotControl.左进入.PMove(pos, 0, 1200, 100);
+                                    MotControl.左进入.PMove(pos, 0);
                                 }
                                 else
                                 {
                                     double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
-                                    MotControl.右进入.PMove(pos, 0, 1200, 100);
+                                    MotControl.右进入.PMove(pos, 0);
                                     LCRHelper.RRealValue = LCRHelper.RealValue;
                                 }
                                 testCount = 0;
@@ -511,7 +516,8 @@ namespace BorwinSplicMachine.LCR
                             GridAddData();
                             break;
                         case LCR.LCRFlow.Finish:
-                            MotControl.测值整体上下.Home(1000);
+                            if (!MotControl.测值整体上下.InPos("待探测位"))
+                                MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
                             break;
                         default:
                             break;

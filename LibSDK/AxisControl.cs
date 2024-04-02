@@ -247,6 +247,7 @@ namespace LibSDK
                 btnPositive.Enabled = false;
                 btnStartGoHome.Enabled = false;
                 btnStop.Enabled = false;
+                c.Enabled = false;
             }
             else
             {
@@ -255,6 +256,7 @@ namespace LibSDK
                 btnPositive.Enabled = true;
                 btnStartGoHome.Enabled = true;
                 btnStop.Enabled = true;
+                c.Enabled = true;
             }
 
             txtRel.Text = MotAPI.GetEncPos().ToString();

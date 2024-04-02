@@ -363,11 +363,11 @@ namespace BorwinSplicMachine.LCR
                                RResult + "," +                                  //右结果
                                LRealValue + "," +                               //左实测值
                                LResult + "," +                                  //左结果
-                               SplicCamera.IsMatch + "," +                      //是否丝印
-                               HIKVision.Instance.CameraR.MatchResult + "," +                                                 //右丝印结果
-                                HIKVision.Instance.CameraR.ImgPath + "," +                                                 //右丝印图片
-                               HIKVision.Instance.CameraL.MatchResult + "," +                                               //左丝印结果
-                               HIKVision.Instance.CameraL.ImgPath + "," +                                              //左丝印图片
+                               "" + "," +                      //是否丝印
+                               "HIKVision.Instance.CameraR.MatchResult" + "," +                                                 //右丝印结果
+                                "HIKVision.Instance.CameraR.ImgPath "+ "," +                                                 //右丝印图片
+                               "HIKVision.Instance.CameraL.MatchResult" + "," +                                               //左丝印结果
+                               "HIKVision.Instance.CameraL.ImgPath" + "," +                                              //左丝印图片
                                "李小龙" + "," +                                          //操作员
                                "" + "," + "\r\n",                                        //备注
                                Encoding.UTF8);

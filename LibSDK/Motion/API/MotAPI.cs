@@ -34,7 +34,7 @@ namespace LibSDK.Motion
         public void MovePosByName(string name, int mode)
         {
             List<PosParam> ps = posParams.Where(x => x.Name == name).ToList();
-            if (ps.Count > 0 && Runing())
+            if (ps.Count > 0)
             {
                 double pos = ps[0].Pos;
                 PMove(pos, mode);
@@ -68,7 +68,7 @@ namespace LibSDK.Motion
             if (ps.Count > 0)
             {
                 double pos = ps[0].Pos;
-                if (Math.Abs(pos - GetEncPos()) < 0.01)
+                if (Math.Abs(pos - GetEncPos()) < 0.3)
                 {
                     return true;
                 }
