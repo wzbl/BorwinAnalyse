@@ -136,6 +136,7 @@
             this.rad24mm.Size = new System.Drawing.Size(57, 20);
             this.rad24mm.TabIndex = 13;
             this.rad24mm.Values.Text = "24mm";
+            this.rad24mm.CheckedChanged += new System.EventHandler(this.rad8mm_CheckedChanged);
             // 
             // rad16mm
             // 
@@ -145,6 +146,7 @@
             this.rad16mm.Size = new System.Drawing.Size(57, 20);
             this.rad16mm.TabIndex = 12;
             this.rad16mm.Values.Text = "16mm";
+            this.rad16mm.CheckedChanged += new System.EventHandler(this.rad8mm_CheckedChanged);
             // 
             // rad12mm
             // 
@@ -154,6 +156,7 @@
             this.rad12mm.Size = new System.Drawing.Size(57, 20);
             this.rad12mm.TabIndex = 11;
             this.rad12mm.Values.Text = "12mm";
+            this.rad12mm.CheckedChanged += new System.EventHandler(this.rad8mm_CheckedChanged);
             // 
             // rad8mm
             // 
@@ -163,6 +166,7 @@
             this.rad8mm.Size = new System.Drawing.Size(50, 20);
             this.rad8mm.TabIndex = 10;
             this.rad8mm.Values.Text = "8mm";
+            this.rad8mm.CheckedChanged += new System.EventHandler(this.rad8mm_CheckedChanged);
             // 
             // btnClearCode
             // 

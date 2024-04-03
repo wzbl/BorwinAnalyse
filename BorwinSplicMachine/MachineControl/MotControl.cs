@@ -198,571 +198,565 @@ namespace BorwinSplicMachine
             if (MotionControl.CardAPI.IsInitCardOK)
             {
                 Run();
-                Reset();
+                //Reset();
             }
         }
 
         private int filmCount = 0;
 
+
         private void Run()
         {
+            ThreadStart threadStart = new ThreadStart(LeftAndRight);
+            Thread Thread = new Thread(threadStart);
+            Thread.IsBackground = true;
+            Thread.Start();
 
-            if (tasks[0] == null || tasks[0].IsCompleted)
+            ThreadStart threadStart2 = new ThreadStart(ResetAndFilm);
+            Thread Thread2 = new Thread(threadStart2);
+            Thread2.Start();
+        }
+
+        private void ResetAndFilm()
+        {
+            while (true)
             {
-                tasks[0] = new Task(new Action(() =>
-            {
-                while (true)
+                if (resetFlow == ResetFlow.None && Alarm.AlarmControl.Alarm == Alarm.AlarmList.None && MotionControl.IsAuto)
                 {
-                    if (Alarm.AlarmControl.Alarm == Alarm.AlarmList.None && MotionControl.IsAuto)
+                    //贴膜
+                    switch (filmFlow)
                     {
-                        //左
-                        if (resetFlow == ResetFlow.None)
-                        {
-                            switch (FlowLeft)
+                        case FilmFlow.None:
+                            if (右入料光栅.State() && 左入料光栅.State()&&右物料光栅.State() && 左物料光栅.State())
                             {
-                                case MainFlow.None:
-                                    SetRunnersWidth();
-                                    flowLight.左进入.status = 0;
-                                    if ((!ParamManager.Instance.System_条码.B || Form1.MainControl.CodeControl.IsSuccess()) && 左入料光栅.State())
-                                    {
-                                        FlowLeft = MainFlow.进料;
-                                        flowLight.左进入.status = 1;
-                                        左进入.SetServoff();
-                                    }
-                                    break;
-                                case MainFlow.进料:
-                                    //左轮开始转动
-                                    左进入.PMove(-4, 0, true);
-                                    if (左物料光栅.State() && 左入料光栅.State())
-                                    {
-                                        左进入.AxisStop();
-                                        //清除坐标==》左进入
-                                        flowLight.左进入.status = 2;
-                                        FlowLeft = MainFlow.感应料带到光源位置;
-                                        SetRunnersWidth2();
-                                    }
-                                    else if (!左入料光栅.State())
-                                    {
-                                        FlowLeft = MainFlow.None;
-                                        左进入.SetServon();
-                                    }
-                                    break;
-                                case MainFlow.感应料带到光源位置:
-                                    if (ParamManager.Instance.System_找空料.B)
-                                    {
-                                        FlowLeft = MainFlow.找空料;
-                                        flowLight.左找空料.status = 1;
-                                        左进入.PMove(-4, 0, true);//走4格
-                                        FindEmptyCount++;
-                                    }
-                                    else if (ParamManager.Instance.System_测值.B)
-                                    {
-                                        FlowLeft = MainFlow.请求测值;
-                                        flowLight.左测值.status = 1;
-
-                                        MotControl.凸轮.MovePosByName("进料位", 1);
-                                    }
-                                    else if (ParamManager.Instance.System_丝印.B)
-                                    {
-                                        flowLight.左丝印.status = 1;
-                                        FlowLeft = MainFlow.丝印;
-                                    }
-                                    else
-                                    {
-                                        FlowLeft = MainFlow.完成;
-                                    }
-                                    break;
-                                case MainFlow.找空料:
-                                    if (false)//视觉确定是否找到空料
-                                    {
-                                        //没找到空料的情况
-                                        左进入.PMove(-4, 0, true);//走4格
-                                        FindEmptyCount++;
-                                    }
-                                    else
-                                    {
-                                        FindEmptyPos = 0;
-                                        FlowLeft = MainFlow.找空料完成;
-                                    }
-                                    break;
-                                case MainFlow.找空料完成:
-                                    flowLight.左找空料.status = 2;
-                                    if (ParamManager.Instance.System_测值.B)
-                                    {
-                                        FlowLeft = MainFlow.请求测值;
-                                    }
-                                    else if (ParamManager.Instance.System_丝印.B)
-                                    {
-                                        flowLight.左丝印.status = 1;
-                                        FlowLeft = MainFlow.丝印;
-                                    }
-                                    else
-                                    {
-                                        FlowLeft = MainFlow.切空料;
-                                        左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
-                                    }
-                                    break;
-                                case MainFlow.请求测值:
-                                    if (Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.Left)
-                                    {
-                                        FlowLeft = MainFlow.测值中;
-                                    }
-                                    break;
-                                case MainFlow.测值中:
-                                    flowLight.左测值.status = 1;
-                                    if (Form1.MainControl.UCLCR.LCRHelper.LCRFlow == LCRFlow.Finish)
-                                    {
-                                        Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCRFlow.None;
-                                        FlowLeft = MainFlow.测值完成;
-                                    }
-                                    break;
-                                case MainFlow.测值完成:
-                                    Thread.Sleep(2000);
-                                    flowLight.左测值.status = 2;
-                                    FlowLeft = MainFlow.切空料;
-                                    //左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
-                                    break;
-                                case MainFlow.切空料:
-                                    凸轮.MovePosByName("切刀位", 1);
-                                    FlowLeft = MainFlow.切空料完成;
-                                    break;
-                                case MainFlow.切空料完成:
-                                    if (凸轮.InPos("切刀位"))
-                                    {
-                                        凸轮.MovePosByName("进料位", 1);
-                                        FlowLeft = MainFlow.完成;
-                                    }
-                                    break;
-                                case MainFlow.丝印:
-                                    break;
-                                case MainFlow.丝印完成:
-                                    flowLight.左丝印.status = 2;
-                                    FlowLeft = MainFlow.切空料;
-                                    左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
-                                    break;
-                                case MainFlow.完成:
-                                    if (filmFlow == FilmFlow.完成)
-                                    {
-                                        FlowLeft = MainFlow.None;
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                filmFlow = FilmFlow.轴到吸膜位;
                             }
-                        }
+                            break;
 
-                        //右
-                        if (resetFlow == ResetFlow.None)
-                        {
-                            switch (FlowRight)
+                        case FilmFlow.轴到吸膜位:
+                            吸头上下.MovePosByName("吸膜位置上", 1);
+                            热熔上下.MovePosByName("热熔上", 1);
+                            filmFlow = FilmFlow.轴到位;
+                            break;
+
+                        case FilmFlow.轴到位:
+
+                            if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上"))
                             {
-                                case MainFlow.None:
-                                    SetRunnersWidth();
-                                    flowLight.右进入.status = 0;
-                                    if ((!ParamManager.Instance.System_条码.B || Form1.MainControl.CodeControl.IsSuccess()) && 右入料光栅.State())
-                                    {
-                                        FlowRight = MainFlow.进料;
-                                        flowLight.右进入.status = 1;
-                                        右进入.SetServoff();
-                                    }
-                                    break;
-                                case MainFlow.进料:
-                                    //右轮开始转动
-                                    右进入.PMove(-4, 0, true);
-                                    if (右物料光栅.State() && 右入料光栅.State())
-                                    {
-                                        右进入.AxisStop();
-                                        //清除坐标==》右进入
-                                        flowLight.右进入.status = 2;
-                                        FlowRight = MainFlow.感应料带到光源位置;
-                                        SetRunnersWidth2();
-                                    }
-                                    else if (!右入料光栅.State())
-                                    {
-                                        FlowRight = MainFlow.None;
-                                        右进入.SetServon();
-                                    }
-                                    break;
-                                case MainFlow.感应料带到光源位置:
-                                    if (ParamManager.Instance.System_找空料.B)
-                                    {
-                                        FlowRight = MainFlow.找空料;
-                                        flowLight.右找空料.status = 1;
-                                    }
-                                    else if (ParamManager.Instance.System_测值.B)
-                                    {
-                                        FlowRight = MainFlow.请求测值;
-                                        flowLight.右测值.status = 1;
-                                    }
-                                    else if (ParamManager.Instance.System_丝印.B)
-                                    {
-                                        flowLight.右丝印.status = 1;
-                                        FlowRight = MainFlow.丝印;
-                                    }
-                                    else
-                                    {
-                                        FlowRight = MainFlow.完成;
-                                    }
-                                    break;
-                                case MainFlow.找空料:
-                                    if (false)//视觉确定是否找到空料
-                                    {
-                                        //没找到空料的情况
-                                        右进入.PMove(-4, 0, true);//走4格
-
-                                    }
-                                    else
-                                    {
-                                        FlowRight = MainFlow.找空料完成;
-                                    }
-                                    break;
-                                case MainFlow.找空料完成:
-                                    flowLight.右找空料.status = 2;
-                                    if (ParamManager.Instance.System_测值.B)
-                                    {
-                                        FlowRight = MainFlow.请求测值;
-                                    }
-                                    else if (ParamManager.Instance.System_丝印.B)
-                                    {
-                                        flowLight.右丝印.status = 1;
-                                        FlowRight = MainFlow.丝印;
-                                    }
-                                    else
-                                    {
-                                        FlowRight = MainFlow.切空料;
-                                        右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
-                                    }
-                                    break;
-                                case MainFlow.请求测值:
-                                    if (Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.Right)
-                                    {
-                                        FlowRight = MainFlow.测值中;
-                                    }
-                                    break;
-                                case MainFlow.测值中:
-                                    flowLight.右测值.status = 1;
-                                    if (Form1.MainControl.UCLCR.LCRHelper.LCRFlow == LCRFlow.Finish)
-                                    {
-                                        Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCRFlow.None;
-                                        FlowRight = MainFlow.测值完成;
-                                    }
-                                    break;
-                                case MainFlow.测值完成:
-                                    Thread.Sleep(3000);
-                                    flowLight.右测值.status = 2;
-                                    FlowRight = MainFlow.切空料;
-                                    //右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
-                                    break;
-                                case MainFlow.切空料:
-                                    凸轮.MovePosByName("切刀位", 1);
-                                    FlowRight = MainFlow.切空料完成;
-                                    break;
-                                case MainFlow.切空料完成:
-                                    if (凸轮.InPos("切刀位"))
-                                    {
-                                        凸轮.MovePosByName("进料位", 1);
-                                        FlowRight = MainFlow.完成;
-                                    }
-                                    break;
-                                case MainFlow.丝印:
-                                    break;
-                                case MainFlow.丝印完成:
-                                    flowLight.右丝印.status = 2;
-                                    FlowRight = MainFlow.切空料;
-                                    右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
-                                    break;
-                                case MainFlow.完成:
-                                    if (filmFlow == FilmFlow.完成)
-                                    {
-                                        FlowRight = MainFlow.None;
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                filmFlow = FilmFlow.拨刀伸出位;
                             }
-                        }
+                            break;
+
+                        case FilmFlow.拨刀伸出位:
+                            吸头平移.MovePosByName("吸膜位置", 1);
+                            拨刀.MovePosByName("伸出位", 1);
+                            filmFlow = FilmFlow.拨刀到伸出位;
+                            break;
+
+                        case FilmFlow.拨刀到伸出位:
+                            if (拨刀.InPos("伸出位") && 吸头平移.InPos("吸膜位置") && FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
+                            {
+                                filmFlow = FilmFlow.卷料送一个膜;
+                                if (胶膜1到位.IsOn())
+                                {
+                                    卷料.PMove(6, 0);
+                                }
+                                if (filmCount == 0)
+                                {
+                                    左进入.PMove(-左进入.GetPosByName("接料位"), 0);
+                                    右进入.PMove(-右进入.GetPosByName("接料位"), 0);
+                                    //MotControl.测值整体上下.Home(3000);
+                                }
+                            }
+                            else
+                            {
+                                filmFlow = FilmFlow.拨刀伸出位;
+                            }
+                            break;
+
+                        case FilmFlow.卷料送一个膜:
+                            if (胶膜1到位.IsOn())
+                            {
+                                filmFlow = FilmFlow.吸头上下吸膜;
+                                吸头上下.MovePosByName("吸膜位置下", 1);
+                                filmCount++;
+                            }
+                            else
+                            {
+                                卷料.PMove(2, 0);
+                            }
+                            break;
+
+                        case FilmFlow.吸头上下吸膜:
+                            if (吸头上下.InPos("吸膜位置下"))
+                            {
+                                真空电磁阀1.On();
+                                真空电磁阀2.On();
+                                真空泵.On();
+                                TuiDaoPos();
+                            }
+
+                            break;
+
+                        case FilmFlow.大膜退刀位:
+                            拨刀.MovePosByName("大膜退刀位", 1);
+                            filmFlow = FilmFlow.判断真空表;
+                            break;
+
+                        case FilmFlow.小膜退刀位:
+                            拨刀.MovePosByName("小膜退刀位", 1);
+                            filmFlow = FilmFlow.判断真空表;
+                            break;
+
+                        case FilmFlow.判断真空表:
+                            if (拨刀.InPos("大膜退刀位"))
+                            {
+                                Thread.Sleep(1000);
+                                if (真空表.State())
+                                {
+                                    filmFlow = FilmFlow.吸头上下到待机位;
+                                }
+                                else if (filmCount > 2)
+                                {
+                                    //报警吸膜异常
+                                    AlarmControl.Alarm = AlarmList.吸膜超时;
+                                }
+                                else
+                                {
+                                    真空电磁阀1.Off();
+                                    真空电磁阀2.Off();
+                                    真空泵.Off();
+                                    filmFlow = FilmFlow.轴到吸膜位;
+                                }
+                            }
+
+                            break;
+
+                        case FilmFlow.吸头上下到待机位:
+                            吸头上下.MovePosByName("吸膜位置上", 1);
+                            吸头平移.MovePosByName("贴8mm位", 1);
+                            filmFlow = FilmFlow.平移到对应贴膜位;
+                            break;
+
+                        case FilmFlow.平移到对应贴膜位:
+                            if (吸头平移.InPos("贴8mm位"))
+                            {
+                                filmFlow = FilmFlow.贴膜动作;
+                                吸头上下.MovePosByName("贴膜位置下", 1);
+                            }
+                            else
+                            {
+                                吸头平移.MovePosByName("贴8mm位", 1);
+                            }
+                            break;
+
+                        case FilmFlow.贴膜动作:
+                            if (吸头上下.InPos("贴膜位置下"))
+                            {
+                                真空电磁阀1.Off();
+                                真空电磁阀2.Off();
+                                真空泵.Off();
+                                凸轮.MovePosByName("至包胶位", 1);
+                                Thread.Sleep(100);//贴膜延时
+                                吸头上下.MovePosByName("热熔位置", 1);
+                                吸头平移.MovePosByName("热熔位置", 1);
+                                filmFlow = FilmFlow.热熔动作;
+                            }
+                            break;
+
+                        case FilmFlow.热熔动作:
+                            if (吸头上下.InPos("热熔位置") && 吸头平移.InPos("热熔位置"))
+                            {
+                                热熔上下.MovePosByName("热熔下", 1);
+                                filmFlow = FilmFlow.热熔;
+                            }
+
+                            break;
+                        case FilmFlow.热熔:
+                            if (热熔上下.InPos("热熔下"))
+                            {
+                                FileSuccessCount++;
+                                if (!IsTwice())
+                                {
+                                    filmFlow = FilmFlow.完成;
+                                    凸轮.MovePosByName("松料位", 1);
+                                    热熔上下.PMove(2, 1,120,50);
+                                    SetRunnersWidth();
+                                }
+                                else
+                                {
+                                    filmFlow = FilmFlow.轴到吸膜位;
+                                }
+
+                            }
+                            break;
+
+                        case FilmFlow.完成:
+                            if (凸轮.InPos("松料位") && resetFlow == ResetFlow.None)
+                            {
+                                flowLight.贴膜.status = 2;
+                                Form1.MainControl.UCLCR.LCRHelper.SaveData();
+                                Reset();
+                            }
+                            break;
+
+                        default:
+                            break;
                     }
-                    Thread.Sleep(250);
                 }
-            }));
-                tasks[0].Start();
-            }
 
-            if (tasks[1] == null || tasks[1].IsCompleted)
-            {
-                tasks[1] = new Task(new Action(() =>
+                //复位
+                switch (resetFlow)
                 {
-                    while (true)
-                    {
-                        if (Alarm.AlarmControl.Alarm == Alarm.AlarmList.None && MotionControl.IsAuto)
+                    case ResetFlow.None:
+
+                        break;
+                    case ResetFlow.吸嘴_测值上下回零:
+                        Form1.MainControl.CodeControl.Clear();
+                        吸头上下.Home(1000);
+                        热熔上下.Home(1000);
+                        左进入.SetServon();
+                        右进入.SetServon();
+                        测值整体上下.Home(3000);
+                        下针.Home(1000);
+                        探针A.Home(1000);
+                        探针B.Home(1000);
+                        resetFlow = ResetFlow.吸嘴_测值上下回零完成;
+                        break;
+                    case ResetFlow.吸嘴_测值上下回零完成:
+                        if (吸头上下.HomeState)
                         {
-                            //贴膜
-                            switch (filmFlow)
-                            {
-                                case FilmFlow.None:
-                                    if (右物料光栅.State() || 左物料光栅.State())
-                                    {
-                                        filmFlow = FilmFlow.轴到吸膜位;
-                                        filmCount = 0;
-                                    }
-                                    break;
-
-                                case FilmFlow.轴到吸膜位:
-                                    吸头上下.MovePosByName("吸膜位置上", 1);
-                                    热熔上下.MovePosByName("热熔上", 1);
-                                    filmFlow = FilmFlow.轴到位;
-                                    break;
-
-                                case FilmFlow.轴到位:
-
-                                    if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上"))
-                                    {
-                                        filmFlow = FilmFlow.拨刀伸出位;
-                                    }
-                                    break;
-
-                                case FilmFlow.拨刀伸出位:
-                                    吸头平移.MovePosByName("吸膜位置", 1);
-                                    拨刀.MovePosByName("伸出位", 1);
-                                    filmFlow = FilmFlow.拨刀到伸出位;
-                                    break;
-
-                                case FilmFlow.拨刀到伸出位:
-                                    if (拨刀.InPos("伸出位") && 吸头平移.InPos("吸膜位置") && FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
-                                    {
-                                        filmFlow = FilmFlow.卷料送一个膜;
-                                        if (胶膜1到位.IsOn())
-                                        {
-                                            卷料.PMove(6, 0);
-                                        }
-                                        if (filmCount == 0)
-                                        {
-                                            左进入.PMove(-左进入.GetPosByName("接料位"), 0);
-                                            右进入.PMove(-右进入.GetPosByName("接料位"), 0);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        filmFlow = FilmFlow.拨刀伸出位;
-                                    }
-                                    break;
-
-                                case FilmFlow.卷料送一个膜:
-                                    if (胶膜1到位.IsOn())
-                                    {
-                                        filmFlow = FilmFlow.吸头上下吸膜;
-                                        吸头上下.MovePosByName("吸膜位置下", 1);
-                                        filmCount++;
-                                    }
-                                    else
-                                    {
-                                        卷料.PMove(2, 0);
-                                    }
-                                    break;
-
-                                case FilmFlow.吸头上下吸膜:
-                                    if (吸头上下.InPos("吸膜位置下"))
-                                    {
-                                        真空电磁阀1.On();
-                                        真空电磁阀2.On();
-                                        真空泵.On();
-                                        TuiDaoPos();
-                                    }
-
-                                    break;
-
-                                case FilmFlow.大膜退刀位:
-                                    拨刀.MovePosByName("大膜退刀位", 1);
-                                    filmFlow = FilmFlow.判断真空表;
-                                    break;
-
-                                case FilmFlow.小膜退刀位:
-                                    拨刀.MovePosByName("小膜退刀位", 1);
-                                    filmFlow = FilmFlow.判断真空表;
-                                    break;
-
-                                case FilmFlow.判断真空表:
-                                    if (拨刀.InPos("大膜退刀位"))
-                                    {
-                                        Thread.Sleep(2000);//吸膜延时
-                                        if (真空表.State() || filmCount > 1)
-                                        {
-                                            filmFlow = FilmFlow.吸头上下到待机位;
-                                        }
-                                        else if (filmCount > 2)
-                                        {
-                                            //报警吸膜异常
-                                            AlarmControl.Alarm = AlarmList.吸膜超时;
-                                        }
-                                        else
-                                        {
-                                            真空电磁阀1.Off();
-                                            真空电磁阀2.Off();
-                                            真空泵.Off();
-                                            filmFlow = FilmFlow.轴到吸膜位;
-                                        }
-                                    }
-
-                                    break;
-
-                                case FilmFlow.吸头上下到待机位:
-                                    吸头上下.MovePosByName("吸膜位置上", 1);
-                                    吸头平移.MovePosByName("贴8mm位", 1);
-                                    filmFlow = FilmFlow.平移到对应贴膜位;
-                                    break;
-
-                                case FilmFlow.平移到对应贴膜位:
-                                    if (吸头平移.InPos("贴8mm位"))
-                                    {
-                                        filmFlow = FilmFlow.贴膜动作;
-                                        吸头上下.MovePosByName("贴膜位置下", 1);
-                                    }
-                                    else
-                                    {
-                                        吸头平移.MovePosByName("贴8mm位", 1);
-                                    }
-                                    break;
-
-                                case FilmFlow.贴膜动作:
-                                    if (吸头上下.InPos("贴膜位置下"))
-                                    {
-                                        真空电磁阀1.Off();
-                                        真空电磁阀2.Off();
-                                        真空泵.Off();
-                                        凸轮.MovePosByName("至包胶位", 1);
-                                        Thread.Sleep(100);//贴膜延时
-                                        吸头上下.MovePosByName("热熔位置", 1);
-                                        热熔上下.MovePosByName("热熔下", 1);
-                                        filmFlow = FilmFlow.热熔动作;
-                                    }
-                                    break;
-
-                                case FilmFlow.热熔动作:
-                                    if (热熔上下.InPos("热熔下"))
-                                    {
-                                        FileSuccessCount++;
-                                        if (!IsTwice())
-                                        {
-                                            filmFlow = FilmFlow.完成;
-                                            凸轮.MovePosByName("松料位", 1);
-                                        }
-                                        else
-                                        {
-                                            filmFlow = FilmFlow.轴到吸膜位;
-                                        }
-
-                                    }
-                                    break;
-
-                                case FilmFlow.完成:
-                                    if (凸轮.InPos("松料位"))
-                                    {
-                                        flowLight.贴膜.status = 2;
-                                        FileSuccessCount = 0;
-                                        Form1.MainControl.UCLCR.LCRHelper.SaveData();
-                                        Reset();
-                                    }
-                                  
-                                    break;
-
-                                default:
-                                    break;
-                            }
-
+                            resetFlow = ResetFlow.探针回零;
                         }
-                        else
+                        break;
+                    case ResetFlow.探针回零:
+                        探针A.Home(1000);
+                        探针B.Home(1000);
+                        resetFlow = ResetFlow.探针回零完成;
+                        break;
+                    case ResetFlow.探针回零完成:
+                        if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState && 测值整体上下.HomeState)
                         {
+                            吸头平移.Home(1000);
+                            拨刀.Home(1000);
+                            resetFlow = ResetFlow.料带是否取走;
+                        }
+                        break;
+
+                    case ResetFlow.料带是否取走:
+                        if (!左入料光栅.State() && !右入料光栅.State())
+                        {
+                            resetFlow = ResetFlow.初始化;
+                        }
+                        break;
+
+                    case ResetFlow.初始化:
+                        FlowLeft = MainFlow.None;
+                        FlowRight = MainFlow.None;
+                        filmFlow = FilmFlow.None;
+                        Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCR.LCRFlow.None;
+                        flowLight.Reset();
+                        凸轮.Home(3000);
+                        流道调宽.Home(1000);
+
+                        resetFlow = ResetFlow.初始化完成;
+                        break;
+                    case ResetFlow.初始化完成:
+                        if (凸轮.HomeState && 流道调宽.HomeState && 吸头平移.HomeState)
+                        {
+                            resetFlow = ResetFlow.None;
+                            filmCount = 0;
+                            FileSuccessCount = 0;
                             左进入.SetServoff();
                             右进入.SetServoff();
+                            左进入.Home(1000);
+                            右进入.Home(1000);
+                            SetRunnersWidth();
                         }
-
-                        //复位
-                        switch (resetFlow)
-                        {
-                            case ResetFlow.None:
-
-                                break;
-                            case ResetFlow.吸嘴_测值上下回零:
-                                Form1.MainControl.CodeControl.Clear();
-                                吸头上下.Home(1000);
-                                热熔上下.Home(1000);
-                                左进入.SetServon();
-                                右进入.SetServon();
-                                测值整体上下.Home(3000);
-                                下针.Home(1000);
-                                探针A.Home(1000);
-                                探针B.Home(1000);
-                                resetFlow = ResetFlow.吸嘴_测值上下回零完成;
-                                break;
-                            case ResetFlow.吸嘴_测值上下回零完成:
-                                if (吸头上下.HomeState)
-                                {
-                                    resetFlow = ResetFlow.探针回零;
-                                }
-                                break;
-                            case ResetFlow.探针回零:
-                                探针A.Home(1000);
-                                探针B.Home(1000);
-                                resetFlow = ResetFlow.探针回零完成;
-                                break;
-                            case ResetFlow.探针回零完成:
-                                if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState && 测值整体上下.HomeState)
-                                {
-                                    吸头平移.Home(1000);
-                                    拨刀.Home(1000);
-                                    resetFlow = ResetFlow.料带是否取走;
-                                }
-                                break;
-
-                            case ResetFlow.料带是否取走:
-                                if (true)
-                                {
-                                    resetFlow = ResetFlow.初始化;
-                                }
-                                break;
-
-                            case ResetFlow.初始化:
-                                FlowLeft = MainFlow.None;
-                                FlowRight = MainFlow.None;
-                                Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCR.LCRFlow.None;
-                                flowLight.Reset();
-                                凸轮.Home(3000);
-                                流道调宽.Home(1000);
-
-                                resetFlow = ResetFlow.初始化完成;
-                                break;
-                            case ResetFlow.初始化完成:
-                                if (凸轮.HomeState && 流道调宽.HomeState && 吸头平移.HomeState)
-                                {
-                                    resetFlow = ResetFlow.None;
-                                    filmCount = 0;
-                                    左进入.SetServoff();
-                                    右进入.SetServoff();
-                                    左进入.Home(1000);
-                                    右进入.Home(1000);
-                                    SetRunnersWidth();
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                        Thread.Sleep(250);
-                    }
-                }));
-                tasks[1].Start();
+                        break;
+                    default:
+                        break;
+                }
+                Thread.Sleep(1000);
             }
+        }
 
+        private void LeftAndRight()
+        {
+            while (true)
+            {
+                if (resetFlow == ResetFlow.None && Alarm.AlarmControl.Alarm == Alarm.AlarmList.None && MotionControl.IsAuto)
+                {
+                    //左
+                    switch (FlowLeft)
+                    {
+                        case MainFlow.None:
+                            flowLight.左进入.status = 0;
+                            if ((!ParamManager.Instance.System_条码.B || Form1.MainControl.CodeControl.IsSuccess()) && 左入料光栅.State())
+                            {
+                                FlowLeft = MainFlow.进料;
+                                flowLight.左进入.status = 1;
+                                左进入.SetServoff();
+                            }
+                            break;
+                        case MainFlow.进料:
+                            //左轮开始转动
+                            左进入.PMove(-2, 0, true);
+                            if (左物料光栅.State() && 左入料光栅.State())
+                            {
+                                左进入.AxisStop();
+                                //清除坐标==》左进入
+                                flowLight.左进入.status = 2;
+                                FlowLeft = MainFlow.感应料带到光源位置;
+                                SetRunnersWidth2();
+                            }
+                            else if (!左入料光栅.State())
+                            {
+                                FlowLeft = MainFlow.None;
+                                左进入.SetServon();
+                            }
+                            break;
+                        case MainFlow.感应料带到光源位置:
+                            if (ParamManager.Instance.System_找空料.B)
+                            {
+                                FlowLeft = MainFlow.找空料;
+                                flowLight.左找空料.status = 1;
+                                左进入.PMove(-4, 0, true);//走4格
+                                FindEmptyCount++;
+                            }
+                            else if (ParamManager.Instance.System_测值.B)
+                            {
+                                FlowLeft = MainFlow.请求测值;
+                                flowLight.左测值.status = 1;
+
+                                MotControl.凸轮.MovePosByName("进料位", 1);
+                            }
+                            else if (ParamManager.Instance.System_丝印.B)
+                            {
+                                flowLight.左丝印.status = 1;
+                                FlowLeft = MainFlow.丝印;
+                            }
+                            else
+                            {
+                                FlowLeft = MainFlow.完成;
+                            }
+                            break;
+                        case MainFlow.找空料:
+                            if (false)//视觉确定是否找到空料
+                            {
+                                //没找到空料的情况
+                                左进入.PMove(-4, 0, true);//走4格
+                                FindEmptyCount++;
+                            }
+                            else
+                            {
+                                FindEmptyPos = 0;
+                                FlowLeft = MainFlow.找空料完成;
+                            }
+                            break;
+                        case MainFlow.找空料完成:
+                            flowLight.左找空料.status = 2;
+                            if (ParamManager.Instance.System_测值.B)
+                            {
+                                FlowLeft = MainFlow.请求测值;
+                            }
+                            else if (ParamManager.Instance.System_丝印.B)
+                            {
+                                flowLight.左丝印.status = 1;
+                                FlowLeft = MainFlow.丝印;
+                            }
+                            else
+                            {
+                                FlowLeft = MainFlow.切空料;
+                                左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
+                            }
+                            break;
+                        case MainFlow.请求测值:
+                            if (Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.Left)
+                            {
+                                FlowLeft = MainFlow.测值中;
+                            }
+                            break;
+                        case MainFlow.测值中:
+                            flowLight.左测值.status = 1;
+                            if (Form1.MainControl.UCLCR.LCRHelper.LCRFlow == LCRFlow.Finish)
+                            {
+                                Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCRFlow.None;
+                                FlowLeft = MainFlow.测值完成;
+                            }
+                            break;
+                        case MainFlow.测值完成:
+                            Thread.Sleep(2000);
+                            flowLight.左测值.status = 2;
+                            FlowLeft = MainFlow.完成;
+                            //左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
+                            break;
+                        case MainFlow.切空料:
+                            凸轮.MovePosByName("切刀位", 1);
+                            FlowLeft = MainFlow.切空料完成;
+                            break;
+                        case MainFlow.切空料完成:
+                            if (凸轮.InPos("切刀位"))
+                            {
+                                凸轮.MovePosByName("进料位", 1);
+                                FlowLeft = MainFlow.完成;
+                            }
+                            break;
+                        case MainFlow.丝印:
+                            break;
+                        case MainFlow.丝印完成:
+                            flowLight.左丝印.status = 2;
+                            FlowLeft = MainFlow.切空料;
+                            左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
+                            break;
+                        case MainFlow.完成:
+
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //右
+                    switch (FlowRight)
+                    {
+                        case MainFlow.None:
+                            flowLight.右进入.status = 0;
+                            if ((!ParamManager.Instance.System_条码.B || Form1.MainControl.CodeControl.IsSuccess()) && 右入料光栅.State())
+                            {
+                                FlowRight = MainFlow.进料;
+                                flowLight.右进入.status = 1;
+                                右进入.SetServoff();
+                            }
+                            break;
+                        case MainFlow.进料:
+                            //右轮开始转动
+                            右进入.PMove(-2, 0, true);
+                            if (右物料光栅.State() && 右入料光栅.State())
+                            {
+                                右进入.AxisStop();
+                                //清除坐标==》右进入
+                                flowLight.右进入.status = 2;
+                                FlowRight = MainFlow.感应料带到光源位置;
+                                SetRunnersWidth2();
+                            }
+                            else if (!右入料光栅.State())
+                            {
+                                FlowRight = MainFlow.None;
+                                右进入.SetServon();
+                            }
+                            break;
+                        case MainFlow.感应料带到光源位置:
+                            if (ParamManager.Instance.System_找空料.B)
+                            {
+                                FlowRight = MainFlow.找空料;
+                                flowLight.右找空料.status = 1;
+                            }
+                            else if (ParamManager.Instance.System_测值.B)
+                            {
+                                FlowRight = MainFlow.请求测值;
+                                flowLight.右测值.status = 1;
+                            }
+                            else if (ParamManager.Instance.System_丝印.B)
+                            {
+                                flowLight.右丝印.status = 1;
+                                FlowRight = MainFlow.丝印;
+                            }
+                            else
+                            {
+                                FlowRight = MainFlow.完成;
+                            }
+                            break;
+                        case MainFlow.找空料:
+                            if (false)//视觉确定是否找到空料
+                            {
+                                //没找到空料的情况
+                                右进入.PMove(-4, 0, true);//走4格
+
+                            }
+                            else
+                            {
+                                FlowRight = MainFlow.找空料完成;
+                            }
+                            break;
+                        case MainFlow.找空料完成:
+                            flowLight.右找空料.status = 2;
+                            if (ParamManager.Instance.System_测值.B)
+                            {
+                                FlowRight = MainFlow.请求测值;
+                            }
+                            else if (ParamManager.Instance.System_丝印.B)
+                            {
+                                flowLight.右丝印.status = 1;
+                                FlowRight = MainFlow.丝印;
+                            }
+                            else
+                            {
+                                FlowRight = MainFlow.切空料;
+                                右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
+                            }
+                            break;
+                        case MainFlow.请求测值:
+                            if (Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.Right)
+                            {
+                                FlowRight = MainFlow.测值中;
+                            }
+                            break;
+                        case MainFlow.测值中:
+                            flowLight.右测值.status = 1;
+                            if (Form1.MainControl.UCLCR.LCRHelper.LCRFlow == LCRFlow.Finish)
+                            {
+                                Form1.MainControl.UCLCR.LCRHelper.LCRFlow = LCRFlow.None;
+                                FlowRight = MainFlow.测值完成;
+                            }
+                            break;
+                        case MainFlow.测值完成:
+                            Thread.Sleep(3000);
+                            flowLight.右测值.status = 2;
+                            FlowRight = MainFlow.完成;
+                            //右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
+                            break;
+                        case MainFlow.切空料:
+                            凸轮.MovePosByName("切刀位", 1);
+                            FlowRight = MainFlow.切空料完成;
+                            break;
+                        case MainFlow.切空料完成:
+                            if (凸轮.InPos("切刀位"))
+                            {
+                                凸轮.MovePosByName("进料位", 1);
+                                FlowRight = MainFlow.完成;
+                            }
+                            break;
+                        case MainFlow.丝印:
+                            break;
+                        case MainFlow.丝印完成:
+                            flowLight.右丝印.status = 2;
+                            FlowRight = MainFlow.切空料;
+                            右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
+                            break;
+                        case MainFlow.完成:
+
+
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                Thread.Sleep(5);
+            }
         }
 
         public void Stop()
         {
-            MotionControl.CardAPI.StopEmgAxis();
+            if (!MotionControl.CardAPI.StopEmgAxis())
+            {
+                MotionControl.CardAPI.StopEmgAxis();
+            }
         }
 
         public void Reset()
         {
-            if (resetFlow == ResetFlow.None)
-                resetFlow = ResetFlow.吸嘴_测值上下回零;
+            //if (resetFlow == ResetFlow.None)
+            resetFlow = ResetFlow.吸嘴_测值上下回零;
         }
 
         /// <summary>
@@ -828,7 +822,7 @@ namespace BorwinSplicMachine
         /// <summary>
         /// 设置流道宽度
         /// </summary>
-        private void SetRunnersWidth()
+        public void SetRunnersWidth()
         {
             switch (runnersWidth)
             {
@@ -988,6 +982,7 @@ namespace BorwinSplicMachine
         平移到对应贴膜位,
         贴膜动作,
         热熔动作,
+        热熔,
         完成
     }
 

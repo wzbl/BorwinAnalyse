@@ -68,7 +68,7 @@ namespace LibSDK.Motion
             if (ps.Count > 0)
             {
                 double pos = ps[0].Pos;
-                if (Math.Abs(pos - GetEncPos()) < 0.3)
+                if (Math.Abs(pos - GetEncPos()) < 0.3&&Runing())
                 {
                     return true;
                 }

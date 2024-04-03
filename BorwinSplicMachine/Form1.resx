@@ -158,15 +158,6 @@
   <data name="相机标定.TextLine1" xml:space="preserve">
     <value>相机</value>
   </data>
-  <data name="kryptonRibbonGroupButton3.TextLine1" xml:space="preserve">
-    <value>BOM解析</value>
-  </data>
-  <data name="kryptonRibbonGroupButton12.TextLine1" xml:space="preserve">
-    <value>查询</value>
-  </data>
-  <data name="kryptonRibbonGroupButton13.TextLine1" xml:space="preserve">
-    <value>设置</value>
-  </data>
   <data name="kryptonRibbonGroupButton14.TextLine1" xml:space="preserve">
     <value>设置</value>
   </data>
@@ -184,6 +175,12 @@
   </data>
   <data name="kryptonRibbonGroupButton6.TextLine1" xml:space="preserve">
     <value>打印</value>
+  </data>
+  <data name="kryptonRibbonGroupButton3.TextLine1" xml:space="preserve">
+    <value>复位</value>
+  </data>
+  <data name="kryptonRibbonGroupButton7.TextLine1" xml:space="preserve">
+    <value>停止</value>
   </data>
   <data name="kryptonRibbonGroup1.TextLine1" xml:space="preserve">
     <value>主菜单</value>
@@ -313,36 +310,6 @@
   <data name="&gt;&gt;kryptonRibbonGroupSeparator2.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
-  <data name="&gt;&gt;kryptonRibbonGroupTriple5.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupTriple5</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupTriple5.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton3.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupButton3</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton3.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton12.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupButton12</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton12.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton13.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupButton13</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupButton13.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupSeparator3.Name" xml:space="preserve">
-    <value>kryptonRibbonGroupSeparator3</value>
-  </data>
-  <data name="&gt;&gt;kryptonRibbonGroupSeparator3.Type" xml:space="preserve">
-    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
-  </data>
   <data name="&gt;&gt;kryptonRibbonGroupTriple6.Name" xml:space="preserve">
     <value>kryptonRibbonGroupTriple6</value>
   </data>
@@ -395,6 +362,36 @@
     <value>kryptonRibbonGroupButton6</value>
   </data>
   <data name="&gt;&gt;kryptonRibbonGroupButton6.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupSeparator3.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupSeparator3</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupSeparator3.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupSeparator5.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupSeparator5</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupSeparator5.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupSeparator, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupTriple3.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupTriple3</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupTriple3.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupTriple, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton3.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupButton3</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton3.Type" xml:space="preserve">
+    <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton7.Name" xml:space="preserve">
+    <value>kryptonRibbonGroupButton7</value>
+  </data>
+  <data name="&gt;&gt;kryptonRibbonGroupButton7.Type" xml:space="preserve">
     <value>ComponentFactory.Krypton.Ribbon.KryptonRibbonGroupButton, ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

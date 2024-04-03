@@ -82,12 +82,12 @@ namespace BorwinSplicMachine.LCR
         /// <summary>
         /// 左实测值
         /// </summary>
-        public string LResult = "NG";
+        public string LResult = "";
 
         /// <summary>
         /// 右实测值
         /// </summary>
-        public string RResult = "NG";
+        public string RResult = "";
 
         /// <summary>
         /// 单位
@@ -290,6 +290,8 @@ namespace BorwinSplicMachine.LCR
             Value = 0;
             Unit = Unit.Error;
             Grade = 0;
+            LResult = "";
+            RResult = "";
         }
 
         /// <summary>

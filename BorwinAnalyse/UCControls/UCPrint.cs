@@ -17,8 +17,8 @@ namespace BorwinAnalyse.UCControls
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-            this.Load += UCPrint_Load;
-            BartenderPrintModel.Instance.Load();
+            //this.Load += UCPrint_Load;
+            //BartenderPrintModel.Instance.Load();
         }
 
         private void UCPrint_Load(object sender, EventArgs e)

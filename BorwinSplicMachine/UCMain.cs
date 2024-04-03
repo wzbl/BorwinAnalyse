@@ -110,6 +110,8 @@ namespace BorwinSplicMachine
                 txtBarcode1.Enabled = true;
                 txtbarCode2.Enabled = false;
                 txtBarcode1.Text = "";
+                txtbarCode2.Text = "";
+                
                 txtBarcode1.Focus();
             }
 
@@ -140,6 +142,7 @@ namespace BorwinSplicMachine
                 FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.Alarm.ToString(), "admin");
                 if (MotionControl.CardAPI.IsInitCardOK)
                     MotControl.蜂鸣器.On();
+                Form1.MainControl.motControl.Stop();
                 if (formAlarm.ShowDialog() == DialogResult.Yes)
                 {
                     if (MotionControl.CardAPI.IsInitCardOK)
@@ -176,6 +179,10 @@ namespace BorwinSplicMachine
             txtBarcode1.Text = "";
             txtbarCode2.Text = "";
         }
-         
+
+        private void rad8mm_CheckedChanged(object sender, EventArgs e)
+        {
+            Form1.MainControl.motControl.SetRunnersWidth();
+        }
     }
 }

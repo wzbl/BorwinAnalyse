@@ -212,9 +212,7 @@ namespace LibSDK
                 }
                 if (CardAPI.InitCard(CardNum, axis, BaseConfig.Instance.ModeNum, ConfigFile))
                 {
-                    Log("开始加载轴".tr());
                     InitAxis();
-                    Log("开始加载IO".tr());
                     InitINIO();
                     InitOUTIO();
                     for (int i = 0; i < CardNum; i++)
@@ -225,7 +223,6 @@ namespace LibSDK
                     }
                     BaseConfig.Instance.Write();
                 };
-
             }
             else
             {
