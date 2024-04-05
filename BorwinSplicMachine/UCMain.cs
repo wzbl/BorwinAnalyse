@@ -140,13 +140,13 @@ namespace BorwinSplicMachine
             {
                 timer1.Stop();
                 FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), Alarm.AlarmControl.Alarm.ToString(), "admin");
-                if (MotionControl.CardAPI.IsInitCardOK)
-                    MotControl.蜂鸣器.On();
+                //if (MotionControl.CardAPI.IsInitCardOK)
+                //    MotControl.蜂鸣器.On();
                 Form1.MainControl.motControl.Stop();
                 if (formAlarm.ShowDialog() == DialogResult.Yes)
                 {
-                    if (MotionControl.CardAPI.IsInitCardOK)
-                        MotControl.蜂鸣器.Off();
+                    //if (MotionControl.CardAPI.IsInitCardOK)
+                    //    MotControl.蜂鸣器.Off();
                     timer1.Start();
                 }
 

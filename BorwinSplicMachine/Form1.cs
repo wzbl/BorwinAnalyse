@@ -116,6 +116,9 @@ namespace BorwinSplicMachine
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            System.Environment.Exit(System.Environment.ExitCode);
+            this.Dispose();
+            this.Close();
             MainControl.Log("程序关闭");
         }
 

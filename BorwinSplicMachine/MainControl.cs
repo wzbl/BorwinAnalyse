@@ -90,6 +90,12 @@ namespace BorwinSplicMachine
             UCLCR.Start();
         }
 
+        public void Stop()
+        {
+            motControl.Stop();
+            UCLCR.Start();
+        }
+
         public async void UpdataLanguage()
         {
             await asyncUpdataLanguage();

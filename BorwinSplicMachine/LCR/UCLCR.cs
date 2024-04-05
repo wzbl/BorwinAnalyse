@@ -338,193 +338,194 @@ namespace BorwinSplicMachine.LCR
         {
             while (Form1.MainControl.motControl != null)
             {
-                switch (LCRHelper.LCRFlow)
+                if (MotionControl.IsAuto)
                 {
-                    case LCR.LCRFlow.None:
-                        if (Form1.MainControl.motControl.FlowLeft == MainFlow.请求测值)
-                        {
-                            LCRHelper.LCRFlow = LCR.LCRFlow.Start;
-                            LCRHelper.Side = LCR.WhichSide.Left;
-                            MotControl.凸轮.MovePosByName("进料位", 1);
-                        }
-                        else if (Form1.MainControl.motControl.FlowRight == MainFlow.请求测值)
-                        {
-                            LCRHelper.LCRFlow = LCR.LCRFlow.Start;
-                            LCRHelper.Side = LCR.WhichSide.Right;
-                            MotControl.凸轮.MovePosByName("进料位", 1);
-                        }
-                        else if (Form1.MainControl.CodeControl.IsSuccess() && Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None && MotControl.测值整体上下.HomeState)
-                        {
-                            if (!MotControl.测值整体上下.InPos("待探测位"))
+                    switch (LCRHelper.LCRFlow)
+                    {
+                        case LCR.LCRFlow.None:
+                            if (Form1.MainControl.motControl.FlowLeft == MainFlow.请求测值)
                             {
-                                MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
+                                LCRHelper.LCRFlow = LCR.LCRFlow.Start;
+                                LCRHelper.Side = LCR.WhichSide.Left;
+                                MotControl.凸轮.MovePosByName("进料位", 1);
                             }
-                        }
-                        break;
-                    case LCR.LCRFlow.Start:
-                        if (MotControl.凸轮.InPos("进料位"))
-                        {
-                            if (LCRHelper.Side == LCR.WhichSide.Left)
+                            else if (Form1.MainControl.motControl.FlowRight == MainFlow.请求测值)
                             {
-                                MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0, 1500, 100);
+                                LCRHelper.LCRFlow = LCR.LCRFlow.Start;
+                                LCRHelper.Side = LCR.WhichSide.Right;
+                                MotControl.凸轮.MovePosByName("进料位", 1);
                             }
-                            else if (LCRHelper.Side == LCR.WhichSide.Right)
+                            else if (Form1.MainControl.CodeControl.IsSuccess() && Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None && MotControl.测值整体上下.HomeState)
                             {
-                                MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0, 1500, 100);
+                                if (!MotControl.测值整体上下.InPos("待探测位"))
+                                {
+                                    MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
+                                }
                             }
-                            LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
-                        }
-                        Thread.Sleep(1000);
-                        break;
-                    case LCR.LCRFlow.走一格:
-                        if (MotControl.测值整体上下.InPos("待探测位"))
-                        {
-                            testCount++;
-                            if (LCRHelper.Side == LCR.WhichSide.Left)
+                            break;
+                        case LCR.LCRFlow.Start:
+                            if (MotControl.凸轮.InPos("进料位"))
                             {
-                                MotControl.左进入.PMove(-1, 0);
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0, 1500, 100);
+                                }
+                                else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                {
+                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0, 1500, 100);
+                                }
+                                LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
-                            else if (LCRHelper.Side == LCR.WhichSide.Right)
+                            Thread.Sleep(1000);
+                            break;
+                        case LCR.LCRFlow.走一格:
+                            if (MotControl.测值整体上下.InPos("待探测位"))
                             {
-                                MotControl.右进入.PMove(-1, 0);
+                                testCount++;
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    MotControl.左进入.PMove(-1, 0);
+                                }
+                                else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                {
+                                    MotControl.右进入.PMove(-1, 0);
+                                }
+                                LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
-                            LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
-                        }
-                        break;
-                    case LCR.LCRFlow.测值整体平移:
-                        LCRHelper.LCRFlow = LCR.LCRFlow.测值定位;
-                        break;
-                    case LCR.LCRFlow.测值定位:
-                        LCRHelper.LCRFlow = LCR.LCRFlow.AB探针到位;
-                        MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("探测位"), 1);
-                        break;
-                    case LCR.LCRFlow.AB探针到位:
-                        if (MotControl.测值整体上下.InPos("探测位"))
-                        {
-                            MotControl.测值支撑电磁铁.On();
-                            LCRHelper.LCRFlow = LCR.LCRFlow.下针;
-                            MotControl.下针.PMove(MotControl.下针.GetPosByName("探测位"), 1);
-                        }
-                        Thread.Sleep(1000);
-                        break;
-                    case LCR.LCRFlow.下针:
-                        if (MotControl.下针.InPos("探测位"))
-                        {
-                            LCRHelper.LCRFlow = LCR.LCRFlow.发送电表指令;
-                            KTimer.Restart();
-                            LCRHelper.SendReadCommand();
-                        }
-                        else
-                        {
+                            break;
+                        case LCR.LCRFlow.测值整体平移:
+                            LCRHelper.LCRFlow = LCR.LCRFlow.测值定位;
+                            break;
+                        case LCR.LCRFlow.测值定位:
                             LCRHelper.LCRFlow = LCR.LCRFlow.AB探针到位;
-                        }
-                        break;
-                    case LCR.LCRFlow.发送电表指令:
-                        LCRHelper.LCRFlow = LCR.LCRFlow.增加补偿值;
-                        LCRHelper.RealValue = (LCRHelper.Min_Value + LCRHelper.Max_Value) / 2;
-                        if (KTimer.IsOn(ParamManager.Instance.TimerOut.I))
-                        {
-                            AlarmControl.Alarm = AlarmList.测值超时;
-                            LCRHelper.LCRFlow = LCR.LCRFlow.None;
-                        }
-                        break;
-                    case LCR.LCRFlow.增加补偿值:
-                        LCRHelper.SetUnitReadData(ref LCRHelper.ReadData);
-                        LCRHelper.RealValue = LCRHelper.ReadData;
-                        LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
-                        break;
-                    case LCR.LCRFlow.判断值是否在范围:
-                        MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1, 20, 10);
-                        MotControl.测值支撑电磁铁.Off();
-                        if (LCRHelper.RealValue >= LCRHelper.Min_Value && LCRHelper.RealValue <= LCRHelper.Max_Value)
-                        {
-                            if (LCRHelper.Side == LCR.WhichSide.Left)
+                            MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("探测位"), 1);
+                            break;
+                        case LCR.LCRFlow.AB探针到位:
+                            if (MotControl.测值整体上下.InPos("探测位"))
                             {
-                                double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
-                                MotControl.左进入.PMove(pos, 0, 1000, 100);
-                                LCRHelper.LRealValue = LCRHelper.RealValue;
-                                LCRHelper.LResult = "Pass";
+                                MotControl.测值支撑电磁铁.On();
+                                LCRHelper.LCRFlow = LCR.LCRFlow.下针;
+                                MotControl.下针.PMove(MotControl.下针.GetPosByName("探测位"), 1);
                             }
-                            else if (LCRHelper.Side == LCR.WhichSide.Right)
+                            Thread.Sleep(1000);
+                            break;
+                        case LCR.LCRFlow.下针:
+                            if (MotControl.下针.InPos("探测位"))
                             {
-                                double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
-                                MotControl.右进入.PMove(pos, 0, 1000, 100);
-                                LCRHelper.RRealValue = LCRHelper.RealValue;
-                                LCRHelper.RResult = "Pass";
+                                LCRHelper.LCRFlow = LCR.LCRFlow.发送电表指令;
+                                KTimer.Restart();
+                                LCRHelper.SendReadCommand();
                             }
-                            LCRHelper.Result = LCRResult.Pass;
-                            if (ParamManager.Instance.ContinuousTest.B)
+                            else
                             {
+                                LCRHelper.LCRFlow = LCR.LCRFlow.AB探针到位;
+                            }
+                            break;
+                        case LCR.LCRFlow.发送电表指令:
+                            LCRHelper.LCRFlow = LCR.LCRFlow.增加补偿值;
+                            LCRHelper.RealValue = (LCRHelper.Min_Value + LCRHelper.Max_Value) / 2;
+                            if (KTimer.IsOn(ParamManager.Instance.TimerOut.I))
+                            {
+                                AlarmControl.Alarm = AlarmList.测值超时;
+                                LCRHelper.LCRFlow = LCR.LCRFlow.None;
+                            }
+                            break;
+                        case LCR.LCRFlow.增加补偿值:
+                            LCRHelper.SetUnitReadData(ref LCRHelper.ReadData);
+                            LCRHelper.RealValue = LCRHelper.ReadData;
+                            LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
+                            break;
+                        case LCR.LCRFlow.判断值是否在范围:
+                            MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1, 20, 10);
+                            MotControl.测值支撑电磁铁.Off();
+                            if (LCRHelper.RealValue >= LCRHelper.Min_Value && LCRHelper.RealValue <= LCRHelper.Max_Value)
+                            {
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
+                                    MotControl.左进入.PMove(pos, 0, 1000, 100);
+                                    LCRHelper.LRealValue = LCRHelper.RealValue;
+                                    LCRHelper.LResult = "Pass";
+                                }
+                                else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                {
+                                    double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
+                                    MotControl.右进入.PMove(pos, 0, 1000, 100);
+                                    LCRHelper.RRealValue = LCRHelper.RealValue;
+                                    LCRHelper.RResult = "Pass";
+                                }
+                                LCRHelper.Result = LCRResult.Pass;
+                                if (ParamManager.Instance.ContinuousTest.B)
+                                {
 
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
+                                }
+                                else
+                                {
+                                    testCount = 0;
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                                }
+                            }
+                            else if (ParamManager.Instance.ContinuousTest.B || testCount < ParamManager.Instance.testint_Count.I - 1)
+                            {
+                                LCRHelper.Result = LCRResult.Fail;
                                 LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
                             }
                             else
                             {
+                                //MotControl.蜂鸣器.On();
+                                FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), "测值失败", "admin", 1);
+                                DialogResult dialogResult = formAlarm.ShowDialog();
+                                if (dialogResult == DialogResult.OK)
+                                {
+                                    if (LCRHelper.Side == LCR.WhichSide.Left)
+                                    {
+                                        LCRHelper.LResult = "人工Pass".tr();
+                                    }
+                                    else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                    {
+                                        LCRHelper.RResult = "人工Pass".tr();
+                                    }
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                                }
+                                else
+                                {
+                                    if (LCRHelper.Side == LCR.WhichSide.Left)
+                                    {
+                                        LCRHelper.LResult = "Fail";
+                                    }
+                                    else if (LCRHelper.Side == LCR.WhichSide.Right)
+                                    {
+                                        LCRHelper.RResult = "Fail";
+                                    }
+                                    LCRHelper.LCRFlow = LCR.LCRFlow.None;
+                                }
+                                if (LCRHelper.Side == LCR.WhichSide.Left)
+                                {
+                                    LCRHelper.LRealValue = LCRHelper.RealValue;
+                                    double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
+                                    MotControl.左进入.PMove(pos, 0);
+                                }
+                                else
+                                {
+                                    double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
+                                    MotControl.右进入.PMove(pos, 0);
+                                    LCRHelper.RRealValue = LCRHelper.RealValue;
+                                }
                                 testCount = 0;
-                                LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
+                                //MotControl.蜂鸣器.Off();
                             }
-                        }
-                        else if (ParamManager.Instance.ContinuousTest.B || testCount < ParamManager.Instance.testint_Count.I - 1)
-                        {
-                            LCRHelper.Result = LCRResult.Fail;
-                            LCRHelper.LCRFlow = LCR.LCRFlow.走一格;
-                        }
-                        else
-                        {
-                            //MotControl.蜂鸣器.On();
-                            FormAlarm formAlarm = new FormAlarm(DateTime.Now.ToString(), "测值失败", "admin", 1);
-                            DialogResult dialogResult = formAlarm.ShowDialog();
-                            if (dialogResult == DialogResult.OK)
-                            {
-                                if (LCRHelper.Side == LCR.WhichSide.Left)
-                                {
-                                    LCRHelper.LResult = "人工Pass".tr();
-                                }
-                                else if (LCRHelper.Side == LCR.WhichSide.Right)
-                                {
-                                    LCRHelper.RResult = "人工Pass".tr();
-                                }
-                                LCRHelper.LCRFlow = LCR.LCRFlow.Finish;
-                            }
-                            else
-                            {
-                                if (LCRHelper.Side == LCR.WhichSide.Left)
-                                {
-                                    LCRHelper.LResult = "Fail";
-                                }
-                                else if (LCRHelper.Side == LCR.WhichSide.Right)
-                                {
-                                    LCRHelper.RResult = "Fail";
-                                }
-                                LCRHelper.LCRFlow = LCR.LCRFlow.None;
-                            }
-                            if (LCRHelper.Side == LCR.WhichSide.Left)
-                            {
-                                LCRHelper.LRealValue = LCRHelper.RealValue;
-                                double pos = testCount * 1 + MotControl.左进入.GetPosByName("测值位");
-                                MotControl.左进入.PMove(pos, 0);
-                            }
-                            else
-                            {
-                                double pos = testCount * 1 + MotControl.右进入.GetPosByName("测值位");
-                                MotControl.右进入.PMove(pos, 0);
-                                LCRHelper.RRealValue = LCRHelper.RealValue;
-                            }
-                            testCount = 0;
-                            //MotControl.蜂鸣器.Off();
-                        }
-                        GridAddData();
-                        break;
-                    case LCR.LCRFlow.Finish:
-                        if (LCRHelper.LResult!=""&&LCRHelper.RResult!="")
-                        {
-                            //MotControl.测值整体上下.AxisStop();
-                        }
-                        break;
-                    default:
-                        break;
+                            GridAddData();
+                            break;
+                        case LCR.LCRFlow.Finish:
+
+
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                Thread.Sleep(5);
+                Thread.Sleep(20);
             }
         }
 

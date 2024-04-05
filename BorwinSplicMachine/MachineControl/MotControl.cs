@@ -204,16 +204,15 @@ namespace BorwinSplicMachine
 
         private int filmCount = 0;
 
-
+        Thread Thread = null;
+        Thread Thread2 = null;
         private void Run()
         {
-            ThreadStart threadStart = new ThreadStart(LeftAndRight);
-            Thread Thread = new Thread(threadStart);
+            Thread = new Thread(LeftAndRight);
             Thread.IsBackground = true;
             Thread.Start();
 
-            ThreadStart threadStart2 = new ThreadStart(ResetAndFilm);
-            Thread Thread2 = new Thread(threadStart2);
+            Thread2 = new Thread(ResetAndFilm);
             Thread2.Start();
         }
 
@@ -227,21 +226,30 @@ namespace BorwinSplicMachine
                     switch (filmFlow)
                     {
                         case FilmFlow.None:
-                            if (右入料光栅.State() && 左入料光栅.State()&&右物料光栅.State() && 左物料光栅.State())
+                            if (右入料光栅.State() && 左入料光栅.State() && 右物料光栅.State() && 左物料光栅.State())
                             {
                                 filmFlow = FilmFlow.轴到吸膜位;
                             }
                             break;
 
                         case FilmFlow.轴到吸膜位:
-                            吸头上下.MovePosByName("吸膜位置上", 1);
-                            热熔上下.MovePosByName("热熔上", 1);
-                            filmFlow = FilmFlow.轴到位;
-                            break;
+                            if (真空表.State())
+                            {
+                                filmFlow = FilmFlow.吸头上下到待机位;
+                            }
+                            else
+                            {
+                                吸头上下.MovePosByName("吸膜位置上", 1);
+                                热熔上下.MovePosByName("热熔上", 1);
+                                filmFlow = FilmFlow.轴到位;
+                            }                            break;
 
                         case FilmFlow.轴到位:
-
-                            if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上"))
+                            if (真空表.State())
+                            {
+                                filmFlow = FilmFlow.吸头上下到待机位;
+                            }
+                            else  if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上"))
                             {
                                 filmFlow = FilmFlow.拨刀伸出位;
                             }
@@ -254,19 +262,9 @@ namespace BorwinSplicMachine
                             break;
 
                         case FilmFlow.拨刀到伸出位:
-                            if (拨刀.InPos("伸出位") && 吸头平移.InPos("吸膜位置") && FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
+                            if (拨刀.InPos("伸出位") && 吸头平移.InPos("吸膜位置"))
                             {
                                 filmFlow = FilmFlow.卷料送一个膜;
-                                if (胶膜1到位.IsOn())
-                                {
-                                    卷料.PMove(6, 0);
-                                }
-                                if (filmCount == 0)
-                                {
-                                    左进入.PMove(-左进入.GetPosByName("接料位"), 0);
-                                    右进入.PMove(-右进入.GetPosByName("接料位"), 0);
-                                    //MotControl.测值整体上下.Home(3000);
-                                }
                             }
                             else
                             {
@@ -277,9 +275,17 @@ namespace BorwinSplicMachine
                         case FilmFlow.卷料送一个膜:
                             if (胶膜1到位.IsOn())
                             {
-                                filmFlow = FilmFlow.吸头上下吸膜;
-                                吸头上下.MovePosByName("吸膜位置下", 1);
-                                filmCount++;
+                                if (FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
+                                {
+                                    filmFlow = FilmFlow.吸头上下吸膜;
+                                    吸头上下.MovePosByName("吸膜位置下", 1);
+                                    if (FileSuccessCount == 0)
+                                    {
+                                        左进入.PMove(-左进入.GetPosByName("接料位"), 0);
+                                        右进入.PMove(-右进入.GetPosByName("接料位"), 0);
+                                    }
+                                    filmCount++;
+                                }
                             }
                             else
                             {
@@ -323,10 +329,18 @@ namespace BorwinSplicMachine
                                 }
                                 else
                                 {
-                                    真空电磁阀1.Off();
-                                    真空电磁阀2.Off();
-                                    真空泵.Off();
-                                    filmFlow = FilmFlow.轴到吸膜位;
+                                    if (真空表.State())
+                                    {
+                                        filmFlow = FilmFlow.吸头上下到待机位;
+                                    }
+                                    else
+                                    {
+                                        真空电磁阀1.Off();
+                                        真空电磁阀2.Off();
+                                        真空泵.Off();
+                                        filmFlow = FilmFlow.轴到吸膜位;
+                                    }
+                                   
                                 }
                             }
 
@@ -334,30 +348,33 @@ namespace BorwinSplicMachine
 
                         case FilmFlow.吸头上下到待机位:
                             吸头上下.MovePosByName("吸膜位置上", 1);
-                            吸头平移.MovePosByName("贴8mm位", 1);
+
+                            吸头平移.MovePosByName(FilmPos(), 1);
                             filmFlow = FilmFlow.平移到对应贴膜位;
                             break;
 
                         case FilmFlow.平移到对应贴膜位:
-                            if (吸头平移.InPos("贴8mm位"))
+                            if (吸头平移.InPos(FilmPos()))
                             {
                                 filmFlow = FilmFlow.贴膜动作;
                                 吸头上下.MovePosByName("贴膜位置下", 1);
-                            }
-                            else
-                            {
-                                吸头平移.MovePosByName("贴8mm位", 1);
                             }
                             break;
 
                         case FilmFlow.贴膜动作:
                             if (吸头上下.InPos("贴膜位置下"))
                             {
+                                凸轮.PMove(凸轮.GetPosByName("至包胶位"), 1, 5, 3);
+                                filmFlow = FilmFlow.包胶动作;
+                            }
+                            break;
+
+                        case FilmFlow.包胶动作:
+                            if (凸轮.InPos("至包胶位"))
+                            {
                                 真空电磁阀1.Off();
                                 真空电磁阀2.Off();
                                 真空泵.Off();
-                                凸轮.MovePosByName("至包胶位", 1);
-                                Thread.Sleep(100);//贴膜延时
                                 吸头上下.MovePosByName("热熔位置", 1);
                                 吸头平移.MovePosByName("热熔位置", 1);
                                 filmFlow = FilmFlow.热熔动作;
@@ -370,8 +387,8 @@ namespace BorwinSplicMachine
                                 热熔上下.MovePosByName("热熔下", 1);
                                 filmFlow = FilmFlow.热熔;
                             }
-
                             break;
+
                         case FilmFlow.热熔:
                             if (热熔上下.InPos("热熔下"))
                             {
@@ -380,7 +397,7 @@ namespace BorwinSplicMachine
                                 {
                                     filmFlow = FilmFlow.完成;
                                     凸轮.MovePosByName("松料位", 1);
-                                    热熔上下.PMove(2, 1,120,50);
+                                    热熔上下.PMove(2, 1, 120, 50);
                                     SetRunnersWidth();
                                 }
                                 else
@@ -392,10 +409,11 @@ namespace BorwinSplicMachine
                             break;
 
                         case FilmFlow.完成:
-                            if (凸轮.InPos("松料位") && resetFlow == ResetFlow.None)
+                            if (FileSuccessCount > 0 && 凸轮.InPos("松料位") && resetFlow == ResetFlow.None)
                             {
                                 flowLight.贴膜.status = 2;
                                 Form1.MainControl.UCLCR.LCRHelper.SaveData();
+                                MotControl.测值整体上下.Home(3000);
                                 Reset();
                             }
                             break;
@@ -417,10 +435,11 @@ namespace BorwinSplicMachine
                         热熔上下.Home(1000);
                         左进入.SetServon();
                         右进入.SetServon();
-                        测值整体上下.Home(3000);
                         下针.Home(1000);
                         探针A.Home(1000);
                         探针B.Home(1000);
+                        if (FileSuccessCount==0)
+                        MotControl.测值整体上下.Home(3000);
                         resetFlow = ResetFlow.吸嘴_测值上下回零完成;
                         break;
                     case ResetFlow.吸嘴_测值上下回零完成:
@@ -437,8 +456,10 @@ namespace BorwinSplicMachine
                     case ResetFlow.探针回零完成:
                         if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState && 测值整体上下.HomeState)
                         {
+                            if (!吸头平移.HomeState)
                             吸头平移.Home(1000);
-                            拨刀.Home(1000);
+                            if (!拨刀.HomeState)
+                                拨刀.Home(1000);
                             resetFlow = ResetFlow.料带是否取走;
                         }
                         break;
@@ -447,6 +468,10 @@ namespace BorwinSplicMachine
                         if (!左入料光栅.State() && !右入料光栅.State())
                         {
                             resetFlow = ResetFlow.初始化;
+                        }
+                        else
+                        {
+                            AlarmControl.Alarm = AlarmList.请取走料带;
                         }
                         break;
 
@@ -481,7 +506,7 @@ namespace BorwinSplicMachine
             }
         }
 
-        private void LeftAndRight()
+        private  void LeftAndRight()
         {
             while (true)
             {
@@ -747,6 +772,7 @@ namespace BorwinSplicMachine
 
         public void Stop()
         {
+           
             if (!MotionControl.CardAPI.StopEmgAxis())
             {
                 MotionControl.CardAPI.StopEmgAxis();
@@ -846,6 +872,41 @@ namespace BorwinSplicMachine
                     流道调宽.MovePosByName("流道8mm", 1);
                     break;
             }
+        }
+
+        /// <summary>
+        /// 贴膜位置
+        /// </summary>
+        /// <returns></returns>
+        public string FilmPos()
+        {
+            string posName = "贴8mm位";
+            switch (runnersWidth)
+            {
+                case RunnersWidth._8mm:
+                    break;
+                case RunnersWidth._12mm:
+                    if (FileSuccessCount>0)
+                    {
+                        posName = "贴12mm位";
+                    }
+                    break;
+                case RunnersWidth._16mm:
+                    if (FileSuccessCount > 0)
+                    {
+                        posName = "贴16mm位";
+                    }
+                    break;
+                case RunnersWidth._24mm:
+                    if (FileSuccessCount > 0)
+                    {
+                        posName = "贴24mm位";
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return posName;
         }
 
         /// <summary>
@@ -981,6 +1042,7 @@ namespace BorwinSplicMachine
         吸头上下到待机位,
         平移到对应贴膜位,
         贴膜动作,
+        包胶动作,
         热熔动作,
         热熔,
         完成
