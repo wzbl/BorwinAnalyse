@@ -39,9 +39,7 @@ namespace BorwinSplicMachine
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-            //kryptonSplitContainer2.Panel1.Controls.Add(Form1.MainControl.UCRichLog);
-            //kryptonSplitContainer2.Panel1.Controls.Add(new UCFlowLight());
-            Form1.MainControl.UCCCD.Dock = DockStyle.Fill;
+       
             kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCLCR);
             timer1.Start();
         }
@@ -49,20 +47,7 @@ namespace BorwinSplicMachine
         {
             LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            //LogManager.Instance.WriteLog(new LogModel(LogType.扫码日志, "输入条码"+":"+ txtBarCode1.Text,"周星星"));
-            //List<BomDataModel> bomDataModels = BomManager.Instance.AllBomData.Where(x => x.barCode == txtBarCode1.Text).ToList<BomDataModel>();
-            //if (bomDataModels.Count > 0)
-            //{
-            //    Form1.MainControl.UCLCR.LoadSplic(bomDataModels[0].type, bomDataModels[0].size, bomDataModels[0].value, bomDataModels[0].unit, bomDataModels[0].grade);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Bom中不存在条码:" + txtBarCode1.Text);
-            //}
-        }
-
+     
 
         protected override CreateParams CreateParams
         {
@@ -89,31 +74,40 @@ namespace BorwinSplicMachine
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Form1.MainControl.CodeControl.Code1.IsSuccess)
+            if (!ParamManager.Instance.System_条码.B)
             {
                 txtBarcode1.Enabled = false;
-                txtBarcode1.Text = Form1.MainControl.CodeControl.Code1.Code;
-                if (!Form1.MainControl.CodeControl.Code2.IsSuccess)
-                {
-                    txtbarCode2.Focus();
-                    txtbarCode2.Enabled = true;
-                    txtbarCode2.Text = "";
-                }
-                else
-                {
-                    txtbarCode2.Enabled = false;
-                    txtbarCode2.Text = Form1.MainControl.CodeControl.Code2.Code;
-                }
+                txtbarCode2.Enabled = false;
             }
             else
             {
-                txtBarcode1.Enabled = true;
-                txtbarCode2.Enabled = false;
-                txtBarcode1.Text = "";
-                txtbarCode2.Text = "";
-                
-                txtBarcode1.Focus();
+                if (Form1.MainControl.CodeControl.Code1.IsSuccess)
+                {
+                    txtBarcode1.Enabled = false;
+                    txtBarcode1.Text = Form1.MainControl.CodeControl.Code1.Code;
+                    if (!Form1.MainControl.CodeControl.Code2.IsSuccess)
+                    {
+                        txtbarCode2.Focus();
+                        txtbarCode2.Enabled = true;
+                        txtbarCode2.Text = "";
+                    }
+                    else
+                    {
+                        txtbarCode2.Enabled = false;
+                        txtbarCode2.Text = Form1.MainControl.CodeControl.Code2.Code;
+                    }
+                }
+                else
+                {
+                    txtBarcode1.Enabled = true;
+                    txtbarCode2.Enabled = false;
+                    txtBarcode1.Text = "";
+                    txtbarCode2.Text = "";
+
+                    txtBarcode1.Focus();
+                }
             }
+      
 
             if (rad8mm.Checked)
             {
@@ -135,7 +129,8 @@ namespace BorwinSplicMachine
             {
                 MotControl.runnersWidth = RunnersWidth._8mm;
             }
-
+            if (Form1.MainControl.motControl.resetFlow==ResetFlow.None&& Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None)
+                Form1.MainControl.motControl.SetRunnersWidth();
             if (Alarm.AlarmControl.Alarm != Alarm.AlarmList.None)
             {
                 timer1.Stop();
@@ -182,7 +177,7 @@ namespace BorwinSplicMachine
 
         private void rad8mm_CheckedChanged(object sender, EventArgs e)
         {
-            Form1.MainControl.motControl.SetRunnersWidth();
+
         }
     }
 }

@@ -32,6 +32,11 @@ namespace BorwinSplicMachine.LCR
             initGrid1();
         }
 
+        public void UpdateLanguage()
+        {
+
+        }
+
         private void initGrid1()
         {
             boundGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

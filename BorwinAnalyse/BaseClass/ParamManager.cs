@@ -34,6 +34,7 @@ namespace BorwinAnalyse.BaseClass
         public ParamData System_找空料 = new ParamData(ParamType.System, "找空料", "0", "0不启用,1启用", "1");
         public ParamData System_丝印 = new ParamData(ParamType.System, "丝印", "0", "0不启用,1启用", "1");
         public ParamData System_BOM = new ParamData(ParamType.System, "BOM", "0", "0不启用,1启用", "1");
+        public ParamData System_语音= new ParamData(ParamType.System, "语音", "0", "0不启用,1启用", "1");
         #endregion
 
         #region 条码校验
@@ -48,6 +49,8 @@ namespace BorwinAnalyse.BaseClass
         public ParamData 条码校验_原始字符 = new ParamData(ParamType.CheckCode, "原始字符", "A", "", "1");
         public ParamData 条码校验_替换为 = new ParamData(ParamType.CheckCode, "替换为", "B", "", "1");
         public ParamData 条码校验_是否字符大写 = new ParamData(ParamType.CheckCode, "是否字符大写", "0", "0不启用,1启用", "1");
+        public ParamData 条码校验_是否设定条码长度 = new ParamData(ParamType.CheckCode, "是否设定条码长度", "0", "0不启用,1启用", "1");
+        public ParamData 条码校验_条码长度 = new ParamData(ParamType.CheckCode, "设定条码长度", "10", "从1开始", "1");
         #endregion
 
         #region LCR

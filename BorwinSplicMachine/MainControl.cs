@@ -44,7 +44,6 @@ namespace BorwinSplicMachine
 
         public UCRichLog UCRichLog { get; set; }
 
-        public UCCCD UCCCD { get; set; }
 
         public UCFlowControl UCFlowControl { get; set; }
 
@@ -72,7 +71,6 @@ namespace BorwinSplicMachine
             UCLog = new UCLog();
 
             UCRichLog = new UCRichLog();
-            UCCCD = new UCCCD();
             UCFlowControl = new UCFlowControl();
             UCLCRSearch = new UCLCRSearch();
             UCMes = new UCMes();
@@ -88,12 +86,18 @@ namespace BorwinSplicMachine
         {
             motControl.Start();
             UCLCR.Start();
+            BartenderPrintModel.Instance.Start();
         }
 
         public void Stop()
         {
             motControl.Stop();
-            UCLCR.Start();
+        }
+
+        public void Close()
+        {
+            motControl.Stop();
+            BartenderPrintModel.Instance.Stop();
         }
 
         public async void UpdataLanguage()
@@ -112,7 +116,11 @@ namespace BorwinSplicMachine
                 MainForm.UpdataLanguage();
                 UCLog.UpdataLanguage();
                 UCLCR.UpdateLanguage();
-                UCMes.UpdataLanguage();
+                UCMes.UpdataLanguage(); 
+                UCLCRSearch.UpdateLanguage();
+                UCAxis.UpdataLanguage();
+                UCPrint.UpdataLanguage();
+
             });
         }
 
@@ -128,6 +136,21 @@ namespace BorwinSplicMachine
                 return;
             }
             CodeControl.CheckCode(ref code);
+            if (!CodeControl.Code1.IsSuccess)
+            {
+                CodeControl.Code1.Code = code;
+            }
+            else
+            {
+                CodeControl.Code2.Code = code;
+            }
+            if (ParamManager.Instance.条码校验_是否设定条码长度.B)
+            {
+                if (code.Length < ParamManager.Instance.条码校验_条码长度.I)
+                {
+                    return;
+                }
+            }
 
             if (!CodeControl.Code1.IsSuccess)
             {

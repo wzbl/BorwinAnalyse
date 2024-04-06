@@ -88,6 +88,8 @@ namespace LibSDK
             MotAPI.SetLimit(false);
             MotAPI.SetServoff();
             btnOpenSero.Enabled = false;
+
+            this.components = new System.ComponentModel.Container();
         }
 
         private void KryptonButton_Click(object sender, EventArgs e)
@@ -98,7 +100,7 @@ namespace LibSDK
                 {
                     MotAPI.PMove(6, 0, sped, Acc);
                 }
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 kryptonButton.Enabled = false;
             }
            
@@ -165,6 +167,11 @@ namespace LibSDK
         {
             lbName.Text = MotAPI.Name;
             Color = btnPositive.BackColor;
+            UpdataLanguage();
+        }
+        public void UpdataLanguage()
+        {
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
 
         private void btnOpenSero_Click(object sender, EventArgs e)
@@ -279,10 +286,11 @@ namespace LibSDK
                 if (胶膜1到位.IsOn())
                 {
                     kryptonButton.Enabled = true;
+                    MotAPI.AxisStop();
                 }
                 else
                 {
-                    MotAPI.PMove(2, 0, sped, Acc);
+                    MotAPI.PMove(1, 0, sped, Acc);
                 }
             }
 

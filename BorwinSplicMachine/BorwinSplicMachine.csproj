@@ -249,6 +249,7 @@
     <Compile Include="UCMain.Designer.cs">
       <DependentUpon>UCMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="WAVPlayer.cs" />
     <EmbeddedResource Include="FlowModel\FlowBaseModel.resx">
       <DependentUpon>FlowBaseModel.cs</DependentUpon>
     </EmbeddedResource>

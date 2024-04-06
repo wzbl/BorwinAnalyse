@@ -198,7 +198,7 @@ namespace BorwinSplicMachine
             if (MotionControl.CardAPI.IsInitCardOK)
             {
                 Run();
-                //Reset();
+                Reset();
             }
         }
 
@@ -215,6 +215,7 @@ namespace BorwinSplicMachine
             Thread2 = new Thread(ResetAndFilm);
             Thread2.Start();
         }
+
 
         private void ResetAndFilm()
         {
@@ -242,27 +243,28 @@ namespace BorwinSplicMachine
                                 吸头上下.MovePosByName("吸膜位置上", 1);
                                 热熔上下.MovePosByName("热熔上", 1);
                                 filmFlow = FilmFlow.轴到位;
-                            }                            break;
+                            }
+                            break;
 
                         case FilmFlow.轴到位:
                             if (真空表.State())
                             {
                                 filmFlow = FilmFlow.吸头上下到待机位;
                             }
-                            else  if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上"))
+                            else if (吸头上下.InPos("吸膜位置上") && 热熔上下.InPos("热熔上"))
                             {
                                 filmFlow = FilmFlow.拨刀伸出位;
                             }
                             break;
 
                         case FilmFlow.拨刀伸出位:
-                            吸头平移.MovePosByName("吸膜位置", 1);
+                            吸头平移.MovePosByName(XiMoPos(), 1);
                             拨刀.MovePosByName("伸出位", 1);
                             filmFlow = FilmFlow.拨刀到伸出位;
                             break;
 
                         case FilmFlow.拨刀到伸出位:
-                            if (拨刀.InPos("伸出位") && 吸头平移.InPos("吸膜位置"))
+                            if (拨刀.InPos("伸出位") && 吸头平移.InPos(XiMoPos()))
                             {
                                 filmFlow = FilmFlow.卷料送一个膜;
                             }
@@ -275,6 +277,7 @@ namespace BorwinSplicMachine
                         case FilmFlow.卷料送一个膜:
                             if (胶膜1到位.IsOn())
                             {
+                                卷料.AxisStop();
                                 if (FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
                                 {
                                     filmFlow = FilmFlow.吸头上下吸膜;
@@ -289,7 +292,7 @@ namespace BorwinSplicMachine
                             }
                             else
                             {
-                                卷料.PMove(2, 0);
+                                卷料.PMove(1, 0);
                             }
                             break;
 
@@ -317,7 +320,7 @@ namespace BorwinSplicMachine
                         case FilmFlow.判断真空表:
                             if (拨刀.InPos("大膜退刀位"))
                             {
-                                Thread.Sleep(1000);
+                                Thread.Sleep(500);
                                 if (真空表.State())
                                 {
                                     filmFlow = FilmFlow.吸头上下到待机位;
@@ -340,7 +343,7 @@ namespace BorwinSplicMachine
                                         真空泵.Off();
                                         filmFlow = FilmFlow.轴到吸膜位;
                                     }
-                                   
+
                                 }
                             }
 
@@ -364,7 +367,7 @@ namespace BorwinSplicMachine
                         case FilmFlow.贴膜动作:
                             if (吸头上下.InPos("贴膜位置下"))
                             {
-                                凸轮.PMove(凸轮.GetPosByName("至包胶位"), 1, 5, 3);
+                                凸轮.PMove(凸轮.GetPosByName("至包胶位"), 1, 10, 10);
                                 filmFlow = FilmFlow.包胶动作;
                             }
                             break;
@@ -422,7 +425,6 @@ namespace BorwinSplicMachine
                             break;
                     }
                 }
-
                 //复位
                 switch (resetFlow)
                 {
@@ -438,8 +440,8 @@ namespace BorwinSplicMachine
                         下针.Home(1000);
                         探针A.Home(1000);
                         探针B.Home(1000);
-                        if (FileSuccessCount==0)
-                        MotControl.测值整体上下.Home(3000);
+                        if (FileSuccessCount == 0)
+                            MotControl.测值整体上下.Home(3000);
                         resetFlow = ResetFlow.吸嘴_测值上下回零完成;
                         break;
                     case ResetFlow.吸嘴_测值上下回零完成:
@@ -457,7 +459,7 @@ namespace BorwinSplicMachine
                         if (探针A.HomeState && 探针B.HomeState && 热熔上下.HomeState && 测值整体上下.HomeState)
                         {
                             if (!吸头平移.HomeState)
-                            吸头平移.Home(1000);
+                                吸头平移.Home(1000);
                             if (!拨刀.HomeState)
                                 拨刀.Home(1000);
                             resetFlow = ResetFlow.料带是否取走;
@@ -502,11 +504,11 @@ namespace BorwinSplicMachine
                     default:
                         break;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(10);
             }
         }
 
-        private  void LeftAndRight()
+        private void LeftAndRight()
         {
             while (true)
             {
@@ -553,7 +555,6 @@ namespace BorwinSplicMachine
                             {
                                 FlowLeft = MainFlow.请求测值;
                                 flowLight.左测值.status = 1;
-
                                 MotControl.凸轮.MovePosByName("进料位", 1);
                             }
                             else if (ParamManager.Instance.System_丝印.B)
@@ -563,6 +564,7 @@ namespace BorwinSplicMachine
                             }
                             else
                             {
+                                MotControl.凸轮.MovePosByName("进料位", 1);
                                 FlowLeft = MainFlow.完成;
                             }
                             break;
@@ -640,7 +642,6 @@ namespace BorwinSplicMachine
                         default:
                             break;
                     }
-
                     //右
                     switch (FlowRight)
                     {
@@ -688,6 +689,7 @@ namespace BorwinSplicMachine
                             }
                             else
                             {
+                                MotControl.凸轮.MovePosByName("进料位", 1);
                                 FlowRight = MainFlow.完成;
                             }
                             break;
@@ -772,7 +774,7 @@ namespace BorwinSplicMachine
 
         public void Stop()
         {
-           
+
             if (!MotionControl.CardAPI.StopEmgAxis())
             {
                 MotionControl.CardAPI.StopEmgAxis();
@@ -781,7 +783,6 @@ namespace BorwinSplicMachine
 
         public void Reset()
         {
-            //if (resetFlow == ResetFlow.None)
             resetFlow = ResetFlow.吸嘴_测值上下回零;
         }
 
@@ -790,7 +791,7 @@ namespace BorwinSplicMachine
         /// </summary>
         private int FileSuccessCount = 0;
         /// <summary>
-        /// 推刀位置
+        /// 退刀位置
         /// </summary>
         public void TuiDaoPos()
         {
@@ -850,27 +851,30 @@ namespace BorwinSplicMachine
         /// </summary>
         public void SetRunnersWidth()
         {
-            switch (runnersWidth)
+            if (MotionControl.CardAPI.IsInitCardOK && MotionControl.IsAuto)
             {
-                case RunnersWidth._8mm:
-                    if (!流道调宽.InPos("流道8mm"))
+                switch (runnersWidth)
+                {
+                    case RunnersWidth._8mm:
+                        if (!流道调宽.InPos("流道8mm"))
+                            流道调宽.MovePosByName("流道8mm", 1);
+                        break;
+                    case RunnersWidth._12mm:
+                        if (!流道调宽.InPos("流道12mm"))
+                            流道调宽.MovePosByName("流道12mm", 1);
+                        break;
+                    case RunnersWidth._16mm:
+                        if (!流道调宽.InPos("流道16mm"))
+                            流道调宽.MovePosByName("流道16mm", 1);
+                        break;
+                    case RunnersWidth._24mm:
+                        if (!流道调宽.InPos("流道24mm"))
+                            流道调宽.MovePosByName("流道24mm", 1);
+                        break;
+                    default:
                         流道调宽.MovePosByName("流道8mm", 1);
-                    break;
-                case RunnersWidth._12mm:
-                    if (!流道调宽.InPos("流道12mm"))
-                        流道调宽.MovePosByName("流道12mm", 1);
-                    break;
-                case RunnersWidth._16mm:
-                    if (!流道调宽.InPos("流道16mm"))
-                        流道调宽.MovePosByName("流道16mm", 1);
-                    break;
-                case RunnersWidth._24mm:
-                    if (!流道调宽.InPos("流道24mm"))
-                        流道调宽.MovePosByName("流道24mm", 1);
-                    break;
-                default:
-                    流道调宽.MovePosByName("流道8mm", 1);
-                    break;
+                        break;
+                }
             }
         }
 
@@ -886,22 +890,61 @@ namespace BorwinSplicMachine
                 case RunnersWidth._8mm:
                     break;
                 case RunnersWidth._12mm:
-                    if (FileSuccessCount>0)
+                    if (FileSuccessCount > 0)
                     {
-                        posName = "贴12mm位";
+                        posName = "贴12mm位2";
+                    }
+                    else
+                    {
+                        posName = "贴12mm位1";
                     }
                     break;
                 case RunnersWidth._16mm:
                     if (FileSuccessCount > 0)
                     {
-                        posName = "贴16mm位";
+                        posName = "贴16mm位2";
+                    }
+                    else
+                    {
+                        posName = "贴16mm位1";
                     }
                     break;
                 case RunnersWidth._24mm:
                     if (FileSuccessCount > 0)
                     {
-                        posName = "贴24mm位";
+                        posName = "贴24mm位2";
                     }
+                    else
+                    {
+                        posName = "贴24mm位1";
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return posName;
+        }
+
+        /// <summary>
+        /// 吸膜位置
+        /// </summary>
+        /// <returns></returns>
+        public string XiMoPos()
+        {
+            string posName = "吸膜位置";
+            switch (runnersWidth)
+            {
+                case RunnersWidth._8mm:
+                    break;
+                case RunnersWidth._12mm:
+                    if (FileSuccessCount == 0)
+                    {
+                        posName = "吸小膜位置";
+                    }
+                    break;
+                case RunnersWidth._16mm:
+                    break;
+                case RunnersWidth._24mm:
                     break;
                 default:
                     break;

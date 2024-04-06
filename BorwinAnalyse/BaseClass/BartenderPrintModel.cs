@@ -2,6 +2,7 @@
 using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -44,16 +45,40 @@ namespace BorwinAnalyse.BaseClass
         /// 打印机名称
         /// </summary>
         public string Name;
-        private readonly BarTender.Application btApp = new BarTender.Application();
-        BarTender.Format btFormat;
+        private BarTender.Application btApp = null;
+        BarTender.Format btFormat = null;
         public List<PrintValue> PrintValues = new List<PrintValue>();
 
-        private void Init()
-        { 
+        public void Start()
+        {
+            if (btApp != null)
+                btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+            btApp = new BarTender.Application();
             btFormat = btApp.Formats.Open(Path, false, "");
             btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
             btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
         }
+
+        public void Stop()
+        {
+            if (btApp != null)
+            {
+                //var processList = Process.GetProcesses();
+                //foreach (var process in processList)
+                //{
+                //    if (process.ProcessName== "bartend")
+                //    {
+                //        process.Kill();
+                //    }
+                //}
+                Process[] processes = Process.GetProcessesByName("bartend");
+                foreach (Process process in processes)
+                {
+                    process.Kill();
+                }
+            }
+        }
+
         /// <summary>
         /// 绑定数据
         /// </summary>
@@ -119,7 +144,6 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public void Print()
         {
-            Init();
             BindData();
             //打印机名称
             btFormat.PrintSetup.Printer = Name;
@@ -139,7 +163,7 @@ namespace BorwinAnalyse.BaseClass
                 fs1.Close();
             }
             File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
-
+            Start();
         }
 
         public void Load()

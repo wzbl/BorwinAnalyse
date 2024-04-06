@@ -20,6 +20,7 @@ namespace LibSDK
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            this.components = new System.ComponentModel.Container();
             MotionControl.UpDateAxis += UpDateAxis;
             UpDateAxis();
             this.Load += UCALLAxis_Load;
@@ -28,6 +29,15 @@ namespace LibSDK
         private void UCALLAxis_Load(object sender, EventArgs e)
         {
             timer1.Start();
+            UpdataLanguage();
+        }
+        public void UpdataLanguage()
+        {
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            for (int i = 0; i < axisControls.Count; i++)
+            {
+                axisControls[i].UpdataLanguage();
+            }
         }
 
         private List<AxisControl> axisControls = new List<AxisControl>();

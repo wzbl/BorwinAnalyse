@@ -17,8 +17,9 @@ namespace BorwinAnalyse.UCControls
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-            //this.Load += UCPrint_Load;
-            //BartenderPrintModel.Instance.Load();
+            this.Load += UCPrint_Load;
+            BartenderPrintModel.Instance.Load();
+            this.components = new System.ComponentModel.Container();
         }
 
         private void UCPrint_Load(object sender, EventArgs e)
@@ -27,6 +28,7 @@ namespace BorwinAnalyse.UCControls
             txtPath.Text = BartenderPrintModel.Instance.Path;
             RefreshData();
             GetPrinter();
+            UpdataLanguage();
         }
 
         /// <summary>
@@ -95,6 +97,11 @@ namespace BorwinAnalyse.UCControls
         private void BtnPrint_Click(object sender, EventArgs e)
         {
             BartenderPrintModel.Instance.Print();
+        }
+
+        public void UpdataLanguage()
+        {
+            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
     }
 }

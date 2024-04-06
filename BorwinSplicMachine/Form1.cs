@@ -20,7 +20,7 @@ using Alarm;
 
 namespace BorwinSplicMachine
 {
-    public partial class Form1 : Form// KryptonForm
+    public partial class Form1 :  KryptonForm
     {
         public static MainControl MainControl;
         public Form1()
@@ -28,7 +28,6 @@ namespace BorwinSplicMachine
             InitializeComponent();
             MainControl = new MainControl(this);
             MainControl.Init();
-            MainControl.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,7 +38,7 @@ namespace BorwinSplicMachine
             }
             UpdataLanguage();
             kryptonPanel1.Controls.Add(MainControl.UCMain);
-           
+            MainControl.Start();
         }
 
         public void UpdataLanguage()
@@ -116,6 +115,7 @@ namespace BorwinSplicMachine
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            MainControl.Close();
             System.Environment.Exit(System.Environment.ExitCode);
             this.Dispose();
             this.Close();
@@ -141,7 +141,7 @@ namespace BorwinSplicMachine
 
         private void kryptonRibbonGroupButton7_Click(object sender, EventArgs e)
         {
-            MainControl.motControl.Stop();
+            MainControl.Stop();
         }
     }
 }
