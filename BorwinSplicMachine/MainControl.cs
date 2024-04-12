@@ -6,6 +6,7 @@ using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using BorwinSplicMachine.UCControls;
 using ComponentFactory.Krypton.Toolkit;
+using FeederSpliceVisionSys;
 using LibSDK;
 using LibSDK.IO;
 using LibSDK.Motion;
@@ -44,7 +45,7 @@ namespace BorwinSplicMachine
 
         public UCRichLog UCRichLog { get; set; }
 
-
+        public UCVisor UCVision { get; set; }
         public UCFlowControl UCFlowControl { get; set; }
 
 
@@ -63,13 +64,13 @@ namespace BorwinSplicMachine
         public BarCodeCheck CodeControl = new BarCodeCheck();
         public MainControl(Form1 MainForm)
         {
-
+           
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
             UCMain = new UCMain();
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
-
+            UCVision =new UCVisor();
             UCRichLog = new UCRichLog();
             UCFlowControl = new UCFlowControl();
             UCLCRSearch = new UCLCRSearch();
@@ -139,6 +140,24 @@ namespace BorwinSplicMachine
             if (!CodeControl.Code1.IsSuccess)
             {
                 CodeControl.Code1.Code = code;
+                switch (MotControl.runnersWidth)
+                {
+                    case RunnersWidth._8mm:
+                        VisionDetection.SetMaterialNumber(code, MyTapeWidthType.M8);
+                        break;
+                    case RunnersWidth._12mm:
+                        VisionDetection.SetMaterialNumber(code, MyTapeWidthType.M12);
+                        break;
+                    case RunnersWidth._16mm:
+                        VisionDetection.SetMaterialNumber(code, MyTapeWidthType.M16);
+                        break;
+                    case RunnersWidth._24mm:
+                        VisionDetection.SetMaterialNumber(code, MyTapeWidthType.M24);
+                        break;
+                    default:
+                        break;
+                }
+              
             }
             else
             {

@@ -28,6 +28,7 @@ namespace BorwinSplicMachine
             InitializeComponent();
             MainControl = new MainControl(this);
             MainControl.Init();
+            kryptonPanel1.Controls.Add(MainControl.UCMain);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +38,6 @@ namespace BorwinSplicMachine
                 this.components = new System.ComponentModel.Container();
             }
             UpdataLanguage();
-            kryptonPanel1.Controls.Add(MainControl.UCMain);
             MainControl.Start();
         }
 
@@ -83,7 +83,8 @@ namespace BorwinSplicMachine
         /// <param name="e"></param>
         private void kryptonRibbonGroupButton12_Click(object sender, EventArgs e)
         {
-
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCVision);
         }
 
         private void kryptonRibbonGroupButton10_Click(object sender, EventArgs e)

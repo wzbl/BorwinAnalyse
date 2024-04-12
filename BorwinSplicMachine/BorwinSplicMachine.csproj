@@ -82,6 +82,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="FeederSpliceVisionSys">
+      <HintPath>..\..\lib\FeederSpliceVisionSys.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -249,6 +252,18 @@
     <Compile Include="UCMain.Designer.cs">
       <DependentUpon>UCMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCVisor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCVisor.Designer.cs">
+      <DependentUpon>UCVisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisiTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisiTest.Designer.cs">
+      <DependentUpon>VisiTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="WAVPlayer.cs" />
     <EmbeddedResource Include="FlowModel\FlowBaseModel.resx">
       <DependentUpon>FlowBaseModel.cs</DependentUpon>
@@ -317,6 +332,9 @@
     <EmbeddedResource Include="UCMain.resx">
       <DependentUpon>UCMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UCVisor.resx">
+      <DependentUpon>UCVisor.cs</DependentUpon>
+    </EmbeddedResource>
     <Fakes Include="Fakes\ComponentFactory.Krypton.Docking.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -348,10 +366,6 @@
     <ProjectReference Include="..\Mes\Mes.csproj">
       <Project>{63498bce-fb6c-4b1b-83cb-efb920803616}</Project>
       <Name>Mes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisionModel\VisionModel.csproj">
-      <Project>{4fc18e6e-e14e-4c08-94f3-fa4d6793a012}</Project>
-      <Name>VisionModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

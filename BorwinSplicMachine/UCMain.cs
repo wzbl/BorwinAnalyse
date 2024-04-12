@@ -6,6 +6,7 @@ using BorwinSplicMachine.BarCode;
 using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
 using ComponentFactory.Krypton.Toolkit;
+using FeederSpliceVisionSys;
 using LibSDK;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace BorwinSplicMachine
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+
+            VisionDetection.set_ImageShowUIPanel(Station.LiftStation, pL);
+            VisionDetection.set_ImageShowUIPanel(Station.RightStation, pR);
+            VisionDetection.set_ImageShowUIPanel(Station.MeasureStation, pM);
+            VisionDetection.InitVisionDetection();
         }
 
         private void UCMain_Load(object sender, EventArgs e)

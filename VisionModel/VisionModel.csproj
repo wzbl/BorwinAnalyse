@@ -50,49 +50,16 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
     <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\ComponentFactory.Krypton.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="MvCameraControl.Net, Version=3.4.0.1, Culture=neutral, PublicKeyToken=52fddfb3f94be800, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MvCameraControl.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDAlmightyPatMatch.Controls.NET, Version=4.2.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDAlmightyPatMatch.Controls.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDAlmightyPattern.Controls.NET, Version=4.2.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDAlmightyPattern.Controls.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDCore.Net, Version=4.2.1.4, Culture=neutral, PublicKeyToken=1325730a174c0650, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDCore.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDImage.Net, Version=4.2.1.4, Culture=neutral, PublicKeyToken=ce2c144a3e6a9a93, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDImage.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDPreproMask.NET, Version=4.2.1.4, Culture=neutral, PublicKeyToken=8a4d121e96fe3223, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDPreproMask.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDSDKLog.Net, Version=4.2.1.4, Culture=neutral, PublicKeyToken=4900f093fd18c638, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDSDKLog.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDShape.Net, Version=4.2.1.4, Culture=neutral, PublicKeyToken=a59215ef735587a6, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDShape.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="MVDXmlParse.NET, Version=4.2.1.4, Culture=neutral, PublicKeyToken=7806150e22c43124, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MVDXmlParse.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="MvRenderActiveX.Net, Version=4.2.1.4, Culture=neutral, PublicKeyToken=da2fd3581884613a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MvRenderActiveX.Net.dll</HintPath>
+    <Reference Include="FeederSpliceVisionSys">
+      <HintPath>..\..\..\视觉\2024-04-09\FeederSpliceVisionSysDemo(2)\FeederSpliceVisionSysDemo\bin\x64\Debug\FeederSpliceVisionSys.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -107,26 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HIKVision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SplicCamera.cs" />
-    <Compile Include="UCControls\CalibrationCCD.cs">
+    <Compile Include="UCControls\UCVisor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UCControls\CalibrationCCD.Designer.cs">
-      <DependentUpon>CalibrationCCD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\CCD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\CCD.Designer.cs">
-      <DependentUpon>CCD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\UCCCD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\UCCCD.Designer.cs">
-      <DependentUpon>UCCCD.cs</DependentUpon>
+    <Compile Include="UCControls\UCVisor.Designer.cs">
+      <DependentUpon>UCVisor.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -135,15 +88,10 @@
       <Name>BorwinAnalyse</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="UCControls\CalibrationCCD.resx">
-      <DependentUpon>CalibrationCCD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\CCD.resx">
-      <DependentUpon>CCD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\UCCCD.resx">
-      <DependentUpon>UCCCD.cs</DependentUpon>
+    <EmbeddedResource Include="UCControls\UCVisor.resx">
+      <DependentUpon>UCVisor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

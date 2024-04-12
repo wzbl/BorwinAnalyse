@@ -42,9 +42,9 @@
             this.btnClearCode = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pL = new System.Windows.Forms.Panel();
+            this.pM = new System.Windows.Forms.FlowLayoutPanel();
+            this.pR = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -57,9 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).BeginInit();
             this.kryptonSplitContainer2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbarCode2
@@ -193,9 +190,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pR, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pM, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pL, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -204,35 +201,32 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(980, 183);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // pictureBox3
+            // pL
             // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(655, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(322, 177);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
+            this.pL.BackColor = System.Drawing.Color.Black;
+            this.pL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pL.Location = new System.Drawing.Point(3, 3);
+            this.pL.Name = "pL";
+            this.pL.Size = new System.Drawing.Size(320, 177);
+            this.pL.TabIndex = 1;
             // 
-            // pictureBox1
+            // pM
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(320, 177);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pM.BackColor = System.Drawing.Color.Black;
+            this.pM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pM.Location = new System.Drawing.Point(329, 3);
+            this.pM.Name = "pM";
+            this.pM.Size = new System.Drawing.Size(320, 177);
+            this.pM.TabIndex = 2;
             // 
-            // pictureBox2
+            // pR
             // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(329, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(320, 177);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
+            this.pR.BackColor = System.Drawing.Color.Black;
+            this.pR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pR.Location = new System.Drawing.Point(655, 3);
+            this.pR.Name = "pR";
+            this.pR.Size = new System.Drawing.Size(322, 177);
+            this.pR.TabIndex = 3;
             // 
             // UCMain
             // 
@@ -255,9 +249,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
             this.kryptonSplitContainer2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -271,13 +262,13 @@
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnClearCode;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad24mm;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad16mm;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad12mm;
         private ComponentFactory.Krypton.Toolkit.KryptonRadioButton rad8mm;
+        private System.Windows.Forms.Panel pL;
+        private System.Windows.Forms.FlowLayoutPanel pM;
+        private System.Windows.Forms.FlowLayoutPanel pR;
     }
 }

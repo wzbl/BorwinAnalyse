@@ -1,6 +1,7 @@
 ﻿using Alarm;
 using BorwinAnalyse.BaseClass;
 using BorwinSplicMachine.LCR;
+using FeederSpliceVisionSys;
 using LibSDK;
 using LibSDK.IO;
 using LibSDK.Motion;
@@ -88,6 +89,10 @@ namespace BorwinSplicMachine
         /// 左流程
         /// </summary>
         public MainFlow FlowLeft = MainFlow.None;
+        private int leftMoveCount = 0;
+        public static double leftCutPos = 0;
+        public static double leftDockPos = 0;
+        public static double RightCutPos = 0;
 
         /// <summary>
         /// 右流程
@@ -217,7 +222,7 @@ namespace BorwinSplicMachine
         }
 
 
-        private void ResetAndFilm()
+        private async void ResetAndFilm()
         {
             while (true)
             {
@@ -508,7 +513,7 @@ namespace BorwinSplicMachine
             }
         }
 
-        private void LeftAndRight()
+        private async void LeftAndRight()
         {
             while (true)
             {
@@ -546,9 +551,8 @@ namespace BorwinSplicMachine
                         case MainFlow.感应料带到光源位置:
                             if (ParamManager.Instance.System_找空料.B)
                             {
-                                FlowLeft = MainFlow.找空料;
+                                FlowLeft = MainFlow.开始找空料;
                                 flowLight.左找空料.status = 1;
-                                左进入.PMove(-4, 0, true);//走4格
                                 FindEmptyCount++;
                             }
                             else if (ParamManager.Instance.System_测值.B)
@@ -568,18 +572,20 @@ namespace BorwinSplicMachine
                                 FlowLeft = MainFlow.完成;
                             }
                             break;
-                        case MainFlow.找空料:
-                            if (false)//视觉确定是否找到空料
-                            {
-                                //没找到空料的情况
-                                左进入.PMove(-4, 0, true);//走4格
-                                FindEmptyCount++;
-                            }
-                            else
-                            {
-                                FindEmptyPos = 0;
-                                FlowLeft = MainFlow.找空料完成;
-                            }
+                        case MainFlow.开始找空料:
+                            leftMoveCount++;
+                            左进入.PMove(-左进入.GetPosByName("移动距离"), 0, true);//走4格
+                            VisionDetection.Detection_CutPos(Station.LiftStation);
+                            FlowLeft = MainFlow.找空料中;
+                            break;
+                        case MainFlow.找空料中:
+
+                            break;
+                        case MainFlow.找空料OK:
+                            FlowLeft = MainFlow.开始切空料;
+                            break;
+                        case MainFlow.找空料NG:
+                            FlowLeft = MainFlow.开始找空料;
                             break;
                         case MainFlow.找空料完成:
                             flowLight.左找空料.status = 2;
@@ -618,9 +624,31 @@ namespace BorwinSplicMachine
                             FlowLeft = MainFlow.完成;
                             //左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
                             break;
+                        case MainFlow.开始切空料:
+                            double pod = -左进入.GetPosByName("切刀位") + leftCutPos;
+                            左进入.PMove(pod, 0);
+                            FlowLeft=  MainFlow.开始空料补偿;
+                            break;
+                        case MainFlow.开始空料补偿:
+                            if (左进入.Runing())
+                            {
+                                VisionDetection.Detection_DockPos(Station.LiftStation);
+                                FlowLeft = MainFlow.空料补偿中;
+                            }
+                            break;
+                        case MainFlow.空料补偿中:
+
+                            break;
+                        case MainFlow.空料补偿完成:
+                            左进入.PMove(-leftDockPos, 0);
+                            FlowLeft = MainFlow.切空料;
+                            break;
                         case MainFlow.切空料:
-                            凸轮.MovePosByName("切刀位", 1);
-                            FlowLeft = MainFlow.切空料完成;
+                            if (左进入.Runing())
+                            {
+                                凸轮.MovePosByName("切刀位", 1);
+                                FlowLeft = MainFlow.切空料完成;
+                            }
                             break;
                         case MainFlow.切空料完成:
                             if (凸轮.InPos("切刀位"))
@@ -674,7 +702,7 @@ namespace BorwinSplicMachine
                         case MainFlow.感应料带到光源位置:
                             if (ParamManager.Instance.System_找空料.B)
                             {
-                                FlowRight = MainFlow.找空料;
+                                FlowRight = MainFlow.开始找空料;
                                 flowLight.右找空料.status = 1;
                             }
                             else if (ParamManager.Instance.System_测值.B)
@@ -693,17 +721,19 @@ namespace BorwinSplicMachine
                                 FlowRight = MainFlow.完成;
                             }
                             break;
-                        case MainFlow.找空料:
-                            if (false)//视觉确定是否找到空料
-                            {
-                                //没找到空料的情况
-                                右进入.PMove(-4, 0, true);//走4格
+                        case MainFlow.开始找空料:
 
-                            }
-                            else
-                            {
-                                FlowRight = MainFlow.找空料完成;
-                            }
+                            break;
+                        case MainFlow.找空料中:
+
+                            break;
+                        case MainFlow.找空料OK:
+                            FlowRight = MainFlow.找空料完成;
+                            break;
+                        case MainFlow.找空料NG:
+
+                            右进入.PMove(-4, 0, true);//走4格
+
                             break;
                         case MainFlow.找空料完成:
                             flowLight.右找空料.status = 2;
@@ -1048,11 +1078,18 @@ namespace BorwinSplicMachine
         None, //判断复位OK
         进料,//齿轮转动
         感应料带到光源位置,//齿轮走一格
-        找空料,//拍照
+        开始找空料,
+        找空料中,//拍照
+        找空料NG,//拍照
+        找空料OK,//拍照
         找空料完成,//去切空料位
         请求测值,//测值失败走一格
         测值中,
         测值完成,
+        开始切空料,
+        开始空料补偿,
+        空料补偿中,
+        空料补偿完成,
         切空料,
         切空料完成,//去测值位，到位信号
         丝印,
