@@ -37,10 +37,6 @@ namespace VisionModel.UCControls
         {
             try
             {
-                //VisionDetection.set_ImageShowUIPanel(Station.LiftStation, pL);
-                //VisionDetection.set_ImageShowUIPanel(Station.RightStation, pR);
-                //VisionDetection.set_ImageShowUIPanel(Station.MeasureStation, pM);
-
                 string[] strings = VisionDetection.GetCameraSerialNums;
                 for (int i = 0; i < strings.Length; i++)
                 {
@@ -72,7 +68,7 @@ namespace VisionModel.UCControls
                         {
                             case Station.LiftStation:
                                 {
-                                    Log("1#相机裁切位置检测完成");
+                                    Log("1#相机裁切位置检测完成" + Result.TapeType.ToString());
                                     if (Result.Result == MyDetectionResult.NoProduct)
                                     {
                                         Form1.MainControl.motControl.FlowLeft = MainFlow.找空料NG;
@@ -87,11 +83,13 @@ namespace VisionModel.UCControls
                                     }
                                     else if (Result.Result == MyDetectionResult.CreateModel)
                                     {
-                                        Form1.MainControl.motControl.FlowLeft = MainFlow.找空料NG;
+                                        VisiTest visiTest = new VisiTest();
+                                        visiTest.ShowDialog();
+                                        //VisionDetection.Detection_CutPos(Station.LiftStation);
                                         Log("1#弹出创建模板界面");
                                         return;
                                     }
-                                    Log("1#找空料OK");
+                                
                                     Form1.MainControl.motControl.FlowLeft = MainFlow.找空料OK;
                                     MotControl.leftCutPos = Result.CutPosValue;
                                     // 产品尺寸
@@ -105,7 +103,8 @@ namespace VisionModel.UCControls
                                     // 物料间距
                                     MyProductSpacingType ProductSpacingType = Result.ProductSpacingType;
                                     Log("物料间距" + ProductSpacingType.ToString());
-                                    
+                                    Log("找空料OK");
+                         
                                     if (Result.OCVEnabled)
                                     {
                                         if (Result.OCVResult == false)
@@ -393,6 +392,14 @@ namespace VisionModel.UCControls
             txt孔边.Text = CircleLift.ToString();
             txt孔中心.Text = CircleMid.ToString();
             txt两孔之间.Text = Circle2Mid.ToString();
+
+             MyGray myGray =  VisionDetection.get_TapeGrayParameter(curStation);
+            txt透明Low.Text = myGray.TransTapeGrayMin.ToString();
+            txt透明High.Text = myGray.TransTapeGrayMax.ToString();
+            txt纸Low.Text = myGray.PaperTapeGrayMin.ToString();
+            txt纸High.Text = myGray.PaperTapeGrayMax.ToString();
+            txt黑Low.Text = myGray.BlackTapeGrayMin.ToString();
+            txt黑High.Text = myGray.BlackTapeGrayMax.ToString();
         }
 
 
@@ -494,6 +501,14 @@ namespace VisionModel.UCControls
             MyMaterialDetection_.Area = double.Parse(txtArea.Text);
             VisionDetection.set_CheckMaterialParameter(curStation, MyMaterialDetection_);
             VisionDetection.SetStandardDistance(curStation, double.Parse(txt孔边.Text), double.Parse(txt孔中心.Text), double.Parse(txt两孔之间.Text));
+            MyGray myGray =new MyGray();
+            myGray.TransTapeGrayMin = int.Parse(txt透明Low.Text);
+            myGray.TransTapeGrayMax = int.Parse(txt透明High.Text);
+            myGray.PaperTapeGrayMin = int.Parse(txt纸Low.Text);
+            myGray.PaperTapeGrayMax = int.Parse(txt纸High.Text);
+            myGray.BlackTapeGrayMin = int.Parse(txt黑Low.Text);
+            myGray.BlackTapeGrayMax = int.Parse(txt黑High.Text);
+            VisionDetection.set_TapeGrayParameter(curStation,myGray);
         }
 
         private void btnSaveProPara_Click(object sender, EventArgs e)

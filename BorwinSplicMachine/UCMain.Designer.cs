@@ -46,6 +46,16 @@
             this.pM = new System.Windows.Forms.FlowLayoutPanel();
             this.pL = new System.Windows.Forms.Panel();
             this.kryptonSplitContainer3 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.MenuLeft = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuMid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuRight = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.拍照ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.视频ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.拍照ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.视频ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.拍照ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.视频ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.裁切位置检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -63,11 +73,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel2)).BeginInit();
             this.kryptonSplitContainer3.SuspendLayout();
+            this.MenuLeft.SuspendLayout();
+            this.MenuMid.SuspendLayout();
+            this.MenuRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtbarCode2
             // 
-            this.txtbarCode2.Location = new System.Drawing.Point(348, 13);
+            this.txtbarCode2.Location = new System.Drawing.Point(57, 28);
             this.txtbarCode2.Name = "txtbarCode2";
             this.txtbarCode2.Size = new System.Drawing.Size(239, 23);
             this.txtbarCode2.TabIndex = 5;
@@ -77,14 +90,14 @@
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(309, 21);
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(18, 36);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(39, 15);
             this.kryptonWrapLabel2.Text = "条码2";
             // 
             // txtBarcode1
             // 
-            this.txtBarcode1.Location = new System.Drawing.Point(57, 13);
+            this.txtBarcode1.Location = new System.Drawing.Point(57, 4);
             this.txtBarcode1.Name = "txtBarcode1";
             this.txtBarcode1.Size = new System.Drawing.Size(239, 23);
             this.txtBarcode1.TabIndex = 1;
@@ -94,7 +107,7 @@
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(18, 21);
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(18, 12);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(39, 15);
             this.kryptonWrapLabel1.Text = "条码1";
@@ -132,7 +145,7 @@
             // 
             // rad24mm
             // 
-            this.rad24mm.Location = new System.Drawing.Point(850, 21);
+            this.rad24mm.Location = new System.Drawing.Point(477, 28);
             this.rad24mm.Margin = new System.Windows.Forms.Padding(2);
             this.rad24mm.Name = "rad24mm";
             this.rad24mm.Size = new System.Drawing.Size(57, 20);
@@ -141,7 +154,7 @@
             // 
             // rad16mm
             // 
-            this.rad16mm.Location = new System.Drawing.Point(802, 21);
+            this.rad16mm.Location = new System.Drawing.Point(413, 28);
             this.rad16mm.Margin = new System.Windows.Forms.Padding(2);
             this.rad16mm.Name = "rad16mm";
             this.rad16mm.Size = new System.Drawing.Size(57, 20);
@@ -150,7 +163,7 @@
             // 
             // rad12mm
             // 
-            this.rad12mm.Location = new System.Drawing.Point(748, 21);
+            this.rad12mm.Location = new System.Drawing.Point(477, 4);
             this.rad12mm.Margin = new System.Windows.Forms.Padding(2);
             this.rad12mm.Name = "rad12mm";
             this.rad12mm.Size = new System.Drawing.Size(57, 20);
@@ -159,7 +172,7 @@
             // 
             // rad8mm
             // 
-            this.rad8mm.Location = new System.Drawing.Point(700, 21);
+            this.rad8mm.Location = new System.Drawing.Point(413, 4);
             this.rad8mm.Margin = new System.Windows.Forms.Padding(2);
             this.rad8mm.Name = "rad8mm";
             this.rad8mm.Size = new System.Drawing.Size(50, 20);
@@ -168,7 +181,7 @@
             // 
             // btnClearCode
             // 
-            this.btnClearCode.Location = new System.Drawing.Point(593, 4);
+            this.btnClearCode.Location = new System.Drawing.Point(302, 8);
             this.btnClearCode.Name = "btnClearCode";
             this.btnClearCode.Size = new System.Drawing.Size(90, 40);
             this.btnClearCode.TabIndex = 7;
@@ -249,6 +262,90 @@
             this.kryptonSplitContainer3.SplitterDistance = 287;
             this.kryptonSplitContainer3.TabIndex = 0;
             // 
+            // MenuLeft
+            // 
+            this.MenuLeft.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.MenuLeft.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.拍照ToolStripMenuItem,
+            this.视频ToolStripMenuItem,
+            this.裁切位置检测ToolStripMenuItem});
+            this.MenuLeft.Name = "MenuLeft";
+            this.MenuLeft.Size = new System.Drawing.Size(181, 92);
+            // 
+            // MenuMid
+            // 
+            this.MenuMid.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.MenuMid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.拍照ToolStripMenuItem1,
+            this.视频ToolStripMenuItem1});
+            this.MenuMid.Name = "MenuMid";
+            this.MenuMid.Size = new System.Drawing.Size(101, 48);
+            // 
+            // MenuRight
+            // 
+            this.MenuRight.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.MenuRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.拍照ToolStripMenuItem2,
+            this.视频ToolStripMenuItem2});
+            this.MenuRight.Name = "MenuMid";
+            this.MenuRight.Size = new System.Drawing.Size(101, 48);
+            // 
+            // 拍照ToolStripMenuItem
+            // 
+            this.拍照ToolStripMenuItem.Name = "拍照ToolStripMenuItem";
+            this.拍照ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.拍照ToolStripMenuItem.Tag = "L";
+            this.拍照ToolStripMenuItem.Text = "拍照";
+            this.拍照ToolStripMenuItem.Click += new System.EventHandler(this.拍照ToolStripMenuItem_Click);
+            // 
+            // 视频ToolStripMenuItem
+            // 
+            this.视频ToolStripMenuItem.Name = "视频ToolStripMenuItem";
+            this.视频ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.视频ToolStripMenuItem.Tag = "L";
+            this.视频ToolStripMenuItem.Text = "视频";
+            this.视频ToolStripMenuItem.Click += new System.EventHandler(this.视频ToolStripMenuItem_Click);
+            // 
+            // 拍照ToolStripMenuItem1
+            // 
+            this.拍照ToolStripMenuItem1.Name = "拍照ToolStripMenuItem1";
+            this.拍照ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.拍照ToolStripMenuItem1.Tag = "M";
+            this.拍照ToolStripMenuItem1.Text = "拍照";
+            this.拍照ToolStripMenuItem1.Click += new System.EventHandler(this.拍照ToolStripMenuItem_Click);
+            // 
+            // 视频ToolStripMenuItem1
+            // 
+            this.视频ToolStripMenuItem1.Name = "视频ToolStripMenuItem1";
+            this.视频ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.视频ToolStripMenuItem1.Tag = "M";
+            this.视频ToolStripMenuItem1.Text = "视频";
+            this.视频ToolStripMenuItem1.Click += new System.EventHandler(this.视频ToolStripMenuItem_Click);
+            // 
+            // 拍照ToolStripMenuItem2
+            // 
+            this.拍照ToolStripMenuItem2.Name = "拍照ToolStripMenuItem2";
+            this.拍照ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.拍照ToolStripMenuItem2.Tag = "R";
+            this.拍照ToolStripMenuItem2.Text = "拍照";
+            this.拍照ToolStripMenuItem2.Click += new System.EventHandler(this.拍照ToolStripMenuItem_Click);
+            // 
+            // 视频ToolStripMenuItem2
+            // 
+            this.视频ToolStripMenuItem2.Name = "视频ToolStripMenuItem2";
+            this.视频ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.视频ToolStripMenuItem2.Tag = "R";
+            this.视频ToolStripMenuItem2.Text = "视频";
+            this.视频ToolStripMenuItem2.Click += new System.EventHandler(this.视频ToolStripMenuItem_Click);
+            // 
+            // 裁切位置检测ToolStripMenuItem
+            // 
+            this.裁切位置检测ToolStripMenuItem.Name = "裁切位置检测ToolStripMenuItem";
+            this.裁切位置检测ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.裁切位置检测ToolStripMenuItem.Tag = "L";
+            this.裁切位置检测ToolStripMenuItem.Text = "裁切位置检测";
+            this.裁切位置检测ToolStripMenuItem.Click += new System.EventHandler(this.裁切位置检测ToolStripMenuItem_Click);
+            // 
             // UCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -275,6 +372,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3)).EndInit();
             this.kryptonSplitContainer3.ResumeLayout(false);
+            this.MenuLeft.ResumeLayout(false);
+            this.MenuMid.ResumeLayout(false);
+            this.MenuRight.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -297,5 +397,15 @@
         private System.Windows.Forms.FlowLayoutPanel pM;
         private System.Windows.Forms.FlowLayoutPanel pR;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer3;
+        private System.Windows.Forms.ContextMenuStrip MenuLeft;
+        private System.Windows.Forms.ContextMenuStrip MenuMid;
+        private System.Windows.Forms.ContextMenuStrip MenuRight;
+        private System.Windows.Forms.ToolStripMenuItem 拍照ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 视频ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 拍照ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 视频ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 拍照ToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 视频ToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 裁切位置检测ToolStripMenuItem;
     }
 }

@@ -31,10 +31,6 @@
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage1 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pR = new System.Windows.Forms.FlowLayoutPanel();
-            this.pL = new System.Windows.Forms.Panel();
-            this.pM = new System.Windows.Forms.FlowLayoutPanel();
             this.kryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnSetMaterialNumber = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
@@ -158,11 +154,9 @@
             this.kryptonPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
-            this.kryptonSplitContainer1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).BeginInit();
             this.kryptonPage2.SuspendLayout();
@@ -215,7 +209,7 @@
             this.kryptonPage1,
             this.kryptonPage2,
             this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 1;
+            this.kryptonNavigator1.SelectedIndex = 0;
             this.kryptonNavigator1.Size = new System.Drawing.Size(1083, 529);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -241,10 +235,6 @@
             this.kryptonSplitContainer1.Name = "kryptonSplitContainer1";
             this.kryptonSplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // kryptonSplitContainer1.Panel1
-            // 
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
-            // 
             // kryptonSplitContainer1.Panel2
             // 
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonComboBox1);
@@ -266,50 +256,6 @@
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1081, 502);
             this.kryptonSplitContainer1.SplitterDistance = 318;
             this.kryptonSplitContainer1.TabIndex = 0;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.tableLayoutPanel1.Controls.Add(this.pR, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pL, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pM, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1081, 318);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // pR
-            // 
-            this.pR.BackColor = System.Drawing.Color.Black;
-            this.pR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pR.Location = new System.Drawing.Point(715, 3);
-            this.pR.Name = "pR";
-            this.pR.Size = new System.Drawing.Size(363, 312);
-            this.pR.TabIndex = 2;
-            // 
-            // pL
-            // 
-            this.pL.BackColor = System.Drawing.Color.Black;
-            this.pL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pL.Location = new System.Drawing.Point(3, 3);
-            this.pL.Name = "pL";
-            this.pL.Size = new System.Drawing.Size(350, 312);
-            this.pL.TabIndex = 0;
-            // 
-            // pM
-            // 
-            this.pM.BackColor = System.Drawing.Color.Black;
-            this.pM.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pM.Location = new System.Drawing.Point(359, 3);
-            this.pM.Name = "pM";
-            this.pM.Size = new System.Drawing.Size(350, 312);
-            this.pM.TabIndex = 1;
             // 
             // kryptonComboBox1
             // 
@@ -1509,13 +1455,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
-            this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
             this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             this.kryptonSplitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage2)).EndInit();
             this.kryptonPage2.ResumeLayout(false);
@@ -1573,12 +1517,8 @@
         private ComponentFactory.Krypton.Navigator.KryptonNavigator kryptonNavigator1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage1;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage2;
         private ComponentFactory.Krypton.Navigator.KryptonPage kryptonPage3;
-        private System.Windows.Forms.FlowLayoutPanel pR;
-        private System.Windows.Forms.Panel pL;
-        private System.Windows.Forms.FlowLayoutPanel pM;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnPositionOffset;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnMTriggle;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnMSoftTrigger;

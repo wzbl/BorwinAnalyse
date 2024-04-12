@@ -40,16 +40,31 @@ namespace BorwinSplicMachine
             VisionDetection.set_ImageShowUIPanel(Station.RightStation, pR);
             VisionDetection.set_ImageShowUIPanel(Station.MeasureStation, pM);
             VisionDetection.InitVisionDetection();
+            bool [] connes = VisionDetection.GetCameraConnectionStatus;
+            if (!connes[0])
+            {
+                pL.BackColor = Color.Red;
+            }
+            if (!connes[1])
+            {
+                pR.BackColor = Color.Red;
+            }
+            if (!connes[2])
+            {
+                pM.BackColor = Color.Red;
+            }
 
-            
         }
 
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
+            timer1.Start();
             kryptonSplitContainer3.Panel1.Controls.Add(Form1.MainControl.UCLCR);
             kryptonSplitContainer3.Panel2.Controls.Add(Form1.MainControl.UCRichLog);
-            timer1.Start();
+            pL.ContextMenuStrip = MenuLeft;
+            pR.ContextMenuStrip = MenuRight;
+            pM.ContextMenuStrip = MenuMid;
         }
         public void UpdataLanguage()
         {
@@ -183,9 +198,67 @@ namespace BorwinSplicMachine
             txtbarCode2.Text = "";
         }
 
-        private void rad8mm_CheckedChanged(object sender, EventArgs e)
-        {
+        
 
+        private void 拍照ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string tag = (sender as ToolStripMenuItem).Tag.ToString();
+            switch (tag)
+            {
+                case "L":
+                    MyCameraTriggerModel L = VisionDetection.get_CameraTriggerModel(Station.LiftStation);
+                    L = MyCameraTriggerModel.SoftTrigger;
+                    VisionDetection.CameraSnapAnImage(Station.LiftStation);
+                    break;
+                case "R":
+                    MyCameraTriggerModel R = VisionDetection.get_CameraTriggerModel(Station.LiftStation);
+                    R = MyCameraTriggerModel.SoftTrigger;
+                    VisionDetection.CameraSnapAnImage(Station.RightStation);
+                    break;
+                case "M":
+                    MyCameraTriggerModel M = VisionDetection.get_CameraTriggerModel(Station.LiftStation);
+                    M = MyCameraTriggerModel.SoftTrigger;
+                    VisionDetection.CameraSnapAnImage(Station.MeasureStation);
+                    break;
+            }
+        }
+
+        private void 视频ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string tag = (sender as ToolStripMenuItem).Tag.ToString();
+            switch (tag)
+            {
+                case "L":
+                    MyCameraTriggerModel L = VisionDetection.get_CameraTriggerModel(Station.LiftStation); 
+                    L = MyCameraTriggerModel.ContinueTrigger;
+                    break;
+                case "R":
+                    MyCameraTriggerModel R = VisionDetection.get_CameraTriggerModel(Station.LiftStation);
+                    R = MyCameraTriggerModel.ContinueTrigger;
+                    break;
+                case "M":
+                    MyCameraTriggerModel M = VisionDetection.get_CameraTriggerModel(Station.LiftStation); 
+                    M = MyCameraTriggerModel.ContinueTrigger;
+                    break;
+            }
+        }
+
+        private void 裁切位置检测ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string tag = (sender as ToolStripMenuItem).Tag.ToString();
+            switch (tag)
+            {
+                case "L":
+                    VisionDetection.Detection_CutPos(Station.LiftStation);
+                    break;
+                case "R":
+                    VisionDetection.Detection_CutPos(Station.RightStation);
+                    break;
+                case "M":
+                    VisionDetection.Detection_CutPos(Station.MeasureStation);
+                    break;
+            }
+            
         }
     }
 }

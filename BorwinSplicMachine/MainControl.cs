@@ -67,7 +67,6 @@ namespace BorwinSplicMachine
            
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
-            UCMain = new UCMain();
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
             UCVision =new UCVisor();
@@ -79,6 +78,7 @@ namespace BorwinSplicMachine
             motControl = new MotControl();
             UCPrint = new UCPrint();
             UCLCR = new UCLCR();
+            UCMain = new UCMain();
             this.MainForm = MainForm;
         }
 
