@@ -1,9 +1,11 @@
 ﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BorwinSplicMachine.BarCode
 {
@@ -48,6 +50,7 @@ namespace BorwinSplicMachine.BarCode
             {
                 code = code.ToUpper();
             }
+            Log("规则处理条码" + code);
         }
 
         public virtual void Clear()
@@ -59,6 +62,11 @@ namespace BorwinSplicMachine.BarCode
         public bool IsSuccess()
         {
             return Code1.IsSuccess && Code2.IsSuccess;
+        }
+
+        public void Log(string message)
+        {
+            LogManager.Instance.WriteLog(new LogModel(LogType.扫码日志, message));
         }
     }
 

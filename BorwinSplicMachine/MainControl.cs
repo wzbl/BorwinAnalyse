@@ -136,6 +136,7 @@ namespace BorwinSplicMachine
             {
                 return;
             }
+            CodeControl.Log("原始条码"+code);
             CodeControl.CheckCode(ref code);
             if (!CodeControl.Code1.IsSuccess)
             {
@@ -157,7 +158,6 @@ namespace BorwinSplicMachine
                     default:
                         break;
                 }
-              
             }
             else
             {

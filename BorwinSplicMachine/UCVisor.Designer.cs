@@ -53,6 +53,7 @@
             this.btnLSoftTrigger = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chkSaveImg = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnCalculatePixel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -81,6 +82,13 @@
             this.currentP = new System.Windows.Forms.Panel();
             this.kryptonNavigator2 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.kryptonPage4 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.txt两孔之间 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel27 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt孔中心 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel25 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt孔边 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnMaterialDetectionRegion = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtArea = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -131,14 +139,19 @@
             this.comLight = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonWrapLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.txt孔中心 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWrapLabel25 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.txt孔边 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWrapLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.txt两孔之间 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWrapLabel27 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonGroupBox4 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.txt黑Low = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel28 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt纸Low = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel29 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt透明Low = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel30 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt黑High = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel31 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt纸High = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel32 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt透明High = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel33 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -170,6 +183,10 @@
             this.kryptonNavigator2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).BeginInit();
             this.kryptonPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).BeginInit();
+            this.kryptonGroupBox3.Panel.SuspendLayout();
+            this.kryptonGroupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).BeginInit();
             this.kryptonGroupBox2.Panel.SuspendLayout();
@@ -183,10 +200,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.comSelectModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comLight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).BeginInit();
-            this.kryptonGroupBox3.Panel.SuspendLayout();
-            this.kryptonGroupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4.Panel)).BeginInit();
+            this.kryptonGroupBox4.Panel.SuspendLayout();
+            this.kryptonGroupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonNavigator1
@@ -495,6 +512,15 @@
             this.kryptonSplitContainer2.SplitterDistance = 122;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(614, 96);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
+            this.kryptonButton1.TabIndex = 35;
+            this.kryptonButton1.Values.Text = "写入";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
             // chkSaveImg
             // 
             this.chkSaveImg.Location = new System.Drawing.Point(729, 97);
@@ -758,6 +784,7 @@
             // kryptonPage4
             // 
             this.kryptonPage4.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage4.Controls.Add(this.kryptonGroupBox4);
             this.kryptonPage4.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPage4.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPage4.Controls.Add(this.btnBaseLine);
@@ -777,9 +804,74 @@
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "7431C842BD8448A85FA7E59F7366F7F8";
             // 
+            // kryptonGroupBox3
+            // 
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(359, 74);
+            this.kryptonGroupBox3.Name = "kryptonGroupBox3";
+            // 
+            // kryptonGroupBox3.Panel
+            // 
+            this.kryptonGroupBox3.Panel.Controls.Add(this.txt两孔之间);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel27);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.txt孔中心);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel25);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.txt孔边);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel26);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(248, 114);
+            this.kryptonGroupBox3.TabIndex = 32;
+            this.kryptonGroupBox3.Values.Heading = "接驳裁切距离";
+            // 
+            // txt两孔之间
+            // 
+            this.txt两孔之间.Location = new System.Drawing.Point(89, 61);
+            this.txt两孔之间.Name = "txt两孔之间";
+            this.txt两孔之间.Size = new System.Drawing.Size(122, 23);
+            this.txt两孔之间.TabIndex = 34;
+            // 
+            // kryptonWrapLabel27
+            // 
+            this.kryptonWrapLabel27.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel27.Location = new System.Drawing.Point(11, 66);
+            this.kryptonWrapLabel27.Name = "kryptonWrapLabel27";
+            this.kryptonWrapLabel27.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel27.Text = "两孔之间";
+            // 
+            // txt孔中心
+            // 
+            this.txt孔中心.Location = new System.Drawing.Point(89, 32);
+            this.txt孔中心.Name = "txt孔中心";
+            this.txt孔中心.Size = new System.Drawing.Size(122, 23);
+            this.txt孔中心.TabIndex = 29;
+            // 
+            // kryptonWrapLabel25
+            // 
+            this.kryptonWrapLabel25.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel25.Location = new System.Drawing.Point(11, 37);
+            this.kryptonWrapLabel25.Name = "kryptonWrapLabel25";
+            this.kryptonWrapLabel25.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel25.Text = "孔中心";
+            // 
+            // txt孔边
+            // 
+            this.txt孔边.Location = new System.Drawing.Point(89, 3);
+            this.txt孔边.Name = "txt孔边";
+            this.txt孔边.Size = new System.Drawing.Size(122, 23);
+            this.txt孔边.TabIndex = 17;
+            // 
+            // kryptonWrapLabel26
+            // 
+            this.kryptonWrapLabel26.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel26.Location = new System.Drawing.Point(11, 8);
+            this.kryptonWrapLabel26.Name = "kryptonWrapLabel26";
+            this.kryptonWrapLabel26.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel26.Text = "孔边";
+            // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(41, 92);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(26, 92);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
@@ -836,7 +928,7 @@
             // 
             // btnBaseLine
             // 
-            this.btnBaseLine.Location = new System.Drawing.Point(250, 62);
+            this.btnBaseLine.Location = new System.Drawing.Point(250, 43);
             this.btnBaseLine.Name = "btnBaseLine";
             this.btnBaseLine.Size = new System.Drawing.Size(139, 25);
             this.btnBaseLine.TabIndex = 14;
@@ -1286,79 +1378,124 @@
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "0A717F30EAFE4AA680AEE9EDE04174F8";
             // 
-            // kryptonButton1
+            // kryptonGroupBox4
             // 
-            this.kryptonButton1.Location = new System.Drawing.Point(614, 96);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
-            this.kryptonButton1.TabIndex = 35;
-            this.kryptonButton1.Values.Text = "写入";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            this.kryptonGroupBox4.Location = new System.Drawing.Point(20, 192);
+            this.kryptonGroupBox4.Name = "kryptonGroupBox4";
             // 
-            // kryptonGroupBox3
+            // kryptonGroupBox4.Panel
             // 
-            this.kryptonGroupBox3.Location = new System.Drawing.Point(41, 191);
-            this.kryptonGroupBox3.Name = "kryptonGroupBox3";
+            this.kryptonGroupBox4.Panel.Controls.Add(this.txt黑High);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonWrapLabel31);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.txt纸High);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonWrapLabel32);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.txt透明High);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonWrapLabel33);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.txt黑Low);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonWrapLabel28);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.txt纸Low);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonWrapLabel29);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.txt透明Low);
+            this.kryptonGroupBox4.Panel.Controls.Add(this.kryptonWrapLabel30);
+            this.kryptonGroupBox4.Size = new System.Drawing.Size(456, 114);
+            this.kryptonGroupBox4.TabIndex = 36;
+            this.kryptonGroupBox4.Values.Heading = "料带亮度";
             // 
-            // kryptonGroupBox3.Panel
+            // txt黑Low
             // 
-            this.kryptonGroupBox3.Panel.Controls.Add(this.txt两孔之间);
-            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel27);
-            this.kryptonGroupBox3.Panel.Controls.Add(this.txt孔中心);
-            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel25);
-            this.kryptonGroupBox3.Panel.Controls.Add(this.txt孔边);
-            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel26);
-            this.kryptonGroupBox3.Size = new System.Drawing.Size(318, 114);
-            this.kryptonGroupBox3.TabIndex = 32;
-            this.kryptonGroupBox3.Values.Heading = "接驳裁切距离";
+            this.txt黑Low.Location = new System.Drawing.Point(115, 61);
+            this.txt黑Low.Name = "txt黑Low";
+            this.txt黑Low.Size = new System.Drawing.Size(87, 23);
+            this.txt黑Low.TabIndex = 34;
             // 
-            // txt孔中心
+            // kryptonWrapLabel28
             // 
-            this.txt孔中心.Location = new System.Drawing.Point(89, 32);
-            this.txt孔中心.Name = "txt孔中心";
-            this.txt孔中心.Size = new System.Drawing.Size(122, 23);
-            this.txt孔中心.TabIndex = 29;
+            this.kryptonWrapLabel28.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel28.Location = new System.Drawing.Point(20, 66);
+            this.kryptonWrapLabel28.Name = "kryptonWrapLabel28";
+            this.kryptonWrapLabel28.Size = new System.Drawing.Size(85, 15);
+            this.kryptonWrapLabel28.Text = "黑料带低亮度";
             // 
-            // kryptonWrapLabel25
+            // txt纸Low
             // 
-            this.kryptonWrapLabel25.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel25.Location = new System.Drawing.Point(11, 37);
-            this.kryptonWrapLabel25.Name = "kryptonWrapLabel25";
-            this.kryptonWrapLabel25.Size = new System.Drawing.Size(46, 15);
-            this.kryptonWrapLabel25.Text = "孔中心";
+            this.txt纸Low.Location = new System.Drawing.Point(115, 32);
+            this.txt纸Low.Name = "txt纸Low";
+            this.txt纸Low.Size = new System.Drawing.Size(87, 23);
+            this.txt纸Low.TabIndex = 29;
             // 
-            // txt孔边
+            // kryptonWrapLabel29
             // 
-            this.txt孔边.Location = new System.Drawing.Point(89, 3);
-            this.txt孔边.Name = "txt孔边";
-            this.txt孔边.Size = new System.Drawing.Size(122, 23);
-            this.txt孔边.TabIndex = 17;
+            this.kryptonWrapLabel29.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel29.Location = new System.Drawing.Point(21, 37);
+            this.kryptonWrapLabel29.Name = "kryptonWrapLabel29";
+            this.kryptonWrapLabel29.Size = new System.Drawing.Size(85, 15);
+            this.kryptonWrapLabel29.Text = "纸料带低亮度";
             // 
-            // kryptonWrapLabel26
+            // txt透明Low
             // 
-            this.kryptonWrapLabel26.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel26.Location = new System.Drawing.Point(11, 8);
-            this.kryptonWrapLabel26.Name = "kryptonWrapLabel26";
-            this.kryptonWrapLabel26.Size = new System.Drawing.Size(33, 15);
-            this.kryptonWrapLabel26.Text = "孔边";
+            this.txt透明Low.Location = new System.Drawing.Point(115, 3);
+            this.txt透明Low.Name = "txt透明Low";
+            this.txt透明Low.Size = new System.Drawing.Size(87, 23);
+            this.txt透明Low.TabIndex = 17;
             // 
-            // txt两孔之间
+            // kryptonWrapLabel30
             // 
-            this.txt两孔之间.Location = new System.Drawing.Point(89, 61);
-            this.txt两孔之间.Name = "txt两孔之间";
-            this.txt两孔之间.Size = new System.Drawing.Size(122, 23);
-            this.txt两孔之间.TabIndex = 34;
+            this.kryptonWrapLabel30.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel30.Location = new System.Drawing.Point(11, 8);
+            this.kryptonWrapLabel30.Name = "kryptonWrapLabel30";
+            this.kryptonWrapLabel30.Size = new System.Drawing.Size(98, 15);
+            this.kryptonWrapLabel30.Text = "透明料带低亮度";
             // 
-            // kryptonWrapLabel27
+            // txt黑High
             // 
-            this.kryptonWrapLabel27.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel27.Location = new System.Drawing.Point(11, 66);
-            this.kryptonWrapLabel27.Name = "kryptonWrapLabel27";
-            this.kryptonWrapLabel27.Size = new System.Drawing.Size(59, 15);
-            this.kryptonWrapLabel27.Text = "两孔之间";
+            this.txt黑High.Location = new System.Drawing.Point(322, 63);
+            this.txt黑High.Name = "txt黑High";
+            this.txt黑High.Size = new System.Drawing.Size(87, 23);
+            this.txt黑High.TabIndex = 43;
+            // 
+            // kryptonWrapLabel31
+            // 
+            this.kryptonWrapLabel31.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel31.Location = new System.Drawing.Point(230, 67);
+            this.kryptonWrapLabel31.Name = "kryptonWrapLabel31";
+            this.kryptonWrapLabel31.Size = new System.Drawing.Size(85, 15);
+            this.kryptonWrapLabel31.Text = "黑料带高亮度";
+            // 
+            // txt纸High
+            // 
+            this.txt纸High.Location = new System.Drawing.Point(322, 34);
+            this.txt纸High.Name = "txt纸High";
+            this.txt纸High.Size = new System.Drawing.Size(87, 23);
+            this.txt纸High.TabIndex = 42;
+            // 
+            // kryptonWrapLabel32
+            // 
+            this.kryptonWrapLabel32.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel32.Location = new System.Drawing.Point(231, 39);
+            this.kryptonWrapLabel32.Name = "kryptonWrapLabel32";
+            this.kryptonWrapLabel32.Size = new System.Drawing.Size(85, 15);
+            this.kryptonWrapLabel32.Text = "纸料带高亮度";
+            // 
+            // txt透明High
+            // 
+            this.txt透明High.Location = new System.Drawing.Point(322, 3);
+            this.txt透明High.Name = "txt透明High";
+            this.txt透明High.Size = new System.Drawing.Size(87, 23);
+            this.txt透明High.TabIndex = 41;
+            // 
+            // kryptonWrapLabel33
+            // 
+            this.kryptonWrapLabel33.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel33.Location = new System.Drawing.Point(218, 10);
+            this.kryptonWrapLabel33.Name = "kryptonWrapLabel33";
+            this.kryptonWrapLabel33.Size = new System.Drawing.Size(98, 15);
+            this.kryptonWrapLabel33.Text = "透明料带高亮度";
             // 
             // UCVisor
             // 
@@ -1402,6 +1539,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage4)).EndInit();
             this.kryptonPage4.ResumeLayout(false);
             this.kryptonPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).EndInit();
+            this.kryptonGroupBox3.Panel.ResumeLayout(false);
+            this.kryptonGroupBox3.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
+            this.kryptonGroupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox2.Panel)).EndInit();
             this.kryptonGroupBox2.Panel.ResumeLayout(false);
             this.kryptonGroupBox2.Panel.PerformLayout();
@@ -1417,11 +1559,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.comSelectModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comLight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).EndInit();
-            this.kryptonGroupBox3.Panel.ResumeLayout(false);
-            this.kryptonGroupBox3.Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
-            this.kryptonGroupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4.Panel)).EndInit();
+            this.kryptonGroupBox4.Panel.ResumeLayout(false);
+            this.kryptonGroupBox4.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox4)).EndInit();
+            this.kryptonGroupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1539,5 +1681,18 @@
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel25;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt孔边;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel26;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox4;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt黑High;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel31;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt纸High;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel32;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt透明High;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel33;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt黑Low;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel28;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt纸Low;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel29;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt透明Low;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel30;
     }
 }
