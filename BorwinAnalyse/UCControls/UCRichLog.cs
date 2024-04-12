@@ -17,12 +17,18 @@ namespace BorwinAnalyse.UCControls
         {
             InitializeComponent();
             this.Dock= DockStyle.Fill;
+            this.Load += UCRichLog_Load;
+        
+        }
+
+        private void UCRichLog_Load(object sender, EventArgs e)
+        {
             LogManager.Instance.LogMsg += WriteLog;
         }
 
         private void WriteLog(string msg)
         {
-            richLog.Text += msg + "\r\n";
+            this.Invoke(new Action(() => { richLog.Text += msg + "\r\n"; }));
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

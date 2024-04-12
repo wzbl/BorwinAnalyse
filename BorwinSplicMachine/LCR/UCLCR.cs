@@ -334,11 +334,11 @@ namespace BorwinSplicMachine.LCR
         /// <summary>
         /// LCR测值线程
         /// </summary>
-        private void LCRFlow()
+        private async void LCRFlow()
         {
             while (Form1.MainControl.motControl != null)
             {
-                if (MotionControl.IsAuto)
+                if (MotionControl.IsAuto && ParamManager.Instance.System_测值.B)
                 {
                     switch (LCRHelper.LCRFlow)
                     {
@@ -518,14 +518,13 @@ namespace BorwinSplicMachine.LCR
                             GridAddData();
                             break;
                         case LCR.LCRFlow.Finish:
-
-
+                            LCRHelper.Side= LCR.WhichSide.None;
                             break;
                         default:
                             break;
                     }
                 }
-                Thread.Sleep(20);
+                Thread.Sleep(50);
             }
         }
 

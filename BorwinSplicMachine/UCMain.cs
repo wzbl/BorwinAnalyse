@@ -40,13 +40,15 @@ namespace BorwinSplicMachine
             VisionDetection.set_ImageShowUIPanel(Station.RightStation, pR);
             VisionDetection.set_ImageShowUIPanel(Station.MeasureStation, pM);
             VisionDetection.InitVisionDetection();
+
+            
         }
 
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-       
-            kryptonSplitContainer2.Panel2.Controls.Add(Form1.MainControl.UCLCR);
+            kryptonSplitContainer3.Panel1.Controls.Add(Form1.MainControl.UCLCR);
+            kryptonSplitContainer3.Panel2.Controls.Add(Form1.MainControl.UCRichLog);
             timer1.Start();
         }
         public void UpdataLanguage()
@@ -148,9 +150,9 @@ namespace BorwinSplicMachine
                 {
                     //if (MotionControl.CardAPI.IsInitCardOK)
                     //    MotControl.蜂鸣器.Off();
-                    timer1.Start();
+                 
                 }
-
+                timer1.Start();
             }
 
             bool IsStart = Form1.MainControl.CodeControl.Code1.IsSuccess;

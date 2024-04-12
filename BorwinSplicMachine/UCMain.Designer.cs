@@ -42,9 +42,10 @@
             this.btnClearCode = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pL = new System.Windows.Forms.Panel();
-            this.pM = new System.Windows.Forms.FlowLayoutPanel();
             this.pR = new System.Windows.Forms.FlowLayoutPanel();
+            this.pM = new System.Windows.Forms.FlowLayoutPanel();
+            this.pL = new System.Windows.Forms.Panel();
+            this.kryptonSplitContainer3 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -55,8 +56,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).BeginInit();
             this.kryptonSplitContainer2.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).BeginInit();
+            this.kryptonSplitContainer2.Panel2.SuspendLayout();
             this.kryptonSplitContainer2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel2)).BeginInit();
+            this.kryptonSplitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtbarCode2
@@ -180,6 +186,10 @@
             // kryptonSplitContainer2.Panel1
             // 
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.tableLayoutPanel1);
+            // 
+            // kryptonSplitContainer2.Panel2
+            // 
+            this.kryptonSplitContainer2.Panel2.Controls.Add(this.kryptonSplitContainer3);
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(980, 551);
             this.kryptonSplitContainer2.SplitterDistance = 183;
             this.kryptonSplitContainer2.TabIndex = 0;
@@ -201,14 +211,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(980, 183);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // pL
+            // pR
             // 
-            this.pL.BackColor = System.Drawing.Color.Black;
-            this.pL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pL.Location = new System.Drawing.Point(3, 3);
-            this.pL.Name = "pL";
-            this.pL.Size = new System.Drawing.Size(320, 177);
-            this.pL.TabIndex = 1;
+            this.pR.BackColor = System.Drawing.Color.Black;
+            this.pR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pR.Location = new System.Drawing.Point(655, 3);
+            this.pR.Name = "pR";
+            this.pR.Size = new System.Drawing.Size(322, 177);
+            this.pR.TabIndex = 3;
             // 
             // pM
             // 
@@ -219,14 +229,25 @@
             this.pM.Size = new System.Drawing.Size(320, 177);
             this.pM.TabIndex = 2;
             // 
-            // pR
+            // pL
             // 
-            this.pR.BackColor = System.Drawing.Color.Black;
-            this.pR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pR.Location = new System.Drawing.Point(655, 3);
-            this.pR.Name = "pR";
-            this.pR.Size = new System.Drawing.Size(322, 177);
-            this.pR.TabIndex = 3;
+            this.pL.BackColor = System.Drawing.Color.Black;
+            this.pL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pL.Location = new System.Drawing.Point(3, 3);
+            this.pL.Name = "pL";
+            this.pL.Size = new System.Drawing.Size(320, 177);
+            this.pL.TabIndex = 1;
+            // 
+            // kryptonSplitContainer3
+            // 
+            this.kryptonSplitContainer3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.kryptonSplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonSplitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.kryptonSplitContainer3.Name = "kryptonSplitContainer3";
+            this.kryptonSplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.kryptonSplitContainer3.Size = new System.Drawing.Size(980, 363);
+            this.kryptonSplitContainer3.SplitterDistance = 287;
+            this.kryptonSplitContainer3.TabIndex = 0;
             // 
             // UCMain
             // 
@@ -246,9 +267,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
             this.kryptonSplitContainer2.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel2)).EndInit();
+            this.kryptonSplitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
             this.kryptonSplitContainer2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3.Panel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer3)).EndInit();
+            this.kryptonSplitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -270,5 +296,6 @@
         private System.Windows.Forms.Panel pL;
         private System.Windows.Forms.FlowLayoutPanel pM;
         private System.Windows.Forms.FlowLayoutPanel pR;
+        private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer3;
     }
 }

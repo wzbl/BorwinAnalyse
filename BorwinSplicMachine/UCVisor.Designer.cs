@@ -63,14 +63,14 @@
             this.kryptonWrapLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnSaveProPara = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnSaveSysPara = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.txtDefaultLight = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txt黑料带曝光 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnTriggle = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnSecendExproseTime = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnFirstExproseTime = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.txtSecondExposureTime = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txt纸料带曝光 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.txtFirstExposureTime = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txt透明曝光值 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnSetCurrentCameraNum = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.comCameraNum = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -131,6 +131,14 @@
             this.comLight = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonWrapLabel14 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonGroupBox3 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.txt孔中心 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel25 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt孔边 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.txt两孔之间 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.kryptonWrapLabel27 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
@@ -175,30 +183,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.comSelectModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comLight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).BeginInit();
+            this.kryptonGroupBox3.Panel.SuspendLayout();
+            this.kryptonGroupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonNavigator1
             // 
-            this.kryptonNavigator1.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.Context;
-            this.kryptonNavigator1.Button.CloseButtonAction = ComponentFactory.Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
-            this.kryptonNavigator1.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigator1.Button.ContextButtonAction = ComponentFactory.Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.kryptonNavigator1.Button.ContextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigator1.Button.ContextMenuMapImage = ComponentFactory.Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigator1.Button.ContextMenuMapText = ComponentFactory.Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigator1.Button.NextButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigator1.Button.NextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigator1.Button.PreviousButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigator1.Button.PreviousButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigator1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonNavigator1.Location = new System.Drawing.Point(0, 0);
             this.kryptonNavigator1.Name = "kryptonNavigator1";
-            this.kryptonNavigator1.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.BarTabGroup;
             this.kryptonNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2,
             this.kryptonPage3});
-            this.kryptonNavigator1.SelectedIndex = 0;
+            this.kryptonNavigator1.SelectedIndex = 1;
             this.kryptonNavigator1.Size = new System.Drawing.Size(1083, 529);
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
@@ -467,18 +467,19 @@
             // 
             // kryptonSplitContainer2.Panel1
             // 
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonButton1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.chkSaveImg);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonGroupBox1);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnSaveProPara);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnSaveSysPara);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.txtDefaultLight);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt黑料带曝光);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonWrapLabel6);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnTriggle);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnSecendExproseTime);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnFirstExproseTime);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.txtSecondExposureTime);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt纸料带曝光);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonWrapLabel5);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.txtFirstExposureTime);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.txt透明曝光值);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonWrapLabel4);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnSetCurrentCameraNum);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.comCameraNum);
@@ -589,13 +590,13 @@
             this.btnSaveSysPara.Values.Text = "保存系统参数";
             this.btnSaveSysPara.Click += new System.EventHandler(this.btnSaveSysPara_Click);
             // 
-            // txtDefaultLight
+            // txt黑料带曝光
             // 
-            this.txtDefaultLight.Location = new System.Drawing.Point(482, 95);
-            this.txtDefaultLight.Name = "txtDefaultLight";
-            this.txtDefaultLight.Size = new System.Drawing.Size(122, 23);
-            this.txtDefaultLight.TabIndex = 22;
-            this.txtDefaultLight.Text = "0";
+            this.txt黑料带曝光.Location = new System.Drawing.Point(482, 95);
+            this.txt黑料带曝光.Name = "txt黑料带曝光";
+            this.txt黑料带曝光.Size = new System.Drawing.Size(122, 23);
+            this.txt黑料带曝光.TabIndex = 22;
+            this.txt黑料带曝光.Text = "0";
             // 
             // kryptonWrapLabel6
             // 
@@ -603,8 +604,8 @@
             this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel6.Location = new System.Drawing.Point(391, 99);
             this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
-            this.kryptonWrapLabel6.Size = new System.Drawing.Size(85, 15);
-            this.kryptonWrapLabel6.Text = "默认背光亮度";
+            this.kryptonWrapLabel6.Size = new System.Drawing.Size(72, 15);
+            this.kryptonWrapLabel6.Text = "黑料带曝光";
             // 
             // btnTriggle
             // 
@@ -633,39 +634,39 @@
             this.btnFirstExproseTime.Values.Text = "写入";
             this.btnFirstExproseTime.Click += new System.EventHandler(this.btnFirstExproseTime_Click);
             // 
-            // txtSecondExposureTime
+            // txt纸料带曝光
             // 
-            this.txtSecondExposureTime.Location = new System.Drawing.Point(147, 93);
-            this.txtSecondExposureTime.Name = "txtSecondExposureTime";
-            this.txtSecondExposureTime.Size = new System.Drawing.Size(122, 23);
-            this.txtSecondExposureTime.TabIndex = 17;
-            this.txtSecondExposureTime.Text = "0";
+            this.txt纸料带曝光.Location = new System.Drawing.Point(147, 93);
+            this.txt纸料带曝光.Name = "txt纸料带曝光";
+            this.txt纸料带曝光.Size = new System.Drawing.Size(122, 23);
+            this.txt纸料带曝光.TabIndex = 17;
+            this.txt纸料带曝光.Text = "0";
             // 
             // kryptonWrapLabel5
             // 
             this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel5.Location = new System.Drawing.Point(17, 97);
+            this.kryptonWrapLabel5.Location = new System.Drawing.Point(51, 97);
             this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
-            this.kryptonWrapLabel5.Size = new System.Drawing.Size(124, 15);
-            this.kryptonWrapLabel5.Text = "第二次拍照曝光时间";
+            this.kryptonWrapLabel5.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel5.Text = "纸料带";
             // 
-            // txtFirstExposureTime
+            // txt透明曝光值
             // 
-            this.txtFirstExposureTime.Location = new System.Drawing.Point(147, 66);
-            this.txtFirstExposureTime.Name = "txtFirstExposureTime";
-            this.txtFirstExposureTime.Size = new System.Drawing.Size(122, 23);
-            this.txtFirstExposureTime.TabIndex = 15;
-            this.txtFirstExposureTime.Text = "0";
+            this.txt透明曝光值.Location = new System.Drawing.Point(147, 66);
+            this.txt透明曝光值.Name = "txt透明曝光值";
+            this.txt透明曝光值.Size = new System.Drawing.Size(122, 23);
+            this.txt透明曝光值.TabIndex = 15;
+            this.txt透明曝光值.Text = "0";
             // 
             // kryptonWrapLabel4
             // 
             this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel4.Location = new System.Drawing.Point(17, 69);
+            this.kryptonWrapLabel4.Location = new System.Drawing.Point(49, 67);
             this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
-            this.kryptonWrapLabel4.Size = new System.Drawing.Size(124, 15);
-            this.kryptonWrapLabel4.Text = "第一次拍照曝光时间";
+            this.kryptonWrapLabel4.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel4.Text = "透明料带";
             // 
             // btnSetCurrentCameraNum
             // 
@@ -743,21 +744,9 @@
             // 
             // kryptonNavigator2
             // 
-            this.kryptonNavigator2.Button.ButtonDisplayLogic = ComponentFactory.Krypton.Navigator.ButtonDisplayLogic.Context;
-            this.kryptonNavigator2.Button.CloseButtonAction = ComponentFactory.Krypton.Navigator.CloseButtonAction.RemovePageAndDispose;
-            this.kryptonNavigator2.Button.CloseButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigator2.Button.ContextButtonAction = ComponentFactory.Krypton.Navigator.ContextButtonAction.SelectPage;
-            this.kryptonNavigator2.Button.ContextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigator2.Button.ContextMenuMapImage = ComponentFactory.Krypton.Navigator.MapKryptonPageImage.Small;
-            this.kryptonNavigator2.Button.ContextMenuMapText = ComponentFactory.Krypton.Navigator.MapKryptonPageText.TextTitle;
-            this.kryptonNavigator2.Button.NextButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigator2.Button.NextButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
-            this.kryptonNavigator2.Button.PreviousButtonAction = ComponentFactory.Krypton.Navigator.DirectionButtonAction.ModeAppropriateAction;
-            this.kryptonNavigator2.Button.PreviousButtonDisplay = ComponentFactory.Krypton.Navigator.ButtonDisplay.Logic;
             this.kryptonNavigator2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonNavigator2.Location = new System.Drawing.Point(435, 3);
             this.kryptonNavigator2.Name = "kryptonNavigator2";
-            this.kryptonNavigator2.NavigatorMode = ComponentFactory.Krypton.Navigator.NavigatorMode.BarTabGroup;
             this.kryptonNavigator2.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage4,
             this.kryptonPage5});
@@ -769,6 +758,7 @@
             // kryptonPage4
             // 
             this.kryptonPage4.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.kryptonPage4.Controls.Add(this.kryptonGroupBox3);
             this.kryptonPage4.Controls.Add(this.kryptonGroupBox2);
             this.kryptonPage4.Controls.Add(this.btnBaseLine);
             this.kryptonPage4.Controls.Add(this.btnRegionSearch);
@@ -789,7 +779,7 @@
             // 
             // kryptonGroupBox2
             // 
-            this.kryptonGroupBox2.Location = new System.Drawing.Point(41, 93);
+            this.kryptonGroupBox2.Location = new System.Drawing.Point(41, 92);
             this.kryptonGroupBox2.Name = "kryptonGroupBox2";
             // 
             // kryptonGroupBox2.Panel
@@ -974,7 +964,7 @@
             this.kryptonPage5.LastVisibleSet = true;
             this.kryptonPage5.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage5.Name = "kryptonPage5";
-            this.kryptonPage5.Size = new System.Drawing.Size(640, 322);
+            this.kryptonPage5.Size = new System.Drawing.Size(641, 322);
             this.kryptonPage5.Text = "模板参数";
             this.kryptonPage5.ToolTipTitle = "Page ToolTip";
             this.kryptonPage5.UniqueName = "39755B465F2043955E8BAFD47590B051";
@@ -1296,6 +1286,80 @@
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "0A717F30EAFE4AA680AEE9EDE04174F8";
             // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(614, 96);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(90, 25);
+            this.kryptonButton1.TabIndex = 35;
+            this.kryptonButton1.Values.Text = "写入";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
+            // kryptonGroupBox3
+            // 
+            this.kryptonGroupBox3.Location = new System.Drawing.Point(41, 191);
+            this.kryptonGroupBox3.Name = "kryptonGroupBox3";
+            // 
+            // kryptonGroupBox3.Panel
+            // 
+            this.kryptonGroupBox3.Panel.Controls.Add(this.txt两孔之间);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel27);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.txt孔中心);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel25);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.txt孔边);
+            this.kryptonGroupBox3.Panel.Controls.Add(this.kryptonWrapLabel26);
+            this.kryptonGroupBox3.Size = new System.Drawing.Size(318, 114);
+            this.kryptonGroupBox3.TabIndex = 32;
+            this.kryptonGroupBox3.Values.Heading = "接驳裁切距离";
+            // 
+            // txt孔中心
+            // 
+            this.txt孔中心.Location = new System.Drawing.Point(89, 32);
+            this.txt孔中心.Name = "txt孔中心";
+            this.txt孔中心.Size = new System.Drawing.Size(122, 23);
+            this.txt孔中心.TabIndex = 29;
+            // 
+            // kryptonWrapLabel25
+            // 
+            this.kryptonWrapLabel25.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel25.Location = new System.Drawing.Point(11, 37);
+            this.kryptonWrapLabel25.Name = "kryptonWrapLabel25";
+            this.kryptonWrapLabel25.Size = new System.Drawing.Size(46, 15);
+            this.kryptonWrapLabel25.Text = "孔中心";
+            // 
+            // txt孔边
+            // 
+            this.txt孔边.Location = new System.Drawing.Point(89, 3);
+            this.txt孔边.Name = "txt孔边";
+            this.txt孔边.Size = new System.Drawing.Size(122, 23);
+            this.txt孔边.TabIndex = 17;
+            // 
+            // kryptonWrapLabel26
+            // 
+            this.kryptonWrapLabel26.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel26.Location = new System.Drawing.Point(11, 8);
+            this.kryptonWrapLabel26.Name = "kryptonWrapLabel26";
+            this.kryptonWrapLabel26.Size = new System.Drawing.Size(33, 15);
+            this.kryptonWrapLabel26.Text = "孔边";
+            // 
+            // txt两孔之间
+            // 
+            this.txt两孔之间.Location = new System.Drawing.Point(89, 61);
+            this.txt两孔之间.Name = "txt两孔之间";
+            this.txt两孔之间.Size = new System.Drawing.Size(122, 23);
+            this.txt两孔之间.TabIndex = 34;
+            // 
+            // kryptonWrapLabel27
+            // 
+            this.kryptonWrapLabel27.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.kryptonWrapLabel27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel27.Location = new System.Drawing.Point(11, 66);
+            this.kryptonWrapLabel27.Name = "kryptonWrapLabel27";
+            this.kryptonWrapLabel27.Size = new System.Drawing.Size(59, 15);
+            this.kryptonWrapLabel27.Text = "两孔之间";
+            // 
             // UCVisor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1353,6 +1417,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.comSelectModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comLight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3.Panel)).EndInit();
+            this.kryptonGroupBox3.Panel.ResumeLayout(false);
+            this.kryptonGroupBox3.Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox3)).EndInit();
+            this.kryptonGroupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1389,16 +1458,16 @@
         private System.Windows.Forms.Panel currentP;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSecendExproseTime;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnFirstExproseTime;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtSecondExposureTime;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt纸料带曝光;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel5;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtFirstExposureTime;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt透明曝光值;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel4;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSetCurrentCameraNum;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comCameraNum;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comSelectCamera;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel3;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDefaultLight;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt黑料带曝光;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel6;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSaveProPara;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSaveSysPara;
@@ -1462,5 +1531,13 @@
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chkEnable;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox OCVScore;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel24;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
+        private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox3;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt两孔之间;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel27;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt孔中心;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel25;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txt孔边;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel26;
     }
 }

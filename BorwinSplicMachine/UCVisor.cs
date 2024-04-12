@@ -1,6 +1,9 @@
-﻿using BorwinSplicMachine;
+﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
+using BorwinSplicMachine;
 using ComponentFactory.Krypton.Toolkit;
 using FeederSpliceVisionSys;
+using LibSDK;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +53,10 @@ namespace VisionModel.UCControls
 
             }
         }
-
+        public void Log(string message)
+        {
+            LogManager.Instance.WriteLog(new LogModel(LogType.相机日志, message));
+        }
         /// <summary>
         /// 完成事件
         /// </summary>
@@ -60,32 +66,32 @@ namespace VisionModel.UCControls
         {
             switch (Result.DetectionType)
             {
-                case  MyDetectionType.Detection_CutPos:
+                case MyDetectionType.Detection_CutPos:
                     {
                         switch (_Station)
                         {
-                            case  Station.LiftStation:
+                            case Station.LiftStation:
                                 {
-                                    //Listinfo("1#相机裁切位置检测完成");
+                                    Log("1#相机裁切位置检测完成");
                                     if (Result.Result == MyDetectionResult.NoProduct)
                                     {
                                         Form1.MainControl.motControl.FlowLeft = MainFlow.找空料NG;
-                                        //Listinfo("1#未检测到产品，需移动料带");
+                                        Log("1#未检测到产品，需移动料带");
                                         return;
                                     }
                                     else if (Result.Result == MyDetectionResult.Error_)
                                     {
                                         Form1.MainControl.motControl.FlowLeft = MainFlow.找空料NG;
-                                        //Listinfo("1#检测异常");
+                                        Log("1#检测异常");
                                         return;
                                     }
                                     else if (Result.Result == MyDetectionResult.CreateModel)
                                     {
                                         Form1.MainControl.motControl.FlowLeft = MainFlow.找空料NG;
-                                        //Listinfo("1#弹出创建模板界面");
+                                        Log("1#弹出创建模板界面");
                                         return;
                                     }
-
+                                    Log("1#找空料OK");
                                     Form1.MainControl.motControl.FlowLeft = MainFlow.找空料OK;
                                     MotControl.leftCutPos = Result.CutPosValue;
                                     // 产品尺寸
@@ -98,13 +104,13 @@ namespace VisionModel.UCControls
                                     MyTapeWidthType TapeWidthType = Result.TapeWidthType;
                                     // 物料间距
                                     MyProductSpacingType ProductSpacingType = Result.ProductSpacingType;
-                                    string str = "产品尺寸：" + productsize + " 裁切位置:" + CutPosValue;
-                                    ListInfo(str);
+                                    Log("物料间距" + ProductSpacingType.ToString());
+                                    
                                     if (Result.OCVEnabled)
                                     {
                                         if (Result.OCVResult == false)
                                         {
-                                            //Listinfo("弹出OCV图片显示及人工确认界面");
+                                            Log("弹出OCV图片显示及人工确认界面");
                                         }
 
                                     }
@@ -112,7 +118,7 @@ namespace VisionModel.UCControls
                                     break;
                                 }
 
-                            case  Station.RightStation:
+                            case Station.RightStation:
                                 {
                                     break;
                                 }
@@ -121,20 +127,20 @@ namespace VisionModel.UCControls
                         break;
                     }
 
-                case  MyDetectionType.Detection_DockPos:
+                case MyDetectionType.Detection_DockPos:
                     {
                         switch (_Station)
                         {
-                            case  Station.LiftStation:
+                            case Station.LiftStation:
                                 {
-                                    //Listinfo("1#相机位置补偿检测完成");
+                                    Log("1#相机位置补偿检测完成");
                                     if (Result.Result == MyDetectionResult.Error_)
                                     {
-                                        //Listinfo("1#检测异常");
+                                        Log("1#检测异常");
                                         return;
                                     }
                                     double DockPosValue = Result.DockPosValue;
-                                    MotControl.leftDockPos= DockPosValue;
+                                    MotControl.leftDockPos = DockPosValue;
                                     Form1.MainControl.motControl.FlowLeft = MainFlow.空料补偿完成;
 
                                     break;
@@ -149,21 +155,21 @@ namespace VisionModel.UCControls
                         break;
                     }
 
-                case  MyDetectionType.Detection_CheckMaterial:
+                case MyDetectionType.Detection_CheckMaterial:
                     {
                         switch (_Station)
                         {
-                            case  Station.LiftStation:
+                            case Station.LiftStation:
                                 {
                                     if (Result.CheckMaterialResult)
-                                        ListInfo("1#检测到有料带");
+                                        Log("1#检测到有料带");
                                     else
-                                        ListInfo("1#检测到无料带");
-                                    VisionDetection.Detection_CheckMaterial_Stop(curStation );
+                                        Log("1#检测到无料带");
+                                    VisionDetection.Detection_CheckMaterial_Stop(curStation);
                                     break;
                                 }
 
-                            case  Station.RightStation:
+                            case Station.RightStation:
                                 {
                                     break;
                                 }
@@ -172,11 +178,11 @@ namespace VisionModel.UCControls
                         break;
                     }
 
-                case  MyDetectionType.Detection_PositionOffset:
+                case MyDetectionType.Detection_PositionOffset:
                     {
                         if (Result.Result == MyDetectionResult.Accept)
                         {
-                            //Listinfo("3#检测完成");
+                            Log("3#检测完成");
                             double PositionOffsetValue = Result.PositionOffsetValue;
                             return;
                         }
@@ -189,7 +195,7 @@ namespace VisionModel.UCControls
 
         private void UCVisor_Load(object sender, EventArgs e)
         {
-         
+
         }
 
         private void btnLSoftTrigger_Click(object sender, EventArgs e)
@@ -347,38 +353,46 @@ namespace VisionModel.UCControls
                     curStation = Station.None;
                     break;
             }
+
             SetStationData();
         }
-
+        /// <summary>
+        /// 切换相机，获取值
+        /// </summary>
         private void SetStationData()
         {
             VisionDetection.set_ShowDrawRegionUIPanel(curStation, currentP);
-            double cirradius=0, pixelsize=0;
-            VisionDetection. GetPixelCalibrationParameter(curStation,ref cirradius,ref pixelsize);
+            double cirradius = 0, pixelsize = 0;
+            VisionDetection.GetPixelCalibrationParameter(curStation, ref cirradius, ref pixelsize);
             txtRadus.Text = cirradius.ToString();
             txtPix.Text = pixelsize.ToString();
 
             MyCameraParameter MyCameraParameter_ = VisionDetection.get_CameraParameter(curStation);
-            txtFirstExposureTime.Text = MyCameraParameter_.FirstExposureTime.ToString();
-            txtSecondExposureTime.Text = MyCameraParameter_.SecondExposureTime.ToString();
-            txtDefaultLight.Text = VisionDetection.get_DefaultBacklightLevel(curStation).ToString();
+            txt透明曝光值.Text = MyCameraParameter_.ExposureTimeTransTape.ToString();
+            txt纸料带曝光.Text = MyCameraParameter_.ExposureTimePaperTape.ToString();
+            txt黑料带曝光.Text = MyCameraParameter_.ExposureTimeBlackTape.ToString();
             MyLightLevel MyLightLevel_ = VisionDetection.get_LightParameter(curStation);
-            if (MyLightLevel_!=null)
+            if (MyLightLevel_ != null)
             {
                 comLight.SelectedIndex = (int)MyLightLevel_.SelectLightSource;
                 txtBacklight.Text = MyLightLevel_.BacklightLevel.ToString();
                 txtFrontlight.Text = MyLightLevel_.FrontlightLevel.ToString();
             }
-            MyMaterialDetection MyMaterialDetection_ = VisionDetection.get_CheckMaterialParameter (curStation);
-            if (MyMaterialDetection_!=null)
+            MyMaterialDetection MyMaterialDetection_ = VisionDetection.get_CheckMaterialParameter(curStation);
+            if (MyMaterialDetection_ != null)
             {
                 txtGrayMax.Text = MyMaterialDetection_.GrayMax.ToString();
                 txtArea.Text = MyMaterialDetection_.Area.ToString();
             }
-            
+
             SetModelData();
-
-
+            double CircleLift = 0;
+            double CircleMid = 0;
+            double Circle2Mid = 0;
+            VisionDetection.GetStandardDistance(curStation, ref CircleLift, ref CircleMid, ref Circle2Mid);
+            txt孔边.Text = CircleLift.ToString();
+            txt孔中心.Text = CircleMid.ToString();
+            txt两孔之间.Text = Circle2Mid.ToString();
         }
 
 
@@ -389,7 +403,7 @@ namespace VisionModel.UCControls
 
         private void btnFirstExproseTime_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(txtFirstExposureTime.Text, out int exposureTime))
+            if (int.TryParse(txt透明曝光值.Text, out int exposureTime))
             {
                 VisionDetection.SetCameraExposureTime(curStation, exposureTime);
             }
@@ -398,7 +412,7 @@ namespace VisionModel.UCControls
 
         private void btnSecendExproseTime_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(txtSecondExposureTime.Text, out int exposureTime))
+            if (int.TryParse(txt纸料带曝光.Text, out int exposureTime))
             {
                 VisionDetection.SetCameraExposureTime(curStation, exposureTime);
             }
@@ -464,9 +478,9 @@ namespace VisionModel.UCControls
             VisionDetection.SetPixelCalibrationParameter(curStation, double.Parse(txtRadus.Text), double.Parse(txtPix.Text));
 
             MyCameraParameter MyCameraParameter_ = new MyCameraParameter();
-            MyCameraParameter_.FirstExposureTime = int.Parse(txtFirstExposureTime.Text);
-            MyCameraParameter_.SecondExposureTime = int.Parse(txtSecondExposureTime.Text);
-            VisionDetection.set_DefaultBacklightLevel(curStation, int.Parse(txtDefaultLight.Text));
+            MyCameraParameter_.ExposureTimeTransTape = int.Parse(txt透明曝光值.Text);
+            MyCameraParameter_.ExposureTimePaperTape = int.Parse(txt纸料带曝光.Text);
+            MyCameraParameter_.ExposureTimeBlackTape = int.Parse(txt黑料带曝光.Text);
             MyLightLevel MyLightLevel_ = new MyLightLevel();
             MyLightLevel_.SelectLightSource = (LightSource)comLight.SelectedIndex;
             MyLightLevel_.BacklightLevel = int.Parse(txtBacklight.Text);
@@ -479,6 +493,7 @@ namespace VisionModel.UCControls
             MyMaterialDetection_.GrayMax = double.Parse(txtGrayMax.Text);
             MyMaterialDetection_.Area = double.Parse(txtArea.Text);
             VisionDetection.set_CheckMaterialParameter(curStation, MyMaterialDetection_);
+            VisionDetection.SetStandardDistance(curStation, double.Parse(txt孔边.Text), double.Parse(txt孔中心.Text), double.Parse(txt两孔之间.Text));
         }
 
         private void btnSaveProPara_Click(object sender, EventArgs e)
@@ -650,6 +665,14 @@ namespace VisionModel.UCControls
         private void btnSave_Click(object sender, EventArgs e)
         {
             GetModelData();
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(txt黑料带曝光.Text, out int exposureTime))
+            {
+                VisionDetection.SetCameraExposureTime(curStation, exposureTime);
+            }
         }
     }
 }
