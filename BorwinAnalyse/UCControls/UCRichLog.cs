@@ -24,11 +24,19 @@ namespace BorwinAnalyse.UCControls
         private void UCRichLog_Load(object sender, EventArgs e)
         {
             LogManager.Instance.LogMsg += WriteLog;
+           
         }
 
         private void WriteLog(string msg)
         {
-            this.Invoke(new Action(() => { richLog.Text += msg + "\r\n"; }));
+            this.Invoke(new Action(() => 
+            { 
+                richLog.Text += msg + "\r\n";
+                richLog.SelectionStart = richLog.Text.Length;
+                richLog.ScrollToCaret();
+            }));
+
+          
         }
 
         private void buttonSpecAny1_Click(object sender, EventArgs e)

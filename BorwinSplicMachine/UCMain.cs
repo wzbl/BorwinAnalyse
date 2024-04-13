@@ -39,8 +39,20 @@ namespace BorwinSplicMachine
             VisionDetection.set_ImageShowUIPanel(Station.LiftStation, pL);
             VisionDetection.set_ImageShowUIPanel(Station.RightStation, pR);
             VisionDetection.set_ImageShowUIPanel(Station.MeasureStation, pM);
-            VisionDetection.InitVisionDetection();
-            bool [] connes = VisionDetection.GetCameraConnectionStatus;
+   
+        }
+
+        private void UCMain_Load(object sender, EventArgs e)
+        {
+            UpdataLanguage();
+            timer1.Start();
+            kryptonSplitContainer3.Panel1.Controls.Add(Form1.MainControl.UCLCR);
+            kryptonSplitContainer3.Panel2.Controls.Add(Form1.MainControl.UCRichLog);
+            pL.ContextMenuStrip = MenuLeft;
+            pR.ContextMenuStrip = MenuRight;
+            pM.ContextMenuStrip = MenuMid;
+
+            bool[] connes = VisionDetection.GetCameraConnectionStatus;
             if (!connes[0])
             {
                 pL.BackColor = Color.Red;
@@ -53,18 +65,6 @@ namespace BorwinSplicMachine
             {
                 pM.BackColor = Color.Red;
             }
-
-        }
-
-        private void UCMain_Load(object sender, EventArgs e)
-        {
-            UpdataLanguage();
-            timer1.Start();
-            kryptonSplitContainer3.Panel1.Controls.Add(Form1.MainControl.UCLCR);
-            kryptonSplitContainer3.Panel2.Controls.Add(Form1.MainControl.UCRichLog);
-            pL.ContextMenuStrip = MenuLeft;
-            pR.ContextMenuStrip = MenuRight;
-            pM.ContextMenuStrip = MenuMid;
         }
         public void UpdataLanguage()
         {

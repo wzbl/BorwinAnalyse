@@ -9,8 +9,6 @@ using System.Windows.Forms;
 
 namespace BorwinSplicMachine.BarCode
 {
-
-
     /// <summary>
     /// 条码校验
     /// </summary>

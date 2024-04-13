@@ -27,8 +27,16 @@ namespace BorwinSplicMachine
         {
             InitializeComponent();
             MainControl = new MainControl(this);
-            MainControl.Init();
-            kryptonPanel1.Controls.Add(MainControl.UCMain);
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,7 +46,8 @@ namespace BorwinSplicMachine
                 this.components = new System.ComponentModel.Container();
             }
             UpdataLanguage();
-            MainControl.Start();
+
+            kryptonPanel1.Controls.Add(MainControl.UCMain);
         }
 
         public void UpdataLanguage()

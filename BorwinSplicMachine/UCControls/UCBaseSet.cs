@@ -22,12 +22,16 @@ namespace BorwinSplicMachine.UCControls
             this.Dock = DockStyle.Fill;
             this.Load += UCBaseSet_Load;
             this.components = new System.ComponentModel.Container();
+            SetStyle();
+        }
+
+        public void SetStyle()
+        {
             kryptonManager1.GlobalPaletteMode = PaletteModeManager.Office2010Blue;
         }
 
         private void UCBaseSet_Load(object sender, EventArgs e)
         {
-            
             UpdataLanguage();
         }
         public void UpdataLanguage()

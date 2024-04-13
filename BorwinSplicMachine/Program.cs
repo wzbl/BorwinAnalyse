@@ -34,20 +34,11 @@ namespace BorwinSplicMachine
             SqlLiteManager.Instance.Init();
             //http();
             MainControl.Log("打开程序");
-            CommonAnalyse.Instance.Load();
-            BomManager.Instance.Init();
-            MesControl.Instance.Load();
-            MotionControl.Init();
-            DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
-            ParamManager.Instance.Load();
-            if (dataTable == null) { return; }
-            if (dataTable.Rows.Count > 0)
-            {
-                int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
-                LanguageManager.Instance.CurrenIndex = lang;
-            }
+            Form1 form1 = new Form1();  
+            FormLogin formLogin = new FormLogin();
+            formLogin.ShowDialog();
             //Application.Run(new MotionConfig());
-            Application.Run(new Form1());
+            Application.Run(form1);
             //Application.Run(new AnalyseMainForm());
 
             //强制关闭进程    

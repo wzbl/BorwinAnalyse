@@ -4,6 +4,7 @@ using BorwinSplicMachine;
 using ComponentFactory.Krypton.Toolkit;
 using FeederSpliceVisionSys;
 using LibSDK;
+using PdfSharp.Charting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,6 @@ namespace VisionModel.UCControls
             this.Dock = DockStyle.Fill;
             this.Load += UCVisor_Load;
             VisionDetection.EventDetectionCompleted += DetectionCompleted;
-            Init();
         }
 
         private void Init()
@@ -53,6 +53,8 @@ namespace VisionModel.UCControls
         {
             LogManager.Instance.WriteLog(new LogModel(LogType.相机日志, message));
         }
+
+        int cont = 0;
         /// <summary>
         /// 完成事件
         /// </summary>
@@ -83,9 +85,14 @@ namespace VisionModel.UCControls
                                     }
                                     else if (Result.Result == MyDetectionResult.CreateModel)
                                     {
+                                        if (cont>=2)
+                                        {
+                                            return;
+                                        }
                                         VisiTest visiTest = new VisiTest();
                                         visiTest.ShowDialog();
-                                        //VisionDetection.Detection_CutPos(Station.LiftStation);
+                                        cont++;
+                                        VisionDetection.Detection_CutPos(Station.LiftStation);
                                         Log("1#弹出创建模板界面");
                                         return;
                                     }
@@ -104,7 +111,7 @@ namespace VisionModel.UCControls
                                     MyProductSpacingType ProductSpacingType = Result.ProductSpacingType;
                                     Log("物料间距" + ProductSpacingType.ToString());
                                     Log("找空料OK");
-                         
+                                    cont = 0;
                                     if (Result.OCVEnabled)
                                     {
                                         if (Result.OCVResult == false)
@@ -194,70 +201,14 @@ namespace VisionModel.UCControls
 
         private void UCVisor_Load(object sender, EventArgs e)
         {
-
+            Init();
         }
 
-        private void btnLSoftTrigger_Click(object sender, EventArgs e)
-        {
-            if (btnLSoftTrigger.BackColor == Color.Lime)
-            {
-                btnLSoftTrigger.BackColor = Color.White;
-                MyCameraTriggerModel myCameraTriggerModel = VisionDetection.get_CameraTriggerModel(Station.LiftStation); myCameraTriggerModel = MyCameraTriggerModel.SoftTrigger;
-            }
-            else
-            {
-                btnLSoftTrigger.BackColor = Color.Lime;
-                MyCameraTriggerModel myCameraTriggerModel = VisionDetection.get_CameraTriggerModel(Station.LiftStation); myCameraTriggerModel = MyCameraTriggerModel.ContinueTrigger;
-            }
-
-        }
-
-        private void btnRSoftTrigger_Click(object sender, EventArgs e)
-        {
-            if (btnRSoftTrigger.BackColor == Color.Lime)
-            {
-                btnRSoftTrigger.BackColor = Color.White;
-                MyCameraTriggerModel myCameraTriggerModel = VisionDetection.get_CameraTriggerModel(Station.RightStation); myCameraTriggerModel = MyCameraTriggerModel.SoftTrigger;
-            }
-            else
-            {
-                btnRSoftTrigger.BackColor = Color.Lime;
-                MyCameraTriggerModel myCameraTriggerModel = VisionDetection.get_CameraTriggerModel(Station.RightStation); myCameraTriggerModel = MyCameraTriggerModel.ContinueTrigger;
-            }
-        }
-
-        private void btnMSoftTrigger_Click(object sender, EventArgs e)
-        {
-            if (btnMSoftTrigger.BackColor == Color.Lime)
-            {
-                btnMSoftTrigger.BackColor = Color.White;
-                MyCameraTriggerModel myCameraTriggerModel = VisionDetection.get_CameraTriggerModel(Station.MeasureStation); myCameraTriggerModel = MyCameraTriggerModel.SoftTrigger;
-            }
-            else
-            {
-                btnMSoftTrigger.BackColor = Color.Lime;
-                MyCameraTriggerModel myCameraTriggerModel = VisionDetection.get_CameraTriggerModel(Station.MeasureStation); myCameraTriggerModel = MyCameraTriggerModel.ContinueTrigger;
-            }
-        }
-
-        private void btnLTriggle_Click(object sender, EventArgs e)
-        {
-            VisionDetection.CameraSnapAnImage(Station.LiftStation);
-        }
-
-        private void btnRTriggle_Click(object sender, EventArgs e)
-        {
-            VisionDetection.CameraSnapAnImage(Station.RightStation);
-        }
-
-        private void btnMTriggle_Click(object sender, EventArgs e)
-        {
-            VisionDetection.CameraSnapAnImage(Station.MeasureStation);
-        }
+     
 
         private void btnCutPos1_Click(object sender, EventArgs e)
         {
-            VisionDetection.Detection_CutPos(Station.LiftStation);
+            VisionDetection.Detection_CutPos(curStation);
         }
 
         private void btnCutPos2_Click(object sender, EventArgs e)
@@ -272,7 +223,7 @@ namespace VisionModel.UCControls
 
         private void btnDockPos1_Click(object sender, EventArgs e)
         {
-            VisionDetection.Detection_DockPos(Station.LiftStation);
+            VisionDetection.Detection_DockPos(curStation);
         }
 
         private void btnDockPos2_Click(object sender, EventArgs e)
@@ -285,44 +236,22 @@ namespace VisionModel.UCControls
             if (btnCheckMaterial1.BackColor == Color.Lime)
             {
                 btnCheckMaterial1.BackColor = Color.White;
-                VisionDetection.Detection_CheckMaterial_Stop(Station.LiftStation);
+                VisionDetection.Detection_CheckMaterial_Stop(curStation);
             }
             else
             {
                 btnCheckMaterial1.BackColor = Color.Lime;
-                VisionDetection.Detection_CheckMaterial_Start(Station.LiftStation);
+                VisionDetection.Detection_CheckMaterial_Start(curStation);
             }
 
         }
 
-        private void btnCheckMaterial2_Click(object sender, EventArgs e)
-        {
-            if (btnCheckMaterial2.BackColor == Color.Lime)
-            {
-                btnCheckMaterial1.BackColor = Color.White;
-                VisionDetection.Detection_CheckMaterial_Stop(Station.RightStation);
-            }
-            else
-            {
-                btnCheckMaterial2.BackColor = Color.Lime;
-                VisionDetection.Detection_CheckMaterial_Start(Station.RightStation);
-            }
-        }
 
         private void btnSetMaterialNumber_Click(object sender, EventArgs e)
         {
-            //  If SetMaterialNumber("123459789", ComboBox9.SelectedIndex) = MyCheckMaterialNumberResult.ChangedLight Then
-            //Dim llight As MyLightLevel = LightParameter(Station.LiftStation)
-            //  Dim rlight As MyLightLevel = LightParameter(Station.RightStation)
-
             MyCheckMaterialNumberResult res = VisionDetection.SetMaterialNumber("445555", MyTapeWidthType.M8);
-            ListInfo("调整光源");
         }
 
-        public void ListInfo(string s)
-        {
-
-        }
         Station curStation = Station.None;
         ModelType mCurModel = ModelType.None;
         private void comSelectCamera_SelectedIndexChanged(object sender, EventArgs e)
@@ -455,23 +384,6 @@ namespace VisionModel.UCControls
 
         }
 
-        private void btnTriggle_Click(object sender, EventArgs e)
-        {
-            if (btnTriggle.BackColor == Color.Lime)
-            {
-                MyCameraTriggerModel myCameraTrigger = VisionDetection.get_DrawRegionCameraTriggerModel(curStation);
-                myCameraTrigger = MyCameraTriggerModel.SoftTrigger;
-                btnTriggle.BackColor = Color.White;
-            }
-            else
-            {
-                btnTriggle.BackColor = Color.Lime;
-                MyCameraTriggerModel myCameraTrigger = VisionDetection.get_DrawRegionCameraTriggerModel(curStation);
-                myCameraTrigger = MyCameraTriggerModel.ContinueTrigger;
-            }
-
-
-        }
 
         private void btnSaveSysPara_Click(object sender, EventArgs e)
         {

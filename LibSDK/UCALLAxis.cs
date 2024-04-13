@@ -22,12 +22,12 @@ namespace LibSDK
             this.Dock = DockStyle.Fill;
             this.components = new System.ComponentModel.Container();
             MotionControl.UpDateAxis += UpDateAxis;
-            UpDateAxis();
             this.Load += UCALLAxis_Load;
         }
 
         private void UCALLAxis_Load(object sender, EventArgs e)
         {
+            UpDateAxis();
             timer1.Start();
             UpdataLanguage();
         }

@@ -10,8 +10,10 @@ using FeederSpliceVisionSys;
 using LibSDK;
 using LibSDK.IO;
 using LibSDK.Motion;
+using Mes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -64,14 +66,31 @@ namespace BorwinSplicMachine
         public BarCodeCheck CodeControl = new BarCodeCheck();
         public MainControl(Form1 MainForm)
         {
-           
+            this.MainForm = MainForm;
+        }
+
+
+
+        public void Init()
+        {
+            CommonAnalyse.Instance.Load();
+            BomManager.Instance.Init();
+            MesControl.Instance.Load();
+            DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
+            ParamManager.Instance.Load();
+            BartenderPrintModel.Instance.Load();
+            if (dataTable == null) { return; }
+            if (dataTable.Rows.Count > 0)
+            {
+                int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
+                LanguageManager.Instance.CurrenIndex = lang;
+            }
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
             UCBaseSet = new UCControls.UCBaseSet();
             UCLog = new UCLog();
-            UCVision =new UCVisor();
+            UCVision = new UCVisor();
             UCRichLog = new UCRichLog();
-            UCFlowControl = new UCFlowControl();
             UCLCRSearch = new UCLCRSearch();
             UCMes = new UCMes();
             UCAxis = new UCALLAxis();
@@ -79,15 +98,19 @@ namespace BorwinSplicMachine
             UCPrint = new UCPrint();
             UCLCR = new UCLCR();
             UCMain = new UCMain();
-            this.MainForm = MainForm;
+            IsInitFinish = true;
         }
 
-
+        public   bool IsInitFinish = false;
+        public bool IsStartFinish = false;
         public void Start()
         {
+            MotionControl.Init();
             motControl.Start();
             UCLCR.Start();
             BartenderPrintModel.Instance.Start();
+            VisionDetection.InitVisionDetection();
+            IsStartFinish = true;
         }
 
         public void Stop()
@@ -117,17 +140,12 @@ namespace BorwinSplicMachine
                 MainForm.UpdataLanguage();
                 UCLog.UpdataLanguage();
                 UCLCR.UpdateLanguage();
-                UCMes.UpdataLanguage(); 
+                UCMes.UpdataLanguage();
                 UCLCRSearch.UpdateLanguage();
                 UCAxis.UpdataLanguage();
                 UCPrint.UpdataLanguage();
 
             });
-        }
-
-        internal void Init()
-        {
-
         }
 
         public void CheckCode(string code)
@@ -136,7 +154,7 @@ namespace BorwinSplicMachine
             {
                 return;
             }
-            CodeControl.Log("原始条码"+code);
+            CodeControl.Log("原始条码" + code);
             CodeControl.CheckCode(ref code);
             if (!CodeControl.Code1.IsSuccess)
             {
