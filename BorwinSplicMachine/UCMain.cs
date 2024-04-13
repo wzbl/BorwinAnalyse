@@ -55,15 +55,27 @@ namespace BorwinSplicMachine
             bool[] connes = VisionDetection.GetCameraConnectionStatus;
             if (!connes[0])
             {
-                pL.BackColor = Color.Red;
+                panel1.BackColor = Color.Red;
+            }
+            else
+            {
+                panel1.BackColor = Color.Green;
             }
             if (!connes[1])
             {
-                pR.BackColor = Color.Red;
+                panel3.BackColor = Color.Red;
+            }
+            else
+            {
+                panel3.BackColor = Color.Green;
             }
             if (!connes[2])
             {
-                pM.BackColor = Color.Red;
+                panel2.BackColor = Color.Red;
+            }
+            else
+            {
+                panel2.BackColor = Color.Green;
             }
         }
         public void UpdataLanguage()

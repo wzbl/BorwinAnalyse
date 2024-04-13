@@ -42,7 +42,6 @@ namespace VisionModel.UCControls
                 {
                     comCameraNum.Items.Add(strings[i]);
                 }
-
             }
             catch (Exception)
             {
