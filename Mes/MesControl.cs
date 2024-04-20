@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using BorwinAnalyse.BaseClass;
+using BorwinAnalyse.DataBase.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -25,7 +29,9 @@ namespace Mes
             set => instance = value;
         }
 
-        //1.是否对接mes
+        /// <summary>
+        /// 1.是否对接mes
+        /// </summary>
         public bool IsOpenMes { get; set; }
         //2.mes类型（webAPI）
         public MesType MesType { get; set; }
@@ -85,6 +91,33 @@ namespace Mes
             return values;
         }
 
+        public void Log(string message)
+        {
+            LogManager.Instance.WriteLog(new LogModel(LogType.Mes日志, message));
+        }
+
+
+        public string UpData(InterType name, string url, string json)
+        {
+            string res = "";
+            Log(name.ToString().tr() + ":" + json);
+            switch (MesControl.Instance.MesType)
+            {
+                case MesType.WebApi:
+                    WebApiHelper webApiHelper = new WebApiHelper();
+                    res = webApiHelper.HttpPost(url, json);
+                    Log(res);
+                    break;
+                case MesType.Socket:
+                    MesClientSocket.ClientSendMsg(json);
+                    res = MesType.Socket.ToString();
+                    break;
+                case MesType.WebService:
+                    break;
+            }
+            return res;
+        }
+
     }
 
     /// <summary>
@@ -106,6 +139,15 @@ namespace Mes
         Xml
     }
 
+    public enum InterType
+    {
+        登录,
+        条码1检验,
+        条码2检验,
+        上传信息,
+        合盘
+    }
+
     public class MesIn
     {
         //上传
@@ -120,7 +162,7 @@ namespace Mes
     public class MesOut
     {
         //返回
-        public MesValue Success = new MesValue("成功", "");
+        public MesValue Result = new MesValue("结果", "");
         public MesValue ErrorMsg = new MesValue("失败信息", "");
         public MesValue ErrorCode = new MesValue("失败代码", "");
     }
@@ -203,9 +245,9 @@ namespace Mes
         public bool Enable;
     }
 
-
+    #region mes对接
     /// <summary>
-    /// mes对接
+    /// WebApi
     /// </summary>
     public class WebApiHelper
     {
@@ -239,9 +281,9 @@ namespace Mes
                     return reader.ReadToEnd();
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                return null;
+                return ex.Message;
             }
 
         }
@@ -309,4 +351,96 @@ namespace Mes
         }
 
     }
+
+    public class MesClientSocket
+    {
+        public MesClientSocket()
+        {
+
+        }
+
+        /// <summary>
+        /// 接收消息委托
+        /// </summary>
+        public static Action<string> OnReceive;
+        static Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+        /// <summary>
+        /// 连接服务端
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        public static void ConnectService(string ip, int port)
+        {
+            if (socket.Connected)
+            {
+                return;
+            }
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try
+            {
+                socket.Connect(ip, port);
+                MesControl.Instance.Log("Connect Success" + ":IP=" + ip + ",port=" + port);
+                //独立线程来接受来自服务端的数据
+                Thread receive = new Thread(ClientReceive);
+                receive.Start(socket);    
+            }
+            catch (Exception ex)
+            {
+                MesControl.Instance.Log("Connect Fail" + ex.Message + ":IP=" + ip + ",port=" + port);
+            }
+        }
+        /// <summary>
+        /// 断开连接
+        /// </summary>
+        public static void DisConnect()
+        {
+            socket.Close();
+        }
+
+        static void ClientReceive(object so)
+        {
+            Socket MesClientSocket = so as Socket;
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;  // 修改文字颜色为绿色
+                try
+                {
+                    byte[] buffer = new byte[1024];
+                    int len = MesClientSocket.Receive(buffer);
+                    if (len > 0)
+                    {
+                        string msg = Encoding.UTF8.GetString(buffer);
+                        OnReceive?.Invoke(msg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MesControl.Instance.Log("Exception:" + ex.Message);
+                    break;
+                }
+                Thread.Sleep(10);
+            }
+            MesClientSocket.Close();
+        }
+
+        public static void ClientSendMsg(string msg)
+        {
+            try
+            {
+                if (socket.Connected)
+                {
+                    socket.Send(Encoding.UTF8.GetBytes(msg));
+                }
+            }
+            catch (Exception ex)
+            {
+                MesControl.Instance.Log("Exception:"+ex.Message);
+            }
+        }
+
+        public static bool IsConnect { get { return socket.Connected; } }
+    }
+    #endregion
+
 }

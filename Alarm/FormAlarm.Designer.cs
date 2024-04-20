@@ -52,7 +52,7 @@
             this.panel1.Controls.Add(this.kryptonWrapLabel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(601, 66);
             this.panel1.TabIndex = 0;
@@ -75,8 +75,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(96)))), ((int)(((byte)(138)))));
-            this.panel2.Location = new System.Drawing.Point(0, 242);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Location = new System.Drawing.Point(0, 233);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(600, 8);
             this.panel2.TabIndex = 1;
@@ -84,8 +84,8 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(44, 70);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(44, 68);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(155, 166);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -142,12 +142,19 @@
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(472, 258);
-            this.BtnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnClose.Location = new System.Drawing.Point(404, 244);
+            this.BtnClose.Margin = new System.Windows.Forms.Padding(2);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(100, 47);
+            this.BtnClose.Size = new System.Drawing.Size(70, 65);
+            this.BtnClose.StateNormal.Back.Image = ((System.Drawing.Image)(resources.GetObject("BtnClose.StateNormal.Back.Image")));
+            this.BtnClose.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.BtnClose.StatePressed.Back.Image = ((System.Drawing.Image)(resources.GetObject("BtnClose.StatePressed.Back.Image")));
+            this.BtnClose.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.BtnClose.StateTracking.Back.Image = ((System.Drawing.Image)(resources.GetObject("BtnClose.StateTracking.Back.Image")));
+            this.BtnClose.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.BtnClose.TabIndex = 10;
-            this.BtnClose.Values.Text = "关闭";
+            this.BtnClose.Values.Text = "";
+            this.BtnClose.Visible = false;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // lbemp
@@ -176,22 +183,33 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(44, 258);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReset.Location = new System.Drawing.Point(269, 243);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(2);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(100, 47);
+            this.btnReset.Size = new System.Drawing.Size(65, 65);
+            this.btnReset.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnReset.StateCommon.Back.Image")));
+            this.btnReset.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnReset.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnReset.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnReset.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnReset.TabIndex = 15;
-            this.btnReset.Values.Text = "复位";
+            this.btnReset.Values.Text = "";
             this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // BtnOK
             // 
-            this.BtnOK.Location = new System.Drawing.Point(244, 258);
+            this.BtnOK.Location = new System.Drawing.Point(116, 244);
             this.BtnOK.Margin = new System.Windows.Forms.Padding(2);
             this.BtnOK.Name = "BtnOK";
-            this.BtnOK.Size = new System.Drawing.Size(100, 47);
+            this.BtnOK.Size = new System.Drawing.Size(83, 61);
+            this.BtnOK.StateNormal.Back.Image = ((System.Drawing.Image)(resources.GetObject("BtnOK.StateNormal.Back.Image")));
+            this.BtnOK.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.BtnOK.StatePressed.Back.Image = ((System.Drawing.Image)(resources.GetObject("BtnOK.StatePressed.Back.Image")));
+            this.BtnOK.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.BtnOK.StateTracking.Back.Image = ((System.Drawing.Image)(resources.GetObject("BtnOK.StateTracking.Back.Image")));
+            this.BtnOK.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.BtnOK.TabIndex = 22;
-            this.BtnOK.Values.Text = "人工OK";
+            this.BtnOK.Values.Text = "";
             this.BtnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // FormAlarm
@@ -214,10 +232,10 @@
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormAlarm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormAlarm";
+            this.Text = " ";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

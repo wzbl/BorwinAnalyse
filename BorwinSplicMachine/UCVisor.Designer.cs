@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
-            this.btnSetMaterialNumber = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnPositionOffset = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnCheckMaterial1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnDockPos1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnCutPos1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPage2 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnPositionOffset = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnDockPos1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnCheckMaterial1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnCutPos1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.chkSaveImg = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnCalculatePixel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -84,6 +83,7 @@
             this.kryptonWrapLabel25 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.txt孔边 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel26 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.btnSetMaterialNumber = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.btnMaterialDetectionRegion = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtArea = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -188,52 +188,6 @@
             this.kryptonNavigator1.TabIndex = 0;
             this.kryptonNavigator1.Text = "kryptonNavigator1";
             // 
-            // btnSetMaterialNumber
-            // 
-            this.btnSetMaterialNumber.Location = new System.Drawing.Point(166, 2);
-            this.btnSetMaterialNumber.Name = "btnSetMaterialNumber";
-            this.btnSetMaterialNumber.Size = new System.Drawing.Size(105, 25);
-            this.btnSetMaterialNumber.TabIndex = 14;
-            this.btnSetMaterialNumber.Values.Text = "设置物料号";
-            this.btnSetMaterialNumber.Click += new System.EventHandler(this.btnSetMaterialNumber_Click);
-            // 
-            // btnPositionOffset
-            // 
-            this.btnPositionOffset.Location = new System.Drawing.Point(274, 98);
-            this.btnPositionOffset.Name = "btnPositionOffset";
-            this.btnPositionOffset.Size = new System.Drawing.Size(123, 25);
-            this.btnPositionOffset.TabIndex = 12;
-            this.btnPositionOffset.Values.Text = "执行检测";
-            this.btnPositionOffset.Click += new System.EventHandler(this.btnPositionOffset_Click);
-            // 
-            // btnCheckMaterial1
-            // 
-            this.btnCheckMaterial1.Location = new System.Drawing.Point(275, 73);
-            this.btnCheckMaterial1.Name = "btnCheckMaterial1";
-            this.btnCheckMaterial1.Size = new System.Drawing.Size(123, 25);
-            this.btnCheckMaterial1.TabIndex = 4;
-            this.btnCheckMaterial1.Tag = "1#料带有无检测";
-            this.btnCheckMaterial1.Values.Text = "料带有无检测";
-            this.btnCheckMaterial1.Click += new System.EventHandler(this.btnCheckMaterial1_Click);
-            // 
-            // btnDockPos1
-            // 
-            this.btnDockPos1.Location = new System.Drawing.Point(275, 49);
-            this.btnDockPos1.Name = "btnDockPos1";
-            this.btnDockPos1.Size = new System.Drawing.Size(123, 25);
-            this.btnDockPos1.TabIndex = 3;
-            this.btnDockPos1.Values.Text = "裁切位置补偿";
-            this.btnDockPos1.Click += new System.EventHandler(this.btnDockPos1_Click);
-            // 
-            // btnCutPos1
-            // 
-            this.btnCutPos1.Location = new System.Drawing.Point(275, 24);
-            this.btnCutPos1.Name = "btnCutPos1";
-            this.btnCutPos1.Size = new System.Drawing.Size(123, 25);
-            this.btnCutPos1.TabIndex = 2;
-            this.btnCutPos1.Values.Text = "裁切位置检测";
-            this.btnCutPos1.Click += new System.EventHandler(this.btnCutPos1_Click);
-            // 
             // kryptonPage2
             // 
             this.kryptonPage2.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -242,7 +196,7 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(800, 435);
+            this.kryptonPage2.Size = new System.Drawing.Size(800, 436);
             this.kryptonPage2.Text = "产品参数设置";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "F0FDCA5DEC1B403FD2985BBA566DF3CC";
@@ -284,7 +238,7 @@
             // 
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.kryptonSplitContainer2.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighInternalProfile;
-            this.kryptonSplitContainer2.Size = new System.Drawing.Size(800, 435);
+            this.kryptonSplitContainer2.Size = new System.Drawing.Size(800, 436);
             this.kryptonSplitContainer2.SplitterDistance = 125;
             this.kryptonSplitContainer2.TabIndex = 0;
             // 
@@ -296,6 +250,43 @@
             this.kryptonButton1.TabIndex = 35;
             this.kryptonButton1.Values.Text = "写入";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
+            // btnPositionOffset
+            // 
+            this.btnPositionOffset.Location = new System.Drawing.Point(274, 98);
+            this.btnPositionOffset.Name = "btnPositionOffset";
+            this.btnPositionOffset.Size = new System.Drawing.Size(123, 25);
+            this.btnPositionOffset.TabIndex = 12;
+            this.btnPositionOffset.Values.Text = "执行检测";
+            this.btnPositionOffset.Click += new System.EventHandler(this.btnPositionOffset_Click);
+            // 
+            // btnDockPos1
+            // 
+            this.btnDockPos1.Location = new System.Drawing.Point(275, 49);
+            this.btnDockPos1.Name = "btnDockPos1";
+            this.btnDockPos1.Size = new System.Drawing.Size(123, 25);
+            this.btnDockPos1.TabIndex = 3;
+            this.btnDockPos1.Values.Text = "裁切位置补偿";
+            this.btnDockPos1.Click += new System.EventHandler(this.btnDockPos1_Click);
+            // 
+            // btnCheckMaterial1
+            // 
+            this.btnCheckMaterial1.Location = new System.Drawing.Point(275, 73);
+            this.btnCheckMaterial1.Name = "btnCheckMaterial1";
+            this.btnCheckMaterial1.Size = new System.Drawing.Size(123, 25);
+            this.btnCheckMaterial1.TabIndex = 4;
+            this.btnCheckMaterial1.Tag = "1#料带有无检测";
+            this.btnCheckMaterial1.Values.Text = "料带有无检测";
+            this.btnCheckMaterial1.Click += new System.EventHandler(this.btnCheckMaterial1_Click);
+            // 
+            // btnCutPos1
+            // 
+            this.btnCutPos1.Location = new System.Drawing.Point(275, 24);
+            this.btnCutPos1.Name = "btnCutPos1";
+            this.btnCutPos1.Size = new System.Drawing.Size(123, 25);
+            this.btnCutPos1.TabIndex = 2;
+            this.btnCutPos1.Values.Text = "裁切位置检测";
+            this.btnCutPos1.Click += new System.EventHandler(this.btnCutPos1_Click);
             // 
             // chkSaveImg
             // 
@@ -342,7 +333,7 @@
             // kryptonWrapLabel8
             // 
             this.kryptonWrapLabel8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel8.Location = new System.Drawing.Point(11, 37);
             this.kryptonWrapLabel8.Name = "kryptonWrapLabel8";
             this.kryptonWrapLabel8.Size = new System.Drawing.Size(59, 15);
@@ -368,7 +359,7 @@
             // kryptonWrapLabel7
             // 
             this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel7.Location = new System.Drawing.Point(11, 8);
             this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
             this.kryptonWrapLabel7.Size = new System.Drawing.Size(59, 15);
@@ -403,7 +394,7 @@
             // kryptonWrapLabel6
             // 
             this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel6.Location = new System.Drawing.Point(3, 96);
             this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
             this.kryptonWrapLabel6.Size = new System.Drawing.Size(72, 15);
@@ -438,7 +429,7 @@
             // kryptonWrapLabel5
             // 
             this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel5.Location = new System.Drawing.Point(22, 64);
             this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
             this.kryptonWrapLabel5.Size = new System.Drawing.Size(46, 15);
@@ -455,7 +446,7 @@
             // kryptonWrapLabel4
             // 
             this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel4.Location = new System.Drawing.Point(9, 34);
             this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
             this.kryptonWrapLabel4.Size = new System.Drawing.Size(59, 15);
@@ -495,7 +486,7 @@
             // kryptonWrapLabel3
             // 
             this.kryptonWrapLabel3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel3.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel3.Location = new System.Drawing.Point(193, 8);
             this.kryptonWrapLabel3.Name = "kryptonWrapLabel3";
             this.kryptonWrapLabel3.Size = new System.Drawing.Size(72, 15);
@@ -504,7 +495,7 @@
             // kryptonWrapLabel2
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel2.Location = new System.Drawing.Point(9, 9);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(59, 15);
@@ -522,7 +513,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 305);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 306);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // currentP
@@ -531,7 +522,7 @@
             this.currentP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.currentP.Location = new System.Drawing.Point(3, 3);
             this.currentP.Name = "currentP";
-            this.currentP.Size = new System.Drawing.Size(364, 299);
+            this.currentP.Size = new System.Drawing.Size(364, 300);
             this.currentP.TabIndex = 0;
             // 
             // kryptonNavigator2
@@ -543,7 +534,7 @@
             this.kryptonPage4,
             this.kryptonPage5});
             this.kryptonNavigator2.SelectedIndex = 0;
-            this.kryptonNavigator2.Size = new System.Drawing.Size(424, 299);
+            this.kryptonNavigator2.Size = new System.Drawing.Size(424, 300);
             this.kryptonNavigator2.TabIndex = 1;
             this.kryptonNavigator2.Text = "kryptonNavigator2";
             // 
@@ -566,7 +557,7 @@
             this.kryptonPage4.LastVisibleSet = true;
             this.kryptonPage4.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage4.Name = "kryptonPage4";
-            this.kryptonPage4.Size = new System.Drawing.Size(422, 272);
+            this.kryptonPage4.Size = new System.Drawing.Size(422, 274);
             this.kryptonPage4.Text = "通用参数";
             this.kryptonPage4.ToolTipTitle = "Page ToolTip";
             this.kryptonPage4.UniqueName = "7431C842BD8448A85FA7E59F7366F7F8";
@@ -604,7 +595,7 @@
             // kryptonWrapLabel31
             // 
             this.kryptonWrapLabel31.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel31.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel31.Location = new System.Drawing.Point(219, 59);
             this.kryptonWrapLabel31.Name = "kryptonWrapLabel31";
             this.kryptonWrapLabel31.Size = new System.Drawing.Size(85, 15);
@@ -620,7 +611,7 @@
             // kryptonWrapLabel32
             // 
             this.kryptonWrapLabel32.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel32.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel32.Location = new System.Drawing.Point(220, 35);
             this.kryptonWrapLabel32.Name = "kryptonWrapLabel32";
             this.kryptonWrapLabel32.Size = new System.Drawing.Size(85, 15);
@@ -636,7 +627,7 @@
             // kryptonWrapLabel33
             // 
             this.kryptonWrapLabel33.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel33.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel33.Location = new System.Drawing.Point(207, 10);
             this.kryptonWrapLabel33.Name = "kryptonWrapLabel33";
             this.kryptonWrapLabel33.Size = new System.Drawing.Size(98, 15);
@@ -652,7 +643,7 @@
             // kryptonWrapLabel28
             // 
             this.kryptonWrapLabel28.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel28.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel28.Location = new System.Drawing.Point(21, 58);
             this.kryptonWrapLabel28.Name = "kryptonWrapLabel28";
             this.kryptonWrapLabel28.Size = new System.Drawing.Size(85, 15);
@@ -668,7 +659,7 @@
             // kryptonWrapLabel29
             // 
             this.kryptonWrapLabel29.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel29.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel29.Location = new System.Drawing.Point(22, 33);
             this.kryptonWrapLabel29.Name = "kryptonWrapLabel29";
             this.kryptonWrapLabel29.Size = new System.Drawing.Size(85, 15);
@@ -684,7 +675,7 @@
             // kryptonWrapLabel30
             // 
             this.kryptonWrapLabel30.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel30.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel30.Location = new System.Drawing.Point(12, 8);
             this.kryptonWrapLabel30.Name = "kryptonWrapLabel30";
             this.kryptonWrapLabel30.Size = new System.Drawing.Size(98, 15);
@@ -717,7 +708,7 @@
             // kryptonWrapLabel27
             // 
             this.kryptonWrapLabel27.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel27.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel27.Location = new System.Drawing.Point(7, 66);
             this.kryptonWrapLabel27.Name = "kryptonWrapLabel27";
             this.kryptonWrapLabel27.Size = new System.Drawing.Size(59, 15);
@@ -733,7 +724,7 @@
             // kryptonWrapLabel25
             // 
             this.kryptonWrapLabel25.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel25.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel25.Location = new System.Drawing.Point(8, 37);
             this.kryptonWrapLabel25.Name = "kryptonWrapLabel25";
             this.kryptonWrapLabel25.Size = new System.Drawing.Size(46, 15);
@@ -749,11 +740,20 @@
             // kryptonWrapLabel26
             // 
             this.kryptonWrapLabel26.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel26.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel26.Location = new System.Drawing.Point(9, 8);
             this.kryptonWrapLabel26.Name = "kryptonWrapLabel26";
             this.kryptonWrapLabel26.Size = new System.Drawing.Size(33, 15);
             this.kryptonWrapLabel26.Text = "孔边";
+            // 
+            // btnSetMaterialNumber
+            // 
+            this.btnSetMaterialNumber.Location = new System.Drawing.Point(166, 2);
+            this.btnSetMaterialNumber.Name = "btnSetMaterialNumber";
+            this.btnSetMaterialNumber.Size = new System.Drawing.Size(105, 25);
+            this.btnSetMaterialNumber.TabIndex = 14;
+            this.btnSetMaterialNumber.Values.Text = "设置物料号";
+            this.btnSetMaterialNumber.Click += new System.EventHandler(this.btnSetMaterialNumber_Click);
             // 
             // kryptonGroupBox2
             // 
@@ -790,7 +790,7 @@
             // kryptonWrapLabel12
             // 
             this.kryptonWrapLabel12.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel12.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel12.Location = new System.Drawing.Point(7, 35);
             this.kryptonWrapLabel12.Name = "kryptonWrapLabel12";
             this.kryptonWrapLabel12.Size = new System.Drawing.Size(33, 15);
@@ -806,7 +806,7 @@
             // kryptonWrapLabel13
             // 
             this.kryptonWrapLabel13.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel13.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel13.Location = new System.Drawing.Point(7, 8);
             this.kryptonWrapLabel13.Name = "kryptonWrapLabel13";
             this.kryptonWrapLabel13.Size = new System.Drawing.Size(33, 15);
@@ -849,7 +849,7 @@
             // kryptonWrapLabel11
             // 
             this.kryptonWrapLabel11.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel11.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel11.Location = new System.Drawing.Point(4, 66);
             this.kryptonWrapLabel11.Name = "kryptonWrapLabel11";
             this.kryptonWrapLabel11.Size = new System.Drawing.Size(59, 15);
@@ -873,7 +873,7 @@
             // kryptonWrapLabel10
             // 
             this.kryptonWrapLabel10.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel10.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel10.Location = new System.Drawing.Point(4, 38);
             this.kryptonWrapLabel10.Name = "kryptonWrapLabel10";
             this.kryptonWrapLabel10.Size = new System.Drawing.Size(59, 15);
@@ -895,7 +895,7 @@
             // kryptonWrapLabel9
             // 
             this.kryptonWrapLabel9.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel9.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel9.Location = new System.Drawing.Point(4, 12);
             this.kryptonWrapLabel9.Name = "kryptonWrapLabel9";
             this.kryptonWrapLabel9.Size = new System.Drawing.Size(59, 15);
@@ -942,7 +942,7 @@
             this.kryptonPage5.LastVisibleSet = true;
             this.kryptonPage5.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage5.Name = "kryptonPage5";
-            this.kryptonPage5.Size = new System.Drawing.Size(422, 272);
+            this.kryptonPage5.Size = new System.Drawing.Size(422, 274);
             this.kryptonPage5.Text = "模板参数";
             this.kryptonPage5.ToolTipTitle = "Page ToolTip";
             this.kryptonPage5.UniqueName = "39755B465F2043955E8BAFD47590B051";
@@ -966,7 +966,7 @@
             // kryptonWrapLabel24
             // 
             this.kryptonWrapLabel24.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel24.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel24.Location = new System.Drawing.Point(167, 116);
             this.kryptonWrapLabel24.Name = "kryptonWrapLabel24";
             this.kryptonWrapLabel24.Size = new System.Drawing.Size(57, 15);
@@ -1086,7 +1086,7 @@
             // kryptonWrapLabel23
             // 
             this.kryptonWrapLabel23.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel23.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel23.Location = new System.Drawing.Point(18, 166);
             this.kryptonWrapLabel23.Name = "kryptonWrapLabel23";
             this.kryptonWrapLabel23.Size = new System.Drawing.Size(59, 15);
@@ -1106,7 +1106,7 @@
             // kryptonWrapLabel22
             // 
             this.kryptonWrapLabel22.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel22.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel22.Location = new System.Drawing.Point(18, 143);
             this.kryptonWrapLabel22.Name = "kryptonWrapLabel22";
             this.kryptonWrapLabel22.Size = new System.Drawing.Size(59, 15);
@@ -1123,7 +1123,7 @@
             // kryptonWrapLabel21
             // 
             this.kryptonWrapLabel21.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel21.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel21.Location = new System.Drawing.Point(20, 117);
             this.kryptonWrapLabel21.Name = "kryptonWrapLabel21";
             this.kryptonWrapLabel21.Size = new System.Drawing.Size(59, 15);
@@ -1140,7 +1140,7 @@
             // kryptonWrapLabel20
             // 
             this.kryptonWrapLabel20.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel20.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel20.Location = new System.Drawing.Point(166, 92);
             this.kryptonWrapLabel20.Name = "kryptonWrapLabel20";
             this.kryptonWrapLabel20.Size = new System.Drawing.Size(59, 15);
@@ -1157,7 +1157,7 @@
             // kryptonWrapLabel19
             // 
             this.kryptonWrapLabel19.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel19.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel19.Location = new System.Drawing.Point(20, 92);
             this.kryptonWrapLabel19.Name = "kryptonWrapLabel19";
             this.kryptonWrapLabel19.Size = new System.Drawing.Size(46, 15);
@@ -1174,7 +1174,7 @@
             // kryptonWrapLabel18
             // 
             this.kryptonWrapLabel18.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel18.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel18.Location = new System.Drawing.Point(166, 65);
             this.kryptonWrapLabel18.Name = "kryptonWrapLabel18";
             this.kryptonWrapLabel18.Size = new System.Drawing.Size(59, 15);
@@ -1191,7 +1191,7 @@
             // kryptonWrapLabel17
             // 
             this.kryptonWrapLabel17.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel17.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel17.Location = new System.Drawing.Point(19, 68);
             this.kryptonWrapLabel17.Name = "kryptonWrapLabel17";
             this.kryptonWrapLabel17.Size = new System.Drawing.Size(59, 15);
@@ -1208,7 +1208,7 @@
             // kryptonWrapLabel15
             // 
             this.kryptonWrapLabel15.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel15.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel15.Location = new System.Drawing.Point(166, 41);
             this.kryptonWrapLabel15.Name = "kryptonWrapLabel15";
             this.kryptonWrapLabel15.Size = new System.Drawing.Size(59, 15);
@@ -1225,7 +1225,7 @@
             // kryptonWrapLabel16
             // 
             this.kryptonWrapLabel16.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel16.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel16.Location = new System.Drawing.Point(19, 43);
             this.kryptonWrapLabel16.Name = "kryptonWrapLabel16";
             this.kryptonWrapLabel16.Size = new System.Drawing.Size(59, 15);
@@ -1246,7 +1246,7 @@
             // kryptonWrapLabel14
             // 
             this.kryptonWrapLabel14.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.kryptonWrapLabel14.ForeColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel14.Location = new System.Drawing.Point(18, 17);
             this.kryptonWrapLabel14.Name = "kryptonWrapLabel14";
             this.kryptonWrapLabel14.Size = new System.Drawing.Size(59, 15);

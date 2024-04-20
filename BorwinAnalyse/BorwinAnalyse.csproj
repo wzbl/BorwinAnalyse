@@ -164,6 +164,7 @@
     <Compile Include="BaseClass\LogManager.cs" />
     <Compile Include="BaseClass\NOPIHelper.cs" />
     <Compile Include="BaseClass\ParamManager.cs" />
+    <Compile Include="BaseClass\UserManager.cs" />
     <Compile Include="DataBase\Comm\SQLConnect.cs" />
     <Compile Include="DataBase\Comm\SqlLiteManager.cs" />
     <Compile Include="DataBase\Model\BaseModel.cs" />
@@ -213,12 +214,6 @@
     <Compile Include="UCControls\UCRichLog.Designer.cs">
       <DependentUpon>UCRichLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCControls\UCSearch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\UCSearch.Designer.cs">
-      <DependentUpon>UCSearch.cs</DependentUpon>
-    </Compile>
     <Compile Include="UCControls\UCSearchBom.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -259,9 +254,6 @@
     <EmbeddedResource Include="UCControls\UCRichLog.resx">
       <DependentUpon>UCRichLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\UCSearch.resx">
-      <DependentUpon>UCSearch.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCSearchBom.resx">
       <DependentUpon>UCSearchBom.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,15 +274,10 @@
     <None Include="Resources\icons8-暂停-80.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="BarTender">
-      <Guid>{D58562C1-E51B-11CF-8941-00A024A9083F}</Guid>
-      <VersionMajor>11</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <None Include="Resources\停止 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\运行.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,7 +17,6 @@ namespace LibSDK.Motion
         [Category("轴")]
         public static List<CAxisParm> AParms = new List<CAxisParm>();
 
-
         [Browsable(false)]
         private string MyAxisParmPath = @"Ini/AxisCfg.xml";
 

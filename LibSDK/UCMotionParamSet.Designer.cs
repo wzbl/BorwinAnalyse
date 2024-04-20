@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCMotionParamSet));
             this.PPTParam = new System.Windows.Forms.PropertyGrid();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.txtName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +57,17 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(648, 517);
             this.kryptonPanel1.TabIndex = 2;
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(562, 459);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(62, 58);
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Values.Text = "";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // txtName
             // 
             this.txtName.Dock = System.Windows.Forms.DockStyle.Top;
@@ -65,15 +77,6 @@
             this.txtName.Size = new System.Drawing.Size(648, 23);
             this.txtName.TabIndex = 0;
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(513, 464);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(111, 50);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Values.Text = "保存";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // UCMotionParamSet
             // 

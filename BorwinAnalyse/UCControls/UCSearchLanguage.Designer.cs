@@ -98,7 +98,7 @@
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(67, 39);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
@@ -119,8 +119,9 @@
             this.btnSearch.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnSearch.OverrideFocus.Back.Color2 = System.Drawing.Color.Lime;
             this.btnSearch.Size = new System.Drawing.Size(86, 86);
+            this.btnSearch.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.StateCommon.Back.Image")));
+            this.btnSearch.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSearch.TabIndex = 5;
-            this.btnSearch.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Values.Image")));
             this.btnSearch.Values.Text = "";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -130,8 +131,9 @@
             this.btnUpdate.Location = new System.Drawing.Point(1043, 0);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(86, 86);
+            this.btnUpdate.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.StateCommon.Back.Image")));
+            this.btnUpdate.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Values.Image")));
             this.btnUpdate.Values.Text = "";
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
@@ -141,8 +143,9 @@
             this.btnDelete.Location = new System.Drawing.Point(1129, 0);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(86, 86);
+            this.btnDelete.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.StateCommon.Back.Image")));
+            this.btnDelete.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnDelete.TabIndex = 2;
-            this.btnDelete.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Values.Image")));
             this.btnDelete.Values.Text = "";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -152,8 +155,9 @@
             this.btnImPort.Location = new System.Drawing.Point(1215, 0);
             this.btnImPort.Name = "btnImPort";
             this.btnImPort.Size = new System.Drawing.Size(86, 86);
+            this.btnImPort.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnImPort.StateCommon.Back.Image")));
+            this.btnImPort.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnImPort.TabIndex = 1;
-            this.btnImPort.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnImPort.Values.Image")));
             this.btnImPort.Values.Text = "";
             this.btnImPort.Click += new System.EventHandler(this.btnImPort_Click);
             // 
@@ -163,8 +167,9 @@
             this.btnExport.Location = new System.Drawing.Point(1301, 0);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(86, 86);
+            this.btnExport.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.StateCommon.Back.Image")));
+            this.btnExport.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnExport.TabIndex = 0;
-            this.btnExport.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Values.Image")));
             this.btnExport.Values.Text = "";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 

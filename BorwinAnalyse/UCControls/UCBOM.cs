@@ -216,14 +216,18 @@ namespace BorwinAnalyse.UCControls
         {
             if (isStart)
             {
-                btnStart.Values.Image = Properties.Resources.icons8_开始_80;
+                btnStart.Values.Image = Properties.Resources.运行;
                 StopAnalyse();
             }
             else
             {
+                if (AnalyseDt==null)
+                {
+                    return;
+                }
                 tokenSource = new CancellationTokenSource();
                 kryptonDockableNavigator1.SelectedIndex = 1;
-                btnStart.Values.Image = Properties.Resources.icons8_暂停_80;
+                btnStart.Values.Image = Properties.Resources.停止;
                 StartAnalyse();
             }
         }

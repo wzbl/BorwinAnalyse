@@ -32,7 +32,7 @@ namespace Alarm
             if (type == 1 )
             {
                 BtnOK.Visible = true;
-                BtnClose.Visible = false;
+                BtnClose.Visible = true;
             }
         }
 

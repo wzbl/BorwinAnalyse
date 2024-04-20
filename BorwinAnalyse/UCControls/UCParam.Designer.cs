@@ -31,15 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCParam));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnSearch = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtDescription = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWrapLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.lbDescription = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.paramName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paramValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paramDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paramLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -81,7 +81,7 @@
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnSave);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.btnSearch);
             this.kryptonSplitContainer2.Panel1.Controls.Add(this.txtDescription);
-            this.kryptonSplitContainer2.Panel1.Controls.Add(this.kryptonWrapLabel4);
+            this.kryptonSplitContainer2.Panel1.Controls.Add(this.lbDescription);
             // 
             // kryptonSplitContainer2.Panel2
             // 
@@ -89,6 +89,44 @@
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(854, 641);
             this.kryptonSplitContainer2.SplitterDistance = 88;
             this.kryptonSplitContainer2.TabIndex = 0;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(676, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(92, 88);
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSave.TabIndex = 12;
+            this.btnSave.Values.Text = "";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(768, 0);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(86, 88);
+            this.btnSearch.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.StateCommon.Back.Image")));
+            this.btnSearch.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSearch.TabIndex = 10;
+            this.btnSearch.Values.Text = "";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(380, 27);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(226, 23);
+            this.txtDescription.TabIndex = 9;
+            // 
+            // lbDescription
+            // 
+            this.lbDescription.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lbDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbDescription.Location = new System.Drawing.Point(310, 33);
+            this.lbDescription.Name = "lbDescription";
+            this.lbDescription.Size = new System.Drawing.Size(59, 15);
+            this.lbDescription.Text = "物料描述";
             // 
             // kryptonDataGridView1
             // 
@@ -104,33 +142,6 @@
             this.kryptonDataGridView1.RowTemplate.Height = 23;
             this.kryptonDataGridView1.Size = new System.Drawing.Size(854, 548);
             this.kryptonDataGridView1.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSearch.Location = new System.Drawing.Point(768, 0);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(86, 88);
-            this.btnSearch.TabIndex = 10;
-            this.btnSearch.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchBom.Values.Image")));
-            this.btnSearch.Values.Text = "";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(380, 27);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(226, 23);
-            this.txtDescription.TabIndex = 9;
-            // 
-            // kryptonWrapLabel4
-            // 
-            this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel4.Location = new System.Drawing.Point(310, 33);
-            this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
-            this.kryptonWrapLabel4.Size = new System.Drawing.Size(59, 15);
-            this.kryptonWrapLabel4.Text = "物料描述";
             // 
             // paramName
             // 
@@ -155,17 +166,6 @@
             this.paramLevel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.paramLevel.HeaderText = "Level";
             this.paramLevel.Name = "paramLevel";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(676, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(92, 88);
-            this.btnSave.TabIndex = 12;
-            this.btnSave.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Values.Image")));
-            this.btnSave.Values.Text = "";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // UCParam
             // 
@@ -198,7 +198,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridView1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSearch;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtDescription;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn paramName;
         private System.Windows.Forms.DataGridViewTextBoxColumn paramValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn paramDescription;

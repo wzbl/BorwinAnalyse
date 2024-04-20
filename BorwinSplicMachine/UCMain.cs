@@ -5,6 +5,7 @@ using BorwinAnalyse.UCControls;
 using BorwinSplicMachine.BarCode;
 using BorwinSplicMachine.FlowModel;
 using BorwinSplicMachine.LCR;
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using FeederSpliceVisionSys;
 using LibSDK;
@@ -39,15 +40,32 @@ namespace BorwinSplicMachine
             VisionDetection.set_ImageShowUIPanel(Station.LiftStation, pL);
             VisionDetection.set_ImageShowUIPanel(Station.RightStation, pR);
             VisionDetection.set_ImageShowUIPanel(Station.MeasureStation, pM);
-   
+
+            if (!ParamManager.Instance.System_找空料.B && !ParamManager.Instance.System_丝印.B)
+            {
+                btnVision.StateCommon.Back.Image = Properties.Resources.icons8_禁止照相_80;
+            }
+            else
+            {
+                btnVision.StateCommon.Back.Image = Properties.Resources.icons8_相机_80;
+            }
+
+            if (ParamManager.Instance.System_条码.B)
+            {
+                btnScann.StateCommon.Back.Image = Properties.Resources.icons8_条形码扫描_100;
+            }
+            else
+            {
+                btnScann.StateCommon.Back.Image = Properties.Resources.icons8_屏蔽扫码_96;
+            }
         }
 
         private void UCMain_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
             timer1.Start();
-            kryptonSplitContainer3.Panel1.Controls.Add(Form1.MainControl.UCLCR);
-            kryptonSplitContainer3.Panel2.Controls.Add(Form1.MainControl.UCRichLog);
+            tableLayoutPanel4.Controls.Add(Form1.MainControl.UCLCR);
+            tableLayoutPanel4.Controls.Add(Form1.MainControl.UCRichLog);
             pL.ContextMenuStrip = MenuLeft;
             pR.ContextMenuStrip = MenuRight;
             pM.ContextMenuStrip = MenuMid;
@@ -78,11 +96,13 @@ namespace BorwinSplicMachine
                 panel2.BackColor = Color.Green;
             }
         }
+
         public void UpdataLanguage()
         {
-            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            lbCode1.Text = lbCode1.Text.tr();
+            lbCode2.Text = lbCode2.Text.tr();
+            //LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
-     
 
         protected override CreateParams CreateParams
         {
@@ -94,18 +114,7 @@ namespace BorwinSplicMachine
             }
         }
 
-
         BarCodeCheck barCode = new BarCodeCheck();
-
-        /// <summary>
-        /// 测试检验条码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCheck_Click(object sender, EventArgs e)
-        {
-            Form1.MainControl.CheckCode(txtBarcode1.Text);
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -142,7 +151,6 @@ namespace BorwinSplicMachine
                     txtBarcode1.Focus();
                 }
             }
-      
 
             if (rad8mm.Checked)
             {
@@ -164,7 +172,7 @@ namespace BorwinSplicMachine
             {
                 MotControl.runnersWidth = RunnersWidth._8mm;
             }
-            if (Form1.MainControl.motControl.resetFlow==ResetFlow.None&& Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None)
+            if (Form1.MainControl.motControl.resetFlow == ResetFlow.None && Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None)
                 Form1.MainControl.motControl.SetRunnersWidth();
             if (Alarm.AlarmControl.Alarm != Alarm.AlarmList.None)
             {
@@ -177,7 +185,7 @@ namespace BorwinSplicMachine
                 {
                     //if (MotionControl.CardAPI.IsInitCardOK)
                     //    MotControl.蜂鸣器.Off();
-                 
+
                 }
                 timer1.Start();
             }
@@ -210,8 +218,6 @@ namespace BorwinSplicMachine
             txtbarCode2.Text = "";
         }
 
-        
-
         private void 拍照ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string tag = (sender as ToolStripMenuItem).Tag.ToString();
@@ -241,7 +247,7 @@ namespace BorwinSplicMachine
             switch (tag)
             {
                 case "L":
-                    MyCameraTriggerModel L = VisionDetection.get_CameraTriggerModel(Station.LiftStation); 
+                    MyCameraTriggerModel L = VisionDetection.get_CameraTriggerModel(Station.LiftStation);
                     L = MyCameraTriggerModel.ContinueTrigger;
                     break;
                 case "R":
@@ -249,7 +255,7 @@ namespace BorwinSplicMachine
                     R = MyCameraTriggerModel.ContinueTrigger;
                     break;
                 case "M":
-                    MyCameraTriggerModel M = VisionDetection.get_CameraTriggerModel(Station.LiftStation); 
+                    MyCameraTriggerModel M = VisionDetection.get_CameraTriggerModel(Station.LiftStation);
                     M = MyCameraTriggerModel.ContinueTrigger;
                     break;
             }
@@ -270,7 +276,37 @@ namespace BorwinSplicMachine
                     VisionDetection.Detection_CutPos(Station.MeasureStation);
                     break;
             }
-            
+
+        }
+
+        private void btnVision_Click(object sender, EventArgs e)
+        {
+            if (!ParamManager.Instance.System_找空料.B && !ParamManager.Instance.System_丝印.B)
+            {
+                ParamManager.Instance.System_找空料.paramValue = "1";
+                ParamManager.Instance.System_丝印.paramValue = "1";
+                btnVision.StateCommon.Back.Image = Properties.Resources.icons8_相机_80;
+            }
+            else
+            {
+                ParamManager.Instance.System_找空料.paramValue = "0";
+                ParamManager.Instance.System_丝印.paramValue = "0";
+                btnVision.StateCommon.Back.Image = Properties.Resources.icons8_禁止照相_80;
+            }
+        }
+
+        private void btnScann_Click(object sender, EventArgs e)
+        {
+            if (ParamManager.Instance.System_条码.B)
+            {
+                ParamManager.Instance.System_条码.paramValue = "0";
+                btnScann.StateCommon.Back.Image = Properties.Resources.icons8_屏蔽扫码_96;
+            }
+            else
+            {
+                ParamManager.Instance.System_条码.paramValue = "1";
+                btnScann.StateCommon.Back.Image = Properties.Resources.icons8_条形码扫描_100;
+            }
         }
     }
 }

@@ -41,6 +41,17 @@ namespace LibSDK.Motion
             }
         }
 
+
+        public void MovePosByName(string name, int mode,double vel,double acc)
+        {
+            List<PosParam> ps = posParams.Where(x => x.Name == name).ToList();
+            if (ps.Count > 0)
+            {
+                double pos = ps[0].Pos;
+                PMove(pos, mode,vel,acc);
+            }
+        }
+
         /// <summary>
         /// 获取位置
         /// </summary>

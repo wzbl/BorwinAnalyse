@@ -32,19 +32,37 @@ namespace BorwinSplicMachine
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SqlLiteManager.Instance.Init();
-            //http();
-            MainControl.Log("打开程序");
-            Form1 form1 = new Form1();  
+            if (IsExistProcess())
+            {
+                MessageBox.Show("程序正在运行".tr());
+                return;
+            }
+            Form1 form1 = new Form1();
             FormLogin formLogin = new FormLogin();
-            formLogin.ShowDialog();
-            //Application.Run(new MotionConfig());
-            Application.Run(form1);
-            //Application.Run(new AnalyseMainForm());
+            if (formLogin.ShowDialog() == DialogResult.OK)
+            {
+                MainControl.Log("打开程序");
+                Application.Run(form1);
+            }
+            else
+            {
+                System.Environment.Exit(System.Environment.ExitCode);
+            }
 
-            //强制关闭进程    
-            //string exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-            //string[] exeArray = exeName.Split('\\');
-            //RunCmd("taskkill /im " + exeArray[exeArray.Length - 1] + " /f ");
+
+            //Application.Run(new AnalyseMainForm());
+            //Application.Run(new MotionConfig());
+
+        }
+
+        static bool IsExistProcess()
+        {
+            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName("BorwinSplicMachine");
+            if (processes.Count() > 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

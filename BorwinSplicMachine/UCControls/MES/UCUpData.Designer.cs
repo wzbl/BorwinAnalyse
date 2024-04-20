@@ -28,22 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCUpData));
             this.SuspendLayout();
-            // 
-            // btnRun
-            // 
-            this.btnRun.Values.Text = "上传";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Values.Text = "保存";
+         
             // 
             // UCUpData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UCUpData";
-            this.Size = new System.Drawing.Size(1495, 687);
+            this.Size = new System.Drawing.Size(1541, 636);
             this.ResumeLayout(false);
 
         }

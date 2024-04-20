@@ -29,7 +29,8 @@ namespace BorwinAnalyse.UCControls
         }
         public void UpdataLanguage()
         {
-            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            lbDescription.Text = lbDescription.Text.tr();
+            //LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
         }
         /// <summary>
         /// 初始化类别
@@ -79,12 +80,10 @@ namespace BorwinAnalyse.UCControls
                 {
                     string paramName = kryptonDataGridView1.Rows[i].Cells[0].FormattedValue.ToString();
                     string paramValue = kryptonDataGridView1.Rows[i].Cells[1].FormattedValue.ToString();
-                    ParamManager.Instance.UpData(paramName, paramValue);
+                    string level = kryptonDataGridView1.Rows[i].Cells[3].FormattedValue.ToString();
+                    ParamManager.Instance.UpData(paramName, paramValue, level);
                 }
-               
             }
-            //string v = kryptonDataGridView1.SelectedCells[0].Value.ToString();
-
             ParamManager.Instance.Save();
         }
         private void btnSearch_Click(object sender, EventArgs e)

@@ -76,13 +76,12 @@
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonDataGridView1);
             this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1149, 596);
-            this.kryptonSplitContainer1.SplitterDistance = 98;
+            this.kryptonSplitContainer1.SplitterDistance = 74;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
             // btnSearch
             // 
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSearch.Location = new System.Drawing.Point(977, 0);
+            this.btnSearch.Location = new System.Drawing.Point(437, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnSearch.OverrideDefault.Back.Color2 = System.Drawing.Color.Cyan;
@@ -93,21 +92,30 @@
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnSearch.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnSearch.OverrideFocus.Back.Color2 = System.Drawing.Color.Lime;
-            this.btnSearch.Size = new System.Drawing.Size(86, 98);
+            this.btnSearch.Size = new System.Drawing.Size(72, 67);
+            this.btnSearch.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.StateCommon.Back.Image")));
+            this.btnSearch.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSearch.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSearch.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSearch.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSearch.TabIndex = 7;
-            this.btnSearch.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Values.Image")));
             this.btnSearch.Values.Text = "";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDelete.Location = new System.Drawing.Point(1063, 0);
+            this.btnDelete.Location = new System.Drawing.Point(786, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(86, 98);
+            this.btnDelete.Size = new System.Drawing.Size(70, 68);
+            this.btnDelete.StateNormal.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.StateNormal.Back.Image")));
+            this.btnDelete.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnDelete.StatePressed.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.StatePressed.Back.Image")));
+            this.btnDelete.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnDelete.StateTracking.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.StateTracking.Back.Image")));
+            this.btnDelete.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnDelete.TabIndex = 6;
-            this.btnDelete.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Values.Image")));
             this.btnDelete.Values.Text = "";
+            this.btnDelete.Visible = false;
             // 
             // comType
             // 
@@ -119,8 +127,9 @@
             "扫码日志",
             "测值日志",
             "相机日志",
-            "运动控制日志"});
-            this.comType.Location = new System.Drawing.Point(114, 50);
+            "运动控制日志",
+            "Mes日志"});
+            this.comType.Location = new System.Drawing.Point(71, 35);
             this.comType.Name = "comType";
             this.comType.Size = new System.Drawing.Size(164, 21);
             this.comType.TabIndex = 4;
@@ -129,7 +138,7 @@
             // 
             this.endTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.endTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endTime.Location = new System.Drawing.Point(300, 18);
+            this.endTime.Location = new System.Drawing.Point(241, 8);
             this.endTime.MaxDate = new System.DateTime(2070, 12, 31, 0, 0, 0, 0);
             this.endTime.MinDate = new System.DateTime(2023, 12, 20, 0, 0, 0, 0);
             this.endTime.Name = "endTime";
@@ -140,7 +149,7 @@
             // 
             this.startTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.startTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startTime.Location = new System.Drawing.Point(114, 18);
+            this.startTime.Location = new System.Drawing.Point(71, 8);
             this.startTime.MaxDate = new System.DateTime(2070, 12, 31, 0, 0, 0, 0);
             this.startTime.MinDate = new System.DateTime(2023, 12, 20, 0, 0, 0, 0);
             this.startTime.Name = "startTime";
@@ -151,8 +160,8 @@
             // kryptonWrapLabel2
             // 
             this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(65, 56);
+            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel2.Location = new System.Drawing.Point(17, 41);
             this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
             this.kryptonWrapLabel2.Size = new System.Drawing.Size(33, 15);
             this.kryptonWrapLabel2.Text = "类型";
@@ -160,8 +169,8 @@
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(65, 24);
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.Location = new System.Drawing.Point(15, 14);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(33, 15);
             this.kryptonWrapLabel1.Text = "时间";
@@ -179,7 +188,7 @@
             this.kryptonDataGridView1.Location = new System.Drawing.Point(0, 0);
             this.kryptonDataGridView1.Name = "kryptonDataGridView1";
             this.kryptonDataGridView1.RowTemplate.Height = 23;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(1149, 493);
+            this.kryptonDataGridView1.Size = new System.Drawing.Size(1149, 517);
             this.kryptonDataGridView1.TabIndex = 0;
             // 
             // 序号

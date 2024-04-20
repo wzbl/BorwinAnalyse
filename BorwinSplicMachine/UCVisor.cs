@@ -197,23 +197,16 @@ namespace VisionModel.UCControls
             }
         }
 
-
         private void UCVisor_Load(object sender, EventArgs e)
         {
             Init();
         }
-
-     
 
         private void btnCutPos1_Click(object sender, EventArgs e)
         {
             VisionDetection.Detection_CutPos(curStation);
         }
 
-        private void btnCutPos2_Click(object sender, EventArgs e)
-        {
-            VisionDetection.Detection_CutPos(Station.RightStation);
-        }
 
         private void btnPositionOffset_Click(object sender, EventArgs e)
         {
@@ -223,11 +216,6 @@ namespace VisionModel.UCControls
         private void btnDockPos1_Click(object sender, EventArgs e)
         {
             VisionDetection.Detection_DockPos(curStation);
-        }
-
-        private void btnDockPos2_Click(object sender, EventArgs e)
-        {
-            VisionDetection.Detection_DockPos(Station.RightStation);
         }
 
         private void btnCheckMaterial1_Click(object sender, EventArgs e)
@@ -244,7 +232,6 @@ namespace VisionModel.UCControls
             }
 
         }
-
 
         private void btnSetMaterialNumber_Click(object sender, EventArgs e)
         {
@@ -280,8 +267,14 @@ namespace VisionModel.UCControls
                     curStation = Station.None;
                     break;
             }
-
-            SetStationData();
+            try
+            {
+                SetStationData();
+            }
+            catch (Exception)
+            {
+            }
+           
         }
         /// <summary>
         /// 切换相机，获取值
@@ -329,7 +322,6 @@ namespace VisionModel.UCControls
             txt黑Low.Text = myGray.BlackTapeGrayMin.ToString();
             txt黑High.Text = myGray.BlackTapeGrayMax.ToString();
         }
-
 
         private void btnSetCurrentCameraNum_Click(object sender, EventArgs e)
         {
@@ -382,7 +374,6 @@ namespace VisionModel.UCControls
             }
 
         }
-
 
         private void btnSaveSysPara_Click(object sender, EventArgs e)
         {
@@ -536,8 +527,6 @@ namespace VisionModel.UCControls
             GetModelData();
             VisionDetection.RunTest(curStation, mCurModel);
         }
-
-
 
         public void GetModelData()
         {

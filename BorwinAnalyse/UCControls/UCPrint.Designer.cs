@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCPrint));
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Column1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.txtPath = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.kryptonWrapLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.kryptonWrapLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.lbPath = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
+            this.lbPrintName = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnPrint = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnDelete = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnSave = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -70,7 +71,7 @@
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "系统字段";
+            this.Column1.HeaderText = "System Fields";
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.Width = 213;
@@ -78,7 +79,7 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "模板字段";
+            this.Column2.HeaderText = "Template Fields";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.Width = 212;
@@ -86,7 +87,7 @@
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "值";
+            this.Column3.HeaderText = "Value";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.Width = 213;
@@ -94,7 +95,7 @@
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.HeaderText = "启用";
+            this.Column4.HeaderText = "Enable";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
             // 
@@ -103,57 +104,63 @@
             this.txtPath.Location = new System.Drawing.Point(124, 21);
             this.txtPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(367, 23);
+            this.txtPath.Size = new System.Drawing.Size(294, 23);
             this.txtPath.TabIndex = 1;
             // 
-            // kryptonWrapLabel1
+            // lbPath
             // 
-            this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel1.Location = new System.Drawing.Point(65, 27);
-            this.kryptonWrapLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
-            this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
-            this.kryptonWrapLabel1.Text = "模板路径";
+            this.lbPath.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lbPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbPath.Location = new System.Drawing.Point(50, 27);
+            this.lbPath.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPath.Name = "lbPath";
+            this.lbPath.Size = new System.Drawing.Size(59, 15);
+            this.lbPath.Text = "模板路径";
             // 
-            // kryptonWrapLabel2
+            // lbPrintName
             // 
-            this.kryptonWrapLabel2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
-            this.kryptonWrapLabel2.Location = new System.Drawing.Point(498, 23);
-            this.kryptonWrapLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.kryptonWrapLabel2.Name = "kryptonWrapLabel2";
-            this.kryptonWrapLabel2.Size = new System.Drawing.Size(72, 15);
-            this.kryptonWrapLabel2.Text = "打印机名称";
+            this.lbPrintName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lbPrintName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
+            this.lbPrintName.Location = new System.Drawing.Point(47, 69);
+            this.lbPrintName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbPrintName.Name = "lbPrintName";
+            this.lbPrintName.Size = new System.Drawing.Size(72, 15);
+            this.lbPrintName.Text = "打印机名称";
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(391, 51);
+            this.btnPrint.Location = new System.Drawing.Point(648, 5);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(100, 42);
+            this.btnPrint.Size = new System.Drawing.Size(81, 81);
+            this.btnPrint.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.StateCommon.Back.Image")));
+            this.btnPrint.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnPrint.TabIndex = 6;
-            this.btnPrint.Values.Text = "打印";
+            this.btnPrint.Values.Text = "";
             this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(65, 53);
+            this.btnDelete.Location = new System.Drawing.Point(770, 3);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 42);
+            this.btnDelete.Size = new System.Drawing.Size(77, 82);
+            this.btnDelete.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.StateCommon.Back.Image")));
+            this.btnDelete.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnDelete.TabIndex = 8;
-            this.btnDelete.Values.Text = "删除";
+            this.btnDelete.Values.Text = "";
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(679, 51);
+            this.btnSave.Location = new System.Drawing.Point(532, 5);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 42);
+            this.btnSave.Size = new System.Drawing.Size(79, 81);
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSave.TabIndex = 9;
-            this.btnSave.Values.Text = "保存";
+            this.btnSave.Values.Text = "";
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // kryptonSplitContainer1
@@ -170,9 +177,9 @@
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnSave);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.txtPath);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnDelete);
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel1);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.lbPath);
             this.kryptonSplitContainer1.Panel1.Controls.Add(this.btnPrint);
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonWrapLabel2);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.lbPrintName);
             // 
             // kryptonSplitContainer1.Panel2
             // 
@@ -185,7 +192,7 @@
             // comPrintName
             // 
             this.comPrintName.FormattingEnabled = true;
-            this.comPrintName.Location = new System.Drawing.Point(575, 19);
+            this.comPrintName.Location = new System.Drawing.Point(124, 65);
             this.comPrintName.Name = "comPrintName";
             this.comPrintName.Size = new System.Drawing.Size(204, 20);
             this.comPrintName.TabIndex = 12;
@@ -214,16 +221,16 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView kryptonDataGridView1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtPath;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column2;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbPath;
+        private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel lbPrintName;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnPrint;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDelete;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSave;
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
         private System.Windows.Forms.ComboBox comPrintName;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column2;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
     }
 }

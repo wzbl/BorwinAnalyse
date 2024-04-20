@@ -61,7 +61,7 @@ namespace LibSDK
                 kryptonTrackBar2.Value = (int)CAxisParm.AxisMotionPara.MotionAcc;
                 txtAcc.Text = kryptonTrackBar2.Value.ToString();
             }
-            comMotionType.SelectedIndex = 1;
+            comMotionType.SelectedIndex = 2;
             txtPos.Text = "10";
 
             if (MotAPI.Name == "卷料")
@@ -73,7 +73,7 @@ namespace LibSDK
                 kryptonButton.Dock = DockStyle.Fill;
                 kryptonSplitContainer1.Panel2.Controls.Add(kryptonButton);
                 胶膜1到位 = MotionControl.GetInPutIO("胶膜1到位");
-                btnStartGoHome.Visible = false;
+                dSignalLamp1.Visible = false;
                 dSignalLamp1.Visible = false;
             }
             else
@@ -210,7 +210,7 @@ namespace LibSDK
         private void btnStop_Click(object sender, EventArgs e)
         {
             MotAPI.AxisStop();
-            btnStartGoHome.Enabled = true;
+            dSignalLamp1.Enabled = true;
         }
 
 
@@ -218,7 +218,7 @@ namespace LibSDK
         private void btnStartGoHome_Click(object sender, EventArgs e)
         {
             MotAPI.Home(1000);
-            btnStartGoHome.Enabled = false;
+            dSignalLamp1.Enabled = false;
         }
 
         private void btnNagetive_Click(object sender, EventArgs e)
@@ -250,18 +250,18 @@ namespace LibSDK
             if (MotionControl.IsAuto)
             {
                 btnNagetive.Enabled = false;
-                btnStartGoHome.Enabled = false;
+                dSignalLamp1.Enabled = false;
                 btnPositive.Enabled = false;
-                btnStartGoHome.Enabled = false;
+                dSignalLamp1.Enabled = false;
                 btnStop.Enabled = false;
                 c.Enabled = false;
             }
             else
             {
                 btnNagetive.Enabled = true;
-                btnStartGoHome.Enabled = true;
+                dSignalLamp1.Enabled = true;
                 btnPositive.Enabled = true;
-                btnStartGoHome.Enabled = true;
+                dSignalLamp1.Enabled = true;
                 btnStop.Enabled = true;
                 c.Enabled = true;
             }
@@ -296,7 +296,7 @@ namespace LibSDK
 
             if (!MotionControl.IsAuto&&MotAPI.HomeState)
             {
-                btnStartGoHome.Enabled = true;
+                dSignalLamp1.Enabled = true;
             }
 
         }

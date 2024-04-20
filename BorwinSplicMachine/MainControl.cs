@@ -69,8 +69,6 @@ namespace BorwinSplicMachine
             this.MainForm = MainForm;
         }
 
-
-
         public void Init()
         {
             CommonAnalyse.Instance.Load();
@@ -79,12 +77,22 @@ namespace BorwinSplicMachine
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             ParamManager.Instance.Load();
             BartenderPrintModel.Instance.Load();
-            if (dataTable == null) { return; }
-            if (dataTable.Rows.Count > 0)
+            if (dataTable != null) 
             {
-                int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
-                LanguageManager.Instance.CurrenIndex = lang;
+                if (dataTable.Rows.Count > 0)
+                {
+                    int lang = int.Parse(dataTable.Rows[0].ItemArray[1].ToString());
+                    LanguageManager.Instance.CurrenIndex = lang;
+                }
             }
+            MotionControl.Init();
+            IsInitFinish = true;
+        }
+
+        public bool IsInitFinish = false;
+        public bool IsStartFinish = false;
+        public void Start()
+        {
             UCParam = new UCParam();
             UCSearchLanguage = new UCSearchLanguage();
             UCBaseSet = new UCControls.UCBaseSet();
@@ -98,19 +106,12 @@ namespace BorwinSplicMachine
             UCPrint = new UCPrint();
             UCLCR = new UCLCR();
             UCMain = new UCMain();
-            IsInitFinish = true;
-        }
-
-        public   bool IsInitFinish = false;
-        public bool IsStartFinish = false;
-        public void Start()
-        {
-            MotionControl.Init();
             motControl.Start();
             UCLCR.Start();
             BartenderPrintModel.Instance.Start();
             VisionDetection.InitVisionDetection();
             IsStartFinish = true;
+            motControl.Run();
         }
 
         public void Stop()
@@ -191,21 +192,33 @@ namespace BorwinSplicMachine
 
             if (!CodeControl.Code1.IsSuccess)
             {
-                BomDataModel bomData = BomManager.Instance.SearchByBarCode(code);
-                if (bomData != null)
+                if (MesControl.Instance.IsOpenMes)
                 {
-                    if (bomData.result == "True")
+                    MesControl.Instance.checkInCode1.Code.Value = code;
+                    UCMes.ucCode1Check1.Updata(InterType.条码1检验);
+                }
+                else if (ParamManager.Instance.System_BOM.B)
+                {
+                    BomDataModel bomData = BomManager.Instance.SearchByBarCode(code);
+                    if (bomData != null)
                     {
-                        UCLCR.CheckMaterial(bomData.type, bomData.size, bomData.value, bomData.unit, bomData.grade);
-                        ParamManager.Instance.System_测值.paramValue = "1";
+                        if (bomData.result == "True")
+                        {
+                            UCLCR.CheckMaterial(bomData.type, bomData.size, bomData.value, bomData.unit, bomData.grade);
+                            ParamManager.Instance.System_测值.paramValue = "1";
+                        }
+                        else
+                        {
+                            ParamManager.Instance.System_测值.paramValue = "0";
+                            ParamManager.Instance.System_丝印.paramValue = "1";
+                        }
+                        CodeControl.Code1.Code = code;
+                        CodeControl.Code1.IsSuccess = true;
                     }
                     else
                     {
-                        ParamManager.Instance.System_测值.paramValue = "0";
-                        ParamManager.Instance.System_丝印.paramValue = "1";
+                        CodeControl.Log("Bom中不存在条码:" + code);
                     }
-                    CodeControl.Code1.Code = code;
-                    CodeControl.Code1.IsSuccess = true;
                 }
             }
             else
@@ -214,6 +227,13 @@ namespace BorwinSplicMachine
                 {
                     CodeControl.Code2.Code = code;
                     CodeControl.Code2.IsSuccess = true;
+
+                    if (MesControl.Instance.IsOpenMes)
+                    {
+                        MesControl.Instance.checkInCode2.Code1.Value = CodeControl.Code1.Code;
+                        MesControl.Instance.checkInCode2.Code2.Value = code;
+                        UCMes.ucCode2Check1.Updata(InterType.条码2检验);
+                    }
                 }
             }
         }

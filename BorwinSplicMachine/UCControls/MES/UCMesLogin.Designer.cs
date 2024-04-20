@@ -28,22 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCMesLogin));
             this.SuspendLayout();
-            // 
-            // btnRun
-            // 
-            this.btnRun.Values.Text = "上传";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Values.Text = "保存";
+      
             // 
             // UCMesLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UCMesLogin";
-            this.Size = new System.Drawing.Size(1495, 687);
+            this.Size = new System.Drawing.Size(1562, 887);
             this.ResumeLayout(false);
 
         }

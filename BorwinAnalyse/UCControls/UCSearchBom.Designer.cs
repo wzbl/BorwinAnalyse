@@ -139,8 +139,9 @@
             this.btnSearchByCode.Location = new System.Drawing.Point(625, 47);
             this.btnSearchByCode.Name = "btnSearchByCode";
             this.btnSearchByCode.Size = new System.Drawing.Size(31, 33);
+            this.btnSearchByCode.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchByCode.StateCommon.Back.Image")));
+            this.btnSearchByCode.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSearchByCode.TabIndex = 45;
-            this.btnSearchByCode.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchByCode.Values.Image")));
             this.btnSearchByCode.Values.Text = "";
             this.btnSearchByCode.Click += new System.EventHandler(this.btnSearchByCode_Click);
             // 
@@ -276,9 +277,10 @@
             // 
             this.btnSetModel.Location = new System.Drawing.Point(307, 1);
             this.btnSetModel.Name = "btnSetModel";
-            this.btnSetModel.Size = new System.Drawing.Size(54, 54);
+            this.btnSetModel.Size = new System.Drawing.Size(62, 54);
+            this.btnSetModel.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSetModel.StateCommon.Back.Image")));
+            this.btnSetModel.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSetModel.TabIndex = 14;
-            this.btnSetModel.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSetModel.Values.Image")));
             this.btnSetModel.Values.Text = "";
             this.btnSetModel.Click += new System.EventHandler(this.btnSetModel_Click);
             // 
@@ -287,8 +289,9 @@
             this.btnDeleteModel.Location = new System.Drawing.Point(375, 1);
             this.btnDeleteModel.Name = "btnDeleteModel";
             this.btnDeleteModel.Size = new System.Drawing.Size(54, 54);
+            this.btnDeleteModel.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteModel.StateCommon.Back.Image")));
+            this.btnDeleteModel.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnDeleteModel.TabIndex = 13;
-            this.btnDeleteModel.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteModel.Values.Image")));
             this.btnDeleteModel.Values.Text = "";
             this.btnDeleteModel.Click += new System.EventHandler(this.btnDeleteModel_Click);
             // 
@@ -297,8 +300,9 @@
             this.btnAddBom.Location = new System.Drawing.Point(902, 17);
             this.btnAddBom.Name = "btnAddBom";
             this.btnAddBom.Size = new System.Drawing.Size(86, 86);
+            this.btnAddBom.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnAddBom.StateCommon.Back.Image")));
+            this.btnAddBom.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnAddBom.TabIndex = 9;
-            this.btnAddBom.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnAddBom.Values.Image")));
             this.btnAddBom.Values.Text = "";
             this.btnAddBom.Click += new System.EventHandler(this.btnAddBom_Click);
             // 
@@ -307,8 +311,9 @@
             this.btnUpdataBom.Location = new System.Drawing.Point(797, 17);
             this.btnUpdataBom.Name = "btnUpdataBom";
             this.btnUpdataBom.Size = new System.Drawing.Size(86, 86);
+            this.btnUpdataBom.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdataBom.StateCommon.Back.Image")));
+            this.btnUpdataBom.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnUpdataBom.TabIndex = 8;
-            this.btnUpdataBom.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdataBom.Values.Image")));
             this.btnUpdataBom.Values.Text = "";
             this.btnUpdataBom.Click += new System.EventHandler(this.btnUpdataBom_Click);
             // 
@@ -316,9 +321,10 @@
             // 
             this.btnSearchBom.Location = new System.Drawing.Point(687, 17);
             this.btnSearchBom.Name = "btnSearchBom";
-            this.btnSearchBom.Size = new System.Drawing.Size(86, 86);
+            this.btnSearchBom.Size = new System.Drawing.Size(90, 86);
+            this.btnSearchBom.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchBom.StateCommon.Back.Image")));
+            this.btnSearchBom.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSearchBom.TabIndex = 7;
-            this.btnSearchBom.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchBom.Values.Image")));
             this.btnSearchBom.Values.Text = "";
             this.btnSearchBom.Click += new System.EventHandler(this.btnSearchBom_Click);
             // 

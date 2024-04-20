@@ -66,5 +66,11 @@
     <Compile Include="MesControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BorwinAnalyse\BorwinAnalyse.csproj">
+      <Project>{E24F3998-FF55-4A8F-A7B5-B2DCC34EB3C2}</Project>
+      <Name>BorwinAnalyse</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

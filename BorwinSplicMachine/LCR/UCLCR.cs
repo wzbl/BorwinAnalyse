@@ -1,6 +1,7 @@
 ﻿using Alarm;
 using BorwinAnalyse.BaseClass;
 using LibSDK;
+using LibSDK.AxisParamDebuger;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,10 +40,12 @@ namespace BorwinSplicMachine.LCR
 
         public void Start()
         {
-            ThreadStart threadStart = new ThreadStart(LCRFlow);
-            Thread Thread = new Thread(threadStart);
-            Thread.IsBackground = true;
-            Thread.Start();
+            if (MotionControl.CardAPI.IsInitCardOK)
+            {
+                ThreadStart threadStart = new ThreadStart(LCRFlow);
+                Thread Thread = new Thread(threadStart);
+                Thread.Start();
+            }
         }
 
         private void UCLCR_Load(object sender, EventArgs e)
@@ -74,7 +77,8 @@ namespace BorwinSplicMachine.LCR
                 MinimumWidth = 6,
                 Name = "Column2",
                 ReadOnly = true,
-            }, new DataGridViewTextBoxColumn()
+            },
+                new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
                 HeaderText = "两线/四线",
@@ -347,19 +351,19 @@ namespace BorwinSplicMachine.LCR
                             {
                                 LCRHelper.LCRFlow = LCR.LCRFlow.Start;
                                 LCRHelper.Side = LCR.WhichSide.Left;
-                                MotControl.凸轮.MovePosByName("进料位", 1);
+                                MotControl.凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                             }
                             else if (Form1.MainControl.motControl.FlowRight == MainFlow.请求测值)
                             {
                                 LCRHelper.LCRFlow = LCR.LCRFlow.Start;
                                 LCRHelper.Side = LCR.WhichSide.Right;
-                                MotControl.凸轮.MovePosByName("进料位", 1);
+                                MotControl.凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                             }
                             else if (Form1.MainControl.CodeControl.IsSuccess() && Form1.MainControl.motControl.FlowLeft == MainFlow.None && Form1.MainControl.motControl.FlowRight == MainFlow.None && MotControl.测值整体上下.HomeState)
                             {
                                 if (!MotControl.测值整体上下.InPos("待探测位"))
                                 {
-                                    MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1);
+                                    MotControl.测值整体上下.MovePosByName("待探测位", 1, AxisRunVel.Instance.测值整体上下.Sped, AxisRunVel.Instance.测值整体上下.Acc);
                                 }
                             }
                             break;
@@ -368,11 +372,11 @@ namespace BorwinSplicMachine.LCR
                             {
                                 if (LCRHelper.Side == LCR.WhichSide.Left)
                                 {
-                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0, 1500, 100);
+                                    MotControl.左进入.PMove(-MotControl.左进入.GetPosByName("测值位"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc);
                                 }
                                 else if (LCRHelper.Side == LCR.WhichSide.Right)
                                 {
-                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0, 1500, 100);
+                                    MotControl.右进入.PMove(-MotControl.右进入.GetPosByName("测值位"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc);
                                 }
                                 LCRHelper.LCRFlow = LCR.LCRFlow.测值整体平移;
                             }
@@ -398,14 +402,14 @@ namespace BorwinSplicMachine.LCR
                             break;
                         case LCR.LCRFlow.测值定位:
                             LCRHelper.LCRFlow = LCR.LCRFlow.AB探针到位;
-                            MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("探测位"), 1);
+                            MotControl.测值整体上下.MovePosByName("探测位", 1, AxisRunVel.Instance.测值整体上下.Sped, AxisRunVel.Instance.测值整体上下.Acc);
                             break;
                         case LCR.LCRFlow.AB探针到位:
                             if (MotControl.测值整体上下.InPos("探测位"))
                             {
                                 MotControl.测值支撑电磁铁.On();
                                 LCRHelper.LCRFlow = LCR.LCRFlow.下针;
-                                MotControl.下针.PMove(MotControl.下针.GetPosByName("探测位"), 1);
+                                MotControl.下针.MovePosByName("探测位", 1, AxisRunVel.Instance.下针.Sped, AxisRunVel.Instance.下针.Acc);
                             }
                             Thread.Sleep(1000);
                             break;
@@ -436,7 +440,7 @@ namespace BorwinSplicMachine.LCR
                             LCRHelper.LCRFlow = LCR.LCRFlow.判断值是否在范围;
                             break;
                         case LCR.LCRFlow.判断值是否在范围:
-                            MotControl.测值整体上下.PMove(MotControl.测值整体上下.GetPosByName("待探测位"), 1, 20, 10);
+                            MotControl.测值整体上下.MovePosByName("待探测位", 1, AxisRunVel.Instance.测值整体上下.Sped, AxisRunVel.Instance.测值整体上下.Acc);
                             MotControl.测值支撑电磁铁.Off();
                             if (LCRHelper.RealValue >= LCRHelper.Min_Value && LCRHelper.RealValue <= LCRHelper.Max_Value)
                             {
@@ -518,7 +522,7 @@ namespace BorwinSplicMachine.LCR
                             GridAddData();
                             break;
                         case LCR.LCRFlow.Finish:
-                            LCRHelper.Side= LCR.WhichSide.None;
+                            LCRHelper.Side = LCR.WhichSide.None;
                             break;
                         default:
                             break;
@@ -550,6 +554,7 @@ namespace BorwinSplicMachine.LCR
                     LCRHelper.Grade,
                     LCRHelper.Result
                 );
+                kryptonDataGridView1.FirstDisplayedScrollingRowIndex = kryptonDataGridView1.RowCount - 1;
             }));
         }
 

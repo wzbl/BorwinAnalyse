@@ -240,7 +240,6 @@ namespace BorwinSplicMachine.LCR
                 dt.Rows.Add(dataRow);
             }
 
-
             for (int i = 0; i < boundGridView2.ColumnCount; i++)
             {
                 boundGridView2.Columns[i].Width = boundGridView2.Width / 9;
@@ -311,6 +310,7 @@ namespace BorwinSplicMachine.LCR
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+
             PdfSharpHelper.ExportPdf("D:\\dd.pdf", boundGridView1, boundGridView2);
         }
 

@@ -1,5 +1,6 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
+using LibSDK;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -181,6 +182,10 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void SetABWidth()
         {
+            if (!MotionControl.CardAPI.IsInitCardOK)
+            {
+                return;
+            }
             double a = 0;
             double b = 0;
             switch (Size)
@@ -367,9 +372,9 @@ namespace BorwinSplicMachine.LCR
                                LResult + "," +                                  //左结果
                                "" + "," +                      //是否丝印
                                "HIKVision.Instance.CameraR.MatchResult" + "," +                                                 //右丝印结果
-                                "HIKVision.Instance.CameraR.ImgPath "+ "," +                                                 //右丝印图片
+                                "D:\\壁纸\\高圆圆1.jpg" + "," +                                                 //右丝印图片
                                "HIKVision.Instance.CameraL.MatchResult" + "," +                                               //左丝印结果
-                               "HIKVision.Instance.CameraL.ImgPath" + "," +                                              //左丝印图片
+                               "D:\\壁纸\\高圆圆1.jpg" + "," +                                              //左丝印图片
                                "李小龙" + "," +                                          //操作员
                                "" + "," + "\r\n",                                        //备注
                                Encoding.UTF8);

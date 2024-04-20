@@ -28,22 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCCode1Check));
             this.SuspendLayout();
-            // 
-            // btnRun
-            // 
-            this.btnRun.Values.Text = "上传";
             // 
             // btnSave
             // 
-            this.btnSave.Values.Text = "保存";
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSave.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSave.Values.Text = "";
+            // 
+            // btnRun
+            // 
+            this.btnRun.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.StateCommon.Back.Image")));
+            this.btnRun.StateCommon.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
+            this.btnRun.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnRun.Values.Text = "";
             // 
             // UCCode1Check
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UCCode1Check";
-            this.Size = new System.Drawing.Size(1535, 698);
+            this.Size = new System.Drawing.Size(1562, 887);
             this.ResumeLayout(false);
 
         }

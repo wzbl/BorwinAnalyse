@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCLCRSearch));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.endDateTime = new System.Windows.Forms.DateTimePicker();
@@ -77,7 +78,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("宋体", 18F);
-            this.label1.Location = new System.Drawing.Point(329, 34);
+            this.label1.Location = new System.Drawing.Point(311, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(22, 24);
             this.label1.TabIndex = 14;
@@ -89,7 +90,7 @@
             this.endDateTime.CustomFormat = "yyyy-MM-dd";
             this.endDateTime.Font = new System.Drawing.Font("宋体", 20F);
             this.endDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDateTime.Location = new System.Drawing.Point(352, 24);
+            this.endDateTime.Location = new System.Drawing.Point(334, 16);
             this.endDateTime.Name = "endDateTime";
             this.endDateTime.Size = new System.Drawing.Size(178, 38);
             this.endDateTime.TabIndex = 13;
@@ -100,7 +101,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("宋体", 18F);
-            this.label4.Location = new System.Drawing.Point(83, 32);
+            this.label4.Location = new System.Drawing.Point(45, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 24);
             this.label4.TabIndex = 12;
@@ -112,7 +113,7 @@
             this.startDateTime.CustomFormat = "yyyy-MM-dd";
             this.startDateTime.Font = new System.Drawing.Font("宋体", 20F);
             this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDateTime.Location = new System.Drawing.Point(151, 24);
+            this.startDateTime.Location = new System.Drawing.Point(133, 16);
             this.startDateTime.Name = "startDateTime";
             this.startDateTime.Size = new System.Drawing.Size(178, 38);
             this.startDateTime.TabIndex = 11;
@@ -120,20 +121,32 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(1090, 24);
+            this.btnExport.Location = new System.Drawing.Point(711, 3);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(116, 37);
+            this.btnExport.Size = new System.Drawing.Size(92, 71);
+            this.btnExport.StateNormal.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.StateNormal.Back.Image")));
+            this.btnExport.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnExport.StatePressed.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.StatePressed.Back.Image")));
+            this.btnExport.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnExport.StateTracking.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.StateTracking.Back.Image")));
+            this.btnExport.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnExport.TabIndex = 1;
-            this.btnExport.Values.Text = "导出";
+            this.btnExport.Values.Text = "";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(950, 24);
+            this.btnImport.Location = new System.Drawing.Point(593, 3);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(116, 37);
+            this.btnImport.Size = new System.Drawing.Size(91, 71);
+            this.btnImport.StateNormal.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.StateNormal.Back.Image")));
+            this.btnImport.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnImport.StatePressed.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.StatePressed.Back.Image")));
+            this.btnImport.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnImport.StateTracking.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.StateTracking.Back.Image")));
+            this.btnImport.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnImport.TabIndex = 0;
-            this.btnImport.Values.Text = "导入";
+            this.btnImport.Values.Text = "";
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // boundGridView1

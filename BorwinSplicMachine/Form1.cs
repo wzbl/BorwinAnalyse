@@ -17,10 +17,12 @@ using BorwinAnalyse.Forms;
 using LibSDK.Motion;
 using LibSDK;
 using Alarm;
+using System.Threading;
+using ComponentFactory.Krypton.Ribbon;
 
 namespace BorwinSplicMachine
 {
-    public partial class Form1 :  KryptonForm
+    public partial class Form1 : KryptonForm
     {
         public static MainControl MainControl;
         public Form1()
@@ -52,7 +54,29 @@ namespace BorwinSplicMachine
 
         public void UpdataLanguage()
         {
-            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            this.Text = this.Text.tr();
+
+            for (int i = 0; i < kryptonRibbon1.RibbonTabs.Count; i++)
+            {
+                kryptonRibbon1.RibbonTabs[i].Text = kryptonRibbon1.RibbonTabs[i].Text.tr();
+                for (int j = 0; j < kryptonRibbon1.RibbonTabs[i].Groups.Count; j++)
+                {
+                    for (int k = 0; k < kryptonRibbon1.RibbonTabs[i].Groups[j].Items.Count; k++)
+                    {
+                        KryptonRibbonGroupTriple triple = kryptonRibbon1.RibbonTabs[i].Groups[j].Items[k] as KryptonRibbonGroupTriple;
+                        if (triple != null)
+                        {
+                            for (int l = 0; l < triple.Items.Count; l++)
+                            {
+                                KryptonRibbonGroupButton button = triple.Items[l] as KryptonRibbonGroupButton;
+                                button.TextLine1 = button.TextLine1.tr();
+                            }
+                        }
+
+                    }
+
+                }
+            }
         }
 
         private void ShowLanguageSearch_Click(object sender, EventArgs e)
@@ -112,6 +136,7 @@ namespace BorwinSplicMachine
             kryptonPanel1.Controls.Clear();
             kryptonPanel1.Controls.Add(MainControl.UCMes);
         }
+
         /// <summary>
         /// 运动控制
         /// </summary>
@@ -125,11 +150,12 @@ namespace BorwinSplicMachine
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            MainControl.Log("程序关闭");
             MainControl.Close();
+            Thread.Sleep(50);
             System.Environment.Exit(System.Environment.ExitCode);
             this.Dispose();
             this.Close();
-            MainControl.Log("程序关闭");
         }
 
         private void kryptonRibbonGroupButton5_Click(object sender, EventArgs e)
@@ -152,6 +178,42 @@ namespace BorwinSplicMachine
         private void kryptonRibbonGroupButton7_Click(object sender, EventArgs e)
         {
             MainControl.Stop();
+        }
+
+        private void btnAuto_Click(object sender, EventArgs e)
+        {
+            if (MotionControl.IsAuto)
+            {
+                MotionControl.IsAuto = false;
+                btnAuto.TextLine1 = "手动".tr();
+                btnAuto.ImageLarge = Properties.Resources.icons8_手动_96;
+            }
+            else
+            {
+                MotionControl.IsAuto = true;
+                btnAuto.TextLine1 = "自动".tr();
+                btnAuto.ImageLarge = Properties.Resources.icons8_自动_96;
+            }
+        }
+        public static Process kbpr;
+        private void btnOSK_Click(object sender, EventArgs e)
+        {
+            OSKPro();
+        }
+
+        /// <summary>
+        /// 系统键盘
+        /// </summary>
+        public static void OSKPro()
+        {
+            if (kbpr != null && !kbpr.HasExited)
+            {
+                kbpr.Kill();
+            }
+            else
+            {
+                kbpr = System.Diagnostics.Process.Start("osk.exe");
+            }
         }
     }
 }

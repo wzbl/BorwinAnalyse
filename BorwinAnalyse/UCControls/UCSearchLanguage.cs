@@ -123,7 +123,8 @@ namespace BorwinAnalyse.UCControls
             if (!string.IsNullOrEmpty(txtName.Text.Trim()))
             {
                 string context = txtName.Text.Trim();
-                languages = LanguageManager.Instance.languages.Where(x => x.context == context || x.chinese == context || x.english == context).ToList<Language>();
+                //languages = LanguageManager.Instance.languages.Where(x => x.context == context || x.chinese == context || x.english == context).ToList<Language>();
+                languages = LanguageManager.Instance.languages.Where(x => x.context.Contains(context) || x.chinese.Contains(context) || x.english.Contains(context)).ToList<Language>();
             }
             else
             {
@@ -226,7 +227,7 @@ namespace BorwinAnalyse.UCControls
         private void btnImPort_Click(object sender, EventArgs e)
         {
             DataTable dt = NOPIHelper.ImportExcel();
-            if (dt==null) { return; }
+            if (dt == null) { return; }
             DGV_Language.Rows.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
             {

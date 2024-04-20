@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCAnalyseSet));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridRule3 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.kryptonDataGridViewTextBoxColumn1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.kryptonDataGridViewTextBoxColumn2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.IsIdentifyingDigits = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.txtResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.IsResDefaultUnit = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
@@ -71,11 +76,15 @@
             this.Column4 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.Column5 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.Column6 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.IsSubstitutionRules = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.dataGridRule2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Column7 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.Column8 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.Column9 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.IsSeparator = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonContextMenuItems1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItems();
             this.kryptonContextMenuHeading1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuHeading();
@@ -88,21 +97,15 @@
             this.buttonSpecAny2 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny3 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
             this.buttonSpecAny4 = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
             this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRule3)).BeginInit();
+            this.contextMenuStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).BeginInit();
             this.kryptonSplitContainer2.Panel1.SuspendLayout();
@@ -110,15 +113,13 @@
             this.kryptonSplitContainer2.Panel2.SuspendLayout();
             this.kryptonSplitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRule1)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRule2)).BeginInit();
+            this.contextMenuStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).BeginInit();
             this.kryptonNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).BeginInit();
             this.kryptonPage1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
-            this.contextMenuStrip3.SuspendLayout();
-            this.contextMenuStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonSplitContainer1
@@ -168,6 +169,21 @@
             this.kryptonSplitContainer1.SplitterDistance = 339;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.保存ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 保存ToolStripMenuItem
+            // 
+            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.保存ToolStripMenuItem.Text = "保存";
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
             // dataGridRule3
             // 
             this.dataGridRule3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -177,27 +193,42 @@
             this.kryptonDataGridViewTextBoxColumn2});
             this.dataGridRule3.ContextMenuStrip = this.contextMenuStrip4;
             this.dataGridRule3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridRule3.Location = new System.Drawing.Point(970, 0);
+            this.dataGridRule3.Location = new System.Drawing.Point(919, 0);
             this.dataGridRule3.Name = "dataGridRule3";
             this.dataGridRule3.RowTemplate.Height = 23;
-            this.dataGridRule3.Size = new System.Drawing.Size(167, 339);
+            this.dataGridRule3.Size = new System.Drawing.Size(218, 339);
             this.dataGridRule3.TabIndex = 64;
             // 
             // kryptonDataGridViewTextBoxColumn1
             // 
             this.kryptonDataGridViewTextBoxColumn1.HeaderText = "等级";
             this.kryptonDataGridViewTextBoxColumn1.Name = "kryptonDataGridViewTextBoxColumn1";
-            this.kryptonDataGridViewTextBoxColumn1.Width = 63;
+            this.kryptonDataGridViewTextBoxColumn1.Width = 88;
             // 
             // kryptonDataGridViewTextBoxColumn2
             // 
             this.kryptonDataGridViewTextBoxColumn2.HeaderText = "百分比";
             this.kryptonDataGridViewTextBoxColumn2.Name = "kryptonDataGridViewTextBoxColumn2";
-            this.kryptonDataGridViewTextBoxColumn2.Width = 63;
+            this.kryptonDataGridViewTextBoxColumn2.Width = 89;
+            // 
+            // contextMenuStrip4
+            // 
+            this.contextMenuStrip4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2});
+            this.contextMenuStrip4.Name = "contextMenuStrip2";
+            this.contextMenuStrip4.Size = new System.Drawing.Size(101, 26);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem2.Text = "删除";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // IsIdentifyingDigits
             // 
-            this.IsIdentifyingDigits.Location = new System.Drawing.Point(389, 304);
+            this.IsIdentifyingDigits.Location = new System.Drawing.Point(317, 304);
             this.IsIdentifyingDigits.Name = "IsIdentifyingDigits";
             this.IsIdentifyingDigits.Size = new System.Drawing.Size(88, 20);
             this.IsIdentifyingDigits.TabIndex = 54;
@@ -205,7 +236,7 @@
             // 
             // txtResDefaultUnit
             // 
-            this.txtResDefaultUnit.Location = new System.Drawing.Point(522, 275);
+            this.txtResDefaultUnit.Location = new System.Drawing.Point(450, 275);
             this.txtResDefaultUnit.Name = "txtResDefaultUnit";
             this.txtResDefaultUnit.Size = new System.Drawing.Size(73, 23);
             this.txtResDefaultUnit.TabIndex = 44;
@@ -213,7 +244,7 @@
             // 
             // IsResDefaultUnit
             // 
-            this.IsResDefaultUnit.Location = new System.Drawing.Point(389, 278);
+            this.IsResDefaultUnit.Location = new System.Drawing.Point(317, 278);
             this.IsResDefaultUnit.Name = "IsResDefaultUnit";
             this.IsResDefaultUnit.Size = new System.Drawing.Size(127, 20);
             this.IsResDefaultUnit.TabIndex = 34;
@@ -221,7 +252,7 @@
             // 
             // IsValueContainsGrade
             // 
-            this.IsValueContainsGrade.Location = new System.Drawing.Point(389, 252);
+            this.IsValueContainsGrade.Location = new System.Drawing.Point(317, 252);
             this.IsValueContainsGrade.Name = "IsValueContainsGrade";
             this.IsValueContainsGrade.Size = new System.Drawing.Size(140, 20);
             this.IsValueContainsGrade.TabIndex = 33;
@@ -229,7 +260,7 @@
             // 
             // txtCapGrade_ON_NO_Find
             // 
-            this.txtCapGrade_ON_NO_Find.Location = new System.Drawing.Point(505, 218);
+            this.txtCapGrade_ON_NO_Find.Location = new System.Drawing.Point(433, 218);
             this.txtCapGrade_ON_NO_Find.Name = "txtCapGrade_ON_NO_Find";
             this.txtCapGrade_ON_NO_Find.Size = new System.Drawing.Size(73, 23);
             this.txtCapGrade_ON_NO_Find.TabIndex = 31;
@@ -239,14 +270,14 @@
             // 
             this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel7.Location = new System.Drawing.Point(426, 223);
+            this.kryptonWrapLabel7.Location = new System.Drawing.Point(354, 223);
             this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
             this.kryptonWrapLabel7.Size = new System.Drawing.Size(33, 15);
             this.kryptonWrapLabel7.Text = "电容";
             // 
             // IsIntermediateUnit
             // 
-            this.IsIntermediateUnit.Location = new System.Drawing.Point(389, 133);
+            this.IsIntermediateUnit.Location = new System.Drawing.Point(317, 133);
             this.IsIntermediateUnit.Name = "IsIntermediateUnit";
             this.IsIntermediateUnit.Size = new System.Drawing.Size(444, 20);
             this.IsIntermediateUnit.TabIndex = 29;
@@ -254,7 +285,7 @@
             // 
             // txtResGrade_ON_NO_Find
             // 
-            this.txtResGrade_ON_NO_Find.Location = new System.Drawing.Point(505, 189);
+            this.txtResGrade_ON_NO_Find.Location = new System.Drawing.Point(433, 189);
             this.txtResGrade_ON_NO_Find.Name = "txtResGrade_ON_NO_Find";
             this.txtResGrade_ON_NO_Find.Size = new System.Drawing.Size(73, 23);
             this.txtResGrade_ON_NO_Find.TabIndex = 28;
@@ -264,14 +295,14 @@
             // 
             this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel6.Location = new System.Drawing.Point(426, 194);
+            this.kryptonWrapLabel6.Location = new System.Drawing.Point(354, 194);
             this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
             this.kryptonWrapLabel6.Size = new System.Drawing.Size(33, 15);
             this.kryptonWrapLabel6.Text = "电阻";
             // 
             // IsGrade_ON_NO_Find
             // 
-            this.IsGrade_ON_NO_Find.Location = new System.Drawing.Point(389, 164);
+            this.IsGrade_ON_NO_Find.Location = new System.Drawing.Point(317, 164);
             this.IsGrade_ON_NO_Find.Name = "IsGrade_ON_NO_Find";
             this.IsGrade_ON_NO_Find.Size = new System.Drawing.Size(186, 20);
             this.IsGrade_ON_NO_Find.TabIndex = 25;
@@ -279,7 +310,7 @@
             // 
             // txtSuffixNumber
             // 
-            this.txtSuffixNumber.Location = new System.Drawing.Point(505, 101);
+            this.txtSuffixNumber.Location = new System.Drawing.Point(433, 101);
             this.txtSuffixNumber.Name = "txtSuffixNumber";
             this.txtSuffixNumber.Size = new System.Drawing.Size(73, 23);
             this.txtSuffixNumber.TabIndex = 24;
@@ -287,7 +318,7 @@
             // 
             // txtPrefixNumber
             // 
-            this.txtPrefixNumber.Location = new System.Drawing.Point(505, 74);
+            this.txtPrefixNumber.Location = new System.Drawing.Point(433, 74);
             this.txtPrefixNumber.Name = "txtPrefixNumber";
             this.txtPrefixNumber.Size = new System.Drawing.Size(73, 23);
             this.txtPrefixNumber.TabIndex = 23;
@@ -297,7 +328,7 @@
             // 
             this.kryptonWrapLabel5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel5.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel5.Location = new System.Drawing.Point(389, 109);
+            this.kryptonWrapLabel5.Location = new System.Drawing.Point(317, 109);
             this.kryptonWrapLabel5.Name = "kryptonWrapLabel5";
             this.kryptonWrapLabel5.Size = new System.Drawing.Size(85, 15);
             this.kryptonWrapLabel5.Text = "删除后字符数";
@@ -306,14 +337,14 @@
             // 
             this.kryptonWrapLabel4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel4.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel4.Location = new System.Drawing.Point(389, 78);
+            this.kryptonWrapLabel4.Location = new System.Drawing.Point(317, 78);
             this.kryptonWrapLabel4.Name = "kryptonWrapLabel4";
             this.kryptonWrapLabel4.Size = new System.Drawing.Size(85, 15);
             this.kryptonWrapLabel4.Text = "删除前字符数";
             // 
             // IsDeleteString
             // 
-            this.IsDeleteString.Location = new System.Drawing.Point(389, 49);
+            this.IsDeleteString.Location = new System.Drawing.Point(317, 49);
             this.IsDeleteString.Name = "IsDeleteString";
             this.IsDeleteString.Size = new System.Drawing.Size(101, 20);
             this.IsDeleteString.TabIndex = 19;
@@ -321,18 +352,20 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(514, 0);
+            this.btnSave.Location = new System.Drawing.Point(534, 3);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(240, 53);
+            this.btnSave.Size = new System.Drawing.Size(116, 114);
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSave.TabIndex = 13;
-            this.btnSave.Values.Text = "保存";
+            this.btnSave.Values.Text = "";
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // txtResUnit
             // 
             this.txtResUnit.Location = new System.Drawing.Point(27, 196);
             this.txtResUnit.Name = "txtResUnit";
-            this.txtResUnit.Size = new System.Drawing.Size(298, 23);
+            this.txtResUnit.Size = new System.Drawing.Size(268, 23);
             this.txtResUnit.TabIndex = 9;
             this.txtResUnit.Text = "MΩ,KΩ,Ω,M,K,R,HΩ";
             // 
@@ -340,7 +373,7 @@
             // 
             this.txtCapUnit.Location = new System.Drawing.Point(27, 249);
             this.txtCapUnit.Name = "txtCapUnit";
-            this.txtCapUnit.Size = new System.Drawing.Size(298, 23);
+            this.txtCapUnit.Size = new System.Drawing.Size(268, 23);
             this.txtCapUnit.TabIndex = 10;
             this.txtCapUnit.Text = "PF,NF,UF,P,N,U";
             // 
@@ -366,7 +399,7 @@
             // 
             this.txtSize.Location = new System.Drawing.Point(27, 145);
             this.txtSize.Name = "txtSize";
-            this.txtSize.Size = new System.Drawing.Size(298, 23);
+            this.txtSize.Size = new System.Drawing.Size(268, 23);
             this.txtSize.TabIndex = 6;
             this.txtSize.Text = "01005,0201,0402,0603,0805,1010,1206,1210,2010";
             // 
@@ -383,7 +416,7 @@
             // 
             this.txtRes.Location = new System.Drawing.Point(27, 46);
             this.txtRes.Name = "txtRes";
-            this.txtRes.Size = new System.Drawing.Size(298, 23);
+            this.txtRes.Size = new System.Drawing.Size(268, 23);
             this.txtRes.TabIndex = 2;
             this.txtRes.Text = "RES";
             // 
@@ -391,7 +424,7 @@
             // 
             this.txtCAP.Location = new System.Drawing.Point(27, 94);
             this.txtCAP.Name = "txtCAP";
-            this.txtCAP.Size = new System.Drawing.Size(298, 23);
+            this.txtCAP.Size = new System.Drawing.Size(268, 23);
             this.txtCAP.TabIndex = 3;
             this.txtCAP.Text = "CAP";
             // 
@@ -470,9 +503,9 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.NullValue = false;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column3.FalseValue = null;
             this.Column3.HeaderText = "启用";
             this.Column3.IndeterminateValue = null;
@@ -481,9 +514,9 @@
             // 
             // Column4
             // 
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle26.NullValue = false;
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = false;
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column4.FalseValue = null;
             this.Column4.HeaderText = "区分大小写";
             this.Column4.IndeterminateValue = null;
@@ -492,9 +525,9 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.NullValue = false;
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = false;
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column5.FalseValue = null;
             this.Column5.HeaderText = "区分全半角";
             this.Column5.IndeterminateValue = null;
@@ -506,6 +539,21 @@
             this.Column6.HeaderText = "备注";
             this.Column6.Name = "Column6";
             this.Column6.Width = 125;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // IsSubstitutionRules
             // 
@@ -534,9 +582,9 @@
             // 
             // Column7
             // 
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.NullValue = false;
-            this.Column7.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = false;
+            this.Column7.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column7.FalseValue = null;
             this.Column7.HeaderText = "启用";
             this.Column7.IndeterminateValue = null;
@@ -554,6 +602,21 @@
             this.Column9.HeaderText = "说明";
             this.Column9.Name = "Column9";
             this.Column9.Width = 99;
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip3.Name = "contextMenuStrip2";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(101, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem1.Text = "删除";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
             // IsSeparator
             // 
@@ -609,66 +672,6 @@
             // 
             this.buttonSpecAny4.UniqueName = "36EF95A540F847F1D0BFDAD41991F1BA";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.保存ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // 保存ToolStripMenuItem
-            // 
-            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.保存ToolStripMenuItem.Text = "保存";
-            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.kryptonButton1_Click);
-            // 
-            // contextMenuStrip3
-            // 
-            this.contextMenuStrip3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip3.Name = "contextMenuStrip2";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(101, 26);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.toolStripMenuItem1.Text = "删除";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.kryptonButton2_Click);
-            // 
-            // contextMenuStrip4
-            // 
-            this.contextMenuStrip4.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2});
-            this.contextMenuStrip4.Name = "contextMenuStrip2";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(181, 48);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = "删除";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
             // UCAnalyseSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -683,7 +686,9 @@
             this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRule3)).EndInit();
+            this.contextMenuStrip4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2.Panel1)).EndInit();
             this.kryptonSplitContainer2.Panel1.ResumeLayout(false);
             this.kryptonSplitContainer2.Panel1.PerformLayout();
@@ -693,15 +698,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer2)).EndInit();
             this.kryptonSplitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRule1)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRule2)).EndInit();
+            this.contextMenuStrip3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonNavigator1)).EndInit();
             this.kryptonNavigator1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage1)).EndInit();
             this.kryptonPage1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.contextMenuStrip2.ResumeLayout(false);
-            this.contextMenuStrip3.ResumeLayout(false);
-            this.contextMenuStrip4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -386,6 +386,14 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\icons8-没有网络-100.png" />
+    <None Include="Resources\icons8-有线网络连接-100.png" />
+    <None Include="Resources\icons8-条形码扫描-100.png" />
+    <None Include="Resources\icons8-屏蔽扫码-96.png" />
+    <None Include="Resources\icons8-禁止照相-80.png" />
+    <None Include="Resources\icons8-相机-80.png" />
+    <None Include="Resources\icons8-手动-96.png" />
+    <None Include="Resources\icons8-自动-96.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

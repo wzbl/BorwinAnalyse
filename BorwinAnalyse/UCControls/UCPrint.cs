@@ -100,7 +100,9 @@ namespace BorwinAnalyse.UCControls
 
         public void UpdataLanguage()
         {
-            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            //LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+            lbPath.Text = lbPath.Text.tr();
+            lbPrintName.Text = lbPrintName.Text.tr();
         }
     }
 }

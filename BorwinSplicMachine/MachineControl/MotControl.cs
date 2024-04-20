@@ -3,6 +3,7 @@ using BorwinAnalyse.BaseClass;
 using BorwinSplicMachine.LCR;
 using FeederSpliceVisionSys;
 using LibSDK;
+using LibSDK.AxisParamDebuger;
 using LibSDK.IO;
 using LibSDK.Motion;
 using Mes;
@@ -90,9 +91,16 @@ namespace BorwinSplicMachine
         /// </summary>
         public MainFlow FlowLeft = MainFlow.None;
         private int leftMoveCount = 0;
+        /// <summary>
+        /// 左切料位
+        /// </summary>
         public static double leftCutPos = 0;
+        /// <summary>
+        /// 左切料补偿位
+        /// </summary>
         public static double leftDockPos = 0;
         public static double RightCutPos = 0;
+        public static double RightDockPos = 0;
 
         /// <summary>
         /// 右流程
@@ -117,26 +125,6 @@ namespace BorwinSplicMachine
         public static RunnersWidth runnersWidth = RunnersWidth._8mm;
 
         private KTimer timer = new KTimer();
-
-        /// <summary>
-        /// 空料位置
-        /// </summary>
-        private double FindEmptyPos = 0;
-
-        /// <summary>
-        /// 找空料次数
-        /// </summary>
-        private int FindEmptyCount = 0;
-
-        /// <summary>
-        /// 左料间距
-        /// </summary>
-        private double leftPitch = 0;
-
-        /// <summary>
-        /// 右料间距
-        /// </summary>
-        private double rightPitch = 0;
 
         public MotControl()
         {
@@ -200,9 +188,7 @@ namespace BorwinSplicMachine
                 左收料 = MotionControl.GetOutPutIO("左收料");
                 右收料 = MotionControl.GetOutPutIO("右收料");
                 AlarmControl.ReSet += Reset;
-
-                //Run();
-                //Reset();
+                Reset();
             }
         }
 
@@ -210,7 +196,7 @@ namespace BorwinSplicMachine
 
         Thread Thread = null;
         Thread Thread2 = null;
-        private void Run()
+        public void Run()
         {
             Thread = new Thread(LeftAndRight);
             Thread.IsBackground = true;
@@ -244,8 +230,8 @@ namespace BorwinSplicMachine
                             }
                             else
                             {
-                                吸头上下.MovePosByName("吸膜位置上", 1);
-                                热熔上下.MovePosByName("热熔上", 1);
+                                吸头上下.MovePosByName("吸膜位置上", 1, AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
+                                热熔上下.MovePosByName("热熔上", 1, AxisRunVel.Instance.热熔上下.Sped, AxisRunVel.Instance.热熔上下.Acc);
                                 filmFlow = FilmFlow.轴到位;
                             }
                             break;
@@ -263,7 +249,7 @@ namespace BorwinSplicMachine
 
                         case FilmFlow.拨刀伸出位:
                             吸头平移.MovePosByName(XiMoPos(), 1);
-                            拨刀.MovePosByName("伸出位", 1);
+                            拨刀.MovePosByName("伸出位", 1, AxisRunVel.Instance.拨刀.Sped, AxisRunVel.Instance.拨刀.Acc);
                             filmFlow = FilmFlow.拨刀到伸出位;
                             break;
 
@@ -285,11 +271,11 @@ namespace BorwinSplicMachine
                                 if (FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
                                 {
                                     filmFlow = FilmFlow.吸头上下吸膜;
-                                    吸头上下.MovePosByName("吸膜位置下", 1);
+                                    吸头上下.MovePosByName("吸膜位置下", 1 ,AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
                                     if (FileSuccessCount == 0)
                                     {
-                                        左进入.PMove(-左进入.GetPosByName("接料位"), 0);
-                                        右进入.PMove(-右进入.GetPosByName("接料位"), 0);
+                                        左进入.PMove(-左进入.GetPosByName("接料位"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc);
+                                        右进入.PMove(-右进入.GetPosByName("接料位"), 0, AxisRunVel.Instance.右进入.Sped, AxisRunVel.Instance.右进入.Acc);
                                     }
                                     filmCount++;
                                 }
@@ -312,12 +298,12 @@ namespace BorwinSplicMachine
                             break;
 
                         case FilmFlow.大膜退刀位:
-                            拨刀.MovePosByName("大膜退刀位", 1);
+                            拨刀.MovePosByName("大膜退刀位", 1, AxisRunVel.Instance.拨刀.Sped, AxisRunVel.Instance.拨刀.Acc);
                             filmFlow = FilmFlow.判断真空表;
                             break;
 
                         case FilmFlow.小膜退刀位:
-                            拨刀.MovePosByName("小膜退刀位", 1);
+                            拨刀.MovePosByName("小膜退刀位", 1, AxisRunVel.Instance.拨刀.Sped, AxisRunVel.Instance.拨刀.Acc);
                             filmFlow = FilmFlow.判断真空表;
                             break;
 
@@ -354,9 +340,9 @@ namespace BorwinSplicMachine
                             break;
 
                         case FilmFlow.吸头上下到待机位:
-                            吸头上下.MovePosByName("吸膜位置上", 1);
+                            吸头上下.MovePosByName("吸膜位置上", 1, AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
 
-                            吸头平移.MovePosByName(FilmPos(), 1);
+                            吸头平移.MovePosByName(FilmPos(), 1, AxisRunVel.Instance.吸头平移.Sped, AxisRunVel.Instance.吸头平移.Acc);
                             filmFlow = FilmFlow.平移到对应贴膜位;
                             break;
 
@@ -364,14 +350,14 @@ namespace BorwinSplicMachine
                             if (吸头平移.InPos(FilmPos()))
                             {
                                 filmFlow = FilmFlow.贴膜动作;
-                                吸头上下.MovePosByName("贴膜位置下", 1);
+                                吸头上下.MovePosByName("贴膜位置下", 1, AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
                             }
                             break;
 
                         case FilmFlow.贴膜动作:
                             if (吸头上下.InPos("贴膜位置下"))
                             {
-                                凸轮.PMove(凸轮.GetPosByName("至包胶位"), 1, 10, 10);
+                                凸轮.MovePosByName("至包胶位", 1,  AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 filmFlow = FilmFlow.包胶动作;
                             }
                             break;
@@ -382,8 +368,8 @@ namespace BorwinSplicMachine
                                 真空电磁阀1.Off();
                                 真空电磁阀2.Off();
                                 真空泵.Off();
-                                吸头上下.MovePosByName("热熔位置", 1);
-                                吸头平移.MovePosByName("热熔位置", 1);
+                                吸头上下.MovePosByName("热熔位置", 1, AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
+                                吸头平移.MovePosByName("热熔位置", 1, AxisRunVel.Instance.吸头平移.Sped, AxisRunVel.Instance.吸头平移.Acc);
                                 filmFlow = FilmFlow.热熔动作;
                             }
                             break;
@@ -391,7 +377,7 @@ namespace BorwinSplicMachine
                         case FilmFlow.热熔动作:
                             if (吸头上下.InPos("热熔位置") && 吸头平移.InPos("热熔位置"))
                             {
-                                热熔上下.MovePosByName("热熔下", 1);
+                                热熔上下.MovePosByName("热熔下", 1, AxisRunVel.Instance.热熔上下.Sped, AxisRunVel.Instance.热熔上下.Acc);
                                 filmFlow = FilmFlow.热熔;
                             }
                             break;
@@ -403,7 +389,7 @@ namespace BorwinSplicMachine
                                 if (!IsTwice())
                                 {
                                     filmFlow = FilmFlow.完成;
-                                    凸轮.MovePosByName("松料位", 1);
+                                    凸轮.MovePosByName("松料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                     热熔上下.PMove(2, 1, 120, 50);
                                     SetRunnersWidth();
                                 }
@@ -436,6 +422,7 @@ namespace BorwinSplicMachine
 
                         break;
                     case ResetFlow.吸嘴_测值上下回零:
+                        流道调宽.Home(1000);
                         Form1.MainControl.CodeControl.Clear();
                         吸头上下.Home(1000);
                         热熔上下.Home(1000);
@@ -489,8 +476,6 @@ namespace BorwinSplicMachine
                         Form1.MainControl.UCLCR.LCRHelper.Side = LCR.WhichSide.None;
                         flowLight.Reset();
                         凸轮.Home(3000);
-                        流道调宽.Home(1000);
-
                         resetFlow = ResetFlow.初始化完成;
                         break;
                     case ResetFlow.初始化完成:
@@ -533,7 +518,7 @@ namespace BorwinSplicMachine
                             break;
                         case MainFlow.进料:
                             //左轮开始转动
-                            左进入.PMove(-2, 0, true);
+                            左进入.PMove(-2, 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc, true);
                             if (左物料光栅.State() && 左入料光栅.State())
                             {
                                 左进入.AxisStop();
@@ -553,13 +538,12 @@ namespace BorwinSplicMachine
                             {
                                 FlowLeft = MainFlow.开始找空料;
                                 flowLight.左找空料.status = 1;
-                                FindEmptyCount++;
                             }
                             else if (ParamManager.Instance.System_测值.B)
                             {
                                 FlowLeft = MainFlow.请求测值;
                                 flowLight.左测值.status = 1;
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                             }
                             else if (ParamManager.Instance.System_丝印.B)
                             {
@@ -568,13 +552,13 @@ namespace BorwinSplicMachine
                             }
                             else
                             {
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 FlowLeft = MainFlow.完成;
                             }
                             break;
                         case MainFlow.开始找空料:
                             leftMoveCount++;
-                            左进入.PMove(-左进入.GetPosByName("移动距离"), 0, true);//走4格
+                            左进入.PMove(-左进入.GetPosByName("移动距离"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc, true);//走4格
                             VisionDetection.Detection_CutPos(Station.LiftStation);
                             Form1.MainControl.UCVision.Log("找空料发送" + "Detection_CutPos(Station.LiftStation)");
                             FlowLeft = MainFlow.找空料中;
@@ -592,7 +576,7 @@ namespace BorwinSplicMachine
                             {
                                 FlowLeft = MainFlow.请求测值;
                                 flowLight.左测值.status = 1;
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                             }
                             else
                             {
@@ -616,7 +600,7 @@ namespace BorwinSplicMachine
                             else
                             {
                                 FlowLeft = MainFlow.切空料;
-                                左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
+                                左进入.PMove(-左进入.GetPosByName("切刀位"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc, true);
                             }
                             break;
                         case MainFlow.请求测值:
@@ -638,14 +622,14 @@ namespace BorwinSplicMachine
                             {
                                 flowLight.左测值.status = 2;
                                 FlowLeft = MainFlow.开始切空料;
-                                凸轮.PMove(0, 1, 50, 50);
+                                凸轮.PMove(0, 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 Thread.Sleep(1000);
                             }
                             break;
                         case MainFlow.开始切空料:
                             Form1.MainControl.UCVision.Log("切空料值" + leftCutPos);
                             double pod = -左进入.GetPosByName("切刀位") - leftCutPos + 左进入.GetPosByName("基准位置");
-                            左进入.PMove(pod, 0);
+                            左进入.PMove(pod, 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc);
                             FlowLeft = MainFlow.开始空料补偿;
                             break;
                         case MainFlow.开始空料补偿:
@@ -672,14 +656,14 @@ namespace BorwinSplicMachine
                         case MainFlow.切空料:
                             if (左进入.Runing())
                             {
-                                凸轮.PMove(凸轮.GetPosByName("切刀位"), 1, 50, 50);
+                                凸轮.MovePosByName("切刀位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 FlowLeft = MainFlow.切空料完成;
                             }
                             break;
                         case MainFlow.切空料完成:
                             if (凸轮.InPos("切刀位"))
                             {
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 FlowLeft = MainFlow.完成;
                             }
                             break;
@@ -688,7 +672,7 @@ namespace BorwinSplicMachine
                         case MainFlow.丝印完成:
                             flowLight.左丝印.status = 2;
                             FlowLeft = MainFlow.切空料;
-                            左进入.PMove(-左进入.GetPosByName("切刀位"), 0, true);
+                            左进入.PMove(-左进入.GetPosByName("切刀位"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc, true);
                             break;
                         case MainFlow.完成:
 
@@ -710,7 +694,7 @@ namespace BorwinSplicMachine
                             break;
                         case MainFlow.进料:
                             //右轮开始转动
-                            右进入.PMove(-2, 0, true);
+                            右进入.PMove(-2, 0, AxisRunVel.Instance.右进入.Sped, AxisRunVel.Instance.右进入.Acc, true);
                             if (右物料光栅.State() && 右入料光栅.State())
                             {
                                 右进入.AxisStop();
@@ -730,13 +714,12 @@ namespace BorwinSplicMachine
                             {
                                 FlowRight = MainFlow.开始找空料;
                                 flowLight.右找空料.status = 1;
-                                FindEmptyCount++;
                             }
                             else if (ParamManager.Instance.System_测值.B)
                             {
                                 FlowRight = MainFlow.请求测值;
                                 flowLight.右测值.status = 1;
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                             }
                             else if (ParamManager.Instance.System_丝印.B)
                             {
@@ -745,15 +728,15 @@ namespace BorwinSplicMachine
                             }
                             else
                             {
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 FlowRight = MainFlow.完成;
                             }
                             break;
                         case MainFlow.开始找空料:
                             leftMoveCount++;
-                            右进入.PMove(-右进入.GetPosByName("移动距离"), 0, true);//走4格
-                            VisionDetection.Detection_CutPos(Station.LiftStation);
-                            Form1.MainControl.UCVision.Log("找空料发送" + "Detection_CutPos(Station.LiftStation)");
+                            右进入.PMove(-右进入.GetPosByName("移动距离"), 0, AxisRunVel.Instance.右进入.Sped, AxisRunVel.Instance.右进入.Acc, true);//走4格
+                            VisionDetection.Detection_CutPos(Station.RightStation);
+                            Form1.MainControl.UCVision.Log("找空料发送" + "Detection_CutPos(Station.RightStation)");
                             FlowRight = MainFlow.找空料中;
                             kTimer.Restart();
                             break;
@@ -769,7 +752,7 @@ namespace BorwinSplicMachine
                             {
                                 FlowRight = MainFlow.请求测值;
                                 flowLight.右测值.status = 1;
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                             }
                             else
                             {
@@ -793,11 +776,11 @@ namespace BorwinSplicMachine
                             else
                             {
                                 FlowRight = MainFlow.切空料;
-                                右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
+                                右进入.PMove(-右进入.GetPosByName("切刀位"), 0, AxisRunVel.Instance.右进入.Sped, AxisRunVel.Instance.右进入.Acc, true);
                             }
                             break;
                         case MainFlow.请求测值:
-                            if (Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.Left)
+                            if (Form1.MainControl.UCLCR.LCRHelper.Side == LCR.WhichSide.Right)
                             {
                                 FlowRight = MainFlow.测值中;
                             }
@@ -815,21 +798,21 @@ namespace BorwinSplicMachine
                             {
                                 flowLight.右测值.status = 2;
                                 FlowRight = MainFlow.开始切空料;
-                                凸轮.PMove(0, 1, 50, 50);
+                                凸轮.PMove(0, 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 Thread.Sleep(1000);
                             }
                             break;
                         case MainFlow.开始切空料:
                             Form1.MainControl.UCVision.Log("切空料值" + leftCutPos);
                             double pod = -右进入.GetPosByName("切刀位") - leftCutPos + 右进入.GetPosByName("基准位置");
-                            右进入.PMove(pod, 0);
+                            右进入.PMove(pod, 0, AxisRunVel.Instance.右进入.Sped, AxisRunVel.Instance.右进入.Acc);
                             FlowRight = MainFlow.开始空料补偿;
                             break;
                         case MainFlow.开始空料补偿:
                             if (右进入.Runing())
                             {
-                                VisionDetection.Detection_DockPos(Station.LiftStation);
-                                Form1.MainControl.UCVision.Log("空料补偿发送" + "Detection_DockPos(Station.LiftStation)");
+                                VisionDetection.Detection_DockPos(Station.RightStation);
+                                Form1.MainControl.UCVision.Log("空料补偿发送" + "Detection_DockPos(Station.RightStation)");
                                 FlowRight = MainFlow.空料补偿中;
                                 kTimer.Restart();
                             }
@@ -843,20 +826,20 @@ namespace BorwinSplicMachine
                             break;
                         case MainFlow.空料补偿完成:
                             Form1.MainControl.UCVision.Log("空料补偿值" + leftDockPos);
-                            //右进入.PMove(leftDockPos, 0);
+                            右进入.PMove(-leftDockPos, 0);
                             FlowRight = MainFlow.切空料;
                             break;
                         case MainFlow.切空料:
                             if (右进入.Runing())
                             {
-                                凸轮.PMove(凸轮.GetPosByName("切刀位"), 1, 50, 50);
+                                凸轮.MovePosByName("切刀位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 FlowRight = MainFlow.切空料完成;
                             }
                             break;
                         case MainFlow.切空料完成:
                             if (凸轮.InPos("切刀位"))
                             {
-                                凸轮.PMove(凸轮.GetPosByName("进料位"), 1, 50, 50);
+                                凸轮.MovePosByName("进料位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 FlowRight = MainFlow.完成;
                             }
                             break;
@@ -865,7 +848,7 @@ namespace BorwinSplicMachine
                         case MainFlow.丝印完成:
                             flowLight.右丝印.status = 2;
                             FlowRight = MainFlow.切空料;
-                            右进入.PMove(-右进入.GetPosByName("切刀位"), 0, true);
+                            右进入.PMove(-右进入.GetPosByName("切刀位"), 0, AxisRunVel.Instance.右进入.Sped, AxisRunVel.Instance.右进入.Acc, true);
                             break;
                         case MainFlow.完成:
 
@@ -889,6 +872,7 @@ namespace BorwinSplicMachine
 
         public void Reset()
         {
+            if (MotionControl.CardAPI.IsInitCardOK)
             resetFlow = ResetFlow.吸嘴_测值上下回零;
         }
 
@@ -896,6 +880,7 @@ namespace BorwinSplicMachine
         /// 吸膜成功次数
         /// </summary>
         private int FileSuccessCount = 0;
+
         /// <summary>
         /// 退刀位置
         /// </summary>
@@ -963,22 +948,22 @@ namespace BorwinSplicMachine
                 {
                     case RunnersWidth._8mm:
                         if (!流道调宽.InPos("流道8mm"))
-                            流道调宽.MovePosByName("流道8mm", 1);
+                            流道调宽.MovePosByName("流道8mm", 1,AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                         break;
                     case RunnersWidth._12mm:
                         if (!流道调宽.InPos("流道12mm"))
-                            流道调宽.MovePosByName("流道12mm", 1);
+                            流道调宽.MovePosByName("流道12mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                         break;
                     case RunnersWidth._16mm:
                         if (!流道调宽.InPos("流道16mm"))
-                            流道调宽.MovePosByName("流道16mm", 1);
+                            流道调宽.MovePosByName("流道16mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                         break;
                     case RunnersWidth._24mm:
                         if (!流道调宽.InPos("流道24mm"))
-                            流道调宽.MovePosByName("流道24mm", 1);
+                            流道调宽.MovePosByName("流道24mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                         break;
                     default:
-                        流道调宽.MovePosByName("流道8mm", 1);
+                        流道调宽.MovePosByName("流道8mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                         break;
                 }
             }
@@ -1063,26 +1048,24 @@ namespace BorwinSplicMachine
         /// </summary>
         private void SetRunnersWidth2()
         {
-            return;
             switch (runnersWidth)
             {
                 case RunnersWidth._8mm:
-                    流道调宽.MovePosByName("夹紧8mm", 1);
+                    流道调宽.MovePosByName("夹紧8mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                     break;
                 case RunnersWidth._12mm:
-                    流道调宽.MovePosByName("夹紧12mm", 1);
+                    流道调宽.MovePosByName("夹紧12mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                     break;
                 case RunnersWidth._16mm:
-                    流道调宽.MovePosByName("夹紧16mm", 1);
+                    流道调宽.MovePosByName("夹紧16mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                     break;
                 case RunnersWidth._24mm:
-                    流道调宽.MovePosByName("夹紧24mm", 1);
+                    流道调宽.MovePosByName("夹紧24mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                     break;
                 default:
-                    流道调宽.MovePosByName("夹紧8mm", 1);
+                    流道调宽.MovePosByName("夹紧8mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                     break;
             }
-
         }
 
     }

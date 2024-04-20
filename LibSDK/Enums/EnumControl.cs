@@ -56,37 +56,4 @@ namespace LibSDK.Enums
         Off
     }
 
-    /// <summary>
-    /// 轴数量
-    /// </summary>
-    public enum Axis
-    {
-        A,
-        B,
-        C,
-        D,
-        E,
-        F,
-        G,
-        H,
-        I,
-        J,
-        K,
-        L,
-        M,
-        N,
-        O,
-        P,
-        Q,
-        R,
-        S,
-        T,
-        U,
-        V,
-        W,
-        X,
-        Y,
-        Z,
-        Length
-    }
 }

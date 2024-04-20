@@ -34,7 +34,7 @@ namespace BorwinAnalyse.BaseClass
         public ParamData System_找空料 = new ParamData(ParamType.System, "找空料", "0", "0不启用,1启用", "1");
         public ParamData System_丝印 = new ParamData(ParamType.System, "丝印", "0", "0不启用,1启用", "1");
         public ParamData System_BOM = new ParamData(ParamType.System, "BOM", "0", "0不启用,1启用", "1");
-        public ParamData System_语音= new ParamData(ParamType.System, "语音", "0", "0不启用,1启用", "1");
+        public ParamData System_语音 = new ParamData(ParamType.System, "语音", "0", "0不启用,1启用", "1");
         #endregion
 
         #region 条码校验
@@ -103,23 +103,11 @@ namespace BorwinAnalyse.BaseClass
         #endregion
 
         #region 左LCR
-        public ParamData paramData3 = new ParamData(ParamType.Left_LCR, "左测值", "2", "test", "1");
+        public ParamData IsLCR_Left = new ParamData(ParamType.Left_LCR, "左测值", "0", "0不启用,1启用", "1");
         #endregion
 
         #region 右LCR
-        public ParamData paramData4 = new ParamData(ParamType.Right_LCR, "右测值", "2", "test", "1");
-        #endregion
-
-        #region 相机
-        public ParamData paramData5 = new ParamData(ParamType.CCD, "CCD", "2", "视觉", "1");
-        #endregion
-
-        #region 左相机
-        public ParamData paramData6 = new ParamData(ParamType.Left_CCD, "左视觉", "2", "test", "1");
-        #endregion
-
-        #region 右相机
-        public ParamData paramData7 = new ParamData(ParamType.Right_CCD, "右视觉", "2", "test", "1");
+        public ParamData IsLCR_Right = new ParamData(ParamType.Right_LCR, "右测值", "0", "0不启用,1启用", "1");
         #endregion
 
         #region 扫码枪
@@ -136,8 +124,8 @@ namespace BorwinAnalyse.BaseClass
                 if (type.Name == typeof(ParamData).Name)
                 {
                     ParamData paramData = item.GetValue(this) as ParamData;
-
-                    if (paramData.paramType == paramType)
+                    int.TryParse(paramData.paramLevel, out int lev);
+                    if (paramData.paramType == paramType && lev <= (int)UserManager.Instance.CurrentUser.level)
                     {
                         paramDatas.Add(paramData);
                     }
@@ -146,7 +134,7 @@ namespace BorwinAnalyse.BaseClass
             return paramDatas;
         }
 
-        public void UpData(string paramName, string paramValue)
+        public void UpData(string paramName, string paramValue,string level)
         {
             FieldInfo[] props = typeof(ParamManager).GetFields();
             foreach (var item in props)
@@ -159,6 +147,7 @@ namespace BorwinAnalyse.BaseClass
                     if (paramData.paramName.tr() == paramName)
                     {
                         paramData.paramValue = paramValue;
+                        paramData.paramLevel = level;
                     }
                 }
             }
@@ -286,9 +275,6 @@ namespace BorwinAnalyse.BaseClass
         LCR,
         Left_LCR,
         Right_LCR,
-        CCD,
-        Left_CCD,
-        Right_CCD,
         Barcode_Scanner
     }
 }

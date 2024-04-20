@@ -54,5 +54,10 @@ namespace LibSDK
                 btnShowParam.Text = ">";
             }
         }
+
+        private void kryptonPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

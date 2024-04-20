@@ -21,10 +21,11 @@ namespace BorwinAnalyse.Forms
         {
             InitializeComponent();
             f = this;
+            BomManager.Instance.Init();
         }
 
         UCBOM uCBOM;
-        UCSearch uCSearch;
+        UCSearchBom uCSearch;
         UCAnalyseSet uCAnalyseSet ;
 
         public static AnalyseMainForm f;
@@ -33,13 +34,11 @@ namespace BorwinAnalyse.Forms
         {
             if (uCSearch == null)
             {
-                uCSearch = new UCSearch();
+                uCSearch = new UCSearchBom();
                 kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
             }
-            uCSearch.kryptonNavigator1.SelectedIndex = 1;
-            uCSearch.ucSearchBom1.ComModelUpdata();
-            uCSearch.ucSearchBom1.Search();
-            uCSearch.BringToFront();
+            //uCSearch.ComModelUpdata();
+            //uCSearch.Search();
         }
 
         private void AnalyseMainForm_Load(object sender, EventArgs e)
@@ -95,10 +94,10 @@ namespace BorwinAnalyse.Forms
                 case "查询":
                     if (uCSearch==null)
                     {
-                        uCSearch = new UCSearch();
+                        uCSearch = new UCSearchBom();
                         kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
                     }
-                    uCSearch.ucSearchBom1.ComModelUpdata();
+                    //uCSearch.ucSearchBom1.ComModelUpdata();
                     uCSearch.BringToFront();
                     break;
                 case "设置":

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCBase));
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonGroupBox2 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.DataGridViewOut = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -75,8 +76,8 @@
             // 
             // kryptonSplitContainer2.Panel2
             // 
-            this.kryptonSplitContainer2.Panel2.Controls.Add(this.btnSave);
             this.kryptonSplitContainer2.Panel2.Controls.Add(this.btnRun);
+            this.kryptonSplitContainer2.Panel2.Controls.Add(this.btnSave);
             this.kryptonSplitContainer2.Size = new System.Drawing.Size(933, 461);
             this.kryptonSplitContainer2.SplitterDistance = 767;
             this.kryptonSplitContainer2.TabIndex = 1;
@@ -199,19 +200,23 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(1, 38);
+            this.btnSave.Location = new System.Drawing.Point(13, 33);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(155, 79);
+            this.btnSave.Size = new System.Drawing.Size(91, 89);
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
             this.btnSave.TabIndex = 7;
-            this.btnSave.Values.Text = "保存";
+            this.btnSave.Values.Text = "";
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(1, 140);
+            this.btnRun.Location = new System.Drawing.Point(13, 128);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(155, 79);
-            this.btnRun.TabIndex = 6;
-            this.btnRun.Values.Text = "上传";
+            this.btnRun.Size = new System.Drawing.Size(91, 91);
+            this.btnRun.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton1.StateCommon.Back.Image")));
+            this.btnRun.StateCommon.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
+            this.btnRun.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnRun.TabIndex = 8;
+            this.btnRun.Values.Text = "";
             // 
             // UCBase
             // 
@@ -255,7 +260,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         protected ComponentFactory.Krypton.Toolkit.KryptonDataGridView DataGridViewIn;
         protected ComponentFactory.Krypton.Toolkit.KryptonDataGridView DataGridViewOut;
-        protected ComponentFactory.Krypton.Toolkit.KryptonButton btnRun;
         protected ComponentFactory.Krypton.Toolkit.KryptonButton btnSave;
+        protected ComponentFactory.Krypton.Toolkit.KryptonButton btnRun;
     }
 }

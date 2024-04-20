@@ -114,18 +114,20 @@
             // 
             // btnShowModelData
             // 
-            this.btnShowModelData.Location = new System.Drawing.Point(277, 3);
+            this.btnShowModelData.Location = new System.Drawing.Point(277, 1);
             this.btnShowModelData.Name = "btnShowModelData";
-            this.btnShowModelData.Size = new System.Drawing.Size(98, 31);
+            this.btnShowModelData.Size = new System.Drawing.Size(47, 40);
+            this.btnShowModelData.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnShowModelData.StateCommon.Back.Image")));
+            this.btnShowModelData.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnShowModelData.TabIndex = 5;
-            this.btnShowModelData.Values.Text = "显示模板数据";
+            this.btnShowModelData.Values.Text = "";
             this.btnShowModelData.Visible = false;
             this.btnShowModelData.Click += new System.EventHandler(this.btnShowModelData_Click);
             // 
             // kryptonWrapLabel1
             // 
             this.kryptonWrapLabel1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.Black;
+            this.kryptonWrapLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(57)))), ((int)(((byte)(91)))));
             this.kryptonWrapLabel1.Location = new System.Drawing.Point(17, 12);
             this.kryptonWrapLabel1.Name = "kryptonWrapLabel1";
             this.kryptonWrapLabel1.Size = new System.Drawing.Size(59, 15);
@@ -145,8 +147,9 @@
             this.btnStart.Location = new System.Drawing.Point(1058, 0);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(86, 86);
+            this.btnStart.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.StateCommon.Back.Image")));
+            this.btnStart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnStart.TabIndex = 3;
-            this.btnStart.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.Values.Image")));
             this.btnStart.Values.Text = "";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -156,18 +159,20 @@
             this.btnSave.Location = new System.Drawing.Point(1144, 0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(86, 86);
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSave.TabIndex = 2;
-            this.btnSave.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Values.Image")));
             this.btnSave.Values.Text = "";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(462, 17);
+            this.btnImport.Location = new System.Drawing.Point(462, 2);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(59, 59);
+            this.btnImport.Size = new System.Drawing.Size(69, 66);
+            this.btnImport.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.StateCommon.Back.Image")));
+            this.btnImport.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnImport.TabIndex = 0;
-            this.btnImport.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.Values.Image")));
             this.btnImport.Values.Text = "";
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
@@ -335,7 +340,7 @@
             this.kryptonPage2.LastVisibleSet = true;
             this.kryptonPage2.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage2.Name = "kryptonPage2";
-            this.kryptonPage2.Size = new System.Drawing.Size(1228, 612);
+            this.kryptonPage2.Size = new System.Drawing.Size(1228, 606);
             this.kryptonPage2.Text = "解析结果";
             this.kryptonPage2.ToolTipTitle = "Page ToolTip";
             this.kryptonPage2.UniqueName = "98C0C56E816840DFA2AF84A99BCB948E";
@@ -347,7 +352,7 @@
             this.DataGridView_Result.Location = new System.Drawing.Point(0, 0);
             this.DataGridView_Result.Name = "DataGridView_Result";
             this.DataGridView_Result.RowTemplate.Height = 23;
-            this.DataGridView_Result.Size = new System.Drawing.Size(1228, 612);
+            this.DataGridView_Result.Size = new System.Drawing.Size(1228, 606);
             this.DataGridView_Result.TabIndex = 1;
             // 
             // UCBOM

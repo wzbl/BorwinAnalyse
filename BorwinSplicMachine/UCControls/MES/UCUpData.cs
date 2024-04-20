@@ -1,4 +1,5 @@
-﻿using Mes;
+﻿using BorwinAnalyse.BaseClass;
+using Mes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -46,17 +47,10 @@ namespace BorwinSplicMachine.UCControls.MES
                 }
             }
             string json = JsonConvert.SerializeObject(datas, Formatting.Indented);
-            Form1.MainControl.UCMes.richLog.Text += "登入上传mes" + json;
-            string res = UpData(json);
+            string res = MesControl.Instance.UpData(InterType.上传信息, MesIn.URL.Value, json);
         }
 
-        public string UpData(string json)
-        {
-            WebApiHelper webApiHelper = new WebApiHelper();
-            return webApiHelper.HttpPost(MesIn.URL.Value, json);
-        }
-
-        private void UCMesLogin_Load(object sender, EventArgs e)
+        public void Init()
         {
             GetDataMesIn();
             GetDataMesOut();
@@ -65,16 +59,16 @@ namespace BorwinSplicMachine.UCControls.MES
         public override void GetDataMesIn()
         {
             base.GetDataMesIn();
-  
-        DataGridViewInAdd(MesControl.Instance.upDataIn.SplicTime);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.Barcode1);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.Barcode2);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.MaterialDes);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.LCRValueLeft);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.LCRValueRight);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.LCRResultLeft);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.LCRResultRight);
-        DataGridViewInAdd(MesControl.Instance.upDataIn.MatchResult);
+
+            DataGridViewInAdd(MesControl.Instance.upDataIn.SplicTime);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.Barcode1);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.Barcode2);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.MaterialDes);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.LCRValueLeft);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.LCRValueRight);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.LCRResultLeft);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.LCRResultRight);
+            DataGridViewInAdd(MesControl.Instance.upDataIn.MatchResult);
 
         }
 
@@ -91,7 +85,7 @@ namespace BorwinSplicMachine.UCControls.MES
                 string key = DataGridViewIn.Rows[i].Cells[1].FormattedValue.ToString();
                 string value = DataGridViewIn.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewIn.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
-                List<MesValue> mesValues = mesInValues.Where(x => x.Name == name).ToList();
+                List<MesValue> mesValues = mesInValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
@@ -110,7 +104,7 @@ namespace BorwinSplicMachine.UCControls.MES
                 string key = DataGridViewOut.Rows[i].Cells[1].FormattedValue.ToString();
                 string value = DataGridViewOut.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewOut.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
-                List<MesValue> mesValues = mesOutValues.Where(x => x.Name == name).ToList();
+                List<MesValue> mesValues = mesOutValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
@@ -123,8 +117,7 @@ namespace BorwinSplicMachine.UCControls.MES
 
         private void UCCode1Check_Load(object sender, EventArgs e)
         {
-            GetDataMesIn();
-            GetDataMesOut();
+           
         }
     }
 }

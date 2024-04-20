@@ -37,6 +37,10 @@ namespace BorwinSplicMachine.UCControls
             txtWo.Text = MesControl.Instance.Wo;
             txtLine.Text = MesControl.Instance.Line;
             txtMachinCode.Text = MesControl.Instance.MachineCode;
+            ucMesLogin1.Init();
+            ucCode1Check1.Init();
+            ucCode2Check1.Init();
+            ucUpData1.Init();
         }
 
 
@@ -86,6 +90,42 @@ namespace BorwinSplicMachine.UCControls
         private void btnUpData_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtIP.Text)&& int.TryParse(txtPort.Text,out int port))
+            {
+                MesClientSocket.ConnectService(txtIP.Text,port);
+            }
+            if (MesClientSocket.IsConnect)
+            {
+                btnConnect.StateCommon.Back.Image = Properties.Resources.icons8_有线网络连接_100;
+            }
+            else
+            {
+                btnConnect.StateCommon.Back.Image = Properties.Resources.icons8_没有网络_100;
+            }
+        }
+
+        private void comMesType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesType MesType = (MesType)comMesType.SelectedIndex;
+            switch (MesType)
+            {
+                case Mes.MesType.WebApi:
+                    kryptonGroupBox1.Visible = false;
+                    break;
+                case Mes.MesType.Socket:
+                    kryptonGroupBox1.Visible = true;
+                    break;
+                case Mes.MesType.WebService:
+                    kryptonGroupBox1.Visible = false;
+                    break;
+                default:
+                    break;
+            }
+           
         }
     }
 }

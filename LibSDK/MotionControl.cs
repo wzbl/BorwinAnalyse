@@ -1,19 +1,12 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
-using ComponentFactory.Krypton.Toolkit;
 using LibSDK.AxisParamDebuger;
 using LibSDK.Enums;
 using LibSDK.IO;
 using LibSDK.Motion;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static GC.Frame.Motion.Privt.CNMCLib20;
-using static LibSDK.IO.IOParm;
 
 namespace LibSDK
 {
@@ -36,7 +29,6 @@ namespace LibSDK
         /// true自动模式,false手动模式
         /// </summary>
         public static bool IsAuto = true;
-
 
         #region 卡控制
 
@@ -222,6 +214,7 @@ namespace LibSDK
                         BaseConfig.Instance.cardConfigs[i].AxisCurrentNum = count;
                     }
                     BaseConfig.Instance.Write();
+                    AxisRunVel.Instance.Load();
                 };
             }
             else

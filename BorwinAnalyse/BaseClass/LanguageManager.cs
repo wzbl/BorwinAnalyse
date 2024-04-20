@@ -43,7 +43,6 @@ namespace BorwinAnalyse.BaseClass
             return res;
         }
 
-
         public void SearchALLLanguage()
         {
             string comms = "select * from Language";
@@ -165,7 +164,6 @@ namespace BorwinAnalyse.BaseClass
                 }
 
             }
-
         }
 
         private void LoopControl(Control fatherControl)
@@ -176,7 +174,10 @@ namespace BorwinAnalyse.BaseClass
 
                 if (control is Label || control is Button || control is KryptonButton)
                 {
-                    control.Text = control.Text.tr();
+                    if (!control.Text.Contains("Cost Time：")&&!control.Text.Contains("Cur Coord：")&& !control.Text.Contains("X:"))
+                    {
+                        control.Text = control.Text.tr();
+                    }
                 }
                 else if (control is ComboBox)
                 {
@@ -209,6 +210,8 @@ namespace BorwinAnalyse.BaseClass
                 }
             }
         }
+
+        
 
         public void MethodA(Control fatherControl)
         {
@@ -348,8 +351,6 @@ namespace BorwinAnalyse.BaseClass
                 }
             }
         }
-
-
     }
     public static class LanHelper
     {

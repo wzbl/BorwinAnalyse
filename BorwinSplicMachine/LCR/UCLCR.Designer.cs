@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCLCR));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtRealValue = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtMax = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtMin = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel8 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonWrapLabel7 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.kryptonWrapLabel6 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
-            this.btnStart = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtGrade = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonWrapLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.comSize = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -77,8 +77,6 @@
             // 
             // kryptonSplitContainer1.Panel2
             // 
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.btnStart);
-            this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonButton1);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.txtGrade);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonWrapLabel5);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.comSize);
@@ -101,11 +99,12 @@
             this.kryptonDataGridView1.Location = new System.Drawing.Point(0, 0);
             this.kryptonDataGridView1.Name = "kryptonDataGridView1";
             this.kryptonDataGridView1.RowTemplate.Height = 23;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(800, 334);
+            this.kryptonDataGridView1.Size = new System.Drawing.Size(800, 309);
             this.kryptonDataGridView1.TabIndex = 1;
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.btnStart);
             this.kryptonPanel1.Controls.Add(this.txtRealValue);
             this.kryptonPanel1.Controls.Add(this.txtMax);
             this.kryptonPanel1.Controls.Add(this.txtMin);
@@ -113,29 +112,51 @@
             this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel7);
             this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel6);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 334);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 309);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ButtonCluster;
-            this.kryptonPanel1.Size = new System.Drawing.Size(800, 37);
+            this.kryptonPanel1.Size = new System.Drawing.Size(800, 62);
             this.kryptonPanel1.TabIndex = 0;
+            // 
+            // btnStart
+            // 
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnStart.Location = new System.Drawing.Point(734, 0);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(66, 62);
+            this.btnStart.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.StateCommon.Back.Image")));
+            this.btnStart.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnStart.StateNormal.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Local;
+            this.btnStart.StateNormal.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnStart.StateNormal.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnStart.StateNormal.Border.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.StateNormal.Border.Image")));
+            this.btnStart.StateNormal.Border.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnStart.StateNormal.Border.Rounding = 1;
+            this.btnStart.StateNormal.Border.Width = 1;
+            this.btnStart.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnStart.TabIndex = 21;
+            this.btnStart.Values.Text = "";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // txtRealValue
             // 
-            this.txtRealValue.Location = new System.Drawing.Point(500, 8);
+            this.txtRealValue.Location = new System.Drawing.Point(223, 35);
             this.txtRealValue.Name = "txtRealValue";
             this.txtRealValue.Size = new System.Drawing.Size(156, 23);
             this.txtRealValue.TabIndex = 6;
             // 
             // txtMax
             // 
-            this.txtMax.Location = new System.Drawing.Point(290, 8);
+            this.txtMax.Location = new System.Drawing.Point(72, 35);
             this.txtMax.Name = "txtMax";
             this.txtMax.Size = new System.Drawing.Size(126, 23);
             this.txtMax.TabIndex = 5;
             // 
             // txtMin
             // 
-            this.txtMin.Location = new System.Drawing.Point(73, 8);
+            this.txtMin.Location = new System.Drawing.Point(72, 6);
             this.txtMin.Name = "txtMin";
             this.txtMin.Size = new System.Drawing.Size(126, 23);
             this.txtMin.TabIndex = 4;
@@ -144,7 +165,7 @@
             // 
             this.kryptonWrapLabel8.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel8.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel8.Location = new System.Drawing.Point(438, 12);
+            this.kryptonWrapLabel8.Location = new System.Drawing.Point(263, 11);
             this.kryptonWrapLabel8.Name = "kryptonWrapLabel8";
             this.kryptonWrapLabel8.Size = new System.Drawing.Size(46, 15);
             this.kryptonWrapLabel8.StateCommon.TextColor = System.Drawing.Color.White;
@@ -155,7 +176,7 @@
             // 
             this.kryptonWrapLabel7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel7.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel7.Location = new System.Drawing.Point(230, 12);
+            this.kryptonWrapLabel7.Location = new System.Drawing.Point(12, 39);
             this.kryptonWrapLabel7.Name = "kryptonWrapLabel7";
             this.kryptonWrapLabel7.Size = new System.Drawing.Size(46, 15);
             this.kryptonWrapLabel7.StateCommon.TextColor = System.Drawing.Color.White;
@@ -166,32 +187,12 @@
             // 
             this.kryptonWrapLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.kryptonWrapLabel6.ForeColor = System.Drawing.Color.Black;
-            this.kryptonWrapLabel6.Location = new System.Drawing.Point(12, 12);
+            this.kryptonWrapLabel6.Location = new System.Drawing.Point(11, 10);
             this.kryptonWrapLabel6.Name = "kryptonWrapLabel6";
             this.kryptonWrapLabel6.Size = new System.Drawing.Size(46, 15);
             this.kryptonWrapLabel6.StateCommon.TextColor = System.Drawing.Color.White;
             this.kryptonWrapLabel6.StateNormal.TextColor = System.Drawing.Color.Black;
             this.kryptonWrapLabel6.Text = "最小值";
-            // 
-            // btnStart
-            // 
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnStart.Location = new System.Drawing.Point(0, 294);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(135, 40);
-            this.btnStart.TabIndex = 21;
-            this.btnStart.Values.Text = "启动";
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonButton1.Location = new System.Drawing.Point(0, 334);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.Size = new System.Drawing.Size(135, 37);
-            this.kryptonButton1.TabIndex = 20;
-            this.kryptonButton1.Values.Text = "校准";
-            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // txtGrade
             // 
@@ -347,7 +348,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox comSize;
         private ComponentFactory.Krypton.Toolkit.KryptonWrapLabel kryptonWrapLabel2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnStart;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtRealValue;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtMax;

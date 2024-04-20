@@ -71,6 +71,7 @@
     <Compile Include="AxisControl.Designer.cs">
       <DependentUpon>AxisControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="AxisParamDebuger\AxisRunVel.cs" />
     <Compile Include="AxisParamDebuger\DebugerAxisParam.cs" />
     <Compile Include="Dataview\AxisParam.cs">
       <SubType>Form</SubType>
