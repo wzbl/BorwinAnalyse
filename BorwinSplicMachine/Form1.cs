@@ -141,7 +141,7 @@ namespace BorwinSplicMachine
         /// 运动控制
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e"></param>   
         private void kryptonRibbonGroupButton11_Click(object sender, EventArgs e)
         {
             kryptonPanel1.Controls.Clear();

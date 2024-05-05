@@ -77,7 +77,7 @@ namespace BorwinSplicMachine
             DataTable dataTable = LanguageManager.Instance.SearchALLLanguageType();
             ParamManager.Instance.Load();
             BartenderPrintModel.Instance.Load();
-            if (dataTable != null) 
+            if (dataTable != null)
             {
                 if (dataTable.Rows.Count > 0)
                 {
@@ -221,19 +221,18 @@ namespace BorwinSplicMachine
                     }
                 }
             }
-            else
+            else if (!CodeControl.Code2.IsSuccess)
             {
-                if (CodeControl.Code1.Code == code)
+                if (MesControl.Instance.IsOpenMes)
+                {
+                    MesControl.Instance.checkInCode2.Code1.Value = CodeControl.Code1.Code;
+                    MesControl.Instance.checkInCode2.Code2.Value = code;
+                    UCMes.ucCode2Check1.Updata(InterType.条码2检验);
+                }
+                else if (CodeControl.Code1.Code == code)
                 {
                     CodeControl.Code2.Code = code;
                     CodeControl.Code2.IsSuccess = true;
-
-                    if (MesControl.Instance.IsOpenMes)
-                    {
-                        MesControl.Instance.checkInCode2.Code1.Value = CodeControl.Code1.Code;
-                        MesControl.Instance.checkInCode2.Code2.Value = code;
-                        UCMes.ucCode2Check1.Updata(InterType.条码2检验);
-                    }
                 }
             }
         }

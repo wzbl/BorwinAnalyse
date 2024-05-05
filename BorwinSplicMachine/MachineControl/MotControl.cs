@@ -198,12 +198,16 @@ namespace BorwinSplicMachine
         Thread Thread2 = null;
         public void Run()
         {
-            Thread = new Thread(LeftAndRight);
-            Thread.IsBackground = true;
-            Thread.Start();
+            if (MotionControl.CardAPI.IsInitCardOK)
+            {
+                Thread = new Thread(LeftAndRight);
+                Thread.IsBackground = true;
+                Thread.Start();
 
-            Thread2 = new Thread(ResetAndFilm);
-            Thread2.Start();
+                Thread2 = new Thread(ResetAndFilm);
+                Thread2.Start();
+            }
+          
         }
 
         KTimer kTimer = new KTimer();
@@ -271,7 +275,7 @@ namespace BorwinSplicMachine
                                 if (FlowLeft == MainFlow.完成 && FlowRight == MainFlow.完成)
                                 {
                                     filmFlow = FilmFlow.吸头上下吸膜;
-                                    吸头上下.MovePosByName("吸膜位置下", 1 ,AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
+                                    吸头上下.MovePosByName("吸膜位置下", 1, AxisRunVel.Instance.吸头上下.Sped, AxisRunVel.Instance.吸头上下.Acc);
                                     if (FileSuccessCount == 0)
                                     {
                                         左进入.PMove(-左进入.GetPosByName("接料位"), 0, AxisRunVel.Instance.左进入.Sped, AxisRunVel.Instance.左进入.Acc);
@@ -357,7 +361,7 @@ namespace BorwinSplicMachine
                         case FilmFlow.贴膜动作:
                             if (吸头上下.InPos("贴膜位置下"))
                             {
-                                凸轮.MovePosByName("至包胶位", 1,  AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
+                                凸轮.MovePosByName("至包胶位", 1, AxisRunVel.Instance.凸轮.Sped, AxisRunVel.Instance.凸轮.Acc);
                                 filmFlow = FilmFlow.包胶动作;
                             }
                             break;
@@ -863,17 +867,13 @@ namespace BorwinSplicMachine
 
         public void Stop()
         {
-
-            if (!MotionControl.CardAPI.StopEmgAxis())
-            {
-                MotionControl.CardAPI.StopEmgAxis();
-            }
+            MotionControl.CardAPI.StopEmgAxis();
         }
 
         public void Reset()
         {
             if (MotionControl.CardAPI.IsInitCardOK)
-            resetFlow = ResetFlow.吸嘴_测值上下回零;
+                resetFlow = ResetFlow.吸嘴_测值上下回零;
         }
 
         /// <summary>
@@ -948,7 +948,7 @@ namespace BorwinSplicMachine
                 {
                     case RunnersWidth._8mm:
                         if (!流道调宽.InPos("流道8mm"))
-                            流道调宽.MovePosByName("流道8mm", 1,AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
+                            流道调宽.MovePosByName("流道8mm", 1, AxisRunVel.Instance.流道调宽.Sped, AxisRunVel.Instance.流道调宽.Acc);
                         break;
                     case RunnersWidth._12mm:
                         if (!流道调宽.InPos("流道12mm"))

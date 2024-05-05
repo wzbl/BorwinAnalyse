@@ -230,7 +230,7 @@ namespace LibSDK
         /// <param name="message"></param>
         public static void Log(string message)
         {
-            LogManager.Instance.WriteLog(new LogModel(LogType.运动控制日志, message));
+            LogManager.Instance.WriteLog(new LogModel(LogType.运动日志, message));
         }
 
         #region 外部获取轴/IO

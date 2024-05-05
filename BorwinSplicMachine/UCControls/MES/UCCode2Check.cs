@@ -23,11 +23,28 @@ namespace BorwinSplicMachine.UCControls.MES
             btnSave.Click += BtnSave_Click;
             MesIn = MesControl.Instance.checkInCode2;
             MesOut = MesControl.Instance.checkOutCode2;
+            MesClientSocket.OnReceive += OnSocketReceive;
+        }
+
+        /// <summary>
+        /// 收到返回
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnSocketReceive(string obj)
+        {
+            if (CurrentType == InterType.条码2检验)
+            {
+                AnalyData(obj);
+                this.Invoke(new Action(() => {
+                    GetDataMesOut();
+                }));
+            }
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
-            MesControl.Instance.Save();
+            //MesControl.Instance.Save();
         }
 
         public void Save()
@@ -39,7 +56,7 @@ namespace BorwinSplicMachine.UCControls.MES
         private void BtnRun_Click(object sender, EventArgs e)
         {
             Updata(InterType.条码2检验);
-            GetDataMesOut();
+            
         }
 
         
@@ -80,7 +97,7 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesIn();
+            //GetDataMesIn();
         }
 
         public override void SaveDataMesOut()
@@ -99,7 +116,7 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesOut();
+            //GetDataMesOut();
         }
 
         public void Init()

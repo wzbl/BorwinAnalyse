@@ -30,14 +30,25 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCMesLogin));
             this.SuspendLayout();
-      
+            // 
+            // btnSave
+            // 
+            this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.Values.Text = "";
+            // 
+            // btnRun
+            // 
+            this.btnRun.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.StateCommon.Back.Image")));
+            this.btnRun.StateCommon.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
+            this.btnRun.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnRun.Values.Text = "";
             // 
             // UCMesLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UCMesLogin";
-            this.Size = new System.Drawing.Size(1562, 887);
+            this.Size = new System.Drawing.Size(1580, 887);
             this.ResumeLayout(false);
 
         }

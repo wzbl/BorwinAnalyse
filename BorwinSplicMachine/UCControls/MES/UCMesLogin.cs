@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,12 +24,31 @@ namespace BorwinSplicMachine.UCControls.MES
             btnSave.Click += BtnSave_Click;
             MesIn = MesControl.Instance.loginIn;
             MesOut = MesControl.Instance.loginOut;
+            MesClientSocket.OnReceive += OnSocketReceive;
+        }
+
+        /// <summary>
+        /// 收到返回
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnSocketReceive(string obj)
+        {
+            if (CurrentType== InterType.登录)
+            {
+                AnalyData(obj);
+                this.Invoke(new Action(() => {
+                    GetDataMesOut();
+                }));
+             
+            }
+         
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
-            MesControl.Instance.Save();
+            //MesControl.Instance.Save();
         }
 
         public void Save()
@@ -40,7 +60,7 @@ namespace BorwinSplicMachine.UCControls.MES
         private void BtnRun_Click(object sender, EventArgs e)
         {
             Updata(InterType.登录);
-            GetDataMesOut();
+            
         }
 
         public void Init()
@@ -83,7 +103,7 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesIn();
+            //GetDataMesIn();
         }
 
         public override void SaveDataMesOut()
@@ -92,17 +112,17 @@ namespace BorwinSplicMachine.UCControls.MES
             {
                 string name = DataGridViewOut.Rows[i].Cells[0].FormattedValue.ToString();
                 string key = DataGridViewOut.Rows[i].Cells[1].FormattedValue.ToString();
-                string value = DataGridViewOut.Rows[i].Cells[2].FormattedValue.ToString();
+                //string value = DataGridViewOut.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewOut.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
                 List<MesValue> mesValues = mesOutValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
-                    mesValues[0].Value = value;
+                    //mesValues[0].Value = value;
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesOut();
+            //GetDataMesOut();
         }
     }
 }

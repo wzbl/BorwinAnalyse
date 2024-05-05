@@ -23,11 +23,28 @@ namespace BorwinSplicMachine.UCControls.MES
             btnSave.Click += BtnSave_Click;
             MesIn = MesControl.Instance.upDataIn;
             MesOut = MesControl.Instance.upDataOut;
+            MesClientSocket.OnReceive += OnSocketReceive;
+        }
+
+        /// <summary>
+        /// 收到返回
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnSocketReceive(string obj)
+        {
+            if (CurrentType == InterType.上传信息)
+            {
+                AnalyData(obj);
+                this.Invoke(new Action(() => {
+                    GetDataMesOut();
+                }));
+            }
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
-            MesControl.Instance.Save();
+            //MesControl.Instance.Save();
         }
 
         public void Save()
@@ -38,16 +55,7 @@ namespace BorwinSplicMachine.UCControls.MES
 
         private void BtnRun_Click(object sender, EventArgs e)
         {
-            Dictionary<string, string> datas = new Dictionary<string, string>();
-            foreach (var item in mesInValues)
-            {
-                if (item.Enable && item != MesControl.Instance.upDataIn.IsEnable && item != MesControl.Instance.upDataIn.URL)
-                {
-                    datas.Add(item.Key, item.Value);
-                }
-            }
-            string json = JsonConvert.SerializeObject(datas, Formatting.Indented);
-            string res = MesControl.Instance.UpData(InterType.上传信息, MesIn.URL.Value, json);
+            Updata(InterType.上传信息);
         }
 
         public void Init()
@@ -93,7 +101,7 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesIn();
+            //GetDataMesIn();
         }
 
         public override void SaveDataMesOut()
@@ -112,7 +120,7 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesOut();
+            //GetDataMesOut();
         }
 
         private void UCCode1Check_Load(object sender, EventArgs e)

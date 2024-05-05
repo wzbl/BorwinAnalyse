@@ -326,7 +326,7 @@ namespace BorwinSplicMachine.FlowModel
             {
                 if (selectFlowModes.IsSelectFlowModes)
                 {
-                    graphics.DrawRectangle(new Pen(Brushes.Yellow), selectFlowModes.Point.X, selectFlowModes.Point.Y, selectFlowModes.Width, selectFlowModes.Height);
+                    graphics.DrawRectangle(new Pen(Brushes.Blue), selectFlowModes.Point.X, selectFlowModes.Point.Y, selectFlowModes.Width, selectFlowModes.Height);
                 }
             }
         }

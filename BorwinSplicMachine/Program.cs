@@ -49,7 +49,6 @@ namespace BorwinSplicMachine
                 System.Environment.Exit(System.Environment.ExitCode);
             }
 
-
             //Application.Run(new AnalyseMainForm());
             //Application.Run(new MotionConfig());
 

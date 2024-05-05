@@ -109,6 +109,7 @@ namespace Mes
                     Log(res);
                     break;
                 case MesType.Socket:
+                    MesClientSocket.ConnectService("127.0.0.1",6666);
                     MesClientSocket.ClientSendMsg(json);
                     res = MesType.Socket.ToString();
                     break;
@@ -157,6 +158,7 @@ namespace Mes
         public MesValue MachineCode = new MesValue("设备代码", "", true);
         public MesValue Wo = new MesValue("工单单号", "", true);
         public MesValue UserName = new MesValue("用户名", "", true);
+        public MesValue InterFaceNo = new MesValue("接口序号", "1", true);
     }
 
     public class MesOut
@@ -165,6 +167,7 @@ namespace Mes
         public MesValue Result = new MesValue("结果", "");
         public MesValue ErrorMsg = new MesValue("失败信息", "");
         public MesValue ErrorCode = new MesValue("失败代码", "");
+        public MesValue InterFaceNo = new MesValue("接口序号", "1", true);
     }
 
     public class LoginIn : MesIn
@@ -372,10 +375,10 @@ namespace Mes
         /// <param name="port"></param>
         public static void ConnectService(string ip, int port)
         {
-            if (socket.Connected)
-            {
-                return;
-            }
+            //if (socket.Connected)
+            //{
+            //    return;
+            //}
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
@@ -412,6 +415,8 @@ namespace Mes
                     {
                         string msg = Encoding.UTF8.GetString(buffer);
                         OnReceive?.Invoke(msg);
+                        MesClientSocket.Close();
+                        break;
                     }
                 }
                 catch (Exception ex)
@@ -421,7 +426,6 @@ namespace Mes
                 }
                 Thread.Sleep(10);
             }
-            MesClientSocket.Close();
         }
 
         public static void ClientSendMsg(string msg)

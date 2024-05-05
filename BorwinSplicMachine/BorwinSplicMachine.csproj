@@ -252,6 +252,12 @@
     <Compile Include="UCControls\UCMes.Designer.cs">
       <DependentUpon>UCMes.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCControls\Vision\CreateModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCControls\Vision\CreateModel.Designer.cs">
+      <DependentUpon>CreateModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -263,12 +269,6 @@
     </Compile>
     <Compile Include="UCVisor.Designer.cs">
       <DependentUpon>UCVisor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VisiTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VisiTest.Designer.cs">
-      <DependentUpon>VisiTest.cs</DependentUpon>
     </Compile>
     <Compile Include="WAVPlayer.cs" />
     <EmbeddedResource Include="FlowModel\FlowBaseModel.resx">
@@ -337,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCMes.resx">
       <DependentUpon>UCMes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\Vision\CreateModel.resx">
+      <DependentUpon>CreateModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCMain.resx">
       <DependentUpon>UCMain.cs</DependentUpon>

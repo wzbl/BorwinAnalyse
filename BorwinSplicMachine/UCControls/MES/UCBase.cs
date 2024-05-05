@@ -7,7 +7,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,27 +17,17 @@ namespace BorwinSplicMachine.UCControls.MES
 {
     public partial class UCBase : UserControl
     {
-        protected List<MesValue> mesInValues = new List<MesValue>();
-        protected List<MesValue> mesOutValues = new List<MesValue>();
-        protected MesIn MesIn;
-        protected MesOut MesOut;
-        private InterType CurrentType = InterType.登录;
+        public List<MesValue> mesInValues = new List<MesValue>();
+        public List<MesValue> mesOutValues = new List<MesValue>();
+        public MesIn MesIn;
+        public MesOut MesOut;
+        public static InterType CurrentType = InterType.登录;
         public UCBase()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-            MesClientSocket.OnReceive += OnSocketReceive;
         }
 
-        /// <summary>
-        /// 收到返回
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void OnSocketReceive(string obj)
-        {
-            AnalyData(obj);
-        }
 
         public virtual void GetDataMesIn()
         {
@@ -51,6 +43,7 @@ namespace BorwinSplicMachine.UCControls.MES
             DataGridViewInAdd(MesIn.MachineCode);
             DataGridViewInAdd(MesIn.Wo);
             DataGridViewInAdd(MesIn.UserName);
+            DataGridViewInAdd(MesIn.InterFaceNo);
         }
 
         protected void DataGridViewInAdd(MesValue mesValue)
@@ -81,6 +74,7 @@ namespace BorwinSplicMachine.UCControls.MES
             DataGridViewOutAdd(MesOut.Result);
             DataGridViewOutAdd(MesOut.ErrorMsg);
             DataGridViewOutAdd(MesOut.ErrorCode);
+            DataGridViewOutAdd(MesOut.InterFaceNo);
         }
 
 
@@ -100,6 +94,7 @@ namespace BorwinSplicMachine.UCControls.MES
             if (res != MesType.Socket.ToString())
             {
                 AnalyData(res);
+                GetDataMesOut();
             }
         }
 
@@ -107,11 +102,20 @@ namespace BorwinSplicMachine.UCControls.MES
         /// 解析mes返回数据
         /// </summary>
         /// <param name="res"></param>
-        private void AnalyData(string res)
+        public void AnalyData(string res)
         {
             try
             {
+                foreach (MesValue pv in mesOutValues)
+                    pv.Value = "";
                 dynamic o = JsonConvert.DeserializeObject(res);
+                if (o != null)
+                {
+                    string s = o.ToString();
+                    s = s.Replace("\\", "");
+                    o = JsonConvert.DeserializeObject(s);
+                }
+
                 foreach (MesValue pv in mesOutValues)
                 {
                     try
@@ -129,7 +133,7 @@ namespace BorwinSplicMachine.UCControls.MES
 
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
 
                     }
@@ -137,7 +141,7 @@ namespace BorwinSplicMachine.UCControls.MES
             }
             catch (Exception ex)
             {
-                MesOut.ErrorMsg.Value= res;
+                MesOut.ErrorMsg.Value = res;
             }
 
             switch (CurrentType)
@@ -163,17 +167,17 @@ namespace BorwinSplicMachine.UCControls.MES
         {
             if (MesOut.Result.Value == "OK")
             {
-               
+
             }
             else
             {
-                
+
             }
         }
 
         private void AnalyCheckCode1()
         {
-            if (MesOut.Result.Value=="OK")
+            if (MesOut.Result.Value == "OK")
             {
                 Form1.MainControl.CodeControl.Code1.IsSuccess = true;
                 WAVPlayer.Playerer(WAVPlayer.playName.条码1获取成功请扫条码2);
@@ -189,12 +193,12 @@ namespace BorwinSplicMachine.UCControls.MES
         {
             if (MesOut.Result.Value == "OK")
             {
-                Form1.MainControl.CodeControl.Code1.IsSuccess = true;
+                Form1.MainControl.CodeControl.Code2.IsSuccess = true;
                 WAVPlayer.Playerer(WAVPlayer.playName.条码比对成功);
             }
             else
             {
-                Form1.MainControl.CodeControl.Code1.IsSuccess = true;
+                Form1.MainControl.CodeControl.Code2.IsSuccess = false;
                 WAVPlayer.Playerer(WAVPlayer.playName.条码比对失败);
             }
         }

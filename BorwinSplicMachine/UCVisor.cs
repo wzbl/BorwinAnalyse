@@ -1,6 +1,7 @@
 ﻿using BorwinAnalyse.BaseClass;
 using BorwinAnalyse.DataBase.Model;
 using BorwinSplicMachine;
+using BorwinSplicMachine.UCControls.Vision;
 using ComponentFactory.Krypton.Toolkit;
 using FeederSpliceVisionSys;
 using LibSDK;
@@ -88,7 +89,7 @@ namespace VisionModel.UCControls
                                         {
                                             return;
                                         }
-                                        VisiTest visiTest = new VisiTest();
+                                        CreateModel visiTest = new CreateModel();
                                         visiTest.ShowDialog();
                                         cont++;
                                         VisionDetection.Detection_CutPos(Station.LiftStation);
@@ -111,14 +112,7 @@ namespace VisionModel.UCControls
                                     Log("物料间距" + ProductSpacingType.ToString());
                                     Log("找空料OK");
                                     cont = 0;
-                                    if (Result.OCVEnabled)
-                                    {
-                                        if (Result.OCVResult == false)
-                                        {
-                                            Log("弹出OCV图片显示及人工确认界面");
-                                        }
-
-                                    }
+                              
 
                                     break;
                                 }
@@ -132,7 +126,7 @@ namespace VisionModel.UCControls
                         break;
                     }
 
-                case MyDetectionType.Detection_DockPos:
+                case MyDetectionType.Detection_DockPosRedress:
                     {
                         switch (_Station)
                         {
@@ -247,19 +241,19 @@ namespace VisionModel.UCControls
                 case 0:
                     comCameraNum.Text = VisionDetection.get_CameraSerialNum(Station.LiftStation);
                     VisionDetection.ShowImage(Station.LiftStation, MyShowImage.CurrentImage, ModelType.None);
-                    VisionDetection.set_ShowDrawRegionUIPanel(Station.LiftStation, currentP);
+                    //VisionDetection.ShowDrawRegionUIPanel(Station.LiftStation);
                     curStation = Station.LiftStation;
                     break;
                 case 1:
                     comCameraNum.Text = VisionDetection.get_CameraSerialNum(Station.RightStation);
                     VisionDetection.ShowImage(Station.RightStation, MyShowImage.CurrentImage, ModelType.None);
-                    VisionDetection.set_ShowDrawRegionUIPanel(Station.RightStation, currentP);
+                    //VisionDetection.set_ShowDrawRegionUIPanel(Station.RightStation, currentP);
                     curStation = Station.RightStation;
                     break;
                 case 2:
                     comCameraNum.Text = VisionDetection.get_CameraSerialNum(Station.MeasureStation);
                     VisionDetection.ShowImage(Station.MeasureStation, MyShowImage.CurrentImage, ModelType.None);
-                    VisionDetection.set_ShowDrawRegionUIPanel(Station.MeasureStation, currentP);
+                    //VisionDetection.set_ShowDrawRegionUIPanel(Station.MeasureStation, currentP);
                     curStation = Station.MeasureStation;
                     break;
                 default:
@@ -281,7 +275,7 @@ namespace VisionModel.UCControls
         /// </summary>
         private void SetStationData()
         {
-            VisionDetection.set_ShowDrawRegionUIPanel(curStation, currentP);
+            //VisionDetection.set_ShowDrawRegionUIPanel(curStation, currentP);
             double cirradius = 0, pixelsize = 0;
             VisionDetection.GetPixelCalibrationParameter(curStation, ref cirradius, ref pixelsize);
             txtRadus.Text = cirradius.ToString();
@@ -291,13 +285,13 @@ namespace VisionModel.UCControls
             txt透明曝光值.Text = MyCameraParameter_.ExposureTimeTransTape.ToString();
             txt纸料带曝光.Text = MyCameraParameter_.ExposureTimePaperTape.ToString();
             txt黑料带曝光.Text = MyCameraParameter_.ExposureTimeBlackTape.ToString();
-            MyLightLevel MyLightLevel_ = VisionDetection.get_LightParameter(curStation);
-            if (MyLightLevel_ != null)
-            {
-                comLight.SelectedIndex = (int)MyLightLevel_.SelectLightSource;
-                txtBacklight.Text = MyLightLevel_.BacklightLevel.ToString();
-                txtFrontlight.Text = MyLightLevel_.FrontlightLevel.ToString();
-            }
+            //MyLightLevel MyLightLevel_ = VisionDetection.get_LightParameter(curStation);
+            //if (MyLightLevel_ != null)
+            //{
+            //    comLight.SelectedIndex = (int)MyLightLevel_.SelectLightSource;
+            //    txtBacklight.Text = MyLightLevel_.BacklightLevel.ToString();
+            //    txtFrontlight.Text = MyLightLevel_.FrontlightLevel.ToString();
+            //}
             MyMaterialDetection MyMaterialDetection_ = VisionDetection.get_CheckMaterialParameter(curStation);
             if (MyMaterialDetection_ != null)
             {
@@ -395,7 +389,7 @@ namespace VisionModel.UCControls
             MyLightLevel_.BacklightLevel = int.Parse(txtBacklight.Text);
             MyLightLevel_.FrontlightLevel = int.Parse(txtFrontlight.Text);
             VisionDetection.set_CameraParameter(curStation, MyCameraParameter_);
-            VisionDetection.set_LightParameter(curStation, MyLightLevel_);
+            //VisionDetection.set_LightParameter(curStation, MyLightLevel_);
 
 
             MyMaterialDetection MyMaterialDetection_ = new MyMaterialDetection();
@@ -470,7 +464,6 @@ namespace VisionModel.UCControls
                 NUDMatchThreshold.Text = OcvModelParameter_.MatchScore.ToString();
                 NUDCountToFind.Text = OcvModelParameter_.CountToMatch.ToString();
                 OCVScore.Text = OcvModelParameter_.OCVScore.ToString();
-                chkEnable.Checked = OcvModelParameter_.Enabled;
                 if (OcvModelParameter_.MatchMode == ModelMatchMode.QuickMode)
                     comSelectModel.SelectedIndex = 0;
                 else
@@ -506,7 +499,7 @@ namespace VisionModel.UCControls
         {
             DrawRegion(btnTrainRegion, RegionType.TrainRegion);
         }
-
+         
         private void btnModelImg_Click(object sender, EventArgs e)
         {
             VisionDetection.ShowImage(curStation, MyShowImage.ModelImage, mCurModel);
@@ -539,7 +532,6 @@ namespace VisionModel.UCControls
                 ocvModelParameter_.MatchScore = int.Parse(NUDMatchThreshold.Text);
                 ocvModelParameter_.CountToMatch = int.Parse(NUDCountToFind.Text);
                 ocvModelParameter_.OCVScore = int.Parse(OCVScore.Text);
-                ocvModelParameter_.Enabled = chkEnable.Checked;
                 if (comSelectModel.SelectedIndex == 0)
                     ocvModelParameter_.MatchMode = ModelMatchMode.QuickMode;
                 else

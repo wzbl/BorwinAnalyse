@@ -111,6 +111,7 @@ namespace BorwinSplicMachine.UCControls
         private void comMesType_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesType MesType = (MesType)comMesType.SelectedIndex;
+            MesControl.Instance.MesType = MesType;
             switch (MesType)
             {
                 case Mes.MesType.WebApi:

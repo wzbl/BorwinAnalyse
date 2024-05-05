@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace BorwinSplicMachine.UCControls.MES
 {
-    public partial class UCCode1Check :UCBase
+    public partial class UCCode1Check : UCBase
     {
         public UCCode1Check()
         {
@@ -25,9 +25,25 @@ namespace BorwinSplicMachine.UCControls.MES
             btnSave.Click += BtnSave_Click;
             MesIn = MesControl.Instance.checkInCode1;
             MesOut = MesControl.Instance.checkOutCode1;
+            MesClientSocket.OnReceive += OnSocketReceive;
         }
 
-       
+        /// <summary>
+        /// 收到返回
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void OnSocketReceive(string obj)
+        {
+            if (CurrentType == InterType.条码1检验)
+            {
+                AnalyData(obj);
+                this.Invoke(new Action(() => {
+                    GetDataMesOut();
+                }));
+            }
+        }
+
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -44,7 +60,6 @@ namespace BorwinSplicMachine.UCControls.MES
         private void BtnRun_Click(object sender, EventArgs e)
         {
             Updata(InterType.条码1检验);
-            GetDataMesOut();
         }
 
         public void Init()
@@ -86,7 +101,6 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesIn();
         }
 
         public override void SaveDataMesOut()
@@ -105,7 +119,6 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
-            GetDataMesOut();
         }
 
         private void UCCode1Check_Load(object sender, EventArgs e)
