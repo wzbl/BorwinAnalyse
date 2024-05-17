@@ -153,7 +153,11 @@ namespace BorwinSplicMachine
             MainControl.Log("程序关闭");
             MainControl.Close();
             Thread.Sleep(50);
-            System.Environment.Exit(System.Environment.ExitCode);
+            try
+            { System.Environment.Exit(System.Environment.ExitCode); }
+            catch (Exception ex) 
+            {  }
+           
             this.Dispose();
             this.Close();
         }
@@ -214,6 +218,17 @@ namespace BorwinSplicMachine
             {
                 kbpr = System.Diagnostics.Process.Start("osk.exe");
             }
+        }
+
+        /// <summary>
+        /// 用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void kryptonRibbonGroupButton8_Click(object sender, EventArgs e)
+        {
+            kryptonPanel1.Controls.Clear();
+            kryptonPanel1.Controls.Add(MainControl.UCUser);
         }
     }
 }

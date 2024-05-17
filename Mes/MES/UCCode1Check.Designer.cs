@@ -1,6 +1,6 @@
-﻿namespace BorwinSplicMachine.UCControls.MES
+﻿namespace Mes
 {
-    partial class UCMesLogin
+    partial class UCCode1Check
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCMesLogin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCCode1Check));
             this.SuspendLayout();
             // 
             // btnSave
             // 
             this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
+            this.btnSave.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
+            this.btnSave.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSave.Values.Text = "";
             // 
             // btnRun
@@ -43,12 +45,12 @@
             this.btnRun.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnRun.Values.Text = "";
             // 
-            // UCMesLogin
+            // UCCode1Check
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "UCMesLogin";
-            this.Size = new System.Drawing.Size(1580, 887);
+            this.Name = "UCCode1Check";
+            this.Size = new System.Drawing.Size(1548, 587);
             this.ResumeLayout(false);
 
         }

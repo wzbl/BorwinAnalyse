@@ -49,12 +49,35 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ComponentFactory.Krypton.Docking, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Workspace, Version=4.6.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ComponentFactory.Krypton.Workspace.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,13 +87,102 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MesControl.cs" />
+    <Compile Include="MES\UCBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCBase.Designer.cs">
+      <DependentUpon>UCBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\UCCode1Check.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCCode1Check.Designer.cs">
+      <DependentUpon>UCCode1Check.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\UCCode2Check.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCCode2Check.Designer.cs">
+      <DependentUpon>UCCode2Check.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\UCHP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCHP.Designer.cs">
+      <DependentUpon>UCHP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\UCHPSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCHPSetting.Designer.cs">
+      <DependentUpon>UCHPSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\UCMesLogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCMesLogin.Designer.cs">
+      <DependentUpon>UCMesLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MES\UCUpData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\UCUpData.Designer.cs">
+      <DependentUpon>UCUpData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UCMes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCMes.Designer.cs">
+      <DependentUpon>UCMes.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MES\UCBase.resx">
+      <DependentUpon>UCBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\UCCode1Check.resx">
+      <DependentUpon>UCCode1Check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\UCCode2Check.resx">
+      <DependentUpon>UCCode2Check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\UCHP.resx">
+      <DependentUpon>UCHP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\UCHPSetting.resx">
+      <DependentUpon>UCHPSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\UCMesLogin.resx">
+      <DependentUpon>UCMesLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MES\UCUpData.resx">
+      <DependentUpon>UCUpData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCMes.resx">
+      <DependentUpon>UCMes.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BorwinAnalyse\BorwinAnalyse.csproj">
       <Project>{E24F3998-FF55-4A8F-A7B5-B2DCC34EB3C2}</Project>
       <Name>BorwinAnalyse</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-没有网络-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-有线网络连接-100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -62,7 +62,7 @@
             // 
             // btnLogOut
             // 
-            this.btnLogOut.Location = new System.Drawing.Point(333, 3);
+            this.btnLogOut.Location = new System.Drawing.Point(64, 160);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(76, 73);
             this.btnLogOut.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.StateCommon.Back.Image")));
@@ -73,7 +73,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(259, 160);
+            this.btnLogin.Location = new System.Drawing.Point(268, 160);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(76, 73);
             this.btnLogin.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnLogin.StateCommon.Back.Image")));
@@ -84,7 +84,7 @@
             // 
             // btnRegi
             // 
-            this.btnRegi.Location = new System.Drawing.Point(64, 164);
+            this.btnRegi.Location = new System.Drawing.Point(324, 3);
             this.btnRegi.Name = "btnRegi";
             this.btnRegi.Size = new System.Drawing.Size(76, 69);
             this.btnRegi.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnRegi.StateCommon.Back.Image")));
@@ -123,9 +123,10 @@
             this.comLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comLevel.DropDownWidth = 121;
             this.comLevel.Items.AddRange(new object[] {
-            "Operator",
-            "Administrator",
-            "Engineer"});
+            "Oprator",
+            "Technician",
+            "Engineer",
+            "Admin"});
             this.comLevel.Location = new System.Drawing.Point(151, 35);
             this.comLevel.Name = "comLevel";
             this.comLevel.Size = new System.Drawing.Size(121, 21);
@@ -154,7 +155,7 @@
             this.btnOSK.Location = new System.Drawing.Point(278, 89);
             this.btnOSK.Name = "btnOSK";
             this.btnOSK.Size = new System.Drawing.Size(51, 39);
-            this.btnOSK.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton1.StateCommon.Back.Image")));
+            this.btnOSK.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnOSK.StateCommon.Back.Image")));
             this.btnOSK.StateCommon.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
             this.btnOSK.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.CenterMiddle;
             this.btnOSK.TabIndex = 25;

@@ -48,6 +48,10 @@ namespace BorwinAnalyse.UCControls
             kryptonDataGridView1.Rows.Clear();
             for (int i = 0; i < BartenderPrintModel.Instance.PrintValues.Count; i++)
             {
+                if (BartenderPrintModel.Instance.PrintValues[i].Name=="QR")
+                {
+                    continue;
+                }
                 kryptonDataGridView1.Rows.Add(
                     BartenderPrintModel.Instance.PrintValues[i].Name,
                     BartenderPrintModel.Instance.PrintValues[i].Key,
@@ -81,12 +85,13 @@ namespace BorwinAnalyse.UCControls
                     string name = kryptonDataGridView1.Rows[i].Cells[0].Value == null ? "" : kryptonDataGridView1.Rows[i].Cells[0].Value.ToString();
                     string key = kryptonDataGridView1.Rows[i].Cells[1].Value == null ? "" : kryptonDataGridView1.Rows[i].Cells[1].Value.ToString();
                     string value = kryptonDataGridView1.Rows[i].Cells[2].Value == null ? "" : kryptonDataGridView1.Rows[i].Cells[2].Value.ToString();
+                    bool enable = kryptonDataGridView1.Rows[i].Cells[3].Value == null ? false : (bool)kryptonDataGridView1.Rows[i].Cells[3].Value;
                     PrintValue printValue = new PrintValue
                         (
                         name,
                         key,
                         value,
-                        (bool)kryptonDataGridView1.Rows[i].Cells[3].Value
+                        enable
                         );
                     BartenderPrintModel.Instance.PrintValues.Add(printValue);
                 }

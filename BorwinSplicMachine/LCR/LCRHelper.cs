@@ -231,6 +231,10 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void SetPinWidth()
         {
+            if (!MotionControl.CardAPI.IsInitCardOK)
+            {
+                return;
+            }
             switch (Size)
             {
                 case LCR_Size._01005:

@@ -55,21 +55,21 @@ namespace BorwinAnalyse.BaseClass
         public List<GradeChange> GradeChanges = new List<GradeChange>();
 
         /// <summary>
-        /// 电阻
+        /// 电阻,统一RES
         /// </summary>
         public string Resistance = "resistance,RES";
         /// <summary>
-        /// 电容
+        /// 电容，统一CAP
         /// </summary>
         public string Capacitance = "capacitance,CAP";
 
         /// <summary>
-        /// 电阻单位
+        /// 电阻单位，大写
         /// </summary>
         public string ResistanceUnit = "MΩ,KΩ,Ω,M,K,R,HΩ";
 
         /// <summary>
-        /// 电容单位
+        /// 电容单位，大写
         /// </summary>
         public string CapacitanceUnit = "PF,NF,UF,P,N,U";
 

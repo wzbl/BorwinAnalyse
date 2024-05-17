@@ -124,8 +124,6 @@ namespace BorwinSplicMachine
 
         public static RunnersWidth runnersWidth = RunnersWidth._8mm;
 
-        private KTimer timer = new KTimer();
-
         public MotControl()
         {
 
@@ -207,7 +205,7 @@ namespace BorwinSplicMachine
                 Thread2 = new Thread(ResetAndFilm);
                 Thread2.Start();
             }
-          
+
         }
 
         KTimer kTimer = new KTimer();
@@ -573,6 +571,7 @@ namespace BorwinSplicMachine
                             {
                                 Form1.MainControl.UCVision.Log("找空料超时");
                                 FlowLeft = MainFlow.开始找空料;
+                                AlarmControl.Alarm = AlarmList.找空料超时;
                             }
                             break;
                         case MainFlow.找空料OK:

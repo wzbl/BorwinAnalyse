@@ -24,6 +24,10 @@ namespace BorwinSplicMachine
             this.Load += FormLogin_Load;
             this.FormClosed += FormLogin_FormClosed;
             comLevel.SelectedIndex = 0;
+            if (UserManager.Instance.CurrentUser == null || UserManager.Instance.CurrentUser.level == Level.Oprator)
+            {
+                btnRegi.Visible = false;
+            }
         }
 
         protected override CreateParams CreateParams
@@ -82,6 +86,16 @@ namespace BorwinSplicMachine
         {
             timer1.Start();
             UserManager.Instance.Load();
+            if (UserManager.Instance.users.Count == 0)
+            {
+                User user = new User();
+                user.EmpNo = UserManager.Instance.users.Count.ToString();
+                user.name = "Admin";
+                user.pass = "Admin";
+                user.level = Level.Admin;
+                UserManager.Instance.users.Add(user);
+                UserManager.Instance.Save();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -113,14 +127,30 @@ namespace BorwinSplicMachine
             }
 
             User user = new User();
-            user.level = (Level)comLevel.SelectedIndex + 1;
+            user.level = (Level)comLevel.SelectedIndex;
+            user.EmpNo = UserManager.Instance.users.Count.ToString();
             user.name = txtUserName.Text;
             user.pass = txtPass.Text;
-            if (UserManager.Instance.users.Where(x => x.name == user.name).ToList().Count > 0)
+            if (UserManager.Instance.users.Where(x => x.name == user.name && x.pass == user.pass && user.level == x.level).ToList().Count > 0)
             {
+                if (UserManager.Instance.CurrentUser == null)
+                {
+                    timer1.Start();
+                    progressBar1.Visible = true;
+                }
+                else
+                {
+                    if (user.level < Level.Admin)
+                    {
+                        btnRegi.Visible = false;
+                    }
+                    else
+                    {
+                        btnRegi.Visible = true;
+                    }
+                    MessageBox.Show("登录成功".tr());
+                }
                 UserManager.Instance.CurrentUser = UserManager.Instance.users.Where(x => x.name == user.name).First();
-                timer1.Start();
-                progressBar1.Visible = true;
             }
             else
             {
@@ -131,25 +161,7 @@ namespace BorwinSplicMachine
 
         private void btnRegi_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(comLevel.Text) || string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPass.Text))
-            {
-                MessageBox.Show("信息不全".tr());
-                return;
-            }
 
-            User user = new User();
-            user.level = (Level)comLevel.SelectedIndex + 1;
-            user.name = txtUserName.Text;
-            user.pass = txtPass.Text;
-            UserManager.Instance.users.Where(x => x.name == user.name).ToList();
-            if (UserManager.Instance.users.Where(x => x.name == user.name).ToList().Count > 0)
-            {
-                MessageBox.Show("用户".tr() + user.name + "已经存在".tr());
-                return;
-            }
-            MessageBox.Show("注册成功".tr());
-            UserManager.Instance.users.Add(user);
-            UserManager.Instance.Save();
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)

@@ -7,48 +7,31 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net.Sockets;
-using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BorwinSplicMachine.UCControls.MES
+namespace Mes
 {
-    public partial class UCCode1Check : UCBase
+    public partial class UCMesLogin : UCBase
     {
-        public UCCode1Check()
+        public UCMesLogin()
         {
             InitializeComponent();
-            this.Load += UCCode1Check_Load;
+            this.Load += UCMesLogin_Load;
             btnRun.Click += BtnRun_Click;
             btnSave.Click += BtnSave_Click;
-            MesIn = MesControl.Instance.checkInCode1;
-            MesOut = MesControl.Instance.checkOutCode1;
-            MesClientSocket.OnReceive += OnSocketReceive;
+            MesIn = MesControl.Instance.loginIn;
+            MesOut = MesControl.Instance.loginOut;
         }
 
-        /// <summary>
-        /// 收到返回
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void OnSocketReceive(string obj)
-        {
-            if (CurrentType == InterType.条码1检验)
-            {
-                AnalyData(obj);
-                this.Invoke(new Action(() => {
-                    GetDataMesOut();
-                }));
-            }
-        }
-
+   
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
-            MesControl.Instance.Save();
+            //MesControl.Instance.Save();
         }
 
         public void Save()
@@ -59,7 +42,8 @@ namespace BorwinSplicMachine.UCControls.MES
 
         private void BtnRun_Click(object sender, EventArgs e)
         {
-            Updata(InterType.条码1检验);
+            MesControl.Instance.Updata(InterType.登录);
+            
         }
 
         public void Init()
@@ -68,21 +52,22 @@ namespace BorwinSplicMachine.UCControls.MES
             GetDataMesOut();
         }
 
+
+        private void UCMesLogin_Load(object sender, EventArgs e)
+        {
+           
+        }
+
         public override void GetDataMesIn()
         {
             base.GetDataMesIn();
-            DataGridViewInAdd(MesControl.Instance.checkInCode1.Code);
+            DataGridViewInAdd(MesControl.Instance.loginIn.Pwd);
         }
 
         public override void GetDataMesOut()
         {
             base.GetDataMesOut();
-            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.IsLCR);
-            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MaterialDes);
-            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MaxValue);
-            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.MinValue);
-            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.Unit);
-            DataGridViewOutAdd(MesControl.Instance.checkOutCode1.IsMatch);
+            DataGridViewOutAdd(MesControl.Instance.loginOut.StrToken);
         }
 
         public override void SaveDataMesIn()
@@ -93,7 +78,7 @@ namespace BorwinSplicMachine.UCControls.MES
                 string key = DataGridViewIn.Rows[i].Cells[1].FormattedValue.ToString();
                 string value = DataGridViewIn.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewIn.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
-                List<MesValue> mesValues = mesInValues.Where(x => x.Name.tr() == name).ToList();
+                List<MesValue> mesValues = MesIn.mesInValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
@@ -101,6 +86,7 @@ namespace BorwinSplicMachine.UCControls.MES
                     mesValues[0].Enable = enable;
                 }
             }
+            //GetDataMesIn();
         }
 
         public override void SaveDataMesOut()
@@ -109,21 +95,17 @@ namespace BorwinSplicMachine.UCControls.MES
             {
                 string name = DataGridViewOut.Rows[i].Cells[0].FormattedValue.ToString();
                 string key = DataGridViewOut.Rows[i].Cells[1].FormattedValue.ToString();
-                string value = DataGridViewOut.Rows[i].Cells[2].FormattedValue.ToString();
+                //string value = DataGridViewOut.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewOut.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
-                List<MesValue> mesValues = mesOutValues.Where(x => x.Name.tr() == name).ToList();
+                List<MesValue> mesValues = MesOut.mesOutValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
-                    mesValues[0].Value = value;
+                    //mesValues[0].Value = value;
                     mesValues[0].Enable = enable;
                 }
             }
-        }
-
-        private void UCCode1Check_Load(object sender, EventArgs e)
-        {
-
+            //GetDataMesOut();
         }
     }
 }

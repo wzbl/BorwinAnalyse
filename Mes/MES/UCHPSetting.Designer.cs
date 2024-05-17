@@ -1,6 +1,6 @@
-﻿namespace BorwinSplicMachine.UCControls.MES
+﻿namespace Mes.MES
 {
-    partial class UCCode1Check
+    partial class UCHPSetting
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,14 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCCode1Check));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCHPSetting));
             this.SuspendLayout();
             // 
             // btnSave
             // 
             this.btnSave.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.StateCommon.Back.Image")));
-            this.btnSave.StatePressed.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
-            this.btnSave.StateTracking.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnSave.Values.Text = "";
             // 
             // btnRun
@@ -44,13 +42,14 @@
             this.btnRun.StateCommon.Back.ImageAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
             this.btnRun.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnRun.Values.Text = "";
+            this.btnRun.Visible = false;
             // 
-            // UCCode1Check
+            // UCHPSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "UCCode1Check";
-            this.Size = new System.Drawing.Size(1606, 887);
+            this.Name = "UCHPSetting";
+            this.Size = new System.Drawing.Size(1471, 540);
             this.ResumeLayout(false);
 
         }

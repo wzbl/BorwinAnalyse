@@ -54,6 +54,7 @@ namespace BorwinAnalyse.BaseClass
         #endregion
 
         #region LCR
+        public ParamData LCRSize = new ParamData(ParamType.LCR, "测值是否需要知道尺寸", "0", "0不启用,1启用");
         public ParamData LCR自动校准 = new ParamData(ParamType.LCR, "LCR自动校准", "0", "0不启用,1启用", "1");
         public ParamData LCR校准_只启动两线 = new ParamData(ParamType.LCR, "LCR自动校准只启用两线", "0", "0不启用,1启用", "1");
 
@@ -125,7 +126,7 @@ namespace BorwinAnalyse.BaseClass
                 {
                     ParamData paramData = item.GetValue(this) as ParamData;
                     int.TryParse(paramData.paramLevel, out int lev);
-                    if (paramData.paramType == paramType && lev <= (int)UserManager.Instance.CurrentUser.level)
+                    if (paramData.paramType == paramType && lev <= (int)UserManager.Instance.CurrentUser.level + 1)
                     {
                         paramDatas.Add(paramData);
                     }
@@ -134,7 +135,7 @@ namespace BorwinAnalyse.BaseClass
             return paramDatas;
         }
 
-        public void UpData(string paramName, string paramValue,string level)
+        public void UpData(string paramName, string paramValue, string level)
         {
             FieldInfo[] props = typeof(ParamManager).GetFields();
             foreach (var item in props)

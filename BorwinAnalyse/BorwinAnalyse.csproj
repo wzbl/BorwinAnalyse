@@ -85,6 +85,11 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.Excel.2.1.1\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.BarTender, Version=11.0.7.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\lib\Interop.BarTender.dll</HintPath>
+    </Reference>
     <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Numerics.Signed.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
@@ -226,6 +231,12 @@
     <Compile Include="UCControls\UCSearchLanguage.Designer.cs">
       <DependentUpon>UCSearchLanguage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCControls\UCUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControls\UCUser.Designer.cs">
+      <DependentUpon>UCUser.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -259,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCSearchLanguage.resx">
       <DependentUpon>UCSearchLanguage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControls\UCUser.resx">
+      <DependentUpon>UCUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

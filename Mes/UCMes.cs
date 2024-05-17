@@ -1,6 +1,5 @@
-﻿using BorwinAnalyse.BaseClass;
-using BorwinSplicMachine.UCControls.MES;
-using Mes;
+﻿using BorwinAnalyse;
+using Mes.MES;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BorwinSplicMachine.UCControls
+namespace Mes
 {
     public partial class UCMes : UserControl
     {
@@ -21,15 +20,15 @@ namespace BorwinSplicMachine.UCControls
             Dock = DockStyle.Fill;
             this.Load += UCBaseSet_Load;
             this.components = new System.ComponentModel.Container();
+            kryptonPage5.Controls.Add(cHPSetting);
         }
-
+        UCHPSetting cHPSetting = new UCHPSetting();
         private void UCBaseSet_Load(object sender, EventArgs e)
         {
             UpdataLanguage();
-            initData();
         }
 
-        private void initData()
+        public void InitData()
         {
             chkIsEnableMes.Checked = MesControl.Instance.IsOpenMes;
             comMesType.SelectedIndex = (int)MesControl.Instance.MesType;
@@ -37,16 +36,20 @@ namespace BorwinSplicMachine.UCControls
             txtWo.Text = MesControl.Instance.Wo;
             txtLine.Text = MesControl.Instance.Line;
             txtMachinCode.Text = MesControl.Instance.MachineCode;
+            txtStandNo.Text = MesControl.Instance.StandNo;
+            txtIP.Text = MesControl.Instance.Ip;
+            txtPort.Text = MesControl.Instance.Port.ToString();
             ucMesLogin1.Init();
             ucCode1Check1.Init();
             ucCode2Check1.Init();
             ucUpData1.Init();
+            cHPSetting.Init();
         }
 
 
         public void UpdataLanguage()
         {
-            LanguageManager.Instance.UpdateLanguage(this, this.components.Components);
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -54,13 +57,16 @@ namespace BorwinSplicMachine.UCControls
             MesControl.Instance.IsOpenMes = chkIsEnableMes.Checked;
             MesControl.Instance.MesType = (MesType)comMesType.SelectedIndex;
             MesControl.Instance.DataType = (DataType)comMesData.SelectedIndex;
-            MesControl.Instance.Wo=txtWo.Text;
+            MesControl.Instance.Wo = txtWo.Text;
             MesControl.Instance.Line = txtLine.Text;
-            MesControl.Instance.MachineCode=txtMachinCode.Text;
+            MesControl.Instance.MachineCode = txtMachinCode.Text;
+            MesControl.Instance.StandNo = txtStandNo.Text;
+            MesControl.Instance.Ip = txtIP.Text;
+            MesControl.Instance.Port = int.Parse(txtPort.Text);
             MesControl.Instance.Save();
-           
-            ucMesLogin1. GetDataMesIn();
-            ucMesLogin1. GetDataMesOut();
+
+            ucMesLogin1.GetDataMesIn();
+            ucMesLogin1.GetDataMesOut();
 
             ucCode1Check1.GetDataMesIn();
             ucCode1Check1.GetDataMesOut();
@@ -72,31 +78,13 @@ namespace BorwinSplicMachine.UCControls
             ucUpData1.GetDataMesOut();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void btnCheckCode1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCheckCode2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnUpData_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtIP.Text)&& int.TryParse(txtPort.Text,out int port))
+            if (!string.IsNullOrEmpty(txtIP.Text) && int.TryParse(txtPort.Text, out int port))
             {
-                MesClientSocket.ConnectService(txtIP.Text,port);
+                MesClientSocket.ConnectService(txtIP.Text, port);
             }
             if (MesClientSocket.IsConnect)
             {
@@ -105,6 +93,7 @@ namespace BorwinSplicMachine.UCControls
             else
             {
                 btnConnect.StateCommon.Back.Image = Properties.Resources.icons8_没有网络_100;
+                MessageBox.Show("Connect Fail");
             }
         }
 
@@ -126,7 +115,22 @@ namespace BorwinSplicMachine.UCControls
                 default:
                     break;
             }
-           
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (MesControl.Instance.loginIn.IsEnable.Enable && MesControl.Instance.CurrentType == InterType.登录)
+                ucMesLogin1.GetDataMesOut();
+            if (MesControl.Instance.checkInCode1.IsEnable.Enable && MesControl.Instance.CurrentType == InterType.条码1检验)
+                ucCode1Check1.GetDataMesOut();
+            if (MesControl.Instance.checkInCode2.IsEnable.Enable && MesControl.Instance.CurrentType == InterType.条码2检验)
+                ucCode2Check1.GetDataMesOut();
+            if (MesControl.Instance.upDataIn.IsEnable.Enable && MesControl.Instance.CurrentType == InterType.上传信息)
+                ucUpData1.GetDataMesOut();
+            if (MesControl.Instance.HPDataIn.IsEnable.Enable && MesControl.Instance.CurrentType == InterType.合盘)
+                cHPSetting.GetDataMesOut();
+            timer1.Stop();
         }
     }
 }

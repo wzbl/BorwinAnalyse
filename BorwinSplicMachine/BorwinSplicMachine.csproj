@@ -204,36 +204,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UCControls\MES\UCBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\MES\UCBase.Designer.cs">
-      <DependentUpon>UCBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\MES\UCCode1Check.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\MES\UCCode1Check.Designer.cs">
-      <DependentUpon>UCCode1Check.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\MES\UCCode2Check.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\MES\UCCode2Check.Designer.cs">
-      <DependentUpon>UCCode2Check.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\MES\UCMesLogin.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\MES\UCMesLogin.Designer.cs">
-      <DependentUpon>UCMesLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\MES\UCUpData.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\MES\UCUpData.Designer.cs">
-      <DependentUpon>UCUpData.cs</DependentUpon>
-    </Compile>
     <Compile Include="UCControls\UCBaseSet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -245,12 +215,6 @@
     </Compile>
     <Compile Include="UCControls\UCLog.Designer.cs">
       <DependentUpon>UCLog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCControls\UCMes.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCControls\UCMes.Designer.cs">
-      <DependentUpon>UCMes.cs</DependentUpon>
     </Compile>
     <Compile Include="UCControls\Vision\CreateModel.cs">
       <SubType>Form</SubType>
@@ -314,29 +278,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UCControls\MES\UCBase.resx">
-      <DependentUpon>UCBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\MES\UCCode1Check.resx">
-      <DependentUpon>UCCode1Check.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\MES\UCCode2Check.resx">
-      <DependentUpon>UCCode2Check.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\MES\UCMesLogin.resx">
-      <DependentUpon>UCMesLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\MES\UCUpData.resx">
-      <DependentUpon>UCUpData.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCBaseSet.resx">
       <DependentUpon>UCBaseSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\UCLog.resx">
       <DependentUpon>UCLog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCControls\UCMes.resx">
-      <DependentUpon>UCMes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCControls\Vision\CreateModel.resx">
       <DependentUpon>CreateModel.cs</DependentUpon>

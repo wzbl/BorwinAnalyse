@@ -111,7 +111,11 @@ namespace BorwinAnalyse.BaseClass
                                     for (int i = startRow; i <= rowCount; ++i)
                                     {
                                         IRow row = sheet.GetRow(i);
-                                        if (row == null) continue; //没有数据的行默认是null　　　　　　　
+                                        if (row == null) continue; //没有数据的行默认是null　　
+                                        if (!IsNullRow(row))
+                                        {
+                                            continue; 
+                                        }　　　　
                                         DataRow dataRow = dataTable.NewRow();
                                         int CellNum = row.FirstCellNum;
                                         if (CellNum < 0) { CellNum = 0; }
@@ -134,6 +138,31 @@ namespace BorwinAnalyse.BaseClass
                 MessageBox.Show(ex.Message.tr());
                 return null;
             }
+        }
+
+        private static bool IsNullRow(IRow row)
+        {
+            int fileCount = 0;
+            for (int i = row.FirstCellNum; i < row.LastCellNum; i++)
+            {
+                if (row.GetCell(i)==null)
+                {
+                    fileCount++;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(row.GetCell(i).ToString()))
+                    {
+                        fileCount++;
+                    }
+                }
+                   
+            }
+            if (fileCount== row.LastCellNum- row.FirstCellNum)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

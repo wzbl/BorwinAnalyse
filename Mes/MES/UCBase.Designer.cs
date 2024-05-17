@@ -1,4 +1,4 @@
-﻿namespace BorwinSplicMachine.UCControls.MES
+﻿namespace Mes
 {
     partial class UCBase
     {

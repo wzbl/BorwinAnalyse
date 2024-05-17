@@ -88,8 +88,8 @@
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.comType);
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonWrapLabel1);
             this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
-            this.kryptonSplitContainer1.Size = new System.Drawing.Size(940, 371);
-            this.kryptonSplitContainer1.SplitterDistance = 800;
+            this.kryptonSplitContainer1.Size = new System.Drawing.Size(649, 205);
+            this.kryptonSplitContainer1.SplitterDistance = 472;
             this.kryptonSplitContainer1.TabIndex = 0;
             // 
             // kryptonDataGridView1
@@ -99,7 +99,7 @@
             this.kryptonDataGridView1.Location = new System.Drawing.Point(0, 0);
             this.kryptonDataGridView1.Name = "kryptonDataGridView1";
             this.kryptonDataGridView1.RowTemplate.Height = 23;
-            this.kryptonDataGridView1.Size = new System.Drawing.Size(800, 309);
+            this.kryptonDataGridView1.Size = new System.Drawing.Size(472, 143);
             this.kryptonDataGridView1.TabIndex = 1;
             // 
             // kryptonPanel1
@@ -112,16 +112,16 @@
             this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel7);
             this.kryptonPanel1.Controls.Add(this.kryptonWrapLabel6);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 309);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 143);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ButtonCluster;
-            this.kryptonPanel1.Size = new System.Drawing.Size(800, 62);
+            this.kryptonPanel1.Size = new System.Drawing.Size(472, 62);
             this.kryptonPanel1.TabIndex = 0;
             // 
             // btnStart
             // 
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStart.Location = new System.Drawing.Point(734, 0);
+            this.btnStart.Location = new System.Drawing.Point(406, 0);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(66, 62);
             this.btnStart.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnStart.StateCommon.Back.Image")));
@@ -199,7 +199,7 @@
             this.txtGrade.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtGrade.Location = new System.Drawing.Point(0, 161);
             this.txtGrade.Name = "txtGrade";
-            this.txtGrade.Size = new System.Drawing.Size(135, 23);
+            this.txtGrade.Size = new System.Drawing.Size(172, 23);
             this.txtGrade.TabIndex = 19;
             // 
             // kryptonWrapLabel5
@@ -228,7 +228,7 @@
             " 1210"});
             this.comSize.Location = new System.Drawing.Point(0, 125);
             this.comSize.Name = "comSize";
-            this.comSize.Size = new System.Drawing.Size(135, 21);
+            this.comSize.Size = new System.Drawing.Size(172, 21);
             this.comSize.TabIndex = 16;
             // 
             // kryptonWrapLabel2
@@ -249,7 +249,7 @@
             this.comUnit.DropDownWidth = 149;
             this.comUnit.Location = new System.Drawing.Point(0, 89);
             this.comUnit.Name = "comUnit";
-            this.comUnit.Size = new System.Drawing.Size(135, 21);
+            this.comUnit.Size = new System.Drawing.Size(172, 21);
             this.comUnit.TabIndex = 13;
             // 
             // kryptonWrapLabel4
@@ -269,7 +269,7 @@
             this.txtValue.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtValue.Location = new System.Drawing.Point(0, 51);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(135, 23);
+            this.txtValue.Size = new System.Drawing.Size(172, 23);
             this.txtValue.TabIndex = 6;
             // 
             // kryptonWrapLabel3
@@ -293,7 +293,7 @@
             "CAP"});
             this.comType.Location = new System.Drawing.Point(0, 15);
             this.comType.Name = "comType";
-            this.comType.Size = new System.Drawing.Size(135, 21);
+            this.comType.Size = new System.Drawing.Size(172, 21);
             this.comType.TabIndex = 2;
             this.comType.SelectedIndexChanged += new System.EventHandler(this.comType_SelectedIndexChanged);
             // 
@@ -315,7 +315,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonSplitContainer1);
             this.Name = "UCLCR";
-            this.Size = new System.Drawing.Size(940, 371);
+            this.Size = new System.Drawing.Size(649, 205);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();

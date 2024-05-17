@@ -1,5 +1,4 @@
-﻿using BorwinAnalyse.BaseClass;
-using Mes;
+﻿using Mes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,8 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-namespace BorwinSplicMachine.UCControls.MES
+using BorwinAnalyse.BaseClass;
+namespace Mes
 {
     public partial class UCCode2Check : UCBase
     {
@@ -23,24 +22,8 @@ namespace BorwinSplicMachine.UCControls.MES
             btnSave.Click += BtnSave_Click;
             MesIn = MesControl.Instance.checkInCode2;
             MesOut = MesControl.Instance.checkOutCode2;
-            MesClientSocket.OnReceive += OnSocketReceive;
         }
 
-        /// <summary>
-        /// 收到返回
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void OnSocketReceive(string obj)
-        {
-            if (CurrentType == InterType.条码2检验)
-            {
-                AnalyData(obj);
-                this.Invoke(new Action(() => {
-                    GetDataMesOut();
-                }));
-            }
-        }
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
@@ -55,11 +38,11 @@ namespace BorwinSplicMachine.UCControls.MES
 
         private void BtnRun_Click(object sender, EventArgs e)
         {
-            Updata(InterType.条码2检验);
-            
+            MesControl.Instance.Updata(InterType.条码2检验);
+
         }
 
-        
+
 
 
         private void UCMesLogin_Load(object sender, EventArgs e)
@@ -89,7 +72,7 @@ namespace BorwinSplicMachine.UCControls.MES
                 string key = DataGridViewIn.Rows[i].Cells[1].FormattedValue.ToString();
                 string value = DataGridViewIn.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewIn.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
-                List<MesValue> mesValues = mesInValues.Where(x => x.Name.tr() == name).ToList();
+                List<MesValue> mesValues = MesIn.mesInValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
@@ -108,7 +91,7 @@ namespace BorwinSplicMachine.UCControls.MES
                 string key = DataGridViewOut.Rows[i].Cells[1].FormattedValue.ToString();
                 string value = DataGridViewOut.Rows[i].Cells[2].FormattedValue.ToString();
                 bool.TryParse(DataGridViewOut.Rows[i].Cells[3].FormattedValue.ToString(), out bool enable);
-                List<MesValue> mesValues = mesOutValues.Where(x => x.Name.tr() == name).ToList();
+                List<MesValue> mesValues = MesOut.mesOutValues.Where(x => x.Name.tr() == name).ToList();
                 if (mesValues.Count > 0)
                 {
                     mesValues[0].Key = key;
@@ -127,7 +110,7 @@ namespace BorwinSplicMachine.UCControls.MES
 
         private void UCCode1Check_Load(object sender, EventArgs e)
         {
-          
+
         }
     }
 }

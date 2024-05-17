@@ -70,7 +70,7 @@ namespace BorwinSplicMachine.LCR
                 Name = "Column1",
                 ReadOnly = true,
             },
-               new DataGridViewTextBoxColumn()
+            new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
                 HeaderText = "左/右",
@@ -78,7 +78,7 @@ namespace BorwinSplicMachine.LCR
                 Name = "Column2",
                 ReadOnly = true,
             },
-                new DataGridViewTextBoxColumn()
+            new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
                 HeaderText = "两线/四线",
@@ -89,74 +89,9 @@ namespace BorwinSplicMachine.LCR
             new DataGridViewTextBoxColumn()
             {
                 FillWeight = 45.07613F,
-                HeaderText = "条码",
-                MinimumWidth = 6,
-                Name = "Column4",
-                ReadOnly = true,
-            },
-            new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "最大值",
-                MinimumWidth = 6,
-                Name = "Column5",
-                ReadOnly = true,
-            },
-            new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "最小值",
-                MinimumWidth = 6,
-                Name = "Column6",
-                ReadOnly = true,
-            },
-             new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
                 HeaderText = "实测值",
                 MinimumWidth = 6,
                 Name = "Column7",
-                ReadOnly = true,
-            },
-            new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "类型",
-                MinimumWidth = 6,
-                Name = "Column8",
-                ReadOnly = true,
-            },
-               new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "尺寸",
-                MinimumWidth = 6,
-                Name = "Column9",
-                ReadOnly = true,
-            },
-
-            new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "标准值",
-                MinimumWidth = 6,
-                Name = "Column10",
-                ReadOnly = true,
-            },
-            new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "单位",
-                MinimumWidth = 6,
-                Name = "Column11",
-                ReadOnly = true,
-            },
-               new DataGridViewTextBoxColumn()
-            {
-                FillWeight = 45.07613F,
-                HeaderText = "等级",
-                MinimumWidth = 6,
-                Name = "Column12",
                 ReadOnly = true,
             },
             new DataGridViewTextBoxColumn()
@@ -168,7 +103,6 @@ namespace BorwinSplicMachine.LCR
                 ReadOnly = true,
             }
             });
-
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -178,19 +112,24 @@ namespace BorwinSplicMachine.LCR
 
         public void CheckMaterial(string type, string size, string value, string unit, string grade)
         {
-            if (type == "电阻")
+          
+            this.Invoke(new Action(() =>
             {
-                comType.SelectedIndex = 0;
-            }
-            else if (type == "电容")
-            {
-                comType.SelectedIndex = 1;
-            }
-            comSize.Text = size;
-            comUnit.Text = unit;
-            txtValue.Text = value;
-            txtGrade.Text = grade;
-            CheckMaterialMsg();
+                if (type == "电阻" || type.ToUpper() == "RES")
+                {
+                    comType.SelectedIndex = 0;
+                }
+                else if (type == "电容" || type.ToUpper() == "CAP")
+                {
+                    comType.SelectedIndex = 1;
+                }
+                comSize.Text = size;
+                comUnit.Text = unit;
+                txtValue.Text = value;
+                txtGrade.Text = grade;
+                CheckMaterialMsg();
+            }));
+           
         }
 
         private void CheckMaterialMsg()
@@ -201,7 +140,7 @@ namespace BorwinSplicMachine.LCR
                 return;
             }
 
-            if (string.IsNullOrEmpty(comSize.Text))
+            if (ParamManager.Instance.LCRSize.B && string.IsNullOrEmpty(comSize.Text))
             {
                 MessageBox.Show("请选择尺寸".tr());
                 return;
@@ -300,6 +239,87 @@ namespace BorwinSplicMachine.LCR
 
             txtMax.Text = LCRHelper.Max_Value.ToString();
             txtMin.Text = LCRHelper.Min_Value.ToString();
+        }
+
+        public void StartLCR(string type, string size, string value, string UNIT, string grade)
+        {
+            LCR_Type lCR_Type = LCR_Type.Error;
+            LCR_Size lCR_Size = LCR_Size.Error;
+            Unit unit = Unit.Error;
+            if (type.ToUpper() == "RES" || type == "电阻")
+            {
+                lCR_Type = LCR_Type.电阻;
+                switch (UNIT.Trim())
+                {
+                    case "mΩ":
+                        unit = Unit.mΩ;
+                        break;
+                    case "Ω":
+                        unit = Unit.Ω;
+                        break;
+                    case "KΩ":
+                        unit = Unit.KΩ;
+                        break;
+                    case "MΩ":
+                        unit = Unit.MΩ;
+                        break;
+                }
+            }
+            else if (type.ToUpper() == "CAP" || comType.Text == "电容")
+            {
+                lCR_Type = LCR_Type.电容;
+                switch (UNIT.Trim())
+                {
+                    case "PF":
+                        unit = Unit.PF;
+                        break;
+                    case "NF":
+                        unit = Unit.NF;
+                        break;
+                    case "UF":
+                        unit = Unit.UF;
+                        break;
+                    case "MF":
+                        unit = Unit.MF;
+                        break;
+                    case "F":
+                        unit = Unit.F;
+                        break;
+                }
+            }
+            if (LCR_Size._01005.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._01005;
+            }
+            else if (LCR_Size._0201.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._0201;
+            }
+            else if (LCR_Size._0402.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._0402;
+            }
+            else if (LCR_Size._0603.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._0603;
+            }
+            else if (LCR_Size._0805.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._0805;
+            }
+            else if (LCR_Size._1206.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._1206;
+            }
+            else if (LCR_Size._1210.ToString().Contains(size))
+            {
+                lCR_Size = LCR_Size._1210;
+            }
+            if (grade.Contains("%"))
+            {
+                grade = grade.Replace("%", "");
+            }
+            LCRHelper.StartLCR(lCR_Type, lCR_Size, double.Parse(value), unit, double.Parse(grade));
         }
 
         public void LoadSplic(string type, string size, string value, string unit, string grade)
@@ -537,21 +557,17 @@ namespace BorwinSplicMachine.LCR
         /// </summary>
         public void GridAddData()
         {
+            if (ParamManager.Instance.System_机型.I == 2)
+            {
+                return;
+            }
             this.Invoke(new Action(() =>
             {
                 kryptonDataGridView1.Rows.Add(
                     kryptonDataGridView1.RowCount,
                     LCRHelper.Side.ToString(),
                     LCRHelper.LineNo.ToString(),
-                    Form1.MainControl.CodeControl.Code1.Code,
-                    LCRHelper.Max_Value,
-                    LCRHelper.Min_Value,
                     LCRHelper.RealValue,
-                    LCRHelper.Type,
-                    LCRHelper.Size.ToString(),
-                    LCRHelper.Value,
-                    LCRHelper.Unit,
-                    LCRHelper.Grade,
                     LCRHelper.Result
                 );
                 kryptonDataGridView1.FirstDisplayedScrollingRowIndex = kryptonDataGridView1.RowCount - 1;

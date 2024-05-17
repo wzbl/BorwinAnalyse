@@ -22,18 +22,35 @@ namespace BorwinAnalyse.UCControls
     {
         CancellationTokenSource tokenSource;
         bool isStart = false;
+        private Dictionary<string, int> DictColIndex = new Dictionary<string, int>();
         public UCBOM()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             this.Load += UCBOM_Load;
             this.components = new System.ComponentModel.Container();
+            this.DataGridView_BOM.ColumnDisplayIndexChanged += DataGridView_BOM_ColumnDisplayIndexChanged; ;
+        }
+      
+        private void DataGridView_BOM_ColumnDisplayIndexChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            string ColName = e.Column.HeaderText.ToString();
+            int Colndex = e.Column.DisplayIndex;
+            if (!DictColIndex.ContainsKey(ColName))
+            {
+                DictColIndex.Add(ColName, Colndex);
+            }
+            else
+            {
+                DictColIndex.Remove(ColName);
+                DictColIndex.Add(ColName, Colndex);
+            }
         }
 
         private void UCBOM_Load(object sender, EventArgs e)
         {
-            if (AnalyseDt==null)
-                      InitUI();
+            if (AnalyseDt == null)
+                InitUI();
 
             UpdataLanguage();
         }
@@ -210,6 +227,18 @@ namespace BorwinAnalyse.UCControls
             DataGridView_BOM.DataSource = dt;
             DataGridView_BOM.Refresh();
             lbResult.Text = "总数".tr() + ":" + DataGridView_BOM.RowCount;
+
+            this.DictColIndex?.Clear();
+            if (DataGridView_BOM.DataSource != null)
+            {
+                if (dt != null)
+                {
+                    for (int i = 0; i < dt.Columns.Count; i++)
+                    {
+                        this.DictColIndex.Add(dt.Columns[i].Caption, i);
+                    }
+                }
+            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -221,7 +250,7 @@ namespace BorwinAnalyse.UCControls
             }
             else
             {
-                if (AnalyseDt==null)
+                if (AnalyseDt == null)
                 {
                     return;
                 }
@@ -303,10 +332,13 @@ namespace BorwinAnalyse.UCControls
                     if (tokenSource.IsCancellationRequested) break;
                     if (IsOKRow(i))
                     {
-                        string barCode = DataGridView_BOM.Rows[i].Cells[0].Value.ToString();
-                        string description = DataGridView_BOM.Rows[i].Cells[1].Value.ToString();
+                        string columnPartNo = DictColIndex.Where(u => u.Value == 0).Single().Key;
+                        string columnSpec = DictColIndex.Where(u => u.Value == 1).Single().Key;
+                        string columnwSpec = DictColIndex.Where(u => u.Value == 2).Single().Key;
+                        string barCode = DataGridView_BOM.Rows[i].Cells[columnPartNo].Value.ToString();
+                        string description = DataGridView_BOM.Rows[i].Cells[columnSpec].Value.ToString();
                         description = description.Replace("'", "");
-                        string spec = DataGridView_BOM.Rows[i].Cells[2].Value.ToString();
+                        string spec = DataGridView_BOM.Rows[i].Cells[columnwSpec].Value.ToString();
                         AnalyseMethod(barCode, description, spec);
                     }
                 }
@@ -352,7 +384,7 @@ namespace BorwinAnalyse.UCControls
         public void AnalyseMethod(string barcode, string description, string spec)
         {
             BomDataModel bomData = BomManager.Instance.SearchByBarCode(barcode);
-            AnalyseResult analyseResult=new AnalyseResult();
+            AnalyseResult analyseResult = new AnalyseResult();
             if (bomData != null)
             {
                 analyseResult.BarCode = bomData.barCode;
@@ -467,6 +499,7 @@ namespace BorwinAnalyse.UCControls
         private void btnMerge_Click(object sender, EventArgs e)
         {
             Merge();
+          
         }
 
         /// <summary>
@@ -505,6 +538,16 @@ namespace BorwinAnalyse.UCControls
                 dt.AcceptChanges();
             }
             dt.Columns.Remove(dt.Columns[txtColumn2.Text.Trim()]);
+
+            this.DictColIndex?.Clear();
+
+            if (dt != null)
+            {
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    this.DictColIndex.Add(dt.Columns[i].Caption, i);
+                }
+            }
         }
 
         private void btnShowModelData_Click(object sender, EventArgs e)

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalyseMainForm));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonSplitContainer2 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.comLanguage = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
@@ -101,11 +100,10 @@
             this.kryptonButton4.Location = new System.Drawing.Point(0, 161);
             this.kryptonButton4.Name = "kryptonButton4";
             this.kryptonButton4.Size = new System.Drawing.Size(87, 79);
-            this.kryptonButton4.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton4.StateCommon.Back.Image")));
             this.kryptonButton4.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.kryptonButton4.TabIndex = 3;
             this.kryptonButton4.Tag = "查询";
-            this.kryptonButton4.Values.Text = "";
+            this.kryptonButton4.Values.Text = "查询";
             this.kryptonButton4.Click += new System.EventHandler(this.KryptonButton_Click);
             // 
             // kryptonButton3
@@ -114,11 +112,10 @@
             this.kryptonButton3.Location = new System.Drawing.Point(0, 82);
             this.kryptonButton3.Name = "kryptonButton3";
             this.kryptonButton3.Size = new System.Drawing.Size(87, 79);
-            this.kryptonButton3.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton3.StateCommon.Back.Image")));
             this.kryptonButton3.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.kryptonButton3.TabIndex = 2;
             this.kryptonButton3.Tag = "设置";
-            this.kryptonButton3.Values.Text = "";
+            this.kryptonButton3.Values.Text = "设置";
             this.kryptonButton3.Click += new System.EventHandler(this.KryptonButton_Click);
             // 
             // kryptonButton1
@@ -128,11 +125,10 @@
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(87, 82);
             this.kryptonButton1.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
-            this.kryptonButton1.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton1.StateCommon.Back.Image")));
             this.kryptonButton1.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.kryptonButton1.TabIndex = 0;
             this.kryptonButton1.Tag = "BOM";
-            this.kryptonButton1.Values.Text = "";
+            this.kryptonButton1.Values.Text = "BOM";
             this.kryptonButton1.Click += new System.EventHandler(this.KryptonButton_Click);
             // 
             // kryptonRichTextBox1

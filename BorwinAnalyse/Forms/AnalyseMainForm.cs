@@ -22,6 +22,7 @@ namespace BorwinAnalyse.Forms
             InitializeComponent();
             f = this;
             BomManager.Instance.Init();
+            CommonAnalyse.Instance.Load();
         }
 
         UCBOM uCBOM;
@@ -37,8 +38,6 @@ namespace BorwinAnalyse.Forms
                 uCSearch = new UCSearchBom();
                 kryptonSplitContainer2.Panel2.Controls.Add(uCSearch);
             }
-            //uCSearch.ComModelUpdata();
-            //uCSearch.Search();
         }
 
         private void AnalyseMainForm_Load(object sender, EventArgs e)

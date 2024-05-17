@@ -64,9 +64,9 @@
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.pL = new System.Windows.Forms.Panel();
-            this.pM = new System.Windows.Forms.Panel();
             this.pR = new System.Windows.Forms.Panel();
+            this.pM = new System.Windows.Forms.Panel();
+            this.pL = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.MenuLeft.SuspendLayout();
@@ -85,7 +85,6 @@
             this.txtbarCode2.Name = "txtbarCode2";
             this.txtbarCode2.Size = new System.Drawing.Size(239, 23);
             this.txtbarCode2.TabIndex = 5;
-            this.txtbarCode2.TextChanged += new System.EventHandler(this.txtbarCode2_TextChanged);
             // 
             // lbCode2
             // 
@@ -102,7 +101,6 @@
             this.txtBarcode1.Name = "txtBarcode1";
             this.txtBarcode1.Size = new System.Drawing.Size(239, 23);
             this.txtBarcode1.TabIndex = 1;
-            this.txtBarcode1.TextChanged += new System.EventHandler(this.txtBarcode1_TextChanged);
             // 
             // lbCode1
             // 
@@ -446,14 +444,14 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1036, 238);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
-            // pL
+            // pR
             // 
-            this.pL.BackColor = System.Drawing.Color.Black;
-            this.pL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pL.Location = new System.Drawing.Point(3, 3);
-            this.pL.Name = "pL";
-            this.pL.Size = new System.Drawing.Size(335, 232);
-            this.pL.TabIndex = 0;
+            this.pR.BackColor = System.Drawing.Color.Black;
+            this.pR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pR.Location = new System.Drawing.Point(696, 3);
+            this.pR.Name = "pR";
+            this.pR.Size = new System.Drawing.Size(337, 232);
+            this.pR.TabIndex = 2;
             // 
             // pM
             // 
@@ -464,14 +462,14 @@
             this.pM.Size = new System.Drawing.Size(346, 232);
             this.pM.TabIndex = 1;
             // 
-            // pR
+            // pL
             // 
-            this.pR.BackColor = System.Drawing.Color.Black;
-            this.pR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pR.Location = new System.Drawing.Point(696, 3);
-            this.pR.Name = "pR";
-            this.pR.Size = new System.Drawing.Size(337, 232);
-            this.pR.TabIndex = 2;
+            this.pL.BackColor = System.Drawing.Color.Black;
+            this.pL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pL.Location = new System.Drawing.Point(3, 3);
+            this.pL.Name = "pL";
+            this.pL.Size = new System.Drawing.Size(335, 232);
+            this.pL.TabIndex = 0;
             // 
             // UCMain
             // 

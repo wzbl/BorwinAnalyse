@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NPOI.XWPF.UserModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace BorwinAnalyse.BaseClass
 {
@@ -45,31 +47,34 @@ namespace BorwinAnalyse.BaseClass
         /// 打印机名称
         /// </summary>
         public string Name;
-        //private BarTender.Application btApp = null;
-        //BarTender.Format btFormat = null;
+        private BarTender.Application btApp = null;
+        BarTender.Format btFormat = null;
         public List<PrintValue> PrintValues = new List<PrintValue>();
 
         public void Start()
         {
-            //if (btApp != null)
-            //    btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
-            //btApp = new BarTender.Application();
-            //btFormat = btApp.Formats.Open(Path, false, "");
-            //btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
-            //btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
+            if (File.Exists(Path))
+            {
+                if (btApp != null)
+                    btApp.Quit(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                btApp = new BarTender.Application();
+                btFormat = btApp.Formats.Open(Path, false, "");
+                btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
+                btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
+            }
         }
 
         public void Stop()
         {
-            //if (btApp != null)
-            //{
-               
-            //    Process[] processes = Process.GetProcessesByName("bartend");
-            //    foreach (Process process in processes)
-            //    {
-            //        process.Kill();
-            //    }
-            //}
+            if (btApp != null)
+            {
+
+                Process[] processes = Process.GetProcessesByName("bartend");
+                foreach (Process process in processes)
+                {
+                    process.Kill();
+                }
+            }
         }
 
         /// <summary>
@@ -78,13 +83,31 @@ namespace BorwinAnalyse.BaseClass
         /// <param name="objects"></param>
         private void BindData()
         {
+            SortedList sl = new SortedList();
+            for (int i = 0; i < PrintValues.Count; i++)
+            {
+                if (PrintValues[i].Enable&& PrintValues[i].Name!="QR")
+                {
+                    string key = PrintValues[i].Key;
+                    string val = PrintValues[i].Value;
+                    sl.Add(key, val);
+                }
+            }
+            for (int i = 0; i < PrintValues.Count; i++)
+            {
+                if ( PrintValues[i].Name == "QR")
+                {
+                    PrintValues[i].Value = JsonConvert.SerializeObject(sl);
+                    break;
+                }
+            }
             //名称绑定值
             for (int i = 0; i < PrintValues.Count; i++)
             {
-                //if (PrintValues[i].Enable)
-                //{
-                //    btFormat.SetNamedSubStringValue(PrintValues[i].Key, PrintValues[i].Value);
-                //}
+                if (PrintValues[i].Enable)
+                {
+                    btFormat.SetNamedSubStringValue(PrintValues[i].Key, PrintValues[i].Value);
+                }
             }
         }
 
@@ -139,12 +162,13 @@ namespace BorwinAnalyse.BaseClass
         {
             BindData();
             //打印机名称
-            //btFormat.PrintSetup.Printer = Name;
-            ////第二个false设置打印时是否跳出打印属性
+            btFormat.PrintSetup.Printer = Name;
+            //第二个false设置打印时是否跳出打印属性
             //btFormat.PrintOut(false, false);
-            //btFormat.Print(Path, true, 1000, out BarTender.Messages Messages);
-            ////退出时是否保存标签
-            //btFormat.Close(BarTender.BtSaveOptions.btSaveChanges);
+            btFormat.Print(Path, true, 1000, out BarTender.Messages Messages);
+            //退出时是否保存标签
+            btFormat.Close(BarTender.BtSaveOptions.btSaveChanges);
+            Start();
         }
 
         public void Save()
@@ -194,6 +218,6 @@ namespace BorwinAnalyse.BaseClass
         public string Name { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
-        public bool Enable;
+        public bool Enable { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using FeederSpliceVisionSys;
 using LibSDK;
+using Mes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,11 +65,33 @@ namespace BorwinSplicMachine
         {
             UpdataLanguage();
             timer1.Start();
-            tableLayoutPanel4.Controls.Add(Form1.MainControl.UCLCR);
+            if (ParamManager.Instance.System_机型.I == 2)
+            {
+                tableLayoutPanel4.Controls.Add(Form1.MainControl.UCHP);
+            }
+            else
+            {
+                tableLayoutPanel4.Controls.Add(Form1.MainControl.UCLCR);
+            }
+       
             tableLayoutPanel4.Controls.Add(Form1.MainControl.UCRichLog);
             pL.ContextMenuStrip = MenuLeft;
             pR.ContextMenuStrip = MenuRight;
             pM.ContextMenuStrip = MenuMid;
+
+            if (MesControl.Instance.HPDataList.HPDatas.Count > 0)
+            {
+                Form1.MainControl.CodeControl.Code1.Code = MesControl.Instance.HPDataList.HPDatas[0].BarCode.Value;
+                Form1.MainControl.CodeControl.Code1.IsSuccess = true;
+                txtBarcode1.Text = Form1.MainControl.CodeControl.Code1.Code;
+                if (MesControl.Instance.HPDataList.HPDatas.Count > 1)
+                {
+                    int index = MesControl.Instance.HPDataList.HPDatas.Count - 1;
+                    Form1.MainControl.CodeControl.Code2.Code = MesControl.Instance.HPDataList.HPDatas[index].BarCode.Value;
+                    Form1.MainControl.CodeControl.Code2.IsSuccess = !MesControl.Instance.HPDataList.IsSplicFinish;
+                    txtbarCode2.Text = Form1.MainControl.CodeControl.Code2.Code;
+                }
+            }
 
             bool[] connes = VisionDetection.GetCameraConnectionStatus;
             if (!connes[0])
@@ -95,6 +118,9 @@ namespace BorwinSplicMachine
             {
                 panel2.BackColor = Color.Green;
             }
+
+            txtBarcode1.TextChanged += txtBarcode1_TextChanged;
+            txtbarCode2.TextChanged += txtbarCode2_TextChanged;
         }
 
         public void UpdataLanguage()

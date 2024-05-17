@@ -193,7 +193,7 @@
             this.kryptonDockableNavigator1.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage1,
             this.kryptonPage2});
-            this.kryptonDockableNavigator1.SelectedIndex = 1;
+            this.kryptonDockableNavigator1.SelectedIndex = 0;
             this.kryptonDockableNavigator1.Size = new System.Drawing.Size(1230, 658);
             this.kryptonDockableNavigator1.TabIndex = 2;
             this.kryptonDockableNavigator1.Text = "kryptonDockableNavigator1";
