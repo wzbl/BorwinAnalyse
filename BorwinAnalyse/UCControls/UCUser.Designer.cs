@@ -32,7 +32,7 @@
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.kryptonDataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.EmpNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Level = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnLogin = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -87,7 +87,7 @@
             this.kryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.kryptonDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EmpNo,
-            this.Name,
+            this.colName,
             this.Pass,
             this.Level});
             this.kryptonDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -105,9 +105,9 @@
             // 
             // Name
             // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.HeaderText = "名称";
-            this.Name.Name = "Name";
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.HeaderText = "名称";
+            this.colName.Name = "Name";
             // 
             // Pass
             // 
@@ -134,9 +134,9 @@
             // 
             // btnDeleteModel
             // 
-            this.btnDeleteModel.Location = new System.Drawing.Point(166, 223);
+            this.btnDeleteModel.Location = new System.Drawing.Point(51, 252);
             this.btnDeleteModel.Name = "btnDeleteModel";
-            this.btnDeleteModel.Size = new System.Drawing.Size(72, 70);
+            this.btnDeleteModel.Size = new System.Drawing.Size(74, 70);
             this.btnDeleteModel.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteModel.StateCommon.Back.Image")));
             this.btnDeleteModel.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.Stretch;
             this.btnDeleteModel.TabIndex = 41;
@@ -145,7 +145,7 @@
             // 
             // btnUpdataBom
             // 
-            this.btnUpdataBom.Location = new System.Drawing.Point(65, 223);
+            this.btnUpdataBom.Location = new System.Drawing.Point(51, 147);
             this.btnUpdataBom.Name = "btnUpdataBom";
             this.btnUpdataBom.Size = new System.Drawing.Size(74, 70);
             this.btnUpdataBom.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdataBom.StateCommon.Back.Image")));
@@ -165,7 +165,7 @@
             // 
             // btnRegi
             // 
-            this.btnRegi.Location = new System.Drawing.Point(63, 144);
+            this.btnRegi.Location = new System.Drawing.Point(166, 253);
             this.btnRegi.Name = "btnRegi";
             this.btnRegi.Size = new System.Drawing.Size(76, 69);
             this.btnRegi.StateCommon.Back.Image = ((System.Drawing.Image)(resources.GetObject("btnRegi.StateCommon.Back.Image")));
@@ -227,6 +227,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.kryptonSplitContainer1);
+            this.Name = "UCUser";
             this.Size = new System.Drawing.Size(870, 480);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
@@ -255,7 +256,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnUpdataBom;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDeleteModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pass;
         private System.Windows.Forms.DataGridViewTextBoxColumn Level;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnLogin;

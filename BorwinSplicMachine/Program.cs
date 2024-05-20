@@ -18,6 +18,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 using System.Xml;
+using RegeditHelper;
+using LoginCheck;
+using Microsoft.Win32;
+using System.Security.Cryptography;
 
 namespace BorwinSplicMachine
 {
@@ -37,6 +41,20 @@ namespace BorwinSplicMachine
                 MessageBox.Show("程序正在运行".tr());
                 return;
             }
+            CheckRegedit checkRegedit = new CheckRegedit();
+            if (!checkRegedit.Check(out string msg))
+            {
+                MessageBox.Show(msg);
+                System.Environment.Exit(System.Environment.ExitCode);
+            }
+            else if (int.TryParse(msg, out int day))
+            {
+                if (day < 7)
+                {
+                    MessageBox.Show("剩余天数:" + day);
+                }
+            }
+          
             Form1 form1 = new Form1();
             FormLogin formLogin = new FormLogin();
             if (formLogin.ShowDialog() == DialogResult.OK)
@@ -53,6 +71,8 @@ namespace BorwinSplicMachine
             //Application.Run(new MotionConfig());
 
         }
+
+
 
         static bool IsExistProcess()
         {

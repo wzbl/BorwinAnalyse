@@ -117,7 +117,6 @@ namespace BorwinSplicMachine
             UCUser = new UCUser();
             motControl.Start();
             UCLCR.Start();
-            BartenderPrintModel.Instance.Start();
             VisionDetection.InitVisionDetection();
             IsStartFinish = true;
             motControl.Run();

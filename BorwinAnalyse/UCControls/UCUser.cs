@@ -64,37 +64,30 @@ namespace BorwinAnalyse.UCControls
 
         private void btnUpdataBom_Click(object sender, EventArgs e)
         {
-            if (kryptonDataGridView1.SelectedRows.Count > 0)
+            for (int i = 0; i < kryptonDataGridView1.Rows.Count; i++)
             {
-                int index = kryptonDataGridView1.SelectedRows[0].Index;
-                string empNo = kryptonDataGridView1.Rows[index].Cells[0].FormattedValue.ToString();
-                string name = kryptonDataGridView1.Rows[index].Cells[1].FormattedValue.ToString();
-                string pass = kryptonDataGridView1.Rows[index].Cells[2].FormattedValue.ToString();
-                string level = kryptonDataGridView1.Rows[index].Cells[3].FormattedValue.ToString();
-                if (int.TryParse(level, out int Leve))
+                string empNo = kryptonDataGridView1.Rows[i].Cells[0].FormattedValue.ToString();
+                string name = kryptonDataGridView1.Rows[i].Cells[1].FormattedValue.ToString();
+                string pass = kryptonDataGridView1.Rows[i].Cells[2].FormattedValue.ToString();
+                string level = kryptonDataGridView1.Rows[i].Cells[3].FormattedValue.ToString();
+                int.TryParse(level, out int lev);
+                if (lev > (int)UserManager.Instance.CurrentUser.level)
                 {
-                    if (Leve > (int)UserManager.Instance.CurrentUser.level)
-                    {
-                        MessageBox.Show("设置等级需要小于当前等级".tr());
-                        return;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("等级错误".tr());
-                    return;
+                    continue;
                 }
                 List<User> users = UserManager.Instance.users.Where((x) => x.EmpNo == empNo).ToList();
                 if (users.Count > 0)
                 {
                     users[0].name = name;
                     users[0].pass = pass;
-                    users[0].level = (Level)Leve;
+                    if (users[0] != UserManager.Instance.CurrentUser)
+                    {
+                        users[0].level = (Level)lev;
+                    }
                 }
-                UserManager.Instance.Save();
-                Search();
             }
-            
+            UserManager.Instance.Save();
+            Search();
         }
 
         private void btnDeleteModel_Click(object sender, EventArgs e)
@@ -106,9 +99,9 @@ namespace BorwinAnalyse.UCControls
                 List<User> users = UserManager.Instance.users.Where((x) => x.EmpNo == empNo).ToList();
                 if (users.Count > 0)
                 {
-                    if (users[0]== UserManager.Instance.CurrentUser)
+                    if (users[0] == UserManager.Instance.CurrentUser)
                     {
-                        MessageBox.Show("不可删除当前用户");
+                        MessageBox.Show("不可删除当前用户".tr());
                         return;
                     }
                     UserManager.Instance.users.Remove(users[0]);
@@ -126,7 +119,7 @@ namespace BorwinAnalyse.UCControls
                        UserManager.Instance.CurrentUser.EmpNo,
                        UserManager.Instance.CurrentUser.name,
                        UserManager.Instance.CurrentUser.pass,
-                       UserManager.Instance.CurrentUser.level
+                       (int)UserManager.Instance.CurrentUser.level
                        );
             for (int i = 0; i < UserManager.Instance.users.Count; i++)
             {
@@ -137,7 +130,7 @@ namespace BorwinAnalyse.UCControls
                         UserManager.Instance.users[i].EmpNo,
                         UserManager.Instance.users[i].name,
                         UserManager.Instance.users[i].pass,
-                        UserManager.Instance.users[i].level
+                          (int)UserManager.Instance.users[i].level
                         );
                 }
             }

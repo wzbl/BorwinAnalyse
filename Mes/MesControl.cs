@@ -418,8 +418,6 @@ namespace Mes
             UCMes.timer1.Start();
         }
 
-        
-
         private void AnalyLogin()
         {
 

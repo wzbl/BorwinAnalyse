@@ -160,6 +160,7 @@ namespace BorwinAnalyse.BaseClass
         /// </summary>
         public void Print()
         {
+            Start();
             BindData();
             //打印机名称
             btFormat.PrintSetup.Printer = Name;
@@ -168,7 +169,6 @@ namespace BorwinAnalyse.BaseClass
             btFormat.Print(Path, true, 1000, out BarTender.Messages Messages);
             //退出时是否保存标签
             btFormat.Close(BarTender.BtSaveOptions.btSaveChanges);
-            Start();
         }
 
         public void Save()
@@ -180,7 +180,6 @@ namespace BorwinAnalyse.BaseClass
                 fs1.Close();
             }
             File.WriteAllText(savePath, JsonConvert.SerializeObject(instance));
-            Start();
         }
 
         public void Load()
