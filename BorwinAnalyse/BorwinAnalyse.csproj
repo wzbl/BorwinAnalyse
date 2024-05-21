@@ -174,7 +174,6 @@
     <Compile Include="DataBase\Comm\SqlLiteManager.cs" />
     <Compile Include="DataBase\Model\BaseModel.cs" />
     <Compile Include="DataBase\Model\BomDataModel.cs" />
-    <Compile Include="DataBase\Model\CodeModel.cs" />
     <Compile Include="DataBase\Model\Language.cs" />
     <Compile Include="DataBase\Model\LogModel.cs" />
     <Compile Include="Forms\AnalyseMainForm.cs">

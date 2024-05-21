@@ -54,7 +54,6 @@ namespace BorwinSplicMachine
                     MessageBox.Show("剩余天数:" + day);
                 }
             }
-          
             Form1 form1 = new Form1();
             FormLogin formLogin = new FormLogin();
             if (formLogin.ShowDialog() == DialogResult.OK)
@@ -71,8 +70,6 @@ namespace BorwinSplicMachine
             //Application.Run(new MotionConfig());
 
         }
-
-
 
         static bool IsExistProcess()
         {
